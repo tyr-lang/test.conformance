@@ -1,0 +1,4 @@
+type Test {
+  def main : int <: EntryPoint = 23;
+  def altMain : int <: EntryPoint { return 42; }
+}

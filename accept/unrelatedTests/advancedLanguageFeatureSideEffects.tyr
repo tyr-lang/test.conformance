@@ -1,0 +1,8 @@
+class AdvancedLanguaFeatureSideEffects {
+  test "parameterless call" {
+    // evaluates to E("hallo".append <: Function(String -> String)) E("string")
+    // and Function provides an adequate apply
+    var x = "hallo".append " welt";
+    assert (x.equals("hallo welt"));
+  }
+}

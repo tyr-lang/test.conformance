@@ -1,0 +1,9 @@
+/**
+ * An integer literal.
+ * This type is used to allow compile-time type modifications with integer
+ * arguments such as the Integer type itself.
+ *
+ * @author Timm Felden
+ */
+type LiteralInt <: int, native, CT {
+}

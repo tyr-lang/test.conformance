@@ -1,0 +1,4 @@
+/**
+ * a simple type definition.
+ */
+type T;

@@ -1,0 +1,19 @@
+scope foo;
+
+import predef
+
+type x {
+	
+}
+
+type y <: x {
+	
+}
+
+type i32 <: tyr.predef.int, x;
+
+type Z <: tyr.predef.natie;
+
+type tkr;
+
+type Type;

@@ -1,0 +1,4 @@
+/**
+ * zero space
+ */
+type void <: native;

@@ -1,0 +1,12 @@
+/** 
+ * types inheriting this property are realized by the compiler
+ */
+type native;
+
+/**
+ * all predefined functions and values, that will be imported into the global
+ * scope but do not belong to types directly
+ */
+scope Predef {
+	static def print(msg : String) : Unit <: native;
+}

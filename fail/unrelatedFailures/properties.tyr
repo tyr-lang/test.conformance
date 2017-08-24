@@ -1,0 +1,19 @@
+/**
+ * Anything that inherits this property is handled by the compiler directly.
+ * If an entity has this property and is not known by the compiler, the package
+ * will be rejected.
+ *
+ * @author Timm Felden
+ */
+property native;
+
+/**
+ * Flags a function to be an entry point to the program.
+ */
+property EntryPoint;
+
+
+/**
+ * A compile-time value. For now, they are limited to literals.
+ */
+property CT;

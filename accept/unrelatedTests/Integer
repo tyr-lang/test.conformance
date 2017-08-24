@@ -1,0 +1,14 @@
+scope tyr.lang;
+
+type Integer (n: LiteralInt) <: native {
+	def - : Integer(n) <: native;
+	def - (right : Integer(n)) : Integer(n) <: native;
+	def + (right : Integer(n)) : Integer(n) <: native;
+	def * (right : Integer(n)) : Integer(n) <: native;
+	def / (right : Integer(n)) : Integer(n) <: native;
+	def % (right : Integer(n)) : Integer(n) <: native;
+	
+	def ~ : Integer(n) <: native;
+	def | (right : Integer(n)) : Integer(n) <: native;
+	def & (right : Integer(n)) : Integer(n) <: native;
+}

@@ -1,0 +1,11 @@
+type bool <: native {
+	def ! : bool <: native;
+	def | (right : bool) : bool <: native;
+	def & (right : bool) : bool <: native;
+	
+	def || (right : bool) : bool <: native;
+	def && (right : bool) : bool <: native;
+	
+	val true : bool;
+	val false : bool;
+}

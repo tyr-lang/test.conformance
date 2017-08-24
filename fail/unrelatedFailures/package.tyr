@@ -1,0 +1,4 @@
+# tyr has no package declaration
+package tyr
+
+type myType {}

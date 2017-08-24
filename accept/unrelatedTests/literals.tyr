@@ -1,0 +1,32 @@
+class literals {
+  test "integer" {
+    assert (0 == 0);
+    assert (1 != 0);
+  }
+  test "integer type" {
+    assert (0 <: int);
+    assert (0 <: Integer(32));
+    assert (!(0 <: Integer(64)));
+  }
+  test "integer literals" {
+    assert (0i8 <: Integer(8));
+    assert (0i <: Integer(32));
+    assert (0L <: Integer(64));
+    assert (0i64 <: Integer(64));
+    assert (0i1 <: Integer(1));
+    assert (0x20i64 == 32L);
+  }
+
+  test "float type" {
+    assert (.0f <: Float(32));
+    assert (.0f <: float);
+    assert (.0 <: Float(64));
+    assert (.0 <: double);
+  }
+  test "float literals" {
+    assert (.0f8 <: Float(8));
+    assert (.0 <: Float(64));
+    assert (.0f <: Float(32));
+    assert (.0f64 <: Float(64));
+  }
+}
