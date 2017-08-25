@@ -1,0 +1,4 @@
+// pointless, because we import that one implicitly
+with imports;
+
+type foo;
