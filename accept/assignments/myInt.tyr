@@ -1,0 +1,41 @@
+type MyInt {
+
+  test "constant arithmetic" {
+    assert (7 + 1 * 8 != 64);
+    assert (7 + 1 * 8 == 15);
+    assert (-1 ^ 0 == -1);
+    assert (-1 ** 0 == 0);
+    assert (-3 / 2 == -1);
+    assert (3 / 2 == 1);
+    assert (3 % 2 == 1);
+  }
+
+  test "assignment" {
+    var v = 7;
+    assert (v - 7 == 0);
+    assert (v == 7);
+
+    v = v;
+    assert (v == 7);
+
+    v = 5;
+    assert (v != 7);
+    assert (v == 5);
+  
+    v = -1;
+    assert (v < 0);
+  }
+
+  test "imports" {
+    var v = 7;
+    import v;
+    // ++ is not accepted by the grammar
+    `++`();
+    assert (8 == v);
+    assert (7 != v);
+    
+    // fun with imports; actually that's a hard one
+    += 3;
+    assert (11 = v);
+  }
+}
