@@ -1,0 +1,12 @@
+/**
+ * @note this test will eventually stop working!
+ */
+type int <: native {
+  def + (x : int) : int <: native;
+  def - (x : int) : int <: native;
+
+  test "basic INTO phase" {
+    3
+    1 + 2
+  }
+}
