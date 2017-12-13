@@ -1,0 +1,9 @@
+/**
+ * This test should yield two errors related to A and one related to B.
+ */
+type A;
+type A;
+type A;
+
+type B;
+type B;
