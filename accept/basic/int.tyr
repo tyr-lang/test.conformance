@@ -2,17 +2,48 @@
  * @note this test will eventually stop working!
  */
 type int <: native {
-  def + (x : int) : int <: native;
-  def - (x : int) : int <: native;
+  def ** (x : int) : int <: native, operator.precedence (90), operator.rightAssociative;
+
+  def * (x : int) : int <: native, operator.precedence (70);
+
+  def + (x : int) : int <: native, operator.precedence (50);
+  def - (x : int) : int <: native, operator.precedence (50);
+  def - : int <: native, operator.precedence (100);
+
+  def == (x : int) : bool <: native, operator.precedence(20);
 
   test "basic INTO phase" {
-    3
-    1 + 2
+    3 == 1 + 2
+  }
+
+  test "precedence" {
+    7 == 1 + 2 * 3
+  }
+
+  test "associativity" {
+    -1 == 1 - 1 - 1
+  }
+
+  test "associativity 2" {
+    512 == 2 ** 3 ** 2
   }
 
   test "subtract" {
-    4 - 5
+    -1 == 4 - 5
+  }
+
+  test "unary" {
+    - 1 == 4 - 5
   }
 }
 
+/**
+ * Literals are subtypes of arbitrary integers.
+ */
+type intLiteral <: int;
+
+/**
+ * The entity is known by the compiler and has a special implementation.
+ */
 property native;
+
