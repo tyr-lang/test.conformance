@@ -1,0 +1,6 @@
+/**
+ * a truth type
+ */
+type bool <: native {
+  def == (x : bool) : bool <: native, operator.precedence(20);
+}
