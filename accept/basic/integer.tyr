@@ -1,7 +1,7 @@
 /**
  * @note this test will eventually stop working!
  */
-type int <: native {
+type integer (size : int) <: native {
   def ** (x : int) : int <: native, operator.precedence (90), operator.rightAssociative;
 
   def * (x : int) : int <: native, operator.precedence (70);
@@ -41,6 +41,12 @@ type int <: native {
  * Literals are subtypes of arbitrary integers.
  */
 type intLiteral <: int;
+
+// common integer names
+type byte  := integer (8);
+type short := integer (16);
+type int   := integer (32);
+type long  := integer (64);
 
 /**
  * The entity is known by the compiler and has a special implementation.
