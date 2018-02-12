@@ -1,16 +1,22 @@
 /**
  * @note this test will eventually stop working!
  */
-type integer (size : int) <: native {
-  def ** (x : int) : int <: native, operator.precedence (90), operator.rightAssociative;
+type integer[size : int] <: native {
+  def - : integer[size]
+        <: native, operator.precedence[100];
 
-  def * (x : int) : int <: native, operator.precedence (70);
+  def ** (x : integer[size]) : integer[size]
+         <: native, operator.precedence[90], operator.rightAssociative;
 
-  def + (x : int) : int <: native, operator.precedence (50);
-  def - (x : int) : int <: native, operator.precedence (50);
-  def - : int <: native, operator.precedence (100);
+  def * (x : integer[size]) : integer[size]
+        <: native, operator.precedence[70];
 
-  def == (x : int) : bool <: native, operator.precedence(20);
+  def + (x : integer[size]) : integer[size]
+        <: native, operator.precedence[50];
+  def - (x : integer[size]) : integer[size]
+        <: native, operator.precedence[50];
+
+  def == (x : integer[size]) : bool <: native, operator.precedence[20];
 
   test "basic INTO phase" {
     3 == 1 + 2
@@ -35,18 +41,22 @@ type integer (size : int) <: native {
   test "unary" {
     - 1 == 4 - 5
   }
+
+  test "atomic" {
+    - 1 == (4 - 5)
+  }
 }
 
 /**
  * Literals are subtypes of arbitrary integers.
  */
-type intLiteral <: int;
+type integerLiteral[size : int] <: integer[size];
 
 // common integer names
-type byte  := integer (8);
-type short := integer (16);
-type int   := integer (32);
-type long  := integer (64);
+type byte  := integer[8];
+type short := integer[16];
+type int   := integer[32];
+type long  := integer[64];
 
 /**
  * The entity is known by the compiler and has a special implementation.

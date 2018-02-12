@@ -16,4 +16,4 @@ property postfix;
  * Precedence of the argument operator.
  * Higher is stronger.
  */
-property precedence (strength : int);
+property precedence [strength : int];
