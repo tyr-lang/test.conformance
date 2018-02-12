@@ -1,0 +1,25 @@
+/**
+ * @note this test will eventually stop working!
+ */
+type integer[size : int] <: native {
+  def - : integer[size]
+        <: native, operator.precedence[100];
+
+  test "usage" {
+    - 1 
+  }
+}
+
+/**
+ * Literals are subtypes of arbitrary integers.
+ */
+type integerLiteral[size : int] <: integer[size];
+
+// common integer names
+type int   := integer[32];
+
+/**
+ * The entity is known by the compiler and has a special implementation.
+ */
+property native;
+
