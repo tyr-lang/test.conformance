@@ -2,21 +2,43 @@
  * @note this test will eventually stop working!
  */
 type integer[size : int] <: native {
-  def - : integer[size]
-        <: native, operator.precedence[100];
+  def ++ : integer[size] <: native, operator.precedence[250], operator.postfix;
+  def -- : integer[size] <: native, operator.precedence[250], operator.postfix;
+
+  def - : integer[size] <: native, operator.precedence[200];
+  def ~ : integer[size] <: native, operator.precedence[200];
 
   def ** (x : integer[size]) : integer[size]
-         <: native, operator.precedence[90], operator.rightAssociative;
+         <: native, operator.precedence[150], operator.rightAssociative;
 
   def * (x : integer[size]) : integer[size]
-        <: native, operator.precedence[70];
+        <: native, operator.precedence[120];
+  def \ (x : integer[size]) : integer[size]
+        <: native, operator.precedence[120];
+  def % (x : integer[size]) : integer[size]
+        <: native, operator.precedence[120];
 
   def + (x : integer[size]) : integer[size]
-        <: native, operator.precedence[50];
+        <: native, operator.precedence[110];
   def - (x : integer[size]) : integer[size]
-        <: native, operator.precedence[50];
+        <: native, operator.precedence[110];
 
-  def == (x : integer[size]) : bool <: native, operator.precedence[20];
+  def << (x : integer[size]) : bool
+        <: native, operator.precedence[100];
+  def >> (x : integer[size]) : bool
+        <: native, operator.precedence[100];
+
+  def < (x : integer[size]) : bool
+        <: native, operator.precedence[90];
+  def <= (x : integer[size]) : bool
+        <: native, operator.precedence[90];
+  def > (x : integer[size]) : bool
+        <: native, operator.precedence[90];
+  def >= (x : integer[size]) : bool
+        <: native, operator.precedence[90];
+
+  def != (x : integer[size]) : bool <: native, operator.precedence[80];
+  def == (x : integer[size]) : bool <: native, operator.precedence[80];
 
   test "var" {
     var x = true
@@ -32,6 +54,19 @@ type integer[size : int] <: native {
     var x = 7
     x = 3
     x != 7 && 3 == x
+  }
+
+  test "assign assign" {
+    var x : bool
+    var y : bool
+    x = y = 3
+    x == y && 3 == x
+  }
+
+  test "assign in op" {
+    var x : bool
+    x = 7
+    x = 3 && 3 == x
   }
 
   test "if" {
