@@ -1,0 +1,6 @@
+/**
+ * void has no interesting properties. It is just the result of succsessful
+ * termination without a return value passed as memory on the stack or in a
+ * register.
+ */
+type void <: native;

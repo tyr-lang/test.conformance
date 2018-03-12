@@ -8,6 +8,7 @@ type integer[size : int] <: native {
   def - : integer[size] <: native, operator.precedence[200];
   def ~ : integer[size] <: native, operator.precedence[200];
 
+  // to be removed
   def ** (x : integer[size]) : integer[size]
          <: native, operator.precedence[150], operator.rightAssociative;
 
@@ -57,16 +58,16 @@ type integer[size : int] <: native {
   }
 
   test "assign assign" {
-    var x : bool
-    var y : bool
+    var x : int
+    var y : int
     x = y = 3
     x == y && 3 == x
   }
 
   test "assign in op" {
-    var x : bool
+    var x : int
     x = 7
-    x = 3 && 3 == x
+    3 == (x = 3) && 3 == x
   }
 
   test "if" {
@@ -84,18 +85,24 @@ type integer[size : int] <: native {
   // code is bad if it stares at you ;)
   test "block O.O" {
     {{0};{0}}
-    {{
+       {{
       true
     }}
   }
 
+  test "block O.O void" {
+    {{};{}}
+      { }
+     {   }
+  }
+
   test "while" {
-    var x = 0
+    var x : int = 0
     while(x <= 10) x = x + 1
   }
 
   test "do while" {
-    var x = 0
+    var x : int = 0
     do x = x + 1
     while(x <= 10)
   }
@@ -107,10 +114,10 @@ type integer[size : int] <: native {
 type integerLiteral[size : int] <: integer[size];
 
 // common integer names
-type byte  := integer[8];
-type short := integer[16];
+//type byte  := integer[8];
+//type short := integer[16];
 type int   := integer[32];
-type long  := integer[64];
+//type long  := integer[64];
 
 /**
  * The entity is known by the compiler and has a special implementation.

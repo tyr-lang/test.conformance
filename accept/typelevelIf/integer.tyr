@@ -1,0 +1,14 @@
+/**
+ * @note this test will eventually stop working!
+ */
+type T {
+  def - : { if(7==8) true
+            else false
+            int
+          } = -1;
+
+  test "basic" {
+    var x : T;
+    -1 == -x;
+  }
+}
