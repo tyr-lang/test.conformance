@@ -1,0 +1,9 @@
+type in := int;
+type i := in;
+
+type T {
+  test "basic" {
+    var x : i = 1;
+    -1 == -x;
+  }
+}

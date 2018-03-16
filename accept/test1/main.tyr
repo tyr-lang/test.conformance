@@ -1,0 +1,15 @@
+//instantiate extern type
+type i7  := integer[7];
+
+type T {
+  test "basic" {
+    var x : i7 = 0i7
+    x
+    0i7
+    0i7 == x;
+  }
+
+  test "ext fun" {
+    3 + 2 == 5
+  }
+}

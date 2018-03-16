@@ -1,0 +1,9 @@
+//instantiate extern type
+type iX  := integer[7];
+
+type T {
+  test "basic" {
+    var x : iX = 0i7
+    0i7 == x;
+  }
+}
