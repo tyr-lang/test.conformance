@@ -30,10 +30,6 @@ type integer[size : int] <: native {
     -1 == 1 - 1 - 1
   }
 
-  test "associativity 2" {
-    512 == 2 ** 3 ** 2
-  }
-
   test "subtract" {
     -1 == 4 - 5
   }

@@ -2,19 +2,20 @@
  * This test should eventually work fine and should not result in infinite type
  * instantiation.
  */
-type Pair(A : Type, B : Type) {
+type Pair [A : Type, B : Type] {
   var a : A;
   var b : B;
 
-  def new(a : A, b : B) {
+  new (a : A, b : B) {
     this.a = a;
     this.b = b;
   }
 
-  def swap : Pair(B, A) = new Pair(B,A)(b,a);
+  def swap : Pair[B, A] = new Pair[B,A](b,a);
 
   test "swap swap" {
-    var p = new Pair(int, int)(2,3)
+    var p = new Pair[int, int](2,3)
+    // this test requires Eq!
     p != p.swap() && p == p.swap().swap()
   }
 
@@ -25,22 +26,22 @@ type Pair(A : Type, B : Type) {
 }
 
 /* This type should also be fine */
-type Box(T : Type) {
+type Box [T : Type] {
   var content : T;
 
-  def new(content : T) = this.content = content;
+  new (content : T) = this.content = content;
 
-  def box(T: Type, content : T) : Box(T) <: static = new Box(T)(t);
+  type def box [T: Type] (content : T) : Box[T] <: static = new Box[T](t);
   def unbox : T = content;
 
   test "box unbox" {
-    var b = Box.box(int, 7);
+    var b = Box.box[int](7);
     7 == b.unbox();
   }
 
   test "box box" {
-    var b = Box.box(int, 7);
-    var bb = Box.box(b.type, b);
-    7 == b.unbox().unbox();
+    var b = Box.box[int](7);
+    var bb = Box.box[b.type](b);
+    7 == bb.unbox().unbox();
   }
 }
