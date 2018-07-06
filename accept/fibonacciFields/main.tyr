@@ -1,0 +1,50 @@
+/**
+ * This version of fibonacci is used to test translation of type vars and type vals.
+ */
+type T {
+
+  // fixed values x <= 0
+  type val f0 = 0
+  // fixed values x == 1
+  type val f1 = 1
+
+  // f(curr-2)
+  type var m2 : int = f0
+  // f(curr-1)
+  type var m1 : int = f0
+  // f(curr)
+  type var curr : int = f0
+
+  // state of calculation
+  type var idx : int;
+  
+
+  // fibonacci implementation to check correct implementation of type var/val
+  type def f(x : int) : int {
+    if(x <= 0) f0
+    else {
+      // reset state
+      idx = 0
+      m2 = f0
+      m1 = f0
+      curr = f1
+      while(idx < x){
+        idx += 1
+        m2 = m1
+        m1 = curr
+        curr = m1 + m2
+      }
+      curr
+    }
+  }
+
+  test "f 0" {
+    0 == f(0)
+  }
+  test "f 5" {
+    5 == f(5)
+  }
+  test "f 10" {
+    55 == f(10)
+  }
+}
