@@ -1,0 +1,6 @@
+/** check that control flow inside expressions is flattened correctly */
+type T {
+  test "basic" {
+    0 == (if true 0 else 1)
+  }
+}

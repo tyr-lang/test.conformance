@@ -1,0 +1,45 @@
+/**
+ * Test several uses of switch statements.
+ */
+type T {
+
+  test "basic -- full braces" {
+    switch (0) {
+      0 : { true }
+      else { false }
+    }
+  }
+
+  test "basic -- no braces" {
+    switch 0 {
+      0 : true
+      else false
+    }
+  }
+
+  test "else" {
+    0 == (switch 0 { else 0 })
+  }
+
+  test "else 1" {
+    1 == (switch 0 { 
+      0 : 1
+      1 : 0
+      else -1
+    })
+  }
+
+  test "--1" {
+    - -1 == -(switch -1 { 
+      -1 : { -1 }
+      else 0
+    })
+  }
+
+  test "- - 1" {
+    - -1 == - (switch (- 1) { 
+      (- 1) : (- 1)
+      else 0
+    })
+  }
+}
