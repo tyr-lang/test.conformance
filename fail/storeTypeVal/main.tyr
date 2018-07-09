@@ -1,0 +1,15 @@
+/**
+ * type val is not assignable
+ */
+type T {
+
+  type val f0 = 0
+  
+  type def f : void {
+    f0 = 1
+  }
+
+  test "f" {
+    f()
+  }
+}
