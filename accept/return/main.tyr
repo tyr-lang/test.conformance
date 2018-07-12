@@ -1,0 +1,48 @@
+/**
+ * Test several uses of return statements.
+ */
+type T {
+
+  type def f : void {
+    if false return
+  }
+
+  type def g : void {
+    return
+  }
+
+  type def h : void {
+    if true return
+    else return
+  }
+
+  type def i : int {
+    return if false return 0
+           else 1
+  }
+
+  test "flow" {
+    f()
+  }
+
+  test "simple" {
+    g()
+  }
+
+  test "simple test" {
+    return
+  }
+
+  test "explicit flow" {
+    h()
+  }
+
+  test "explicit flow result" {
+    i()
+  }
+
+  test "explicit flow result test" {
+    return if false return false
+           else true
+  }
+}
