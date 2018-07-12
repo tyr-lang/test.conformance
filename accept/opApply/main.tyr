@@ -1,0 +1,12 @@
+type T {
+
+  type def f(x : int) : int = x - 3
+
+  test "basic" {
+    f (0 - 1) + f(0 - 2)
+  }
+
+  test "explicit" {
+    0.`-`(1)
+  }
+}
