@@ -30,7 +30,7 @@ type T {
   }
 
   test "simple test" {
-    return
+    return true
   }
 
   test "explicit flow" {
