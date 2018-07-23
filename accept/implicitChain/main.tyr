@@ -1,0 +1,43 @@
+/**
+ * Test implicit : T.
+ */
+val type S {
+  def new;
+
+  def f : int = 3
+
+  test "f" {
+    3 == (new S()).f()
+  }
+}
+
+val type T {
+  def new;
+
+  def implicit : S = new S
+
+  test "f" {
+    3 == (new T()).f()
+  }
+}
+
+val type U {
+  def new;
+
+  def implicit : T = new T
+
+  test "f" {
+    3 == (new U()).f()
+  }
+}
+
+/** TODO
+type V <: U {
+  def new;
+
+  def implicit : U = this
+
+  test "f" {
+    3 == (new V()).f()
+  }
+}*/

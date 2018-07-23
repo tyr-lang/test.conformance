@@ -1,0 +1,52 @@
+/**
+ * Test flat structures.
+ */
+val type Point {
+
+  var x : int;
+  var y : int;
+
+  new () {
+    x = 0
+    y = 0
+  }
+
+  new (x := x : int, y := y : int);
+
+  def swap : Point {
+    return new Point(y, x)
+  }
+
+  def + (p : Point) : Point {
+    new Point(x + p.x, y + p.y);
+  }
+
+  def * (s : int) : Point {
+    new Point(s * x, s * y);
+  }
+
+  def == (p : Point) : bool = x == p.x & y == p.y
+
+
+  test "new" {
+    val p = new Point()
+  }
+
+  test "plain new" {
+    new Point()
+  }
+
+  test "new params" {
+    val p = new Point(1, 2)
+  }
+
+  test "swap" {
+    val p = new Point(1, 2)
+    !(p == p.swap())
+  }
+
+  test "swap 2" {
+    val p = new Point(2, 2)
+    p == p.swap()
+  }
+}
