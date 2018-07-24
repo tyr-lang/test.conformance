@@ -2,32 +2,42 @@
  * Test implicit : T.
  */
 val type S {
-  def new;
+  new {}
 
   def f : int = 3
 
   test "f" {
-    3 == (new S()).f()
+    3 == (new S).f()
   }
 }
 
-val type T {
-  def new;
+val type T <: proxy[S] {
+  new {}
 
   def implicit : S = new S
 
   test "f" {
-    3 == (new T()).f()
+    3 == (new T).f()
+  }
+
+  test "if" {
+    3 == (new T).implicit().f()
   }
 }
 
-val type U {
-  def new;
+val type U <: proxy[T] {
+  new {}
 
   def implicit : T = new T
 
   test "f" {
-    3 == (new U()).f()
+    3 == (new U).f()
+  }
+  test "if" {
+    3 == (new U).implicit().f()
+  }
+  test "iif" {
+    3 == (new U).implicit().implicit().f()
   }
 }
 
