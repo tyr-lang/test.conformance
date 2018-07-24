@@ -9,4 +9,8 @@ type T {
   test "explicit" {
     0.`-`(1)
   }
+
+  test "overload" {
+    1.`-`(0) == int.`-`(0, -1)
+  }
 }
