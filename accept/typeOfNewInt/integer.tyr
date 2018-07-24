@@ -1,0 +1,8 @@
+/**
+ * @note tests correctness of .type and new for ints
+ */
+val type T {
+  test "basic" {
+    0 == new ((new 7.type) + 1).type
+  }
+}
