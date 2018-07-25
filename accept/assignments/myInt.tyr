@@ -3,7 +3,9 @@
  */
 type MyInt {
 
-  test "constant arithmetic precedence" { 7 + 1 * 8 != 64 }
+  test "constant arithmetic precedence" { 
+    7 + 1 * 8 != 64
+  }
   test "constant arithmetic precedence 2" { 7 + 1 * 8 == 15 }
   test "constant arithmetic xor" { -1 ^ 0 == -1 }
   test "constant arithmetic mul" { -1 * 0 == 0 }
@@ -25,10 +27,10 @@ type MyInt {
   test "assignment flow" {
     var v = 7
 
-    v == 7 && {
+    v == 7 && ({
       v = 5
       v != 7 && v == 5
-    }
+    })
   }
   
   test "assignment neg" {

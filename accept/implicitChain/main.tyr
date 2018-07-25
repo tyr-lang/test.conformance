@@ -2,7 +2,7 @@
  * Test implicit : T.
  */
 type S {
-  new {}
+  new;
 
   def f : int = 3
 
@@ -12,7 +12,7 @@ type S {
 }
 
 type T <: proxy[S] {
-  new {}
+  new;
 
   def implicit : S = new S
 
@@ -26,7 +26,7 @@ type T <: proxy[S] {
 }
 
 type U <: proxy[T] {
-  new {}
+  new;
 
   def implicit : T = new T
 
@@ -41,10 +41,10 @@ type U <: proxy[T] {
   }
 }
 
-type V <: U {
-  new {}
+type V <: U, proxy[T] {
+  new;
 
   test "f" {
-    3 == (new V()).f()
+    3 == (new V).f()
   }
 }
