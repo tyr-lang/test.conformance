@@ -1,7 +1,7 @@
 /**
  * Test flat Ref[T].
  */
-val type T {
+type T {
 
   test "instance" {
     // should eventually be rejected by the compiler

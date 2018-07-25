@@ -1,3 +1,6 @@
+/**
+ * ensure that type aliases are transparent in terms of types of expressions
+ */
 type in := int;
 type i := in;
 

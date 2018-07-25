@@ -1,8 +1,10 @@
 /**
  * @note tests correctness of .type and new for ints
  */
-val type T {
+type T {
   test "basic" {
+    // a correct implementation of this expression does not involve a "1" as
+    // member of a block
     0 == new ((new 7.type) + 1).type
   }
 }

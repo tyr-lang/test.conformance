@@ -1,7 +1,7 @@
 /**
  * Test flat structures.
  */
-type Point {
+var type Point {
 
   var x : int;
   var y : int;

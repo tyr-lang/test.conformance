@@ -6,10 +6,7 @@ type Pair [A : Type, B : Type] {
   var a : A;
   var b : B;
 
-  new (a : A, b : B) {
-    this.a = a;
-    this.b = b;
-  }
+  new (a := a : A, b := b : B) {}
 
   def swap : Pair[B, A] = new Pair[B,A](b,a);
 
@@ -29,7 +26,7 @@ type Pair [A : Type, B : Type] {
 type Box [T : Type] {
   var content : T;
 
-  new (content : T) = this.content = content;
+  new (content := content : T) {}
 
   type def box [T: Type] (content : T) : Box[T] <: static = new Box[T](t);
   def unbox : T = content;

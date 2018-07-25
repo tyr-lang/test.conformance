@@ -1,0 +1,21 @@
+/**
+ * test global functions
+ */
+type T {
+
+  type def f : void {
+    7 + 3
+    return
+  }
+
+  type def g : bool = true
+
+  type def h : void {
+  }
+
+  test "basic" {
+    f()
+    h()
+    g()
+  }
+}

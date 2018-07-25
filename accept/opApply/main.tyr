@@ -1,3 +1,6 @@
+/**
+ * tests overload resolution and manual operator application
+ */
 type T {
 
   type def f(x : int) : int = x - 3

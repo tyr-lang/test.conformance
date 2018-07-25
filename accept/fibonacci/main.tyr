@@ -1,3 +1,6 @@
+/**
+ * test local variables and global functions
+ */
 type T {
 
   // stupid fibonacci implementation to check correct implementation of recursion

@@ -2,6 +2,8 @@
  * @note this test will eventually stop working!
  */
 type T {
+  new;
+
   def - : { if(7==8) true
             else false
             int

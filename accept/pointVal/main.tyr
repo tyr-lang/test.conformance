@@ -1,7 +1,7 @@
 /**
  * Test flat structures.
  */
-val type Point {
+type point {
 
   var x : int;
   var y : int;
@@ -11,42 +11,43 @@ val type Point {
     y = 0
   }
 
-  new (x := x : int, y := y : int);
+//  new (x := x : int, y := y : int);
+  new (nx : int, ny : int) { x = nx; y = ny }
 
-  def swap : Point {
-    return new Point(y, x)
+  def swap : point {
+    return new point(y, x)
   }
 
-  def + (p : Point) : Point {
-    new Point(x + p.x, y + p.y);
+  def + (p : point) : point {
+    new point(x + p.x, y + p.y);
   }
 
-  def * (s : int) : Point {
-    new Point(s * x, s * y);
+  def * (s : int) : point {
+    new point(s * x, s * y);
   }
 
-  def == (p : Point) : bool = x == p.x & y == p.y
+  def == (p : point) : bool = x == p.x & y == p.y
 
 
   test "new" {
-    val p = new Point()
+    val p = new point()
   }
 
   test "plain new" {
-    new Point()
+    new point()
   }
 
   test "new params" {
-    val p = new Point(1, 2)
+    val p = new point(1, 2)
   }
 
   test "swap" {
-    val p = new Point(1, 2)
+    val p = new point(1, 2)
     !(p == p.swap())
   }
 
   test "swap 2" {
-    val p = new Point(2, 2)
+    val p = new point(2, 2)
     p == p.swap()
   }
 }

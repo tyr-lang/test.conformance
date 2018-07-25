@@ -1,7 +1,7 @@
 /**
  * Test implicit : T.
  */
-val type S {
+type S {
   new {}
 
   def f : int = 3
@@ -11,7 +11,7 @@ val type S {
   }
 }
 
-val type T <: proxy[S] {
+type T <: proxy[S] {
   new {}
 
   def implicit : S = new S
@@ -25,7 +25,7 @@ val type T <: proxy[S] {
   }
 }
 
-val type U <: proxy[T] {
+type U <: proxy[T] {
   new {}
 
   def implicit : T = new T
@@ -41,13 +41,10 @@ val type U <: proxy[T] {
   }
 }
 
-/** TODO
 type V <: U {
-  def new;
-
-  def implicit : U = this
+  new {}
 
   test "f" {
     3 == (new V()).f()
   }
-}*/
+}
