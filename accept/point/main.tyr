@@ -25,11 +25,11 @@ var type Point {
     new Point(s * x, s * y);
   }
 
-  def == (p : Point) : bool = x == p.x & y == p.y
+  def == (q : Point) : bool = x == q.x & y == q.y
 
 
   test "new" {
-    val p = new Point()
+    val a = new Point()
   }
 
   test "plain new" {
@@ -37,16 +37,16 @@ var type Point {
   }
 
   test "new params" {
-    val p = new Point(1, 2)
+    val b = new Point(1, 2)
   }
 
   test "swap" {
-    val p = new Point(1, 2)
-    !(p == p.swap())
+    val c = new Point(1, 2)
+    !(c == c.swap())
   }
 
   test "swap 2" {
-    val p = new Point(2, 2)
-    p == p.swap()
+    val d = new Point(2, 2)
+    d == d.swap()
   }
 }

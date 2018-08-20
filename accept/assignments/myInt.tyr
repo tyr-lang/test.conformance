@@ -3,39 +3,46 @@
  */
 type MyInt {
 
-  test "constant arithmetic precedence" { 
-    7 + 1 * 8 != 64
-  }
+  test "constant arithmetic precedence" { 7 + 1 * 8 != 64 }
   test "constant arithmetic precedence 2" { 7 + 1 * 8 == 15 }
   test "constant arithmetic xor" { -1 ^ 0 == -1 }
   test "constant arithmetic mul" { -1 * 0 == 0 }
   test "constant arithmetic div" { -3 / 2 == -1 }
   test "constant arithmetic -div" { -3 / 2 == -1 }
   test "constant arithmetic mod" { 3 % 2 == 1 }
+  test "constant arithmetic -mod" { -3 % 2 == -1 }
 
   test "assignment" {
     var v = 7;
-    v - 7 == 0 && v == 7
+    v == 7
+  }
+  test "assignment sym" {
+    var v = 7;
+    7 == v
+  }
+  test "assignment 2" {
+    var v = 7;
+    v - 7 == 0
   }
 
   test "assignment self" {
-    var v = 7;
-    v = v;
-    v == 7
+    var x = 7;
+    x = x;
+    x == 7
   }
 
   test "assignment flow" {
-    var v = 7
+    var y = 7
 
-    v == 7 && ({
-      v = 5
-      v != 7 && v == 5
+    y == 7 && ({
+      y = 5
+      y != 7 && y == 5
     })
   }
-  
+
   test "assignment neg" {
-    var v = 5
-    v = -1
-    v < 0
+    var z = 5
+    z = -1
+    z < 0
   }
 }
