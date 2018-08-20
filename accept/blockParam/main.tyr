@@ -1,0 +1,9 @@
+/**
+ * test block parameter usage
+ */
+type Main {
+
+  test "simple" {
+    true && false
+  }
+}

@@ -1,0 +1,47 @@
+/**
+ * test test usage of generalized binders
+ *
+ * @todo improve this test as soon as collections are available
+ */
+type Main {
+
+  // [0;9].fold(intial)(step)
+  type def fold(left : BlockParameter[int], right : BlockParameter[int],
+                initial : Block[int], step : Block[int]) : int {
+    var i = 0;
+    var r = initial.eval();
+    while(i < 10) {
+      left = r;
+      right = i;
+      r = step.eval();
+    }
+    r
+  }
+
+  test "bool" {
+    true.`&&` do { "correct"!!; false }
+  }
+
+  test "fold zero" {
+    0 == (fold i,j do {0}{0})
+  }
+  test "fold drop" {
+    9 == (fold i,j do {0}{j})
+  }
+  test "fold sum" {
+    45 == (fold i,j do {0}{i+j})
+  }
+
+  /**
+   * This test is used to ensure (manually) that sleipnir creates sane code.
+   */
+  test "fold flow" {
+    var x : int = 0
+    var z : int
+    (x == 0 &&
+     x != (z=(fold i,j do {0}{x=j && (if x > 5 then x = 5); i})) &&
+     x == 5 &&
+     z == 9
+    )
+  }
+}

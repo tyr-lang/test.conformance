@@ -1,0 +1,9 @@
+/**
+ * test test usage of generalized binders
+ */
+type Main {
+
+  test "parameter missmatch" {
+    true.`&&` du do { do {} while false}
+  }
+}
