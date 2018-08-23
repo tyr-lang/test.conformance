@@ -4,6 +4,10 @@
 type Main {
 
   test "simple" {
-    true && false
+    false || true
+  }
+
+  test "chain" {
+    true && false || true
   }
 }
