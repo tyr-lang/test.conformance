@@ -1,0 +1,18 @@
+/**
+ * test block parameter usage and integrity of generated CFG
+ */
+type Main {
+  type def chain(v : int, c : Block[int]) : int =
+    if (0 != v) c.eval() else v
+
+  type def niahc(v : int, c : Block[int]) : int =
+    if (0 == v) v else c.eval()
+
+  test "chain" {
+    chain(1, chain(2, 3)) == 3
+  }
+
+  test "reverse chain" {
+    niahc(1, niahc(2, 3)) == 3
+  }
+}
