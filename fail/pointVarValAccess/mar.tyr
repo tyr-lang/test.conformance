@@ -1,5 +1,5 @@
 /**
- * Test flat structures.
+ * Test that variable type operations cannot be performed on vals.
  */
 var type Point {
 
@@ -27,26 +27,13 @@ var type Point {
 
   def == (q : Point) : bool = x == q.x && y == q.y
 
-
-  test "new" {
-    val a = new Point()
-  }
-
-  test "plain new" {
-    new Point()
-  }
-
-  test "new params" {
-    var b = new Point(1, 2)
-  }
-
   test "swap" {
-    var c = new Point(1, 2)
+    val c = new Point(1, 2)
     !(c == c.swap())
   }
 
   test "swap 2" {
-    var d = new Point(2, 2)
+    val d = new Point(2, 2)
     d == d.swap()
   }
 }
