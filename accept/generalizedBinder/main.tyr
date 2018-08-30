@@ -34,9 +34,6 @@ type Main {
     45 == (fold(0) i:int, j:int do {i+j})
   }
 
-  /**
-   * This test is used to ensure (manually) that sleipnir creates sane code.
-   */
   test "fold flow hard" {
     var x : int = 0
     var z : int;
@@ -72,23 +69,24 @@ type Main {
 
     x == 5 && z == 9
   }
-/*
-  test "fold type" {
-    var x : int = 0
-    var z : int = (fold(0) i:int,j:int do {
-      x = j
-      val r:int = i
-      r
-    })
 
-    x == 9
-  }
-*/
   test "fold leak" {
     var x : int = 0
     var z : int = (fold(0) i:int,j:int do {
       x = j
       i
+    })
+
+    x == 9
+  }
+
+  test "fold type" {
+    var x : int = 0
+    var z : int = (fold(0) i:int,j:int do {
+      x = j
+      // TODO remove this shitty implicit conversion!
+      val r:int = i.implicit()
+      r
     })
 
     x == 9
