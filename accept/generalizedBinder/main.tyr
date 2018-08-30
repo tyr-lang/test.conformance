@@ -6,42 +6,91 @@
 type Main {
 
   // [0;9].fold(intial)(step)
-  type def fold(left : BlockParameter[int], right : BlockParameter[int],
-                initial : Block[int], step : Block[int]) : int {
-    var i = 0;
-    var r = initial.eval();
-    while(i < 10) {
+  type def fold(initial : int, 
+                left : BlockParameter[int], right : BlockParameter[int],
+                step : Block[int]) : int {
+    var idx : int = 0;
+    var r = initial;
+    while(idx < 10) {
       left = r;
-      right = i;
+      right = idx;
+      idx = idx + 1;
       r = step.eval();
     }
     r
   }
 
   test "bool" {
-    true.`&&` do { "correct"!!; false }
+    true.`&&` do { "correct\n"!!; false || true}
   }
 
   test "fold zero" {
-    0 == (fold i,j do {0}{0})
+    0 == (fold(0) i:int, j:int do {0})
   }
   test "fold drop" {
-    9 == (fold i,j do {0}{j})
+    9 == (fold(0) i:int, j:int do {j})
   }
   test "fold sum" {
-    45 == (fold i,j do {0}{i+j})
+    45 == (fold(0) i:int, j:int do {i+j})
   }
 
   /**
    * This test is used to ensure (manually) that sleipnir creates sane code.
    */
-  test "fold flow" {
+  test "fold flow hard" {
     var x : int = 0
-    var z : int
+    var z : int;
     (x == 0 &&
-     x != (z=(fold i,j do {0}{x=j && (if x > 5 then x = 5); i})) &&
+     x != (z=(fold(0) i:int,j:int do {x=j; if (x > 5) {x = 5}; j})) &&
      x == 5 &&
      z == 9
     )
+  }
+
+  test "fold flow" {
+    var x : int = 0;
+    var z : int = (fold(0) i:int,j:int do {
+      x = j
+      if (x > 5) {
+        x = 5
+      }
+      i
+    });
+
+    x == 5 && z == 0
+  }
+
+  test "fold flow j" {
+    var x : int = 0;
+    var z : int = (fold(0) i:int,j:int do {
+      x = j
+      if (x > 5) {
+        x = 5
+      }
+      j
+    });
+
+    x == 5 && z == 9
+  }
+/*
+  test "fold type" {
+    var x : int = 0
+    var z : int = (fold(0) i:int,j:int do {
+      x = j
+      val r:int = i
+      r
+    })
+
+    x == 9
+  }
+*/
+  test "fold leak" {
+    var x : int = 0
+    var z : int = (fold(0) i:int,j:int do {
+      x = j
+      i
+    })
+
+    x == 9
   }
 }
