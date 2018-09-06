@@ -34,6 +34,11 @@ type Main {
     45 == (fold(0) i:int, j:int do {i+j})
   }
 
+  // check parsability
+  test "fold dududu" {
+    9 == (fold(0) i:int, du:int do { do { du } while false})
+  }
+
   test "fold flow hard" {
     var x : int = 0
     var z : int;

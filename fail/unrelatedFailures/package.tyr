@@ -1,4 +1,5 @@
-# tyr has no package declaration
+/* old syntax, wont even parse */
+// tyr has no package declaration
 package tyr
 
 type myType {}

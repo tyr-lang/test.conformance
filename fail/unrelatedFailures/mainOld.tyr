@@ -1,3 +1,5 @@
+/* old syntax, wont even parse */
+
 scope foo;
 
 import predef

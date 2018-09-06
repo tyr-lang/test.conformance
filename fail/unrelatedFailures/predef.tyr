@@ -1,3 +1,5 @@
+/* old syntax, wont even parse */
+
 /** 
  * types inheriting this property are realized by the compiler
  */
