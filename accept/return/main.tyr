@@ -4,7 +4,7 @@
 type T {
 
   type def f : void {
-    if false { return }
+    if false return
   }
 
   type def g : void {
@@ -12,12 +12,12 @@ type T {
   }
 
   type def h : void {
-    if true { return }
-    else { return }
+    if true return
+    else return
   }
 
   type def i : int {
-    return if false { return 0 }
+    return if false return 0
            else 1
   }
 
@@ -42,7 +42,7 @@ type T {
   }
 
   test "explicit flow result test" {
-    return if false { return false }
+    return if false return false
            else true
   }
 }

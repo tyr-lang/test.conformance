@@ -1,0 +1,43 @@
+/**
+ * test properties of literals
+ */
+type literals {
+  test "integer" {
+    0 == 0 &&
+    1 != 0
+  }
+  test "long" {
+    0x0 == 0L &&
+    0x1 != 0i64
+  }
+  test "integer type" {
+    0 <: int &&
+    0 <: Integer[32] &&
+    !(0 <: Integer[64])
+  }
+  test "integer literals" {
+    0i8 <: Integer[8] &&
+    0i <: Integer[32] &&
+    0L <: Integer[64] &&
+    0i64 <: Integer[64] &&
+    0i1 <: Integer[1] &&
+    0x20i64 == 32L
+  }
+
+  test "float" {
+    .0f == .0f &&
+    .0f != 1.0f
+  }
+  test "float type" {
+    .0f <: Float[32] &&
+    .0f <: float &&
+    .0 <: Float[64] &&
+    .0 <: double
+  }
+  test "float literals" {
+    .0f8 <: Float[8] &&
+    .0 <: Float[64] &&
+    .0f <: Float[32] &&
+    .0f64 <: Float[64]
+  }
+}

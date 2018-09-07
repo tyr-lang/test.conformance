@@ -1,0 +1,35 @@
+/**
+ * @note tests correctness of new/delete
+ */
+class T {
+  type var state : int = 0
+  
+  new {
+    if(0 == state) { state = 1 }
+  }
+  delete {
+    if(1 == state) { state = 2 }
+  }
+
+  test "var new delete" {
+    var x : T = null
+    0 == state && {
+      x = new T
+      null != x && 1 == state
+    } && {
+      delete x
+      null == x && 2 == state
+    }
+  }
+
+  test "val new delete" {
+    val x = new T
+    {
+      null != x && 1 == state
+    } && {
+      delete x
+      // a val cannot be set to null, as it's a val
+      null != x && 2 == state
+    }
+  }
+}

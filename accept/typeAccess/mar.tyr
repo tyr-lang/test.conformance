@@ -1,0 +1,11 @@
+/**
+ * @note tests correctness of .type for ints
+ */
+type T {
+  test "basic" {
+    int != 7.type
+  }
+  test "basic literal" {
+    IntegerLiteral[32] == 7.type
+  }
+}

@@ -1,7 +1,7 @@
 /**
  * Test that variable type operations cannot be performed on vals.
  */
-var type Point {
+type Point {
 
   var x : int;
   var y : int;
@@ -13,7 +13,8 @@ var type Point {
 
   new (x := x : int, y := y : int);
 
-  def swap : Point {
+  // requires the target to be a var; for no reason but testing
+  def swap(this : Ref[Point]) : Point {
     return new Point(y, x)
   }
 

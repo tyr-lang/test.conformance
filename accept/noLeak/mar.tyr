@@ -1,0 +1,19 @@
+/**
+ * @note tests correctness of .type for ints
+ */
+class T {
+  test "basic" {
+    val x = new T
+    delete x
+  }
+  test "basic var" {
+    var x = new T
+    null != x && ({
+      delete x
+      null == x
+    })
+  }
+  test "basic literal" {
+    IntegerLiteral[32] == 7.type
+  }
+}

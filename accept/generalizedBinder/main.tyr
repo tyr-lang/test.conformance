@@ -23,6 +23,13 @@ type Main {
   test "bool" {
     true.`&&` do { "correct\n"!!; false || true}
   }
+  test "bool simple" {
+    true.`&&` do (false || true)
+  }
+  test "bool chain" {
+    // note: "(true || false) || true", i.e. the control flow is different
+    true.`||` do (false).`||` do (true)
+  }
 
   test "fold zero" {
     0 == (fold(0) i:int, j:int do {0})

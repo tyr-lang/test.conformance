@@ -1,0 +1,27 @@
+/**
+ * @note tests correctness of implicit new/delete
+ */
+class T {
+
+  test "var new delete" {
+    var x : T = null
+    {
+      x = new T
+      null != x
+    } && {
+      delete x
+      null == x
+    }
+  }
+
+  test "val new delete" {
+    val x = new T
+    {
+      null != x
+    } && {
+      delete x
+      // a val cannot be set to null, as it's a val
+      null != x
+    }
+  }
+}

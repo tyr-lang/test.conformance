@@ -1,0 +1,19 @@
+/**
+ * @note tests correctness of .type for ints
+ */
+type T {
+  test "basic" {
+    String != "String".class
+  }
+
+  test "basic lit" {
+    StringLiteral == "String".class
+  }
+
+  test "type of type" {
+    int.type == long.type
+  }
+  test "class and type" {
+    "String".type == "String".class
+  }
+}

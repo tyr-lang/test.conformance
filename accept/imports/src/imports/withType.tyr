@@ -1,6 +1,6 @@
 // import a type
 with imports.foo;
 // same target
-with foo;
+with f := foo;
 
-type bar <: foo;
+type bar <: f;

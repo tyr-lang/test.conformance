@@ -1,7 +1,7 @@
 /**
- * Test flat structures.
+ * Test flat structures with mutable this.
  */
-var type Point {
+type Point {
 
   var x : int;
   var y : int;
@@ -13,19 +13,19 @@ var type Point {
 
   new (x := x : int, y := y : int);
 
-  def swap : Point {
+  def swap(this : Ref[Point]) : Point {
     return new Point(y, x)
   }
 
-  def + (p : Point) : Point {
+  def + (this : Ref[Point], p : Point) : Point {
     new Point(x + p.x, y + p.y);
   }
 
-  def * (s : int) : Point {
+  def * (this : Ref[Point], s : int) : Point {
     new Point(s * x, s * y);
   }
 
-  def == (q : Point) : bool = x == q.x && y == q.y
+  def == (this : Ref[Point], q : Point) : bool = x == q.x && y == q.y
 
 
   test "new" {

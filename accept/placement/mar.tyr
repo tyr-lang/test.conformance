@@ -1,0 +1,29 @@
+/**
+ * This test checks method placement realizations.
+ */
+type T {
+  var a : A;
+  var b : B;
+
+  new (a := a : A, b := b : B) {}
+
+  def swap : Pair[B, A] = new Pair[B,A](b,a);
+  def exchange : Pair[B, A] := swap;
+
+  test "swap swap" {
+    var p = new Pair[int, int](2,3)
+    // this test requires Eq!
+    p != p.swap() && p == p.swap().swap()
+  }
+
+  test "swap swap 2" {
+    var p = new Pair[int, int](2,3)
+    // this test requires Eq!
+    p != p.exchange() && p == p.exchange().exchange()
+  }
+
+  test "placement function pointer" {
+    // this test may require expected types
+    T.swap == T.exchange
+  }
+}

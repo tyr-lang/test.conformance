@@ -1,0 +1,10 @@
+/**
+ * This test checks method placement realizations.
+ */
+type T {
+
+  def swap := exchange;
+  def exchange := swap;
+
+  // no test required
+}
