@@ -6,24 +6,24 @@ type T {
   def == : bool <: operator.postfix, operator.precedence[1] = true
 
   test "basic" <: noWarning {
-    var t : T
+    val t : T
     // binds (true == (!t)) == true
     true == !t == true
   }
 
   test "type based" <: noWarning {
-    var t : T
-    // binds !(==(!t,!t))
+    val t : T
+    // binds (! (!t)) != (!t)
     ! !t != !t
   }
 
   test "basic error" <: noCompile {
-    var t : T
+    val t : T
     true == !t ==
   }
 
   test "basic error more" <: noCompile {
-    var t : T
+    val t : T
     true == !t == !t ==
   }
 
