@@ -1,0 +1,48 @@
+/**
+ * test assignment for classes
+ */
+class S {
+}
+class T {
+
+  test "assignment" {
+    var v = new T;
+    null != v
+  }
+  test "comparable types" {
+    var v = new T;
+    var w = new S;
+    w != v
+  }
+  test "comparable same types" {
+    var v = new T;
+    var w = new T;
+    w != v
+  }
+  test "intersection" {
+    var v = new T;
+    var w = new S;
+    var n = if (true) v else w
+    null != n
+  }
+  test "Null intersection" {
+    var v = new T;
+    var w = new S;
+    var n = if (true) v else w
+    null != n && {
+      n = null
+      null == n
+    }
+  }
+
+  // this will compile eventually
+  test "CT intersection" <: noCompile {
+    val v = new T;
+    val w = new S;
+    var n = if (true) v else w
+    null != n && {
+      n = new T
+      v != n
+    }
+  }
+}

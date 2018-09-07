@@ -32,4 +32,10 @@ class T {
       null != x && 2 == state
     }
   }
+
+  test "delete delete" <: noCompile {
+    val x = new T
+    // result of delete is void and void cannot be deleted, even for vals
+    delete delete x
+  }
 }
