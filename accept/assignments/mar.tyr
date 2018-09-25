@@ -1,0 +1,25 @@
+/**
+ * test type conformity of assignments and initialization
+ */
+type MyInt {
+
+  test "int var" {
+    var v = 7;
+    v.implicit() : int == 7
+  }
+
+  test "int var ref" {
+    var v : int = 7;
+    v : Ref[int] == 7
+  }
+
+  test "int val" {
+    val v = 7;
+    v : IntegerLiteral[32]
+  }
+
+  test "int val string" <: noCompile {
+    val v = 7;
+    v : String
+  }
+}

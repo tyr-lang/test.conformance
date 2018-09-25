@@ -1,0 +1,10 @@
+/**
+ * check correct handling of implicit application of implicit :)
+ */
+type MyInt {
+
+  test "int var implicit apply" {
+    var v = 7;
+    v.implicit : int == 7
+  }
+}

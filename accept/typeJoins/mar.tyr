@@ -1,0 +1,114 @@
+/**
+ * test correct implementation of join
+ */
+type MyInt {
+  // prevent CT evaluation of predicates
+  type var phi = true;
+  // prevent CT evaluation of predicates
+  type var phiX = 7;
+
+  type def exit : NoReturn = exit();
+
+  test "same" {
+    val v = if phi 7 else 7
+    // v.type == IntegerLiteral[32]
+  }
+  // should eventually be noCompile
+  test "any" {
+    val v = if phi 7 else 7L
+    // v.type == any
+  }
+  // should eventually be noCompile
+  test "any string" {
+    val v = if phi 7 else ""
+    // v.type == any
+  }
+  test "literal" {
+    val v = if phi 7 else (7 : int)
+    // v.type == int
+  }
+  test "literal string" {
+    var s = "" // String -> noVar
+    val v = if phi s else ""
+    // v.type == String
+  }
+  test "null" {
+    val v = if phi null else ""
+    // v.type == LiteralString
+  }
+  test "same Null" {
+    val v = if phi null else null
+    // v.type == Null
+  }
+  test "same NoReturn" {
+    val v = if phi exit() else exit()
+    // v.type == Null
+  }
+  test "int NoReturn" {
+    val v = if phi 7 else exit()
+    // v.type == int
+  }
+  // should eventually be noCompile
+  test "int Null" {
+    val v = if phi 7 else Null
+    // v.type == any
+  }
+  test "String NoReturn" {
+    val v = if phi "" else exit()
+    // v.type == StringLiteral
+  }
+  test "var null" {
+    var x = 7
+    val v = if phi null else x
+    // v.type == any // likely pointer instead
+  }
+  test "var string" {
+    var x = 7
+    val v = if phi "" else x
+    // v.type == any // likely pointer instead
+  }
+  test "var string val string" {
+    var x = ""
+    val y = ""
+    val v = if phi y else x
+    // v.type == String // likely pointer instead
+  }
+
+  test "multi int" {
+    val v = switch phiX {
+      if 0 : 0
+      if 1 : (1 : int)
+      if 7 : 4
+      else exit()
+    }
+    // v.type == int
+  }
+  // should eventually be noCompile
+  test "multi any" {
+    val v = switch phiX {
+      if 0 : 0
+      if 1 : (1 : int)
+      if 7 : null
+      else exit()
+    }
+    // v.type == any
+  }
+  test "multi object" {
+    val v = switch phiX {
+      if 0 : 0.type
+      if 1 : ""
+      if 7 : null
+      else exit()
+    }
+    // v.type == Object
+  }
+  test "multi String" {
+    val v = switch phiX {
+      if 0 : ("" : String)
+      if 1 : ""
+      if 7 : null
+      else exit()
+    }
+    // v.type == String
+  }
+}
