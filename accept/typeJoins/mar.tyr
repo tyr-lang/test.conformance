@@ -11,67 +11,99 @@ type MyInt {
 
   test "same" {
     val v = if phi 7 else 7
+    v : IntegerLiteral[32]
     // v.type == IntegerLiteral[32]
   }
-  // should eventually be noCompile
-  test "any" {
+
+  test "any" <: noCompile {
     val v = if phi 7 else 7L
-    // v.type == any
+    // v.type == void // because join knows that it cannot represent its result
   }
-  // should eventually be noCompile
-  test "any string" {
+
+  test "any string" <: noCompile {
     val v = if phi 7 else ""
-    // v.type == any
+    // v.type == void // because join knows that it cannot represent its result
   }
+
   test "literal" {
     val v = if phi 7 else (7 : int)
+    v : int
     // v.type == int
   }
+
+  test "void" <: noCompile {
+    val v = if phi {} else {}
+    v : void
+    // v.type == void
+  }
+
+  test "any void" <: noCompile {
+    var x = 0
+    val v = if phi x else {}
+    // v.type == any
+  }
+
   test "literal string" {
     var s = "" // String -> noVar
     val v = if phi s else ""
+    v : String
     // v.type == String
   }
+
   test "null" {
     val v = if phi null else ""
-    // v.type == LiteralString
-  }
-  test "same Null" {
-    val v = if phi null else null
-    // v.type == Null
-  }
-  test "same NoReturn" {
-    val v = if phi exit() else exit()
-    // v.type == Null
-  }
-  test "int NoReturn" {
-    val v = if phi 7 else exit()
-    // v.type == int
-  }
-  // should eventually be noCompile
-  test "int Null" {
-    val v = if phi 7 else Null
-    // v.type == any
-  }
-  test "String NoReturn" {
-    val v = if phi "" else exit()
+    v : StringLiteral
     // v.type == StringLiteral
   }
-  test "var null" {
+
+  test "same Null" {
+    val v = if phi null else null
+    v : Null
+    // v.type == Null
+  }
+
+  test "same NoReturn" {
+    val v = if phi exit() else exit()
+    // note: there should be a warning informing that the remaining code in this block is not evaluated because it is not reachable
+    v : NoReturn
+    // v.type == NoReturn
+  }
+
+  test "int NoReturn" {
+    val v = if phi 7 else exit()
+    v : IntegerLiteral[32]
+    // v.type == int
+  }
+
+  test "int Null" <: noCompile {
+    val v = if phi 7 else Null
+    // v.type == void
+  }
+
+  test "String NoReturn" {
+    val v = if phi "" else exit()
+    v : StringLiteral
+    // v.type == StringLiteral
+  }
+
+  test "var null" <: noCompile {
     var x = 7
     val v = if phi null else x
-    // v.type == any // likely pointer instead
+    // v.type == void
   }
-  test "var string" {
+
+  test "var string" <: noCompile {
     var x = 7
     val v = if phi "" else x
-    // v.type == any // likely pointer instead
+    // v.type == void
   }
+
   test "var string val string" {
     var x = ""
     val y = ""
     val v = if phi y else x
-    // v.type == String // likely pointer instead
+    v : String
+    // v.type == String
   }
 
   test "multi int" {
@@ -81,18 +113,49 @@ type MyInt {
       if 7 : 4
       else exit()
     }
+    v : int
     // v.type == int
   }
-  // should eventually be noCompile
-  test "multi any" {
+
+  test "multi any" <: noCompile {
     val v = switch phiX {
       if 0 : 0
       if 1 : (1 : int)
       if 7 : null
       else exit()
     }
-    // v.type == any
+    // v.type == void
   }
+
+  test "multi String" {
+    val v = switch phiX {
+      if 0 : ("" : String)
+      if 1 : ""
+      if 7 : null
+      else exit()
+    }
+    v : String
+    // v.type == String
+  }
+
+  test "multi NoReturn" {
+    switch phiX {
+      if 0 : exit()
+      if 1 : exit()
+      else exit()
+    } : NoReturn
+  }
+
+  // @note this test may eventually cause warnings at least
+  test "multi NoReturn void val" {
+    val x = switch phiX {
+      if 0 : exit()
+      if 1 : exit()
+      else exit()
+    }
+  }
+
+/* TODO requires "x.type"
   test "multi object" {
     val v = switch phiX {
       if 0 : 0.type
@@ -102,13 +165,5 @@ type MyInt {
     }
     // v.type == Object
   }
-  test "multi String" {
-    val v = switch phiX {
-      if 0 : ("" : String)
-      if 1 : ""
-      if 7 : null
-      else exit()
-    }
-    // v.type == String
-  }
+*/
 }
