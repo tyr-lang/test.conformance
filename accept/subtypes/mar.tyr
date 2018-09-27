@@ -1,0 +1,10 @@
+/**
+ * Test substyping
+ */
+type G <: Generic[int] {}
+
+interface I <: G {}
+
+interface J <: any, I {}
+
+interface Generic[T : Type] <: any;
