@@ -1,4 +1,3 @@
-// pointless, because we import that one implicitly
-with imports;
+with parent.S;
 
-type foo;
+type foo <: S;

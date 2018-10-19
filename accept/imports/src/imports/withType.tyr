@@ -1,6 +1,10 @@
 // import a type
 with imports.foo;
+
+// this is not possible, as imports are evaluated out of order 
+// with f := foo;
+
 // same target
-with f := foo;
+with f := imports.foo;
 
 type bar <: f;
