@@ -3,13 +3,11 @@
  */
 type T {
 
-  test "instance" {
-    // should eventually be rejected by the compiler
+  test "instance" <: noCompile {
     val p : Ref[int]
   }
 
   test "new" <: noCompile {
-    // should eventually be rejected by the compiler
     val p : Ref[int] = 0
   }
 
