@@ -28,7 +28,7 @@ type Box [T : Type] {
 
   new (content := content : T) {}
 
-  type def box [T: Type] (content : T) : Box[T] <: static = new Box[T](t);
+  type def box [T: Type] (t : T) : Box[T] = new Box[T](t);
   def unbox : T = content;
 
   test "box unbox" {
