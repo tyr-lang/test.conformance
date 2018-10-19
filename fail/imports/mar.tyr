@@ -5,3 +5,5 @@
 with tyr.lang;
 // not ok
 with 7;
+
+type T;
