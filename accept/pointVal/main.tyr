@@ -3,16 +3,15 @@
  */
 type point {
 
-  var x : int;
-  var y : int;
+  val x : int;
+  val y : int;
 
   new () {
     x = 0
     y = 0
   }
 
-//  new (x := x : int, y := y : int);
-  new (nx : int, ny : int) { x = nx; y = ny }
+  new (x := x : int, y := y : int);
 
   def swap : point {
     return new point(y, x)

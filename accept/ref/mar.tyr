@@ -7,7 +7,7 @@ type T {
     val p : Ref[int]
   }
 
-  test "new" <: noCompile {
+  test "ref zero/null" <: noCompile {
     val p : Ref[int] = 0
   }
 
