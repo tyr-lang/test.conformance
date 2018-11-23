@@ -1,0 +1,24 @@
+/**
+ * Test instantiation of template type type functions.
+ */
+type T[T : Type, v : Ref[T]] {
+
+  type def make : T = v
+
+  test "usage" {
+    var x = 0;
+    T[int, x].make();
+  }
+
+  test "check" {
+    var y = 0;
+    T[int, y].make() == 0;
+  }
+
+  test "check mut" {
+    var z = 0;
+    T[int, z].make() == 0;
+    ++z;
+    T[int, z].make() == 1;
+  }
+}

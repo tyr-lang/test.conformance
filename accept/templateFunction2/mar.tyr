@@ -1,0 +1,24 @@
+/**
+ * Test instantiation of simple template functions.
+ */
+type T[x : IntegerLiteral[32]] {
+
+  type def f[y : IntegerLiteral[32]] : int = x + y
+
+  test "usage" {
+    T[1].f[1]
+  }
+
+  test "check" {
+    T[1].f[1] == 2
+  }
+
+  test "var check" {
+    var x : T[1];
+    x.f[1] == 2
+  }
+
+  test "check 2" {
+    T[3].f[4] == 7
+  }
+}

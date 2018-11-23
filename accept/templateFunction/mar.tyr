@@ -1,0 +1,20 @@
+/**
+ * Test instantiation of simple template functions.
+ */
+type T {
+
+  type def f[x : IntegerLiteral[32]] : int = x
+
+  test "usage" {
+    f[0]
+  }
+
+  test "check" {
+    f[0] == 0
+  }
+
+  test "check 2" {
+    f[31337] = 31337 &&
+    f[-1] != ~1
+  }
+}

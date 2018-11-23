@@ -1,0 +1,50 @@
+/**
+ * Test instantiation of types in combination with elaboration order.
+ */
+type SwapQ1[A : Type, B : Type] {
+
+  val x : A;
+  val y : B;
+
+  new (x := x : A, y := y : B);
+
+  def swap : SwapQ2[B,A] {
+    return new SwapQ2[B,A](y, x)
+  }
+
+  test "new" {
+    new SwapQ1[int, float](0, 0.0f)
+  }
+
+  test "swap" <: noCompile {
+    var x = new SwapQ1[int, float](0, 0.0f);
+    x = x.swap()
+  }
+
+  test "swap 2" <: noCompile {
+    var x = new SwapQ1[int, float](0, 0.0f);
+    x = x.swap().swap()
+  }
+
+  test "swap 3" <: noCompile {
+    var x = new SwapQ1[int, float](0, 0.0f);
+    x = x.swap().swap().swap()
+  }
+
+  test "swap 4" {
+    var x = new SwapQ1[int, float](0, 0.0f);
+    x = x.swap().swap().swap().swap()
+  }
+}
+
+type SwapQ2[A : Type, B : Type] {
+
+  val x : A;
+  val y : B;
+
+  new (x := x : A, y := y : B);
+
+  def swap : SwapQ1[B,A] {
+    return new SwapQ1[B,A](y, x)
+  }
+}
