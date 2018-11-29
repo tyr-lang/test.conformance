@@ -1,0 +1,10 @@
+/**
+ * minimal test to check correct template instantiation for != on explicit Ref[int]
+ */
+type Test {
+  test "var" {
+    var x = 1
+    val ref : Ref[int] = x
+    ref != 2
+  }
+}

@@ -1,0 +1,31 @@
+/**
+ * Object is the top of the class latice.
+ * Null is the bottom element of the class latice.
+ * Object are represented by pointers.
+ */
+class Object <: observablePointer, abstract {
+  /**
+   * The runtime class of this object
+   *
+   * @note this value is set by the back-end on object construction
+   * @note should be Class[this.type]
+   */
+  //val class : Class;
+
+  /**
+   * Release resources held by this object including its memory.
+   *
+   * @note Object.delete will just release the memory owned by this
+   *
+   * @note delete is always a dispatching call
+   *
+   * @note it is always an error to use a deleted object, even if its memory is
+   *       not returned to the OS
+   */
+  delete <: native;
+}
+
+/**
+ * The type of null. This is the bottom element of the class latice.
+ */
+interface Null <: Object;

@@ -1,0 +1,8 @@
+/**
+ * minimal test to check correct template instantiation for != on int
+ */
+type Test {
+  test "lit" {
+    1 != 2
+  }
+}

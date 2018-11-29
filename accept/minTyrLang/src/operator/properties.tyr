@@ -1,0 +1,19 @@
+/**
+ * The operator is right associative, i.e. x op y op z ⇒ x op (y op z)
+ */
+property rightAssociative;
+
+/**
+ * The operator is a postfix operator, i.e. in can only by used like x op.
+ * Otherwise, and by default, it is a prefix operator.
+ *
+ * @note name resolution ignores this property. Hence, an operator cannot exist
+ *       as prefix and postfix under the same name for a type.
+ */
+property postfix;
+
+/**
+ * Precedence of the argument operator.
+ * Higher is stronger.
+ */
+property precedence [strength : int];

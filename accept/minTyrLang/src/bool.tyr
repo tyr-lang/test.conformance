@@ -1,0 +1,23 @@
+/**
+ * a truth type
+ */
+type bool <: native {
+  def ! : bool <: native, operator.precedence[250];
+
+  def != (x : bool) : bool <: native, operator.precedence[80];
+  def == (x : bool) : bool <: native, operator.precedence[80];
+
+  def & (x : bool) : bool <: native, operator.precedence[70];
+  def ^ (x : bool) : bool <: native, operator.precedence[60];
+  def | (x : bool) : bool <: native, operator.precedence[50];
+
+  /* the standard semantics of this operator in any common language */
+  def && (x : Block[bool]) : bool
+         <: operator.precedence[40], operator.rightAssociative =
+    if this x.eval() else this
+
+  /* the standard semantics of this operator in any common language */
+  def || (x : Block[bool]) : bool
+         <: operator.precedence[30], operator.rightAssociative =
+    if this this else x.eval()
+}

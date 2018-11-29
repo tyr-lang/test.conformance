@@ -1,0 +1,11 @@
+/**
+ * Test substyping using templates across package boarders
+ */
+type W [T : Type] <: superchain2.V[T] {
+
+  new (x := x : T);
+
+  test "int" {
+    new W[int](0).x == 0
+  }
+}

@@ -1,0 +1,47 @@
+/**
+ * The type of a type.
+ *
+ * @todo should be generic (and covariant?) in T
+ *
+ * @todo should be limited to types below Object
+ *
+ * @note this type is currently used only for typing and has no RT semantics
+ *
+ * @note if well-typed, Type and Class are, like IntegerLiteral,
+ *       recursive and require special treatment by the compiler
+ */
+class Type/*[T : Type[any] <: covariant]*/ <: Object, native {
+
+  //def isa := ?:
+  //def cast := !:
+
+  // @note specifying v in the presence of implicit casts is beneficial
+  //def reinterpret[V : Type](v : V) : T <: native
+
+
+  /**
+   * dynamic type checking
+   *
+   * @todo should be v : some S do(S >= T)
+   */
+  def ?: (v : any) : bool
+         <: native, operator.precedence[90];
+
+  /**
+   * Equality on types is a subrelation of equalit on pointers, because
+   * identical types can exist at most once. Further, it can be decided at
+   * compile time for compile-time types.
+   *
+   * @todo add with CT in 0.7
+   */
+  // type def == (this : Type, that : Type) : bool
+  //            <: CT, native, operator.precedence[80];
+
+  /**
+   * dynamic type casting
+   *
+   * @todo should be v : Some[S, S >: T]
+   */
+  //def !: (v : any) : T
+  //       <: native, operator.precedence[90];
+}

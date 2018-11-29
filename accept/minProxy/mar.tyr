@@ -1,0 +1,12 @@
+/**
+ * minimal test to check correct template instantiation for proxy
+ */
+type Test[v : int] <: proxy[int] {
+  new;
+
+  def implicit : int = v
+
+  test "eval" {
+    0 == new Test[0]
+  }
+}

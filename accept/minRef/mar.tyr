@@ -1,0 +1,9 @@
+/**
+ * minimal test to check correct template instantiation for != on implicit Ref[int]
+ */
+type Test {
+  test "var" {
+    var x = 1
+    x != 2
+  }
+}

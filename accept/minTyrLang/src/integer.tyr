@@ -1,0 +1,41 @@
+/**
+ * The general integer type. This is a signed integer type of n bits.
+ *
+ * @note the cyclic elaboration error for size is handled by the compiler
+ *
+ * @author Timm Felden
+ */
+type Integer[size : IntegerLiteral[32]] <: native {
+
+  /** as in C,C++,Java */
+  type def ++ (this : Ref[Integer[size]]) : Integer[size]
+              <: native, operator.precedence[210];
+
+  def + (x : Integer[size]) : Integer[size]
+        <: native, operator.precedence[110];
+
+  def != (x : Integer[size]) : bool <: native, operator.precedence[80];
+  def == (x : Integer[size]) : bool <: native, operator.precedence[80];
+}
+
+/**
+ * An integer literal.
+ * This type is used to allow compile-time type modifications with integer
+ * arguments such as the integer type itself.
+ *
+ * @note the cyclic elaboration error for size is handled by the compiler
+ *
+ * @author Timm Felden
+ */
+type IntegerLiteral[size : IntegerLiteral[32]] <: Integer[size], noVar {
+  test "IntegerLiteral" {
+    // this test is currently used to instantiate the IntegerLiteral type
+    // @note this instantiation is required to solve the cyclic elaboration
+    //       problem for packages != tyr.lang
+    0 == 0i32
+  }
+}
+
+// common Integer names
+type int   := Integer[32];
+

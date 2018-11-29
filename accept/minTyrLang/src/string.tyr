@@ -1,0 +1,21 @@
+/**
+ * A string is a sequence of human readable characters. A string shall behave
+ * like an Array[byte] of utf-8-endocding of these characters.
+ *
+ * @note eq shall be the identity on the bytes in this string
+ *
+ * @note hashed shall return the xor-folded projection of the bytes in this
+ *       string onto hashCode. I.e. if hashCode were 8 bytes long, every 8 bytes
+ *       shall be converted to a hashCode and all hashCodes shall be xored.
+ */
+class String <: Object, abstract {
+}
+
+/**
+ * Literal strings that can be evaluated at CT. Be aware of null being a valid
+ * StringLiteral!
+ */
+class StringLiteral <: String, native, noVar {
+  // print the string to std out
+  type def !!(v : StringLiteral) : void <: native, operator.postfix, operator.precedence[10];
+}
