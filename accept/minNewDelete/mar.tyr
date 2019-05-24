@@ -1,0 +1,22 @@
+/**
+ * @note minimal test of correctness of new/delete
+ */
+class T {
+  var state : int;
+  
+  new {
+    state = 1
+  }
+  delete {
+    "deleted" !!
+  }
+
+  test "var new delete" {
+    var x : T = new T
+
+    1 == x.state && {
+      delete x
+      true
+    }
+  }
+}

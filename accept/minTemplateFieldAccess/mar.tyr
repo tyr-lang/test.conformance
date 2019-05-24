@@ -1,0 +1,12 @@
+/**
+ * minimal test to check correct access to template fields
+ */
+type Test [A : Type]{
+  val x : A;
+
+  new (x := x : A);
+
+  test "var" {
+    (new Test[int](0)).x == 0
+  }
+}
