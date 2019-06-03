@@ -19,4 +19,22 @@ class T {
       true
     }
   }
+
+  test "var new delete null" {
+    var x : T = new T
+
+    1 == x.state && {
+      delete x
+      true
+    } && null == x
+  }
+
+  test "val new delete null" {
+    val x : T = new T
+
+    1 == x.state && {
+      delete x
+      true
+    } && null != x
+  }
 }
