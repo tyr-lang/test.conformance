@@ -35,6 +35,6 @@ class T {
     1 == x.state && {
       delete x
       true
-    } && null != x
+    } && null == x
   }
 }
