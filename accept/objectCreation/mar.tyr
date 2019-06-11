@@ -28,14 +28,14 @@ class T {
       null != x && 1 == state
     } && {
       delete x
-      // a val cannot be set to null, as it's a val
-      null != x && 2 == state
+      // for now, even val will implicitly be reset to null
+      null == x && 2 == state
     }
   }
 
   test "delete delete" <: noCompile {
     val x = new T
-    // result of delete is void and void cannot be deleted, even for vals
+    // result of delete is void and void cannot be deleted
     delete delete x
   }
 }

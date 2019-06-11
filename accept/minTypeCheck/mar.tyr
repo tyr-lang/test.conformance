@@ -1,0 +1,60 @@
+/**
+ * @note minimal test performing dynamic type checks
+ */
+class T {
+  test "=:=" {
+    var x : T = new T
+
+    val r = x =:= T && ! x =:= U
+
+    delete x
+    r
+  }
+
+  test "<:=" {
+    val x : T = new T
+
+    val r = x <:= T && ! x <:= U
+
+    delete x
+    r
+  }
+
+  test "<:<" {
+    val x : T = new T
+
+    val r = ! x <:< T && ! x <:< U
+
+    delete x
+    r
+  }
+}
+
+class U <: T {
+  test "=:=" {
+    var x : T = new U
+
+    val r = ! x =:= T && x =:= U
+
+    delete x
+    r
+  }
+
+  test "<:=" {
+    val x : T = new U
+
+    val r = x <:= T && x <:= U
+
+    delete x
+    r
+  }
+
+  test "<:<" {
+    val x : T = new U
+
+    val r = x <:< T && ! x <:< U
+
+    delete x
+    r
+  }
+}
