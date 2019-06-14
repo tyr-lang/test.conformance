@@ -3,4 +3,4 @@
 # binary libraries and debug asts
 out.tl.sf
 *.ast.dot
-*.tl
+**/*.tl
