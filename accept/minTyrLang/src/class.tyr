@@ -1,5 +1,0 @@
-/**
- * The type of a class.
- */
-class Class <: Type, native {
-}
