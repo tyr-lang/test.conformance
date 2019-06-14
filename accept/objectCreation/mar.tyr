@@ -28,8 +28,8 @@ class T {
       null != x && 1 == state
     } && {
       delete x
-      // for now, even val will implicitly be reset to null
-      null == x && 2 == state
+      // x cannot change, so it is still not null
+      null != x && 2 == state
     }
   }
 
