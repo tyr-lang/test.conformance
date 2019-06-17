@@ -1,5 +1,8 @@
 /**
  * test properties of literals
+ *
+ * @note there is currently no way to type check the type of types, because such
+ * an operation has no runtime equivalent
  */
 type literals {
   test "integer" {
