@@ -1,0 +1,14 @@
+/**
+ * test wrong return type detection
+ */
+type T {
+
+  type def f : void {
+    return;
+    return true
+  }
+
+  test "f" {
+    f()
+  }
+}

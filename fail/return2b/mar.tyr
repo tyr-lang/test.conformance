@@ -1,0 +1,14 @@
+/**
+ * test unreachable statement detection
+ */
+type T {
+
+  type def f : void {
+    return;
+    return;
+  }
+
+  test "f" {
+    f()
+  }
+}

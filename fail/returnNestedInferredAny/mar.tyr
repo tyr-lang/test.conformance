@@ -1,0 +1,13 @@
+/**
+ * test inferred any return type detection and reporting (test can also fail for
+ * other reasons)
+ */
+type T {
+
+  // f : ()any
+  type def f = if true return else return 2
+
+  test "f" {
+    f()
+  }
+}

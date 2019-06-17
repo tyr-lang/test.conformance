@@ -1,0 +1,13 @@
+/**
+ * test wrong nested returns
+ */
+type T {
+
+  type def f : void {
+    if true return else return 2
+  }
+
+  test "f" {
+    f()
+  }
+}
