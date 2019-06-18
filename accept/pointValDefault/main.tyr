@@ -6,7 +6,7 @@ type point {
   val x : int;
   val y : int;
 
-  new (x := x : int, y := y : int);
+  new (x := x : int = 0, y := y : int = 0);
 
   def swap : point {
     return new point(y, x)

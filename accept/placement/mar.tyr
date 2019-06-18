@@ -5,7 +5,7 @@ type T {
   var a : A;
   var b : B;
 
-  new (a := a : A, b := b : B) {}
+  new (a := a : A, b := b : B);
 
   def swap : Pair[B, A] = new Pair[B,A](b,a);
   def exchange : Pair[B, A] := swap;
