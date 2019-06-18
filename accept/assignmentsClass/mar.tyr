@@ -35,8 +35,7 @@ class T {
     }
   }
 
-  // this will compile eventually
-  test "CT intersection" <: noCompile {
+  test "CT intersection" {
     val v = new T;
     val w = new S;
     var n = if (true) v else w
