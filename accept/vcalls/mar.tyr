@@ -1,0 +1,53 @@
+/**
+ * test virtual (i.e. dispatching) calls
+ */
+class S {
+  new;
+  delete;
+
+  def f() : int = 0
+
+  test "exact call" {
+    val x = new S
+    val r = 0 == x.f()
+    delete x
+    r
+  }
+
+  // this test shall prevent that some CT-evaluation allows odd code
+  test "call on super" <: noCompile {
+    val x : Object = new S
+    val r = 0 == x.f()
+    delete x
+    r
+  }
+
+  // in essence, this is call on super, except that it prevents performing a static lookup
+  test "subtype object call" {
+    val x : S = new T
+    val r = 1 == x.f()
+    delete x
+    r
+  }
+}
+
+class T <: S {
+  new;
+  delete;
+
+  def f() : int = 1
+
+  test "exact call" {
+    val x = new T
+    val r = 1 == x.f()
+    delete x
+    r
+  }
+
+  test "call on super" {
+    val x : S = new T
+    val r = 1 == x.f()
+    delete x
+    r
+  }
+}

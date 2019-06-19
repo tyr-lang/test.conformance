@@ -1,0 +1,45 @@
+/**
+ * test that delete calls are virtual
+ */
+class S {
+  type var state : int = -1
+
+  new;
+  delete {state = 0}
+
+  test "exact call" {
+    val x = new S
+    delete x
+    0 == state
+  }
+
+  test "call on super" {
+    val x : Object = new S
+    delete x
+    0 == state
+  }
+
+  // in essence, this is call on super, except that it prevents performing a static lookup
+  test "subtype object call" {
+    val x : S = new T
+    delete x
+    1 == state
+  }
+}
+
+class T <: S {
+  new;
+  delete {state = 1}
+
+  test "exact call" {
+    val x = new T
+    delete x
+    1 == state
+  }
+
+  test "call on super" {
+    val x : S = new T
+    delete x
+    1 == state
+  }
+}
