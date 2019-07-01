@@ -3,6 +3,8 @@
  * instantiation.
  */
 type Pair [A : Type, B : Type] {
+  type val eq : MinEQR[Pair[A,B]];
+
   var a : A;
   var b : B;
 

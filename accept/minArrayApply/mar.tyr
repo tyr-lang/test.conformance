@@ -1,0 +1,8 @@
+/**
+ * minimal test to check correct access of a call to FlatArray.apply
+ */
+type Test {
+  test "simple" {
+    (new container.FlatArray[int](1L)).apply(0L)
+  }
+}

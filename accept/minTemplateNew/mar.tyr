@@ -1,0 +1,14 @@
+/**
+ * minimal test to check correct access to template new
+ */
+type Test [A : Type]{
+  var x : container.FlatArray[A];
+
+  new () {
+    x = new container.FlatArray[A](1L);
+  }
+
+  test "simple" {
+    (new Test[int]).x.apply(0L) == 0
+  }
+}
