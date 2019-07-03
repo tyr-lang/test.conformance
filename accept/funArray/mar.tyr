@@ -2,7 +2,7 @@
  * Create an array type with < > access operators, just as a proof of concept
  */
 class Array[Base : Type] {
-  val data : container.FlatArray[Base]
+  var data : container.FlatArray[Base]
   val size : container.size_t
   
   new(size := size : container.size_t) {
@@ -23,13 +23,13 @@ class Array[Base : Type] {
   }
 
   test "use" {
-    val arr = new Array(2)
+    val arr = new Array[int](2L)
     arr<0L> = 0
     0 == arr<0L>
   }
 
   test "update" {
-    val arr = new Array(2)
+    val arr = new Array[int](2L)
     arr<0L> = -1
     arr<1L> = 2
     0 != arr<0L> &&
@@ -38,7 +38,7 @@ class Array[Base : Type] {
   }
 
   test "compare" {
-    val arr = new Array(2)
+    val arr = new Array[int](2L)
     arr<0L> != arr<1L> && {
       arr<0L> = -1
       arr<1L> = 2
@@ -47,7 +47,7 @@ class Array[Base : Type] {
   }
 
   test "KaRazy" {
-    val arr = new Array(2)
+    val arr = new Array[int](2L)
     val Ka = arr < 0L
     val Razy = Ka >;
     Razy = 1
@@ -66,7 +66,7 @@ type ArrayIndexOp[T : Type] <: noVar {
   new (target := target : Array[T], index := index : container.size_t);
 
   // prefer this operator over container.size_t <, because it would yield a bool and get stuck
-  def > : ArrayAccessOp[T] <: operator.precedence[91]
+  def > : ArrayAccessOp[T] <: operator.precedence[91], operator.postfix
         = new ArrayAccessOp[T](target, index)
 }
 
