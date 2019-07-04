@@ -5,6 +5,7 @@ The main purpose is to ensure that we do not break something that worked before 
 The secondary goal of this repository is to direct the evolution of tools and the language itself.
 As such, the repository contains tests for scheduled releases as well.
 
+
 ## Organization
 
 The smallest submittable test unit is a package.
@@ -24,6 +25,14 @@ testfiles: Files belonging to this test.
 This includes at least a file package.draupnir.
 If a test requires a only a single source file, that file shall be named mar.tyr and it shall begin with a block comment containing a short description of the test's intentions.
 
+
 ## Implications
 
 A compiler conforms with a version of Tyr iff it passes all tests below that version and all prior versions including reg-directories.
+
+
+## Migration
+
+We will migrate old tests to semantic equivalents if the current release renders them illegal, as long as the major version is 0.
+We will certainly adapt all Tests when generic type parameters are implemented.
+This section ought to be deleted on the release of version 1.0.

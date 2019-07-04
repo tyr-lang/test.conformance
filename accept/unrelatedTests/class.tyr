@@ -1,7 +1,0 @@
-class A {
-  def f = print("hallo");
-
-  def g <: A.f = print("hallo from B");
-
-  def h <: A.g := A.f;
-}

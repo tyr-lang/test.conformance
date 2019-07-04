@@ -1,0 +1,8 @@
+/**
+ * Check insane names
+ */
+class `;..;` {
+  test ";..;" {
+    true
+  }
+}

@@ -1,0 +1,20 @@
+/**
+ * minimal test to check correct treatment of apply on a type name
+ *
+ * @note this test cannot be passed prior to 0.7 because the current handling of
+ *       CT parameters is bullshit
+ */
+type Test {
+  type def apply : bool {
+    "apply!" !!;
+    true
+  }
+
+  test "simple" {
+    Test()
+  }
+
+  test "direct" {
+    apply()
+  }
+}

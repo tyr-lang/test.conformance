@@ -1,3 +1,0 @@
-type String <: native {
-	def + (right : String) : String <: native;
-}

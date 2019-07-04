@@ -1,0 +1,11 @@
+/**
+ * Used to test entryPoint manually
+ */
+type Test {
+  type def main : int <: entryPoint = 23;
+  type def altMain : int <: entryPoint { return 42; }
+
+  test "simple" {
+    32 == main() && 42 == altMain()
+  }
+}

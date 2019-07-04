@@ -1,4 +1,0 @@
-type MyInt {
-  val v : Int;
-  def +(other : MyInt) : MyInt = v + other.v;
-}

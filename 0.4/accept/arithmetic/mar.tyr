@@ -1,0 +1,20 @@
+/**
+ * Check arithmetic expressions.
+ */
+type test {
+  test "mm" {
+    val x = - -1;
+  }
+
+  test "dec" <: noCompile {
+    val y = 1--;
+  }
+
+  test "complex dec" <: noCompile {
+    val z = 1 -- + - 1;
+  }
+
+  test "sub" {
+    val v = -1 - -3;
+  }
+}
