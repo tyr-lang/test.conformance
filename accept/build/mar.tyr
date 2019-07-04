@@ -1,0 +1,55 @@
+/**
+ * This version of fibonacci is used to test entryPoint manually
+ */
+type T {
+
+  // fibonacci implementation to check correct implementation of type var/val
+  type def f(x : int) : int {
+    if(x <= 0) 0
+    else {
+      // set state
+      var idx : int = 1
+      var last : int = 0
+      var curr : int = 1
+      while(++idx <= x){
+        val next = last + curr
+        last = curr
+        curr = next
+      }
+      curr
+    }
+  }
+
+  type def fib : int <: entryPoint {
+    "TODO: print result\n" !!;
+    f(10)
+  }
+
+  test "f 0" {
+    0 == f(0)
+  }
+
+  test "f 1" {
+    1 == f(1)
+  }
+
+  test "f 2" {
+    1 == f(2)
+  }
+
+  test "f 3" {
+    2 == f(3)
+  }
+
+  test "f 5" {
+    5 == f(5)
+  }
+
+  test "f 10" {
+    55 == f(10)
+  }
+
+  test "f 100m" {
+    f(100000000)
+  }
+}

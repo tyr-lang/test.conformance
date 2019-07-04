@@ -1,0 +1,21 @@
+/**
+ * minimal test to check correct implementation of apply
+ */
+type Test {
+  new;
+
+  def apply : bool {
+    "apply!" !!;
+    true
+  }
+
+  test "simple" {
+    val t = new Test
+    t()
+  }
+
+  test "direct" {
+    val t = new Test
+    t.apply()
+  }
+}

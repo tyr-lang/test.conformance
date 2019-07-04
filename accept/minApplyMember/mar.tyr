@@ -1,0 +1,29 @@
+/**
+ * minimal test to check correct implementation of apply in the presence of member access
+ */
+type Test {
+  var f : T;
+
+  new {
+    f = new T;
+  }
+
+  test "simple" {
+    val t = new Test
+    t.f()
+  }
+
+  test "direct" {
+    val t = new Test
+    t.f.apply()
+  }
+}
+
+type T {
+  new;
+
+  def apply : bool {
+    "apply!" !!;
+    true
+  }
+}
