@@ -6,6 +6,6 @@ type Test {
   type def altMain : int <: entryPoint { return 42; }
 
   test "simple" {
-    32 == main() && 42 == altMain()
+    23 == main() && 42 == altMain()
   }
 }
