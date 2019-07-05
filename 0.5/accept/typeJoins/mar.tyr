@@ -116,7 +116,7 @@ type MyInt {
 
   test "multi object" {
     val v = switch phiX {
-      if 0 : 0.type
+      if 0 : "".type
       if 7 : null
       else ""
     }

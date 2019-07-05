@@ -77,6 +77,16 @@ type MyInt {
     }
   }
 
+  // can only be CT-evaluated, because 0.type has no runtime repr
+  test "multi object CT" {
+    val v = switch phiX {
+      if 0 : 0.type
+      if 7 : null
+      else ""
+    }
+    v.type == Object
+  }
+
   test "multi object" {
     val v = switch phiX {
       if 0 : 0.type
