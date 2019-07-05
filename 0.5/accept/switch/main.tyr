@@ -1,0 +1,23 @@
+/**
+ * Test switch and guard type inference
+ */
+type Switch {
+
+  test "var" {
+    var x = 3
+    switch x {
+      if 0 : false
+      if 7 : false
+      else true
+    }
+  }
+
+  test "int / long" <: noCompile {
+    var x = 3
+    switch x {
+      if 0 : false
+      if 7L : false
+      else true
+    }
+  }
+}
