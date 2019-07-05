@@ -5,10 +5,12 @@ type Test [A : Type]{
   var x : container.FlatArray[A];
 
   new () {
-    x = new container.FlatArray[A](1L);
+    x = new container.FlatArray[A](1L)
   }
 
   test "simple" {
-    (new Test[int]).x.apply(0L) == 0
+    val arr = (new Test[int])
+    arr.x.update(0L, 0)
+    arr.x.apply(0L) == 0
   }
 }
