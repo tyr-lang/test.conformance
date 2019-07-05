@@ -1,0 +1,89 @@
+/**
+ * test correct implementation of join for cases with non-trivial code generation
+ */
+type MyInt {
+  // prevent CT evaluation of predicates
+  type var phi = true;
+  // prevent CT evaluation of predicates
+  type var phiX = 7;
+
+  type def exit : NoReturn = exit();
+
+  test "same NoReturn" {
+    val v = if phi exit() else exit()
+    // note: there should be a warning informing that the remaining code in this block is not evaluated because it is not reachable
+    v : NoReturn
+    // v.type == NoReturn
+  }
+
+  test "int NoReturn" {
+    val v = if phi 7 else exit()
+    v : IntegerLiteral[32]
+    // v.type == int
+  }
+
+  test "String NoReturn" {
+    val v = if phi "" else exit()
+    v : StringLiteral
+    // v.type == StringLiteral
+  }
+
+  test "multi int" {
+    val v = switch phiX {
+      if 0 : 0
+      if 1 : (1 : int)
+      if 7 : 4
+      else exit()
+    }
+    v : int
+    // v.type == int
+  }
+
+  test "multi any" <: noCompile {
+    val v = switch phiX {
+      if 0 : 0
+      if 1 : (1 : int)
+      if 7 : null
+      else exit()
+    }
+    // v.type == void
+  }
+
+  test "multi String" {
+    val v = switch phiX {
+      if 0 : ("" : String)
+      if 1 : ""
+      if 7 : null
+      else exit()
+    }
+    v : String
+    // v.type == String
+  }
+
+  test "multi NoReturn" {
+    switch phiX {
+      if 0 : exit()
+      if 1 : exit()
+      else exit()
+    } : NoReturn
+  }
+
+  // @note this test may eventually cause warnings at least
+  test "multi NoReturn void val" {
+    val x = switch phiX {
+      if 0 : exit()
+      if 1 : exit()
+      else exit()
+    }
+  }
+
+  test "multi object" {
+    val v = switch phiX {
+      if 0 : 0.type
+      if 1 : ""
+      if 7 : null
+      else exit()
+    }
+    v.type == Object
+  }
+}
