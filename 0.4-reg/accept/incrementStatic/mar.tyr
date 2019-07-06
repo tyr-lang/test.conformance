@@ -1,0 +1,16 @@
+/**
+ * test usability of Integer.`++`
+ */
+type T {
+  type var v : int = 7;
+
+  test "prefix" {
+    ++v
+    8 == v
+  }
+
+  test "direct" {
+    v.`++`()
+    8 == v
+  }
+}

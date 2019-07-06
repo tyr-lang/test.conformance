@@ -1,0 +1,23 @@
+/**
+ * Minimal test of placement realizations.
+ */
+type T {
+  type var c = 0
+
+  type def f : int = c++
+  type def g : int := f
+
+  test "call" {
+    f()
+    g()
+  }
+
+  test "call check" {
+    f() != g() && c == 2
+  }
+
+  test "placement function pointer" {
+    // this test may require expected types
+    T.f == T.g
+  }
+}
