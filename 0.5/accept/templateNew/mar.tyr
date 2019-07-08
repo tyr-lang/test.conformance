@@ -1,0 +1,13 @@
+/**
+ * Check correct substitution of new in combination with template classes
+ */
+class Box[Base : Type] {
+  var data : Base
+  
+  new(data := data : Base);
+  delete;
+
+  test "simple" {
+    delete new Box[int](0)
+  }
+}
