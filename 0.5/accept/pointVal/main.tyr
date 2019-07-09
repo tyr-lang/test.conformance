@@ -23,11 +23,11 @@ type point {
   def == (p : point) : bool = (x == p.x) & y == p.y
 
 
-  test "new" {
+  test "new" <: noCompile {
     val p = new point()
   }
 
-  test "plain new" {
+  test "plain new" <: noCompile {
     new point()
   }
 

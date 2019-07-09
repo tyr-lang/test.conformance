@@ -1,0 +1,11 @@
+/**
+ * Test default constructor parameters
+ */
+type point {
+
+  new (x : int = 0);
+
+  test "plain new" {
+    new point()
+  }
+}
