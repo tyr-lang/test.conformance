@@ -1,15 +1,17 @@
 /**
- * Test flat structures.
+ * Test val FBOLs in class constructors
  */
-type point {
+class point {
 
   val x : int;
   val y : int;
 
-  new (
-    x := x : int = 0,
-    y := y : int = 0
-  );
+  new () {
+    x = 0
+    y = 0
+  }
+
+  new (x := x : int, y := y : int);
 
   def swap : point {
     return new point(y, x)

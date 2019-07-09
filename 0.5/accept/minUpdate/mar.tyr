@@ -1,0 +1,49 @@
+/**
+ * minimal test to check correct implementation of update
+ */
+type Test {
+  new;
+
+  def apply : bool {
+    "apply!" !!;
+    true
+  }
+
+  def update(x : bool) : bool {
+    "update" !!;
+    x
+  }
+
+  def update(index : int, x : bool) : bool {
+    "wrong update" !!;
+    x
+  }
+
+  test "simple" {
+    val t = new Test
+    t() = true
+  }
+
+  test "direct" {
+    val t = new Test
+    t.update(true)
+  }
+
+  test "degenerated" {
+    val t = new Test
+    // this is legal for now
+    t.apply() = true
+  }
+
+  test "no apply" <: noCompile {
+    val t = new Test
+    // not allowed, as we did not define an apply(int)
+    t(3) = true
+  }
+
+  test "no call" <: noCompile {
+    val t = new Test
+    // not allowed, as we did not call apply()
+    t = true
+  }
+}
