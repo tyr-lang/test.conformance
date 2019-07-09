@@ -1,0 +1,20 @@
+/**
+ * Test instantiation of types.
+ */
+type Swap[A : Type, B : Type] {
+
+  new;
+
+  def swap : Swap[B,A] {
+    return new Swap[B,A];
+  }
+
+  test "new" {
+    new Swap[int, float]
+  }
+
+  test "swap swap" {
+    var x = new Swap[int, float]
+    x = x.swap().swap()
+  }
+}
