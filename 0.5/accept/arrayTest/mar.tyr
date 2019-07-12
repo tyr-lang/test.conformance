@@ -1,0 +1,35 @@
+/**
+ * Test container.Array
+ */
+type Array := container.Array[int]
+
+class Test {
+
+  test "new" {
+    delete new Array(2L)
+  }
+
+  test "use" {
+    val arr = new Array(2L)
+    arr(0L) = 0
+    0 == arr(0L) && { delete arr; true }
+  }
+
+  test "update" {
+    val arr = new Array(2L)
+    arr(0L) = -1
+    arr(1L) = 2
+    0 != arr(0L) &&
+    -1 == arr(0L) &&
+    2 == arr(1L) && { delete arr; true }
+  }
+
+  test "compare" {
+    val arr = new Array(2L)
+    arr(0L) != arr(1L) && {
+      arr(0L) = -1
+      arr(1L) = 2
+      arr(0L) != arr(1L)
+    } && { delete arr; true }
+  }
+}

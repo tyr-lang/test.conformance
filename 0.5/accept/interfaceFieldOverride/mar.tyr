@@ -1,0 +1,64 @@
+/**
+ * Test interface fields with local overrides
+ */
+interface WithFun {
+  // @note interfaces should require neither new nor delete
+
+  var x = 0
+
+  def fun : int = ++x
+}
+
+class Test <: WithFun {
+  var x : int;
+
+  new(x := x : int = 0);
+  delete;
+
+  test "new" {
+    delete new Test
+  }
+
+  test "call" {
+    var x = new Test
+    x.x = 0
+    val r = x.fun()
+    val q = x.fun()
+    delete x
+    1 == r && 2 == q
+  }
+
+  test "icall" {
+    var x : WithFun = new Test
+    x.x = 0
+    val r = x.fun()
+    val q = x.fun()
+    delete x
+    1 == r && 2 == q
+  }
+
+  test "icall shifted" {
+    var x : WithFun = new Test(3)
+
+    val r = x.fun()
+    val q = x.fun()
+    delete x
+    4 == r && 5 == q
+  }
+
+  test "call uninit" {
+    var x = new Test
+    val r = x.fun()
+    val q = x.fun()
+    delete x
+    1 == r && 2 == q
+  }
+
+  test "icall uninit" {
+    var x : WithFun = new Test
+    val r = x.fun()
+    val q = x.fun()
+    delete x
+    1 == r && 2 == q
+  }
+}
