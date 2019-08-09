@@ -1,0 +1,11 @@
+/**
+ * Test even overloads
+ */
+type WithFun {
+  type def f(x : int, y : IntegerLiteral[32]) : void = "foo" !!
+  type def f(x : IntegerLiteral[32], y : int) : void = "bar" !!
+
+  test "new" <: noCompile {
+    f(0,0)
+  }
+}

@@ -1,0 +1,62 @@
+/**
+ * Create an array type with < > access operators, just as a proof of concept
+ */
+class Array[Base : Type] {
+  var data : container.FlatArray[Base]
+  val size : container.size_t
+  
+  new(size := size : container.size_t) {
+    data = new container.FlatArray[Base](size)
+  }
+  delete {
+    delete data;
+  }
+
+  def get(index : container.size_t) : Base = data.apply(index);
+
+  def set(v : Base, index : container.size_t) : void = data.update(index, v);
+
+
+  // prefer this operator over container.size_t <, because it would yield a bool and get stuck
+  def < (index : container.size_t) : ArrayIndexOp[Base] <: operator.precedence[91] {
+    new ArrayIndexOp[Base](this, index);
+  }
+
+  test "use" {
+    val arr = new Array[int](2L)
+    val arr2 = new Array[Array[int]](2L)
+    arr<0L> = 0
+    arr2<0L> = arr
+    // 0 == arr2 < 0L > < 0L >
+    0 == arr2<0L> <0L>
+  }
+}
+
+/**
+ * This is the type of "array<index",i.e. without ">"
+ */
+type ArrayIndexOp[T : Type] <: noVar {
+  val target : Array[T]
+  val index : container.size_t;
+
+  new (target := target : Array[T], index := index : container.size_t);
+
+  // prefer this operator over container.size_t <, because it would yield a bool and get stuck
+  def > : ArrayAccessOp[T] <: operator.precedence[91], operator.postfix
+        = new ArrayAccessOp[T](target, index)
+}
+
+/**
+ * This is the type of > in "array<index>"
+
+ */
+type ArrayAccessOp[T : Type] <: proxy[T], joinImplicit, noVar {
+  val target : Array[T]
+  val index : container.size_t;
+
+  new (target := target : Array[T], index := index : container.size_t);
+
+  def implicit() : T = target.get(index)
+
+  def `=` (v : T) : void = target.set(v, index)
+}
