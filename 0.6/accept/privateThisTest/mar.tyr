@@ -1,0 +1,19 @@
+/**
+ * Check private[this] in a legal scenario in a foreign test
+ */
+type T {
+  private[this] type val x = 0
+
+  type def f : int = T.x
+
+  test "use" {
+    0 == f()
+  }
+}
+
+type U {
+
+  test "foreign private field in test" {
+    0 == T.x
+  }
+}

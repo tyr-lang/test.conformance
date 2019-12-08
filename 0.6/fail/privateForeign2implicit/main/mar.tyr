@@ -1,0 +1,4 @@
+/**
+ * Check pack containment checking
+ */
+pack[/*implicit: test.*/internal /* exist, but not a parent */] type T;

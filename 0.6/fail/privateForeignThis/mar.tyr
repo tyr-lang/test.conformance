@@ -1,0 +1,10 @@
+/**
+ * Check private[this]
+ */
+type T {
+  private[this] type val x = 0
+}
+
+type U {
+  type def f : int = T.x
+}
