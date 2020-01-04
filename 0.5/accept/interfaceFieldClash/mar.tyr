@@ -17,9 +17,9 @@ class Base {
   delete;
 }
 
-class Test <: WithFun {
+class Test <: Base, WithFun {
   new {
-    Base.new
+    Base.new()
   }
   delete;
 
@@ -42,6 +42,6 @@ class Test <: WithFun {
     val r = x.fun()
     val q = x.fun()
     delete x
-    8 == r && 9 == q
+    1 == r && 2 == q
   }
 }
