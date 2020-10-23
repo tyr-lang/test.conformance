@@ -1,0 +1,54 @@
+/**
+ * Test calls to template constructors; simple case where all parameters go to
+ * the constructor.
+ */
+type T {
+
+  val z : int;
+
+  new[y : int](r : int) {
+    z = y + 2*r;
+  }
+  
+  new[y : int] {
+    z = y;
+  }
+  
+  new {
+    z = 0;
+  }
+  
+  def implicit : int = 0 + 2*z
+
+  test "usage" <: noCompile {
+    7 == new T[1][1](1)
+  }
+  
+  test "usage 2" {
+    6 == new T[1](1)
+  }
+  
+  test "usage 2 default" <: noCompile {
+    6 == new T[][1](1)
+  }
+  
+  test "usage 3" <: noCompile {
+    3 == new T[1][1]
+  }
+  
+  test "usage 4" {
+    2 == new T[1]
+  }
+  
+  test "usage 5" {
+    4 == new T(1)
+  }
+  
+  test "usage 6" {
+    0 == new T
+  }
+  
+  test "illegal" <: noCompile {
+    new T[1](1)(1)
+  }
+}
