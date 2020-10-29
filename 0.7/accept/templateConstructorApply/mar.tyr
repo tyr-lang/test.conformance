@@ -20,6 +20,23 @@ type T {
   def apply(x : int) : int = this + x;
   
   def implicit : int = 2*z
+  
+  
+  test "brackets" <: noCompile {
+    6 == (new T)(1)(1)
+  }
+  
+  test "brackets 2" {
+    6 == new (T)(1)(1)
+  }
+  
+  test "brackets 2b" {
+    6 == (new T(1))(1)
+  }
+  
+  test "brackets 3" {
+    4 == (new T)(1)
+  }
 
   test "usage"  {
     7 == new T[1](1)(1)

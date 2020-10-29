@@ -1,0 +1,13 @@
+/**
+ * Test calls constructors of nontrivial types.
+ */
+type T {
+
+  test "usage" {
+    0 == new (3+2).type
+  }
+  
+  test "usage" <: noCompile{
+    0 == new (2L+2L).type
+  }
+}
