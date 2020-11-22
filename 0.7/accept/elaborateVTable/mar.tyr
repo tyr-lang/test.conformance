@@ -1,0 +1,49 @@
+/**
+ * Test correct elaboration of vtables
+ */
+class W [T : Type] <: V[T] {
+
+  delete { x = 3 }
+
+}
+
+class V [T : Type] <: B {
+
+  delete { x = 2 }
+
+}
+
+class B {
+
+  type var x : int = -1
+
+  delete { x = 1 }
+
+}
+
+class S <: W[S] {
+
+  delete { x = 0 }
+  
+  test "S" {
+    var b : B = new S
+    delete b
+    0 == x
+  }
+  test "B" {
+    var b : B = new B
+    delete b
+    1 == x
+  }
+  test "V" {
+    var b : B = new V[S]
+    delete b
+    2 == x
+  }
+  test "W" {
+    var b : B = new W[S]
+    delete b
+    3 == x
+  }
+
+}
