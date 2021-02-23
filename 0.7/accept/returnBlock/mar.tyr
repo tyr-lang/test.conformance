@@ -1,0 +1,23 @@
+/**
+ * Test CFG creation in the presence of return-block combinations.
+ */
+type T {
+
+  def i(b : bool) : int <: inline = return {if b 2 else 3}
+  
+  def f(b : bool) : int = return {if b 2 else 3}
+
+  test "f false" {
+    2 == f(false)
+  }
+  test "f true" {
+    3 == f(true)
+  }
+  
+  test "i false" {
+    2 == i(false)
+  }
+  test "i true" {
+    3 == i(true)
+  }
+}
