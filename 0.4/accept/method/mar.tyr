@@ -8,7 +8,7 @@ type T {
     return
   }
 
-  type def g : bool = true
+  type def g : bool = false
 
   type def h : void {
   }
@@ -17,5 +17,29 @@ type T {
     f()
     h()
     g()
+  }
+  
+  test "while" { // <: noCompile
+    while(g) f();
+    true
+  }
+  
+  test "while call" {
+    while(g()) f();
+    true
+  }
+  
+  test "do while" { // <: noCompile
+    do {
+      f()
+    } while(g);
+    true
+  }
+  
+  test "do while call" {
+    do {
+      f()
+    } while(g());
+    true
   }
 }
