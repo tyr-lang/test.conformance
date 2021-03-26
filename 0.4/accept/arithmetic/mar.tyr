@@ -10,8 +10,16 @@ type test {
     val y = 1--;
   }
 
+  test "dec fixed" <: noCompile {
+    val y = --1;
+  }
+
   test "complex dec" <: noCompile {
     val z = 1 -- + - 1;
+  }
+
+  test "complex dec fixed" <: noCompile {
+    val z = -- 1 + - 1;
   }
 
   test "sub" {
