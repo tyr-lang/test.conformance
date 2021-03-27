@@ -16,20 +16,24 @@ type T {
   test "basic" {
     f()
     h()
-    g()
+    !g()
   }
   
-  test "while" { // <: noCompile
+  test "while" {
     while(g) f();
     true
   }
   
+  test "while short" {
+    while g f
+  }
+
   test "while call" {
     while(g()) f();
     true
   }
   
-  test "do while" { // <: noCompile
+  test "do while" {
     do {
       f()
     } while(g);
