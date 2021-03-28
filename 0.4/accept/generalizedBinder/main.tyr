@@ -44,6 +44,33 @@ type Main {
     9 == (fold(0) i:int, du:int do { do { du } while false})
   }
 
+  test "fold flow hard cfg linear" {
+    var x : int = 0
+    9 == (fold(0) i:int,j:int do {x=j; if (x > 5) {x = 5}; j})
+  }
+
+  test "fold flow hard cfg only" {
+    var x : int = 0
+    var z : int;
+    x != (z=(fold(0) i:int,j:int do {x=j; if (x > 5) {x = 5}; j}))
+    9 == z
+  }
+
+  test "fold flow hard cfg pre checks" {
+    var x : int = 0
+    var z : int;
+    x == 0 &&
+    x != (z=(fold(0) i:int,j:int do {x=j; if (x > 5) {x = 5}; j}))
+  }
+
+  test "fold flow hard cfg post checks" {
+    var x : int = 0
+    var z : int;
+    x != (z=(fold(0) i:int,j:int do {x=j; if (x > 5) {x = 5}; j}))
+    x == 5 &&
+    z == 9
+  }
+
   test "fold flow hard" {
     var x : int = 0
     var z : int;
