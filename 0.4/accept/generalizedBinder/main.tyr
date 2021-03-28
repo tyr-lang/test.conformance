@@ -1,7 +1,5 @@
 /**
  * test test usage of generalized binders
- *
- * @todo improve this test as soon as collections are available
  */
 type Main {
 
