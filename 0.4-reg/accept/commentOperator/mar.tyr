@@ -1,0 +1,8 @@
+/**
+ * Test comments
+ */
+type T {
+  test "comment" {
+    true //&&
+  }
+}
