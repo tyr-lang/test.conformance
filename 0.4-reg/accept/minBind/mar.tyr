@@ -1,0 +1,12 @@
+/**
+ * Test minimal binder assign CFG test
+ */
+type T {
+
+  test "triple" {
+    var x = 0;
+    0 == x &&
+    (2 != {x=7; 3}) &&
+    7 == x
+  }
+}
