@@ -1,6 +1,7 @@
 *~
 
 # binary libraries and debug asts
-out.tl.sf
-*.ast.dot
+out.*.sg
+*.dot
 **/*.tl
+*.bc

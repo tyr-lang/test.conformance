@@ -3,7 +3,7 @@
  */
 type Main {
 
-  test "parameter missmatch" {
+  test "parameter missmatch" <: noCompile {
     true.`&&` du do { do {} while false}
   }
 }
