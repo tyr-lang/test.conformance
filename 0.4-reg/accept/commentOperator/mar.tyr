@@ -5,22 +5,37 @@ type T {
   type def `//` (b : bool) : bool = !b
 
   test "comment" {
-    false // ||
+    false // &&
     true
   }
   
-  test "comment op" <: noCompile {
+  test "comment op" {
     false //||
     true
   }
   
   test "comment op lit" {
-    false //`||`
+    false //`&&`
     true
   }
   
+  test "nocomment 2" {
+    true ||
+    false
+  }
+
+  /* if nocomment 2 is legal, so should be comment 2 */
   test "comment 2" {
     true || //
+    false
+  }
+  
+  /**
+   * because of how operators in Tyr and lexers in general work, this can't
+   * compile: counts as one operator named `||//` that does not exist
+   */
+  test "comment 2 op nc" <: noCompile {
+    true ||//
     false
   }
   
@@ -29,13 +44,13 @@ type T {
     true
   }
   
-  test "comment 3 op" <: noCompile{
+  test "comment 3 op" {
     false //&&
     true
   }
   
   test "comment 3 lit" {
-    `//`(false)&&
-    true
+    `//`(false)||
+    false
   }
 }
