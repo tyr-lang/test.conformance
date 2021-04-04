@@ -2,7 +2,40 @@
  * Test comments
  */
 type T {
+  type def `//` (b : bool) : bool = !b
+
   test "comment" {
-    true //&&
+    false // ||
+    true
+  }
+  
+  test "comment op" <: noCompile {
+    false //||
+    true
+  }
+  
+  test "comment op lit" {
+    false //`||`
+    true
+  }
+  
+  test "comment 2" {
+    true || //
+    false
+  }
+  
+  test "comment 3" {
+    false // &&
+    true
+  }
+  
+  test "comment 3 op" <: noCompile{
+    false //&&
+    true
+  }
+  
+  test "comment 3 lit" {
+    `//`(false)&&
+    true
   }
 }
