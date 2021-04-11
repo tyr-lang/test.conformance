@@ -1,0 +1,37 @@
+/**
+ * @note minimal test of explicit super call
+ */
+class T {
+  def f : int = 1
+  
+  test "scall SA" {
+    var x : T = new U
+    
+    val r = 1 == f(x)
+    
+    delete x
+    r
+  }
+}
+
+class U <: T {
+  def f : int = 2
+
+  test "scall" {
+    var x : T = new U
+    
+    val r = 1 == T.f(x)
+    
+    delete x
+    r
+  }
+
+  test "vcall" {
+    var x : T = new U
+    
+    val r = 2 == x.f()
+    
+    delete x
+    r
+  }
+}
