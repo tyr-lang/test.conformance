@@ -1,0 +1,13 @@
+/**
+ * @note minimal test of polymorphic delete
+ */
+class T;
+
+class U <: T {
+
+  test "poly delete" {
+    var x : T = new U
+    delete x
+    null == x
+  }
+}
