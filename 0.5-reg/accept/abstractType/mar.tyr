@@ -1,0 +1,31 @@
+/**
+ * @note minimal test of abstract classes
+ */
+class T <: abstract {
+  /** it is legal to have a constructor */
+  new;
+}
+
+class U <: T {
+  // no new, implicit new will call T.new
+
+
+  test "new abstract" <: noCompile {
+    new T
+  }
+
+  test "new direct call" {
+    var x : T = new U
+    
+    // absurd, but legal
+    T.`new`(x)
+    
+    delete x
+  }
+
+  test "new sub type" {
+    var x : T = new U
+    
+    delete x
+  }
+}
