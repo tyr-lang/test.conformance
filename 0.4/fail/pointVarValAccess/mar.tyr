@@ -28,12 +28,16 @@ type Point {
 
   def == (q : Point) : bool = x == q.x && y == q.y
 
-  test "swap" {
+  // if test cannot be compiled, this will no longer treated as compilation
+  // error
+  def doSwap : bool {
     val c = new Point(1, 2)
     !(c == c.swap())
   }
 
-  test "swap 2" {
+  // if test cannot be compiled, this will no longer treated as compilation
+  // error
+  def doSwap2 : bool {
     val d = new Point(2, 2)
     d == d.swap()
   }
