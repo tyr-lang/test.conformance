@@ -1,0 +1,8 @@
+/**
+ * Test call to puts.
+ */
+type T {
+  test "hello" {
+    "hello"!!
+  }
+}
