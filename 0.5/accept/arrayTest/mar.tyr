@@ -26,7 +26,7 @@ class Test {
 
   test "compare" {
     val arr = new Array(2L)
-    arr(0L) != arr(1L) && {
+    {
       arr(0L) = -1
       arr(1L) = 2
       arr(0L) != arr(1L)
