@@ -19,7 +19,7 @@ class Base {
 
 class Test <: Base, WithFun {
   new {
-    Base.new()
+    Base.new(this)
   }
   delete;
 
