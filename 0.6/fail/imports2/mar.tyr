@@ -1,0 +1,9 @@
+/**
+ * Check incorrect import.
+ */
+// ok
+with tyr.lang;
+// not ok
+with seven := 7;
+
+type T;

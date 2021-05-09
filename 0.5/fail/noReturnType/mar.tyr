@@ -1,0 +1,7 @@
+/**
+ * Test errors for a function without a return type
+ */
+
+class Test {
+  type def cond(c : bool);
+}

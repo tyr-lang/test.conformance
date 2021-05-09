@@ -1,0 +1,42 @@
+/**
+ * Test container.Array
+ */
+type Array := container.Array[int]
+
+class Test {
+
+  type def cond(c : bool, t : Block[int], e : Block[int]) : int {
+    if c t.eval() else e.eval()
+  }
+
+  test "bare" {
+    val arr = new Array(2L)
+    {
+      arr(0L) = -1
+      arr(1L) = 2
+      var first = true
+      var it = arr.iterator()
+      val r = it.forall i : int do {
+        val r = i == cond(first) do ({-1} {2})
+        first = false
+        r
+      }
+      delete it
+      r
+    } && { delete arr; true }
+  }
+
+  test "full" {
+    val arr = new Array(2L)
+    {
+      arr(0L) = -1
+      arr(1L) = 2
+      var first = true
+      arr.forall i : int do {
+        val r = i == cond(first) do ({-1} {2})
+        first = false
+        r
+      }
+    } && { delete arr; true }
+  }
+}

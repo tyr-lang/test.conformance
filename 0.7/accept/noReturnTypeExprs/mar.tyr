@@ -1,0 +1,7 @@
+/**
+ * Test handling of a function without a return type
+ */
+
+class Test {
+  type def cond(c : bool) = 7
+}
