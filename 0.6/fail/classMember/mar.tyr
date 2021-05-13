@@ -1,0 +1,7 @@
+/**
+ * Check class fields
+ */
+type T {
+  // not a class
+  class val name : String = "";
+}

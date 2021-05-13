@@ -1,0 +1,6 @@
+/**
+ * Check entryPoint checks: cannot be abstract
+ */
+type T {
+  type def myMain : void <: entryPoint;
+}

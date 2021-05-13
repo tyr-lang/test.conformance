@@ -1,0 +1,50 @@
+/**
+ * Check basic string usage
+ */
+type T {
+
+  test "escapes r" {
+    "\r".size == 1
+  }
+
+  test "escapes n" {
+    "\n".size == 1
+  }
+
+  test "escapes t" {
+    "\t".size == 1
+  }
+
+  test "escapes null" {
+    "\0".size == 1
+  }
+
+  test "escapes quote" {
+    "\"".size == 1
+  }
+
+  test "escapes tick" {
+    "\'".size == 1
+  }
+
+  test "escapes slash" {
+    "\\".size == 1
+  }
+
+  test "multi line no escape" {
+    """\""" == "\\"
+  }
+
+  test "multi line break" {
+    """
+""" == "\n"
+  }
+
+  test "multi line print" {
+    """Hi there,
+a long test
+with several
+lines.
+""" !!
+  }
+}

@@ -1,0 +1,7 @@
+/**
+ * Check class fields
+ */
+class T {
+  // require initialization
+  class val name : String;
+}

@@ -1,0 +1,6 @@
+/**
+ * Check entryPoint checks: return type
+ */
+type T {
+  type def myMain : StringLiteral <: entryPoint = "Hello ?!?\n";
+}

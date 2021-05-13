@@ -1,0 +1,6 @@
+/**
+ * Check entryPoint checks: must be type def
+ */
+type T {
+  def myMain : void <: entryPoint = "Hello ?!?\n"!!;
+}

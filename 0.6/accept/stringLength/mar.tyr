@@ -1,0 +1,21 @@
+/**
+ * Check correct string encoding
+ */
+type T {
+
+  test "one" {
+    "1".size == 1
+  }
+
+  test "two" {
+    "ö".size == 2
+  }
+
+  test "three" {
+    "☢".size == 3
+  }
+
+  test "four" {
+    "💩".size == 4
+  }
+}

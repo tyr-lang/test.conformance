@@ -1,0 +1,30 @@
+/**
+ * Check class fields
+ */
+class T {
+  class val name : String = "";
+  
+  def f = name;
+
+  test "implicit access" <: noCompile {
+    "" == name
+  }
+  
+  test "implicit access this" {
+    val x = new T
+    val r = "" == x.f()
+    delete x
+    r
+  }
+
+  test "direct access" {
+    "" == T.name
+  }
+
+  test "virtual access" {
+    val x = new T
+    val r = "" == x.name
+    delete x
+    r
+  }
+}

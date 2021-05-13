@@ -1,0 +1,6 @@
+/**
+ * Check entryPoint checks adequate argument types
+ */
+type T {
+  type def myMain(a : int, b : StringLiteral, c : int) : void <: entryPoint = "Hello ?!?\n"!!;
+}
