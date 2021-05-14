@@ -4,35 +4,47 @@
 type T {
 
   test "empty" {
-    "".size == 0
+    "".size() == 0L
+  }
+
+  test "escapes nonsense" <: noCompile {
+    "\?".size() == 1L
+  }
+
+  test "escapes nonsense 2" <: noCompile {
+    "\v".size() == 1L
+  }
+
+  test "escapes nonsense 3" <: noCompile {
+    "\.".size() == 1L
   }
 
   test "escapes r" {
-    "\r".size == 1
+    "\r".size() == 1L
   }
 
   test "escapes n" {
-    "\n".size == 1
+    "\n".size() == 1L
   }
 
   test "escapes t" {
-    "\t".size == 1
+    "\t".size() == 1L
   }
 
   test "escapes null" {
-    "\0".size == 1
+    "\0".size() == 1L
   }
 
   test "escapes quote" {
-    "\"".size == 1
+    "\"".size() == 1L
   }
 
   test "escapes tick" {
-    "\'".size == 1
+    "\'".size() == 1L
   }
 
   test "escapes slash" {
-    "\\".size == 1
+    "\\".size() == 1L
   }
 
   test "multi line no escape" {

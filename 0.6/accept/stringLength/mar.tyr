@@ -4,18 +4,18 @@
 type T {
 
   test "one" {
-    "1".size == 1
+    "1".size() == 1L
   }
 
   test "two" {
-    "ö".size == 2
+    "ö".size() == 2L
   }
 
   test "three" {
-    "☢".size == 3
+    "☢".size() == 3L
   }
 
   test "four" {
-    "💩".size == 4
+    "💩".size() == 4L
   }
 }
