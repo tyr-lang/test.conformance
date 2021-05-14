@@ -40,7 +40,7 @@ type T {
   }
   
   test "multi line no escape 2" {
-    """xxx\n"" == "xxx\\n"
+    """xxx\n""" == "xxx\\n"
   }
 
   test "multi line break" {
