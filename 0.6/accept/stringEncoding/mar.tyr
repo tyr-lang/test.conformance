@@ -34,8 +34,4 @@ type T {
   test "four U" {
     "💩" == "\U01F4A9"
   }
-
-  test "four U short" <: noCompile {
-    "💩" == "\U1F4A9"
-  }
 }
