@@ -3,6 +3,10 @@
  */
 type T {
 
+  test "empty" {
+    "".size == 0
+  }
+
   test "escapes r" {
     "\r".size == 1
   }
