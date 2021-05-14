@@ -1,0 +1,7 @@
+/**
+ * Check incorrect import.
+ */
+// not ok
+with new int;
+
+type T;
