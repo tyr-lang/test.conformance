@@ -1,0 +1,9 @@
+/**
+ * Check wrong escape sequence
+ */
+type T {
+  test "four U short" {
+    // the parser will reject this
+    "💩" == "\U01FGI9"
+  }
+}
