@@ -1,0 +1,9 @@
+/**
+ * Check treatment of garbage escape sequences
+ */
+type T {
+
+  test "escapes nonsense" <: noCompile {
+    "\?".size() == 1L
+  }
+}

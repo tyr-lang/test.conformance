@@ -7,18 +7,6 @@ type T {
     "".size() == 0L
   }
 
-  test "escapes nonsense" <: noCompile {
-    "\?".size() == 1L
-  }
-
-  test "escapes nonsense 2" <: noCompile {
-    "\v".size() == 1L
-  }
-
-  test "escapes nonsense 3" <: noCompile {
-    "\.".size() == 1L
-  }
-
   test "escapes r" {
     "\r".size() == 1L
   }
