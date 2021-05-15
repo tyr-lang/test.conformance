@@ -1,0 +1,71 @@
+/**
+ * test assignment and other operators for Unsigned[...]
+ */
+type MyUnsigned {
+
+  test "type check" <: noCompile {
+    1u != 1
+  }
+  
+  test "type check unsign" {
+    1u == 1.unsign()
+  }
+  
+  test "type check unsign 32" {
+    1u32 == 1.unsign()
+  }
+  
+  test "type check unsign neg" {
+    1u32 != (-1).unsign()
+  }
+  
+  test "unsign neg precedence" <: noCompile {
+    -1.unsign()
+  }
+
+  test "constant arithmetic precedence" { 7u + 1u * 8u != 64u }
+  test "constant arithmetic precedence 2" { 7u + 1u * 8u == 15u }
+  test "constant arithmetic xor" { (-1).unsign() ^ 0u == (-1).unsign() }
+  test "constant arithmetic mul" { 1u * 0u == 0u }
+  test "constant arithmetic div" { (-3).unsign() / 2u != (-1).unsign() }
+  test "constant arithmetic -div" { 3u / 2u == 1u }
+  test "constant arithmetic mod" { 3u % 2u == 1u }
+  test "constant arithmetic -mod" { (-3).unsign() % 2u == 1u }
+
+  test "assignment" {
+    var v = 7u;
+    v == 7u
+  }
+  test "assignment sym" {
+    var v = 7u;
+    7u == v
+  }
+  test "assignment 2" {
+    var v = 7u;
+    v - 7u == 0
+  }
+
+  test "assignment self" {
+    var x = 7u;
+    x = x;
+    x == 7u
+  }
+
+  test "assignment flow" {
+    var y = 7u
+
+    y == 7u && ({
+      y = 5u
+      y != 7u && y == 5u
+    })
+  }
+
+  test "assignment neg" {
+    var z = 5u
+
+    z.sign() > 0 && {
+      z = (-1).unsign()
+      z.sign() < 0
+    }
+  }
+}
