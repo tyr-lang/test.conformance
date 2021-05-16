@@ -1,0 +1,35 @@
+/**
+ * Test container.Array and container.index_t
+ */
+type Array := container.Array[int]
+
+class Test {
+
+  test "new" {
+    delete new Array(2)
+  }
+
+  test "use" {
+    val arr = new Array(2)
+    arr(0) = 0
+    0 == arr(0) && { delete arr; true }
+  }
+
+  test "update" {
+    val arr = new Array(2)
+    arr(0) = -1
+    arr(1) = 2
+    0 != arr(0) &&
+    -1 == arr(0) &&
+    2 == arr(1) && { delete arr; true }
+  }
+
+  test "compare" {
+    val arr = new Array(2)
+    {
+      arr(0) = -1
+      arr(1) = 2
+      arr(0) != arr(1)
+    } && { delete arr; true }
+  }
+}

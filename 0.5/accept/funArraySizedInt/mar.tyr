@@ -9,14 +9,14 @@ class Array {
   }
   delete;
 
-  def get(index : container.size_t) : int = data.apply(index);
+  def get(index : container.index_t) : int = data.apply(index.unpack);
 
-  def set(v : int, index : container.size_t) : void = data.update(index, v);
+  def set(v : int, index : container.index_t) : void = data.update(index.unpack, v);
 
 
   // prefer this operator over container.size_t <, because it would yield a bool and get stuck
-  def < (index : container.size_t) : ArrayIndexOp <: operator.precedence[91] {
-    new ArrayIndexOp(this, index);
+  def < (index : container.index_t) : ArrayIndexOp <: operator.precedence[91] {
+    new ArrayIndexOp(this, index.unpack);
   }
 
   test "use" {

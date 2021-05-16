@@ -25,7 +25,7 @@ class point {
     new point(s * x, s * y);
   }
 
-  def == (p : point) : bool = (x == p.x) & y == p.y
+  def == (p : point) : bool = (x == p.x) &! y == p.y
 
 
   test "new" {
