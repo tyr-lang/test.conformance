@@ -20,7 +20,7 @@ type MyUnsigned {
   }
   
   test "unsign neg precedence" <: noCompile {
-    -1.unsign()
+    - 1.unsign()
   }
 
   test "constant arithmetic precedence" { 7u + 1u * 8u != 64u }
@@ -42,7 +42,7 @@ type MyUnsigned {
   }
   test "assignment 2" {
     var v = 7u;
-    v - 7u == 0
+    v - 7u == 0u
   }
 
   test "assignment self" {
