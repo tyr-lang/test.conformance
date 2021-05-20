@@ -4,35 +4,35 @@
 type T {
 
   test "empty" {
-    "".size() == 0L
+    "".size() == 0U
   }
 
   test "escapes r" {
-    "\r".size() == 1L
+    "\r".size() == 1U
   }
 
   test "escapes n" {
-    "\n".size() == 1L
+    "\n".size() == 1U
   }
 
   test "escapes t" {
-    "\t".size() == 1L
+    "\t".size() == 1U
   }
 
   test "escapes null" {
-    "\0".size() == 1L
+    "\0".size() == 1U
   }
 
   test "escapes quote" {
-    "\"".size() == 1L
+    "\"".size() == 1U
   }
 
   test "escapes tick" {
-    "\'".size() == 1L
+    "\'".size() == 1U
   }
 
   test "escapes slash" {
-    "\\".size() == 1L
+    "\\".size() == 1U
   }
 
   test "multi line no escape" {
