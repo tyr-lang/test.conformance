@@ -1,0 +1,15 @@
+/**
+ * Check realization of StringLiteral.!!
+ */
+type T {
+
+  test "loop" {
+    var out = new container.Array[StringLiteral](2)
+    out(0) = "Hello "
+    out(1) = "World!"
+    
+    out.foreach s : StringLiteral do {
+      s!!
+    }
+  }
+}
