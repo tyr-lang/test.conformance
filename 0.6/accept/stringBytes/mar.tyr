@@ -3,48 +3,64 @@
  */
 type T {
 
+  /* a bit fun with logic */
+  test "escapes empty" {
+    "".bytes().forall c : byte do (
+      c == 42i8
+    ) && 
+    "".bytes().forall c : byte do (
+      c == 23i8
+    ) && 
+    ! "".bytes().exists c : byte do (
+      c == 0i8
+    )
+  }
+
   test "escapes r" {
-    "\r".size() == 1L
+    "\r".bytes().forall c : byte do {
+      c == 13i8
+    }
   }
 
   test "escapes n" {
-    "\n".size() == 1L
+    "\n".bytes().forall c : byte do {
+      c == 10i8
+    }
   }
 
   test "escapes t" {
-    "\t".size() == 1L
+    "\t".bytes().forall c : byte do {
+      c == 9i8
+    }
   }
 
   test "escapes null" {
-    "\0".size() == 1L
+    "\0".bytes().forall c : byte do {
+      c == 0i8
+    }
   }
 
   test "escapes quote" {
-    "\"".size() == 1L
+    "\"".bytes().forall c : byte do {
+      c == 34i8
+    }
   }
 
   test "escapes tick" {
-    "\'".size() == 1L
+    "\'".bytes().forall c : byte do {
+      c == 39i8
+    }
   }
 
   test "escapes slash" {
-    "\\".size() == 1L
+    "\\".bytes().forall c : byte do {
+      c == 92i8
+    }
   }
 
   test "multi line no escape" {
-    """\""" == "\\"
-  }
-
-  test "multi line break" {
-    """
-""" == "\n"
-  }
-
-  test "multi line print" {
-    """Hi there,
-a long test
-with several
-lines.
-""" !!
+    """\""".bytes().forall c : byte do {
+      c == 92i8
+    }
   }
 }
