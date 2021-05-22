@@ -1,0 +1,6 @@
+/**
+ * Check abstract member in interface
+ */
+interface T {
+  type def offender : void;
+}
