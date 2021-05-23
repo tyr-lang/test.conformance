@@ -1,0 +1,23 @@
+/**
+ * Check that binder parameter type is correctly inferred.
+ */
+type T {
+  type def f(i : BlockParameter[int], j : BlockParameter[int], b : Block[void]) : bool = true
+  type def f(i : int, j : BlockParameter[int], b : Block[void]) : bool = true
+
+  test "zero" <: noCompile {
+    f(0,1) do { "noshow"!! }
+  }
+
+  test "one" {
+    f(0) j do { "noshow"!! }
+  }
+
+  test "two" {
+    f() i, j do { "noshow"!! }
+  }
+
+  test "three" <: noCompile {
+    f() i, j, k do { "noshow"!! }
+  }
+}

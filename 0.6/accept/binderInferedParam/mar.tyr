@@ -1,0 +1,11 @@
+/**
+ * Check that binder parameter type is correctly inferred.
+ */
+type T {
+
+  test "infered c" {
+    "\n".bytes().forall c do {
+      c == 10i8
+    }
+  }
+}
