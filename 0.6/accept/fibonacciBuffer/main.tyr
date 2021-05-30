@@ -1,0 +1,53 @@
+type Buffer := container.ArrayBuffer[int]
+
+/**
+ * test local variables and global functions
+ */
+type T {
+
+  type val cache = new Buffer(20);
+
+  type def fast(x : int) : int {
+    if(cache.isDefined(x)) {
+      return cache(x)
+    }
+
+    var r = {
+      if(x <= 0) 0
+      else if(1 == x) 1
+      else { fast(x - 1) + fast(x - 2) }
+    }
+    if(x == 0 |! cache.isDefined(x - 1))
+      cache += r
+    return r
+  }
+
+  // stupid fibonacci implementation to check correct implementation of recursion
+  type def f(x : int) : int {
+    if(x <= 0) 0
+    else if(1 == x) 1
+    else { f(x - 1) + f(x - 2) }
+  }
+
+  test "f 0" {
+    0 == fast(0)
+  }
+  test "f 5" {
+    5 == fast(5)
+  }
+  test "f 10" {
+    55 == fast(10)
+  }
+  test "f 20 comp" {
+    var i = 0
+    while(++i < 20) {
+      f(i) == fast(i)
+    }
+  }
+  test "fast 1000" {
+    var i = 0
+    while(++i < 1000) {
+      fast(i)
+    }
+  }
+}
