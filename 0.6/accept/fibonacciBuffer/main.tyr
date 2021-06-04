@@ -1,7 +1,7 @@
 type Buffer := container.ArrayBuffer[int]
 
 /**
- * test local variables and global functions
+ * test recursive fibonacci computation against a cache
  */
 type T {
 

@@ -1,0 +1,43 @@
+type Buffer := container.ArrayBuffer[int]
+
+/**
+ * test correct initilization of two global variables with non-trivial
+ * initializers
+ */
+type T {
+
+  type val left = new Buffer(20);
+  type val right = new Buffer(20);
+
+  test "left" {
+    left.clear()
+    right.clear()
+    var i = 0
+    while(++i <= 20)
+      left += i
+
+    left.size() == 20U && right.empty()
+  }
+
+  test "right" {
+    left.clear()
+    right.clear()
+    var i = 0
+    while(++i <= 20)
+      right += i
+
+    right.size() == 20U && left.empty()
+  }
+
+  test "copy" {
+    left.clear()
+    right.clear()
+    var i = 0
+    while(++i <= 20)
+      right += i
+    right.foreach i do (left += i)
+
+    left.size() == 20U && right.size() == 20U &&
+      right.forall i do (left.exists j do (i == j))
+  }
+}
