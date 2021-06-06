@@ -1,0 +1,14 @@
+/**
+ * Check access to a package private external field
+ */
+type T {
+  test "static use type" {
+    val x : "".type.minTid.type = 0;
+    0 == x
+  }
+
+  test "use" <: noCompile {
+    val x = "".type.minTid;
+    false
+  }
+}
