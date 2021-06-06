@@ -1,0 +1,11 @@
+/**
+ * Check CT-evaluation of CT Params is stateless
+ */
+type T {
+  test "use" <: provable {
+    val arr = new container.FlatSizedArray[int, {val x = 1U; x}]
+    val r = arr.size
+    delete arr
+    1U == r
+  }
+}

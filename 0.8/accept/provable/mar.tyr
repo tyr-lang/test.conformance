@@ -1,0 +1,18 @@
+/**
+ * Check translation of provable tests
+ */
+type T {
+  test "trivial" <: provable {
+    0 != 1
+  }
+
+  test "val" <: provable {
+    val r = 0;
+    0 == r && r != 1
+  }
+
+  test "null" <: provable {
+    val r = if (null == "") 1 else 0;
+    0 == r && r != 1
+  }
+}
