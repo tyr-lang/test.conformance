@@ -1,0 +1,15 @@
+type Array := container.Array[int];
+
+/**
+ * Check access to a private external field
+ *
+ * @note This is also a check for the translation of noCompile tests. Because,
+ *       the check should be a post processing check happening after the
+ *       translation of the body of the test.
+ */
+type T {
+  test "use" <: noCompile {
+    val x = new Array(1);
+    x.data(0L)
+  }
+}
