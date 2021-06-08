@@ -1,0 +1,21 @@
+/**
+ * @note tests correctness of switch type expressions
+ */
+type T {
+  test "basic type" {
+    var r = ""
+    switch(r.type) {
+      if String: true
+      if StringLiteral: false
+      else false
+    }
+  }
+  test "basic class" {
+    var r = ""
+    switch(r.type) {
+      if String: false
+      if StringLiteral: true
+      else false
+    }
+  }
+}
