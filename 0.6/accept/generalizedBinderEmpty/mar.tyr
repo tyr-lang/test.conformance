@@ -1,0 +1,26 @@
+/**
+ * test test usage of generalized binders
+ */
+type Main[initial : int] {
+
+  // [0;9].fold(intial)(step)
+  type def fold(left : BlockParameter[int], right : BlockParameter[int],
+                step : Block[int]) : int {
+    var idx : int = 0;
+    var r = initial;
+    while(idx < 10) {
+      left = r;
+      right = idx;
+      idx = idx + 1;
+      r = step.eval();
+    }
+    r
+  }
+
+  type def run : int = Main[initial].fold i:int, du:int do { do { } while false};
+
+  // check parsability
+  test "fold dududu" {
+    9 == Main[0].run()
+  }
+}
