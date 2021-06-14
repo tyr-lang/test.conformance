@@ -17,7 +17,7 @@ type Main[initial : int] {
     r
   }
 
-  type def run : int = Main[initial].fold i:int, du:int do { do { } while false};
+  type def run : int = Main[initial].fold i:int, du:int do { do { } while false; du};
 
   // check parsability
   test "fold dududu" {
