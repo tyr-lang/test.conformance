@@ -1,0 +1,13 @@
+type Array := container.Array
+type A2 := Array[int]
+
+/**
+ * Check that herbrand types can be aliased as expected
+ */
+type T {
+  type val x = new A2(1)
+
+  test "use" {
+    1U == x.size()
+  }
+}
