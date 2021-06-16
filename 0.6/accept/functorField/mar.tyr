@@ -1,0 +1,17 @@
+/**
+ * test member apply usage
+ */
+type T {
+  new;
+
+  type val f : T = new T;
+
+  type def apply(x : int) : int = x
+
+  test "f 0" {
+    0 == T.f(0)
+  }
+  test "f 5" {
+    5 == T.f(5)
+  }
+}
