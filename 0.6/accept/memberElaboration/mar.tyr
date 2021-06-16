@@ -1,0 +1,12 @@
+/**
+ * test fine-grained member elaboration
+ */
+type T {
+  new{}
+
+  type val f = new T;
+
+  test "use" {
+    null != f
+  }
+}
