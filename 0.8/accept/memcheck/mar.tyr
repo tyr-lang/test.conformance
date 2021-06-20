@@ -1,0 +1,21 @@
+/**
+ * @note check that tests can be checked with memcheck ensuring that they won't
+ *       use memory the wrong way
+ */
+type T {
+  type val x = 0;
+  type var y : int;
+
+  test "no error" <: memcheck {
+    0 == x
+  }
+
+  test "uninit" <: noMemcheck {
+    0 == y || 0 == x
+  }
+
+  test "leak" <: noMemcheck {
+    new T
+    true
+  }
+}
