@@ -1,7 +1,7 @@
 /**
  * test fine-grained member elaboration
  */
-type T {
+class T {
   new{}
 
   type val f = new T;
