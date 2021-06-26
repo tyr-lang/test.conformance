@@ -1,0 +1,11 @@
+/**
+ * According to my notes, it should be fine to have bool results in entry points
+ */
+type T {
+  type def fail <: entryPoint = false
+  type def ok <: entryPoint = true
+
+  test "direct call" {
+    !fail() && ok()
+  }
+}
