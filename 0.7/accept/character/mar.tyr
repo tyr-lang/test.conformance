@@ -1,0 +1,43 @@
+/**
+ * Check basic character usage
+ */
+type T {
+
+  /* a bit fun with logic */
+  test "empty" {
+    "".chars().forall c do (
+      c == 42u21
+    ) && 
+    ! "".bytes().exists c do (
+      c == 0u21
+    )
+  }
+
+  test "char single" {
+    "c".bytes().forall c do {
+      c == 'c'
+    }
+  }
+
+  test "char multi byte" {
+    "ᚠ".bytes().forall c do {
+      c == 'ᚠ'
+    }
+  }
+
+  test "escapes tick" {
+    "\'".bytes().forall c do {
+      c == '\''
+    }
+  }
+
+  test "multi chars" {
+    val str = "cᚠc"
+    1 == str.chars().count c do (
+      c == 'ᚠ'
+    ) && 
+    2 == str.chars().count c do (
+      c == 'c'
+    )
+  }
+}
