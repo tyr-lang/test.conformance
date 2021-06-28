@@ -2,5 +2,6 @@
  * Check abstract member in interface
  */
 interface T {
+  // note: this is not legal because it cannot be realized
   type def offender : void;
 }
