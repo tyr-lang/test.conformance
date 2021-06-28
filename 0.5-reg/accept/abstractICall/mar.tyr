@@ -1,0 +1,26 @@
+/**
+ * Test interface calls with abstract prototype
+ */
+interface WithFun {
+  def fun : bool;
+}
+
+class Test <: WithFun {
+  new; delete;
+
+  def fun : bool = true
+
+  test "call" {
+    var x = new Test
+    val r = x.fun()
+    delete x
+    r
+  }
+
+  test "icall" {
+    var x : WithFun = new Test
+    val r = x.fun()
+    delete x
+    r
+  }
+}
