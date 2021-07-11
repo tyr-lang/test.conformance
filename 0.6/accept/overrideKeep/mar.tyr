@@ -1,0 +1,56 @@
+/**
+ * Test explicit override with multiple arguments.
+ */
+interface I {
+  def fun (x : I) : int = 1
+}
+interface J <: I {
+  def fun (x : T) : int = 2
+}
+
+class S {
+  def fun (x : T) : int = 3
+}
+
+class T <: S, I, J {
+
+  override [S.fun]
+  def fun(x : T) := S.fun;
+
+  // a second override of a function that would be folded into the one above
+  // requires explicit this
+  override [I.fun]
+  type def fun(this : I, x : T) := I.fun;
+
+  test "call T" {
+    var x = new T
+
+    val r = x.fun(x)
+    delete x
+    3 == r
+  }
+  test "call S" {
+    var t = new T
+    var x : S = t
+
+    val r = x.fun(t)
+    delete x
+    3 == r
+  }
+  test "call I" {
+    var t = new T
+    var x : I = t
+
+    val r = x.fun(t)
+    delete x
+    1 == r
+  }
+  test "call J" {
+    var t = new T
+    var x : J = t
+
+    val r = x.fun(t)
+    delete x
+    1 == r
+  }
+}

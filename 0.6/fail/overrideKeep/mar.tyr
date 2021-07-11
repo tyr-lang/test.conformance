@@ -1,0 +1,23 @@
+/**
+ * Test explicit override with multiple targets.
+ */
+interface I {
+  def fun (x : I) : int = 1
+}
+interface J <: I {
+  def fun (x : T) : int = 2
+}
+
+class S {
+  def fun (x : T) : int = 3
+}
+
+class T <: S, I, J {
+  override [S.fun]
+  def fun(x : T) := S.fun;
+  override [I.fun]
+  def funFromI(x : T) := I.fun;
+  // this is not legal, as we override the same ITable key twice
+  override [J.fun]
+  def funFromJ(x : T) := I.fun;
+}
