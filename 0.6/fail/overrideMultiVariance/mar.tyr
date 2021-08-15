@@ -1,5 +1,9 @@
 /**
  * Test explicit override with multiple arguments.
+ *
+ * @note this is the original realization and cannot be compiled as the function
+ *       declaration is covariant but the realization is invariant in parameter
+ *       types.
  */
 interface I {
   def fun (x : T) : int = 1
@@ -14,14 +18,14 @@ class S {
 
 class T <: S, I, J {
   override [S.fun, I.fun, J.fun]
-  def fun(x : I) := J.fun;
+  def fun(x : I) := S.fun;
 
   test "call T" {
     var x = new T
 
     val r = x.fun(x)
     delete x
-    2 == r
+    3 == r
   }
   test "call S" {
     var t = new T
@@ -29,7 +33,7 @@ class T <: S, I, J {
 
     val r = x.fun(t)
     delete x
-    2 == r
+    3 == r
   }
   test "call I" {
     var t = new T
@@ -37,7 +41,7 @@ class T <: S, I, J {
 
     val r = x.fun(t)
     delete x
-    2 == r
+    3 == r
   }
   test "call J" {
     var t = new T
@@ -45,6 +49,6 @@ class T <: S, I, J {
 
     val r = x.fun(t)
     delete x
-    2 == r
+    3 == r
   }
 }
