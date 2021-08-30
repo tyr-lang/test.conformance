@@ -1,0 +1,10 @@
+/**
+ * Check that a class can be assigned to a Class variable.
+ */
+class T {
+  test "assign" {
+    var c : Class = null;
+    c = T;
+    T == c && c == T
+  }
+}
