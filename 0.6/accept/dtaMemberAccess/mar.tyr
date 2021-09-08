@@ -1,0 +1,15 @@
+/**
+ * Check that a member can be accessed on .class expressions.
+ */
+class S {
+  type val name : String = "S";
+}
+
+class T <: S {
+  test "dta access" {
+    val x = new T
+    val r = "S" == x.class.name
+    delete x
+    r
+  }
+}
