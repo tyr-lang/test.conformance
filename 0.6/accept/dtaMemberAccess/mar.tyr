@@ -2,7 +2,7 @@
  * Check that a member can be accessed on .class expressions.
  */
 class S {
-  type val name : String = "S";
+  class val name : String = "S";
 }
 
 class T <: S {
