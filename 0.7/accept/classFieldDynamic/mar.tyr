@@ -1,0 +1,21 @@
+/**
+ * Check class fields
+ *
+ * @note check that dynamic type access can be resolved correctly
+ */
+class S {
+  class val name : String = "S";
+}
+
+class T <: S {
+  // overrides S
+  class val name : String = "T";
+
+  test "sta/dta access" {
+    val x = new T
+    val s : S = x;
+    val r = "T" == s.class.name && "S" == s.type.name
+    delete x
+    r
+  }
+}

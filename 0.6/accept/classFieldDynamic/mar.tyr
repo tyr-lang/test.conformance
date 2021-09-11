@@ -24,7 +24,10 @@ class T <: S {
   test "sta/dta access" {
     val x = new T
     val s : S = x;
-    val r = "T" == s.class.name && "S" == s.type.name
+    // note: using the instance produces the same code as using .class here.
+    // Nonetheless, .class cannot be used as .class cannot be typed precisely in
+    // Tyr 0.6.
+    val r = "T" == s.name && "S" == s.type.name
     delete x
     r
   }

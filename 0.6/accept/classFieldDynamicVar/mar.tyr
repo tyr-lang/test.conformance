@@ -1,0 +1,49 @@
+/**
+ * Check class field vars
+ */
+class S {
+  class var name : String;
+}
+
+class T <: S {
+  // overrides S
+  class var name : String;
+
+  test "shared state" {
+    val x = new T
+    val y = new T
+    val a : S = x;
+    val b : S = y;
+
+    S.name = "S"
+    T.name = "T"
+    x.name = "r"
+    y.name = "t"
+
+    val r = ("t" == x.name && "t" == a.name &&  "t" == b.name && "t" == y.name
+          && "t" == T.name && "S" == S.name)
+
+    delete x
+    delete y
+    r
+  }
+
+  test "shared state no alias" {
+    val x = new S
+    val y = new T
+    val a : S = x;
+    val b : S = y;
+
+    S.name = "S"
+    T.name = "T"
+    x.name = "r"
+    y.name = "t"
+
+    val r = ("r" == x.name && "r" == a.name &&  "t" == b.name && "t" == y.name
+          && "t" == T.name && "r" == S.name)
+
+    delete x
+    delete y
+    r
+  }
+}
