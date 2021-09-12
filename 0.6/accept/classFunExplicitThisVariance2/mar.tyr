@@ -1,0 +1,29 @@
+/**
+ * Note: even though n is present in both types and this.n would evaluate to T
+ * for an inherited version of name, this.n in the declaration is bound
+ * immediately and will not be rebound on implicit inheritance.
+ *
+ * Note: The two direct calls won't dispatch and this.n won't dispatch either.
+ */
+class S {
+  type val n : String = "S"
+  class def name(this : S.type) : String = this.n
+}
+
+class T {
+  type val n : String = "T"
+  // implicit override
+  class def name(this : T.type) : String = this.n
+
+  test "implicit call" {
+    "T" == T.name() && "S" == S.name()
+  }
+
+  test "direct call S" {
+    "S" == S.name(T)
+  }
+
+  test "direct call T" {
+    "T" == T.name(S)
+  }
+}

@@ -1,0 +1,19 @@
+/**
+ * Class defs will only get a this if it is declared explicitly
+ */
+class S {
+  class val n : String = "S"
+  class def name(this : S.type) : String = this.n
+}
+
+class T {
+  class val n : String = "T"
+
+  test "implicit call" {
+    "T" == T.name() && "S" == S.name()
+  }
+
+  test "direct call" {
+    "T" == S.name(T)
+  }
+}
