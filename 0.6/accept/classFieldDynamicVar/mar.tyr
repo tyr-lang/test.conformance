@@ -20,8 +20,8 @@ class T <: S {
     x.name = "r"
     y.name = "t"
 
-    val r = ("t" == x.name && "t" == a.name &&  "t" == b.name && "t" == y.name
-          && "t" == T.name && "S" == S.name)
+    val r = ("t" == x.name && "t" == a.name &&  "t" == b.name &&
+             "t" == y.name && "t" == T.name && "S" == S.name)
 
     delete x
     delete y
@@ -39,8 +39,8 @@ class T <: S {
     x.name = "r"
     y.name = "t"
 
-    val r = ("r" == x.name && "r" == a.name &&  "t" == b.name && "t" == y.name
-          && "t" == T.name && "r" == S.name)
+    val r = ("r" == x.name && "r" == a.name &&  "t" == b.name &&
+             "t" == y.name && "t" == T.name && "r" == S.name)
 
     delete x
     delete y
