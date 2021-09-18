@@ -1,0 +1,18 @@
+/**
+ * Check class functions
+ */
+class T {
+  // overrides S
+  class def name : String = "T"
+
+  test "direct access" {
+    "T" == T.name()
+  }
+
+  test "virtual access" {
+    val x = new T
+    val r = "T" == x.name()
+    delete x
+    r
+  }
+}
