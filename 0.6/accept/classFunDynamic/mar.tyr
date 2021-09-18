@@ -5,7 +5,7 @@ class S {
   class def name : String = "S"
 }
 
-class T {
+class T <: S {
   // overrides S
   class def name : String = "T"
 
