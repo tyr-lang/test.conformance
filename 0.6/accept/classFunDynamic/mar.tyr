@@ -16,7 +16,7 @@ class T <: S {
   test "virtual access" {
     val x = new T
     val s : S = x;
-    val r = "T" == x.name() && "T" = s.name()
+    val r = "T" == x.name() && "T" == s.name()
     delete x
     r
   }
@@ -24,7 +24,7 @@ class T <: S {
   test "sta/dta access" {
     val x = new T
     val s : S = x;
-    val r = "T" == s.name() && "S" = s.type.name()
+    val r = "T" == s.name() && "S" == s.type.name()
     delete x
     r
   }
