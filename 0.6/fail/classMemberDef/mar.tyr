@@ -1,0 +1,7 @@
+/**
+ * Check class function
+ */
+type T {
+  // not a class
+  class def name : String = "";
+}
