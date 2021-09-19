@@ -1,0 +1,10 @@
+/**
+ * Check type fields
+ */
+class T {
+  // require initialization
+  val name : String;
+
+  // do not initialize name
+  new <: suppressCompilerMessage("initialization");
+}
