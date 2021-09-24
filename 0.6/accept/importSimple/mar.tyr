@@ -1,0 +1,12 @@
+/**
+ * test the most basic form of import usage
+ */
+with tyr.lang.container.index_t
+
+type T {
+  test "use" {
+    var x : index_t;
+    x = 0
+    0U == x.unpack
+  }
+}

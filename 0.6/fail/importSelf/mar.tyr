@@ -1,0 +1,16 @@
+/**
+ * ensure correct evaluation of recursive imports
+ *
+ * @note imports have unchecked top-down elaboration
+ */
+with a := tyr.lang.container.index_t
+// not ok, because a is not introduced into our scope; it is just valid in this
+// file
+with c := test.a
+
+type T {
+  test "use" {
+    var x : c = 0
+    0L == x
+  }
+}
