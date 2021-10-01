@@ -1,5 +1,9 @@
 /**
  * Check private[this] in a legal scenario in a foreign test
+ *
+ * @note This is a failing test as the feature has been descoped. I checked and
+ *       found that I never used it anywhere, so it is not worth the added
+ *       complexity in the compiler.
  */
 type T {
   private[this] type val x = 0

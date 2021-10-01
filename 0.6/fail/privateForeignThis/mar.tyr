@@ -1,5 +1,7 @@
 /**
  * Check private[this]
+ *
+ * @note feature has been descoped anyway
  */
 type T {
   private[this] type val x = 0
