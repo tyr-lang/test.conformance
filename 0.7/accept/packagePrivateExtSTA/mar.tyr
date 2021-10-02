@@ -1,0 +1,24 @@
+/**
+ * Check access to a package private external field
+ *
+ * @note I am not entirely sure about this test. It kind of should work as STAs
+ *       should not have side effects. However, accessing a private field this
+ *       way could still cause an error message. I have to talk to some people
+ *       about this and see if I can even find a good implementation for it.
+ */
+type T {
+  test "static use type" {
+    val x : "".type.minTID.type = 0;
+    0 == x
+  }
+
+  test "use type" {
+    val x : "".type.T = "";
+    "" == x
+  }
+
+  test "use class" <: noCompile {
+    val x : "".class.T = "";
+    false
+  }
+}
