@@ -1,0 +1,26 @@
+/**
+ * test order of and dependency between formal parameters
+ */
+type Box[T : Type, D : T]{
+  val v : T;
+
+  new (v := V : T = D){}
+}
+
+type InvBox[D : T, T : Type]{
+  val v : T;
+
+  new (v := V : T = D){}
+}
+
+type T {
+  test "box" {
+    1 == new Box[int, 1]
+  }
+  test "box explicit" {
+    1 == new Box[D := 1, T := int]
+  }
+  test "invbox" {
+    1 == new InvBox[1, int]
+  }
+}
