@@ -1,0 +1,40 @@
+/**
+ * It turns out that due to reapplication of binder calls, my initial assumption
+ * about force elaboration of bodies of foreign types is not correct.
+ * However, I'd like to have Iterator.toBuffer in this release and I'd expect
+ * that this issue can be solved by just stopping to force elaborate tho bodies
+ * and add them to the tryElaborate all phase.
+ */
+with container;
+
+type T {
+  test "use" {
+    var b = "\n".bytes().toBuffer();
+    
+    b.forall c do {
+      c == 10i8
+    } &&
+    b.forall c do {
+      c == 10i8
+    } && 
+    b.exists c do {
+      c == 10i8
+    }
+  }
+
+  test "unbuffered" {
+    var b = "\n".bytes();
+    
+    !(
+      b.forall c do {
+        c == 10i8
+      } &&
+      b.forall c do {
+        c == 10i8
+      } && 
+      b.exists c do {
+        c == 10i8
+      }
+    )
+  }
+}
