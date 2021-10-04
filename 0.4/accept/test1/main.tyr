@@ -1,5 +1,5 @@
 //instantiate extern type
-type i7  := Integer[7];
+public type i7  := Integer[7];
 
 type T {
   test "basic" {
