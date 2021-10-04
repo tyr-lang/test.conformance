@@ -1,0 +1,22 @@
+/**
+ * test that an equivalent of Groovy's delegates can be created with proxy and
+ * implicit
+ *
+ * @note I consider this bad style and massive abuse. But, it should still work.
+ */
+type T <: proxy[int] {
+  val x : int;
+  new (x := x : int = 0){}
+
+  def implicit : int = x;
+
+  test "use" {
+    1 == new T + 1
+  }
+  test "LHS symmetry" {
+    new T(1) == 1
+  }
+  test "RHS symmetry" {
+    1 == new T(1)
+  }
+}
