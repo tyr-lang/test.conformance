@@ -1,0 +1,15 @@
+/**
+ * Check that a function with override visibility is accessible from its body.
+ */
+class S {
+  def f : int <: inline = 1;
+}
+
+class T <: S {
+  override
+  def f : int = f();
+
+  test "use" {
+    1 == S.f(null);
+  }
+}
