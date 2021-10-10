@@ -1,0 +1,9 @@
+/**
+ * It is not legal to override nothing
+ */
+type T {
+  override
+  def f : int <: inline = 2;
+
+  test "dead" { true }
+}
