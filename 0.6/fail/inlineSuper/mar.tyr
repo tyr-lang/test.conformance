@@ -1,0 +1,11 @@
+/**
+ * It is not legal to override an inline function without an inline property.
+ */
+type S {
+  public def f : int <: inline = 1;
+}
+
+type T <: S {
+  override
+  def f : int = if(0 == S.f(this)) 0 else f();
+}

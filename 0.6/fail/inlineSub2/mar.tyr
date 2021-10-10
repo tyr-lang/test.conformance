@@ -1,0 +1,16 @@
+/**
+ * It is not legal to override an inline function without an inline property.
+ *
+ * @note here, the explicit override taregt is missing causing this to be partly
+ *       an override test
+ */
+type S {
+  public def f : int = 1;
+}
+
+type T <: S {
+  override
+  def f : int <: inline = 2;
+
+  test "dead" { true }
+}
