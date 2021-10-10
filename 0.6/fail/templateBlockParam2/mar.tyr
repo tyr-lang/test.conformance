@@ -1,0 +1,5 @@
+/**
+ * Check that BlockParameter is no legal CT argument type.
+ */
+class T[x : BlockParameter[int]] {
+}

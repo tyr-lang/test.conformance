@@ -1,0 +1,15 @@
+/**
+ * Check that a variable in a template body can be initialized with a block.
+ */
+class T[x : int] {
+  type def size : int {
+    val r : int = {
+      x - 3
+    }
+    r
+  }
+
+  test "direct access" {
+    0 == T[3].size()
+  }
+}

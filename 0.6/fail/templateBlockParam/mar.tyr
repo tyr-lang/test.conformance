@@ -1,0 +1,5 @@
+/**
+ * Check that Block is no legal type paramater type
+ */
+class T[x : Block[int]] {
+}

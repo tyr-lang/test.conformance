@@ -1,0 +1,14 @@
+/**
+ * Check that a type def can realize a matching def in a template type.
+ */
+type G {
+  type def size : int = 0;
+}
+
+class T[x : int] {
+  type def size := G.size;
+
+  test "direct access" {
+    0 == T[3].size()
+  }
+}
