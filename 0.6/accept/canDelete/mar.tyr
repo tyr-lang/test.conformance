@@ -1,0 +1,23 @@
+/**
+ * Check that a type variable with base type Class can use Object members
+ */
+type Box[T : Class] {
+  var x : T;
+  new (x := x : T);
+
+  delete {
+    delete x;
+  }
+
+  test "use" {
+    var b = new Box[String](null);
+    delete b
+  }
+
+  test "use eq" {
+    var b = new Box[String](null);
+    var r = b.x == b.x
+    delete b
+    return r
+  }
+}
