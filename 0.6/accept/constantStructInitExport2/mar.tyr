@@ -1,0 +1,23 @@
+with test.g1.T;
+
+/**
+ * test constant struct instance initialization
+ */
+public type L {
+  public val x : int;
+
+  public type val f : L = new L(3);
+  public type val g : T = new T(7);
+
+  new(x := x : int);
+
+  test "first" {
+    3 == f.x
+  }
+  test "both" {
+    3 == f.x && 7 == g.x
+  }
+  test "both g1" {
+    3 == T.f.x && 7 == T.g.x
+  }
+}

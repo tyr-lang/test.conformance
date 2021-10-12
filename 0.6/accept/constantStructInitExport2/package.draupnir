@@ -1,0 +1,4 @@
+src=.
+name=test.g2
+
+with=test.g1

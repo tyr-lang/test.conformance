@@ -1,0 +1,18 @@
+/**
+ * test constant struct instance initialization
+ */
+public type T {
+  public val x : int;
+
+  public type val f : T = new T(3);
+  public type val g : T = new T(7);
+
+  new(x := x : int);
+
+  test "first" {
+    3 == f.x
+  }
+  test "both" {
+    3 == f.x && 7 == g.x
+  }
+}
