@@ -1,0 +1,24 @@
+/**
+ * test constant struct instance initialization
+ */
+public type T {
+  public var x : int;
+
+  public type var f : T = new T(3);
+  public type var g : T = new T(7);
+
+  new(x := x : int);
+
+  test "first" {
+    3 == f.x
+  }
+
+  test "both mut" {
+    var r = 3 == f.x && 7 == g.x
+
+    f.x = 1
+    g = new T(2)
+
+    r &&  1 == f.x && 2 == g.x
+  }
+}

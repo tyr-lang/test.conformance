@@ -1,0 +1,25 @@
+with test.gv1.T;
+
+/**
+ * test constant struct instance initialization
+ */
+public type L {
+  public val x : int;
+
+  public type val f : L = new L(3);
+  public type val g : T = new T(7);
+
+  new(x := x : int);
+
+  // use this as only test to ensure that we know the initial state
+  test "all mut" {
+    val r =  3 == f.x && 7 == g.x && 3 == T.f.x && 7 == T.g.x
+
+    T.f.x = 1
+    T.g = new T(2)
+    f.x = 3
+    g = new T(4)
+
+    r && 3 == f.x && 4 == g.x && 1 == T.f.x && 2 == T.g.x
+  }
+}
