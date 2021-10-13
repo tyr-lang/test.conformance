@@ -1,0 +1,17 @@
+/**
+ * check that the expressions below can be parsed
+ *
+ * @note require manual inspection of error messages mentioning the correct 
+ *       kind of operator
+ */
+type T {
+  test "pre" <: noCompile {
+    && true
+  }
+  test "post" <: noCompile {
+    true &&
+  }
+  test "post" <: noCompile {
+    true !
+  }
+}

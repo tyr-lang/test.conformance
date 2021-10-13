@@ -1,0 +1,42 @@
+/**
+ * I finally chose to disable semicolon inference in atomic expressions.
+ *
+ * @note without this extension, we would get a strange parse error from line 9
+ */
+type T {
+  test "pre" {
+    (
+      true
+      && true
+    )
+  }
+  test "post" {
+    (
+      true &&
+      true
+    )
+  }
+
+  test "pre block" <: noCompile {
+    {
+      true
+      && true
+    }
+  }
+  test "post block" <: noCompile {
+    {
+      true &&
+      true
+    }
+  }
+
+  test "multi" {
+    var b = "\n".bytes();
+    
+    !(
+      true &&
+      true && 
+      true
+    )
+  }
+}
