@@ -1,0 +1,13 @@
+/**
+ * I finally chose to disable semicolon inference in atomic expressions.
+ *
+ * @note without this extension, we would get a strange parse error from line 8
+ */
+type T {
+  type def f = true
+            || false;
+
+  test "use" {
+    f();
+  }
+}
