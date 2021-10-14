@@ -23,8 +23,52 @@ type T {
       && true
     }
   }
-  test "post block" <: noCompile {
+
+  test "pre block nedested" {
+    {(
+      true
+      && true
+    )}
+  }
+
+  test "pre block nedested loop" {
     {
+      do {
+        true
+      } while (
+      true
+      && false
+    )}
+  }
+
+  test "pre block nedested loop block simple" {
+    {
+      do {
+        true
+      } while {
+      false
+    }}
+  }
+
+  test "pre block nedested loop block" <: noCompile {
+    {
+      do {
+        true
+      } while {
+      true
+      && false
+    }}
+  }
+
+  test "pre block nedested2" <: noCompile {
+    {({
+      true
+      && true
+    })}
+  }
+  test "post block" {
+    {
+      // this always caused the line to continue in the next one
       true &&
       true
     }
@@ -36,7 +80,7 @@ type T {
     !(
       true &&
       true && 
-      true
+      false
     )
   }
 }
