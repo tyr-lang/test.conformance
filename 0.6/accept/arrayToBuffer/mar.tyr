@@ -11,15 +11,17 @@ type T {
   test "use" {
     var b = "\n".bytes().toBuffer();
     
-    b.forall c do {
-      c == 10i8
-    } &&
-    b.forall c do {
-      c == 10i8
-    } && 
-    b.exists c do {
-      c == 10i8
-    }
+    (
+      b.forall c do {
+        c == 10i8
+      } &&
+      b.forall c do {
+        c == 10i8
+      } && 
+      b.exists c do {
+        c == 10i8
+      }
+    )
   }
 
   test "unbuffered" {
