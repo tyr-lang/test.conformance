@@ -2,10 +2,14 @@
  * I finally chose to disable semicolon inference in atomic expressions.
  *
  * @note without this extension, we would get a strange parse error from line 8
+ *
+ * @note if one would choose to disable semicolon inference in bodies, all
+ *       members would have to be terminated with a semicolon. This, however,
+ *       has not been the case even for tyr 0.4 so I won't change that now.
  */
 type T {
-  type def f = true
-            || false;
+  type def f = (true
+             || false)
 
   test "use" {
     f();
