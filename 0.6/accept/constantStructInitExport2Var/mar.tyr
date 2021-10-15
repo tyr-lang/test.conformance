@@ -4,10 +4,10 @@ with test.gv1.T;
  * test constant struct instance initialization
  */
 public type L {
-  public val x : int;
+  public var x : int;
 
-  public type val f : L = new L(3);
-  public type val g : T = new T(7);
+  public type var f : L = new L(3);
+  public type var g : T = new T(7);
 
   new(x := x : int);
 
