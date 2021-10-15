@@ -7,7 +7,7 @@ public type T {
   public type var f : T = new T(3);
   public type var g : T = new T(7);
 
-  new(x := x : int);
+  public new(x := x : int);
 
   test "first" {
     3 == f.x
