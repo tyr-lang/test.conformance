@@ -1,0 +1,16 @@
+/**
+ * Check that infinite implicit recursion results in an error in finite time.
+ *
+ * @note if it would not, your compiler would hang at this test
+ */
+class Box[T : Type] {
+    def implicit : Box[Box[T]] = null
+}
+
+class T <: proxy[int] {
+    def implicit : Box[T] = null
+
+    test "die" <: noCompile {
+        (new T).unsign()
+    }
+}
