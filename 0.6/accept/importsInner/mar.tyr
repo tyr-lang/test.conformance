@@ -1,6 +1,16 @@
 /**
  * test imports within a type's body
  */
+type S {
+  with container.index_t
+
+  test "use" {
+    var x : index_t;
+    x = 0
+    0U == x.unpack
+  }
+}
+
 type T {
   with tyr.lang.container.index_t
 
