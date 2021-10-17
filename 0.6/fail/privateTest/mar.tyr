@@ -1,0 +1,6 @@
+/**
+ * Check that tests cannot have visibility
+ */
+type T {
+    private test "not allowed" {false}
+}
