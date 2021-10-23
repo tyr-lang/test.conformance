@@ -5,38 +5,45 @@
  * that this issue can be solved by just stopping to force elaborate tho bodies
  * and add them to the tryElaborate all phase.
  */
-with container;
-
 type T {
+  test "instantiate" {
+    var b = "\n".bytes().toBuffer();
+    
+    delete b
+  }
+
   test "use" {
     var b = "\n".bytes().toBuffer();
     
-    (
-      b.forall c do {
+    var r = (
+      b.forall c do (
         c == 10i8
-      } &&
-      b.forall c do {
+      ) &&
+      b.forall c do (
         c == 10i8
-      } && 
-      b.exists c do {
+      ) && 
+      b.exists c do (
         c == 10i8
-      }
+      )
     )
+
+    delete b
+    r
   }
 
   test "unbuffered" {
     var b = "\n".bytes();
     
     !(
-      b.forall c do {
+      b.forall c do (
         c == 10i8
-      } &&
-      b.forall c do {
+      ) &&
+      b.forall c do (
         c == 10i8
-      } && 
-      b.exists c do {
+      ) && 
+      b.exists c do (
         c == 10i8
-      }
+      )
     )
   }
 }
