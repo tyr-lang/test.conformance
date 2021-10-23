@@ -1,0 +1,16 @@
+/**
+ * test checks for formal placement calls
+ */
+type T {
+  type def f(x : int) = x
+
+  test "box" {
+    1 == f(1)
+  }
+  test "box explicit" {
+    1 == f(x := 1)
+  }
+  test "box explicit double" <: noCompile{
+    1 == f(x := 1, x := 2)
+  }
+}
