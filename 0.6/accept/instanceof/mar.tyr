@@ -1,0 +1,31 @@
+/**
+ * Check casts offered by types
+ */
+type T {
+  test "self" {
+    Type ? Type
+  }
+  test "self direct" {
+    Class ? Type
+  }
+  test "self direct2" {
+    Class ? Class
+  }
+  test "literal" {
+    String ? "literal"
+  }
+  test "literal direct" {
+    StringLiteral ? "literal"
+  }
+  test "null" {
+    String ? null
+  }
+  test "not a string" {
+    ! String ? Class
+  }
+
+  test "no class" <: noCompile {
+    // note: embraced to get the desired error message
+    ! (int ? 0)
+  }
+}
