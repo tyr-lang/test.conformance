@@ -1,0 +1,37 @@
+/**
+ * Check unchecked casts offered by classes
+ *
+ * TODO test execution should offer to notify wrong unchecked casts during test
+ *      execution
+ *
+ * TODO furthermore, there should be a test ensuring that using !! on Classes
+ *      creates a warning
+ */
+type T {
+  test "self" {
+    Type == Type ! Type
+  }
+  test "self direct" {
+    Type == Class ! Type
+  }
+  test "self direct2" {
+    Class == Class ! Class
+  }
+  test "literal" {
+    "literal" == String ! "literal"
+  }
+  test "literal direct" {
+    "literal" == StringLiteral ! "literal"
+  }
+  test "null" {
+    null == String ! null
+  }
+  test "not a string" {
+    null == String ! Class
+  }
+
+  test "no class" <: noCompile {
+    // note: embraced to get the desired error message
+    ! (int ! 0)
+  }
+}

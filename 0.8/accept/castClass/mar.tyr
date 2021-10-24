@@ -1,0 +1,44 @@
+/**
+ * Check checked casts offered by classes
+ *
+ * TODO should contain tests catching expected exceptions
+ */
+type T {
+  test "self" {
+    Type == Type ?! Type
+  }
+  test "self direct" {
+    Type == Class ?! Type
+  }
+  test "self direct2" {
+    Class == Class ?! Class
+  }
+  test "literal" {
+    "literal" == String ?! "literal"
+  }
+  test "literal direct" {
+    "literal" == StringLiteral ?! "literal"
+  }
+  test "asof" {
+    var s : String = "literal"
+    "literal" == s.asof(StringLiteral)
+  }
+  test "null" {
+    String ?! null
+    // catch NPE
+  }
+  test "not a string" {
+    String ?! Class
+    // catch CCE
+  }
+  test "asof not a string" {
+    var s = String
+    s.asof(String)
+    // catch CCE
+  }
+
+  test "no class" <: noCompile {
+    // note: embraced to get the desired error message
+    ! (int ?! 0)
+  }
+}
