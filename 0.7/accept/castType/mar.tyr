@@ -1,0 +1,20 @@
+/**
+ * Check casts offered by types
+ */
+type T {
+  test "identity" {
+    0 == int !! 0
+  }
+  test "extend" {
+    0L == long !! 0
+  }
+  test "shrink" {
+    0i8 == byte !! 0
+  }
+  test "pointer" {
+    null == string !! 0
+  }
+  test "no repr" <: noCompile {
+    0 == any !! 0
+  }
+}
