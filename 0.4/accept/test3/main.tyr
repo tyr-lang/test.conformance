@@ -1,6 +1,6 @@
 //instantiate extern type
-type i7  := test1.i7
-type iX  := test2.iX
+type i7  := test.ext1.i7
+type iX  := test.ext2.iX
 
 type T {
   test "basic" {

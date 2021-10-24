@@ -1,5 +1,5 @@
 src=.
-name=test3
-with=test1
-with=test2
+name=test.ext3
+with=test.ext1
+with=test.ext2
 
