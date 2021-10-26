@@ -1,0 +1,65 @@
+/**
+ * Check properties of ChainedIterator
+ */
+class T {
+  // strings are the cheapest way to create an iterable
+  type val x = "\x01\x02"
+  type val y = "\x03\x04"
+  // an empty string will return an empty bytes iterator
+  type val e = "";
+
+  test "chain" {
+    delete (x.bytes() ++ y.bytes())
+  }
+
+  test "chain count" {
+    val it = x.bytes() ++ y.bytes()
+    val r = it.count i do (i != 0i8)
+    delete it
+    4 == r
+  }
+
+  test "chain sum" {
+    val it = x.bytes() ++ y.bytes()
+    val r = it.fold(0i8) l,r do (l+r)
+    delete it
+    10i8 == r
+  }
+
+  test "empty left" {
+    val it = x.bytes() ++ e.bytes()
+    val r = it.fold(0i8) l,r do (l+r)
+    delete it
+    3i8 == r
+  }
+
+  test "empty left identity" {
+    val xs = x.bytes()
+    val it = e.bytes() ++ xs
+    val r = it == xs
+    delete it
+    r
+  }
+
+  test "empty right" {
+    val it = e.bytes() ++ x.bytes()
+    val r = it.fold(0i8) l,r do (l+r)
+    delete it
+    3i8 == r
+  }
+
+  test "empty right identity" {
+    val xs = x.bytes()
+    val it = e.bytes() ++ xs
+    val r = it == xs
+    delete it
+    r
+  }
+
+  test "empty" {
+    val it = e.bytes ++ e.bytes()
+    val r = !it.hasNext()
+    delete it
+    r
+  }
+}
