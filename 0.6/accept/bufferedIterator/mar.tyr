@@ -1,0 +1,44 @@
+/**
+ * Check properties of BufferedIterator
+ */
+class T {
+  // strings are the cheapest way to create an iterable
+  type val x = "\x01\x02"
+  // an empty string will return an empty bytes iterator
+  type val e = "";
+
+  test "buffer" {
+    delete x.bytes().buffered()
+  }
+
+  test "buffer empty" {
+    delete e.bytes().buffered()
+  }
+
+  test "buffer count" {
+    val it = x.bytes().buffered()
+    2 == it.count i do (i != 0i8)
+  }
+
+  test "buffer count empty" {
+    val it = e.bytes().buffered()
+    0 == it.count i do (i != 0i8)
+  }
+
+  test "buffer peek count" {
+    val it = x.bytes().buffered()
+    1i8 == it.peek() &&
+    1i8 == it.peek() &&
+    2 == it.count i do (i != 0i8)
+  }
+
+  test "buffer peek interact count" {
+    val xs = x.bytes()
+    val it = xs.buffered()
+    1i8 == it.peek() &&
+    // advance the inner buffer, which is, strictly speaking, not allowed
+    2i8 == xs.next() &&
+    1i8 == it.peek() &&
+    1 == it.count i do (i != 0i8)
+  }
+}
