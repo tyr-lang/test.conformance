@@ -1,0 +1,19 @@
+/**
+ * Test absence of a bug that I found in my join implementation
+ */
+class Box[T : Type] {
+  var x : T
+
+  new (v : T) {
+    // note: the result of this conditional is also the temporary result of the
+    // block forcing an intersection of the type of {T, bool}
+    if true
+      x = v
+    else
+      false
+  }
+
+  test "use" {
+    delete new Box[int](0)
+  }
+}
