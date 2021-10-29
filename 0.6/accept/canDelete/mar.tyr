@@ -16,7 +16,7 @@ type Box[T : Class] {
 
   test "use eq" {
     var b = new Box[String](null);
-    var r = b.x == b.x
+    val r = b.x == b.x
     delete b
     return r
   }

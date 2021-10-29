@@ -1,0 +1,10 @@
+/**
+ * Apparently, tests in tests Ref[bool] cannot be combined with an explicit
+ * return. This is an error.
+ */
+type T {
+  test "use var" {
+    var r = true
+    return r
+  }
+}
