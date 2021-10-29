@@ -20,6 +20,6 @@ type Box[T : Class] {
     var b = new Box[String](null);
     var r = b == b
     delete b
-    return r
+    r
   }
 }
