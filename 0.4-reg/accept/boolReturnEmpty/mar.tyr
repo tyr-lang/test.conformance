@@ -1,0 +1,26 @@
+/**
+ * Apparently, no propper error message has been diagnosed for an unreachable
+ * block.
+ *
+ * @note while there always was a check for the issue, it failed to detect
+ *       certain cases where an implicit result of a block would have been
+ *       calculated
+ */
+type T {
+  test "last block" <: noCompile {
+    val r = true
+    {
+    return r
+    }
+    {}
+  }
+
+  test "double block" <: noCompile {
+    val r = true
+    {
+    return r
+    }
+    {}
+    {}
+  }
+}
