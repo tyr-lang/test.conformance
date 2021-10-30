@@ -1,0 +1,15 @@
+/**
+ * Apparently, tests in functions Ref[bool] cannot be combined with an explicit
+ * return. This is an error.
+ */
+type T {
+  type def f : bool {
+    var r = false
+    return (r : Ref[bool])
+  }
+
+  test "use var" {
+    var r = !f()
+    return r
+  }
+}
