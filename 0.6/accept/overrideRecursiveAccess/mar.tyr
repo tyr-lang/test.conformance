@@ -2,14 +2,21 @@
  * Check that a function with override visibility is accessible from its body.
  */
 class S {
-  def f : int <: inline = 1;
+  def f : int = 1;
 }
 
 class T <: S {
+
+  // f() should bind as T.f(this) which should be visibla as it is a member of
+  // this.type
   override
   def f : int = f();
 
   test "use" {
+    // this is a test, so we can access S.f anyway
     1 == S.f(null);
   }
+
+  // a test against T.f would not be meaningful as it would just cause a stack
+  // overflow
 }
