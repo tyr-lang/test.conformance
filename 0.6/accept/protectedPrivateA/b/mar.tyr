@@ -1,0 +1,11 @@
+class T <: a.S {
+  protected type def f = x
+
+  test "use f" {
+    1 == f()
+  }
+
+  test "use x" {
+    1 == x
+  }
+}

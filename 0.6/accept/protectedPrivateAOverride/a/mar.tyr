@@ -1,0 +1,5 @@
+// grant access to classes in another subpackage
+private[_root_.test.c] class T <: b.S {
+  // expand access to all child classes
+  protected def f := b.S.f
+}

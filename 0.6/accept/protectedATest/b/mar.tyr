@@ -1,0 +1,10 @@
+class T <: a.S {
+
+  test "use x" {
+    1 == a.S.x
+  }
+
+  test "use x direct" {
+    1 == x
+  }
+}

@@ -1,0 +1,4 @@
+private[a] class S {
+  // grant access to a
+  private[a] def f = 1
+}

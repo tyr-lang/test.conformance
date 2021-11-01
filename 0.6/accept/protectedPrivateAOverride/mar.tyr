@@ -1,0 +1,51 @@
+/**
+ * Test interaction between explicit and override visibility
+ */
+// note to self: these imports cannot be used as the file does not have access
+// to the target declarations. While this is a bit unusual, it is actually a
+// sane and consequent behaviour.
+// with a.b.S
+// with a.T
+// with c.U
+
+class Base {
+
+  test "use S" {
+    var x : a.b.S = new a.b.S
+    val r = 1 == x.f()
+    delete x
+    r
+  }
+  test "use T" {
+    var x : a.b.S = new a.T
+    val r = 1 == x.f()
+    delete x
+    r
+  }
+  test "use U" {
+    var x : a.b.S = new c.U
+    1 == x.f()
+    val r = 1 == x.f()
+    delete x
+    r
+  }
+  test "direct S" {
+    var x = new a.b.S
+    val r = 1 == a.b.S.f(x)
+    delete x
+    r
+  }
+  test "direct T" {
+    var x = new a.T
+    val r = 1 == a.T.f(x)
+    delete x
+    r
+  }
+  test "direct U" {
+    var x = new c.U
+    1 == x.f()
+    val r = 1 == c.U.f(x)
+    delete x
+    r
+  }
+}

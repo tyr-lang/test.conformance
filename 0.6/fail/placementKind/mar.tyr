@@ -1,0 +1,11 @@
+/**
+ * Check that placing a type instead of a function into a function slot will
+ * result in orderly error reporting.
+ */
+class T {
+  def f = 1
+}
+
+class U <: T {
+  override def f := T
+}

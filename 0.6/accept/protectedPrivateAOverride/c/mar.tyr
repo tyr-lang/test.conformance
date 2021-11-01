@@ -1,0 +1,3 @@
+class U <: a.T {
+  override def f := a.T.f
+}
