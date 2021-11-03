@@ -1,0 +1,5 @@
+type Box[T : Type] {
+  private [a] var x : T;
+
+  new (x := x : T);
+}

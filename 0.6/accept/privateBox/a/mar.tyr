@@ -1,0 +1,17 @@
+type Box[T : Type] {
+  private [a] var x : T;
+
+  new (x := x : T);
+}
+
+type BT {
+  val x = new Box[int](0);
+  def f = x.x
+
+  test "use" {
+    0 == x.x
+  }
+  test "use f" {
+    0 == f()
+  }
+}

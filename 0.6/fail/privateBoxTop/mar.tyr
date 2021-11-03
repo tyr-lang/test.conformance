@@ -1,0 +1,14 @@
+/**
+ * Like private box but should not compile as the private field is used outside of a.
+ */
+type BT {
+  val x = new Box[int](0);
+  def f = x.x
+
+  test "use" {
+    0 == x.x
+  }
+  test "use f" {
+    0 == f()
+  }
+}

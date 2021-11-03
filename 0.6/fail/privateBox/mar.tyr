@@ -1,0 +1,17 @@
+/**
+ * This test uses a type parameter in a privacy argument. It is currently not
+ * clear to me if this should really be accepted. Currently, I get the
+ * impression that namespaces will become values like properties.
+ * However, I don't see any useful application.
+ */
+type Box[T : Type] {
+  private [T] val x = 0;
+}
+
+type BT {
+  val x = new Box[BT];
+
+  test "use" {
+    0 == x.x
+  }
+}
