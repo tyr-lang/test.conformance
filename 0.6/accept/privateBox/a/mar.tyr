@@ -1,12 +1,12 @@
-type Box[T : Type] {
+public type Box[T : Type] {
   private [a] var x : T;
 
-  new (x := x : T);
+  public new (x := x : T);
 }
 
 type BT {
-  val x = new Box[int](0);
-  def f = x.x
+  type val x = new Box[int](0);
+  type def f : int = x.x
 
   test "use" {
     0 == x.x

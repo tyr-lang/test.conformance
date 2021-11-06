@@ -1,4 +1,6 @@
 type BT {
+  with a.Box;
+
   test "use" {
     val x = new Box[long](0L)
     0L == x.x
