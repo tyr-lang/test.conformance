@@ -1,0 +1,19 @@
+/**
+ * Ensure that results of functions applicable to the return type result in
+ * usable function implementations
+ */
+public type Box {
+  var x : int;
+
+  public new (x := x : int);
+
+  type val x = new Box(0);
+  type def f : int = x.x
+
+  test "use" {
+    0 == x.x
+  }
+  test "use f" {
+    0 == f()
+  }
+}
