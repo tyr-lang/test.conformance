@@ -1,0 +1,18 @@
+/**
+ * Ensure that usages of namespaces are correctly translated by substitutions
+ *
+ * @note try a new type parameter
+ */
+type BT {
+  with pb.a.Box;
+
+  test "instantiate " {
+    val x = new Box[float](.0f)
+  }
+
+  test "use" <: noCompile {
+    val x = new Box[float](.0f)
+    // should not compile
+    .0f == x.x
+  }
+}
