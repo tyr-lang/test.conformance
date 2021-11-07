@@ -1,0 +1,3 @@
+class S {
+  protected[a] def f : int = 1
+}

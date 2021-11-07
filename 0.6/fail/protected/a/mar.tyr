@@ -1,3 +1,0 @@
-class S {
-  protected[a] private[test] type val x = 1
-}

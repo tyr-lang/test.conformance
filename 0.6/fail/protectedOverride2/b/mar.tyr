@@ -1,0 +1,21 @@
+/**
+ * While we can override S, we cannot access f here. Thus, we cannot override it
+ * explicitly.
+ */
+class T <: a.S {
+  // note: this is an implicit override of a.S.f
+  override def f = 2
+
+  test "use f" {
+    // this should compile and yield 1 as the only way that T exposes an f is
+    // via an implicit override that is visible from T's scope for tests
+    // And yes, this means that T.f exists; it, also, means that one can make
+    // inaccessible function realizations accessible if one has enough
+    // creativity
+    1 == T.f(null)
+  }
+
+  test "use x" {
+    1 == a.S.f(null)
+  }
+}
