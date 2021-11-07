@@ -1,0 +1,35 @@
+/**
+ * Ensure implicits on class member applications are performed as intended
+ */
+public class Box[T : Type] {
+  var x : T;
+
+  class def f(this : Box[T], y : T) : T = y
+  class def g(this : Box[T], y : T) : T = x
+  class def h(this : Box[T], y : T) : Ref[T] = x
+
+  public new (x := x : T);
+
+  type var a = new Box[int](7);
+
+  test "use f" {
+    7 == a.f(a.x)
+  }
+  test "use f static" {
+    7 == Box[int].f(a, a.x)
+  }
+
+  test "use g" {
+    7 == a.g(a.x)
+  }
+  test "use g static" {
+    7 == Box[int].g(a, a.x)
+  }
+
+  test "use h" {
+    7 == a.h(a.x)
+  }
+  test "use h static" {
+    7 == Box[int].h(a, a.x)
+  }
+}
