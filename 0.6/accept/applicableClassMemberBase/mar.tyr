@@ -1,0 +1,51 @@
+/**
+ * Ensure implicits on class member applications are performed as intended
+ *
+ * @note add a base type to ensure that the correct function is used
+ */
+public class Base[T : Type] {
+  type var b : T;
+
+  class def f(this : Box[T], y : T) : T = b
+  class def g(this : Box[T], y : T) : T = b
+  class def h(this : Box[T], y : T) : Ref[T] = b
+}
+
+public class Box[T : Type] <: Base[T] {
+  var x : T;
+
+  class def f(this : Box[T], y : T) : T = y
+  class def g(this : Box[T], y : T) : T = x
+  class def h(this : Box[T], y : T) : Ref[T] = x
+
+  public new (x := x : T);
+
+  type var a = new Box[int](7);
+
+  test "use f" {
+    Base[int].b = 0
+    7 == a.f(a.x)
+  }
+  test "use f static" {
+    Base[int].b = 0
+    7 == Box[int].f(a, a.x)
+  }
+
+  test "use g" {
+    Base[int].b = 0
+    7 == a.g(a.x)
+  }
+  test "use g static" {
+    Base[int].b = 0
+    7 == Box[int].g(a, a.x)
+  }
+
+  test "use h" {
+    Base[int].b = 0
+    7 == a.h(a.x)
+  }
+  test "use h static" {
+    Base[int].b = 0
+    7 == Box[int].h(a, a.x)
+  }
+}
