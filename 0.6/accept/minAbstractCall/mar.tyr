@@ -1,0 +1,18 @@
+/**
+ * Ensure that direct calls of abstract functions dispatch
+ */
+class S <: abstract {
+  def f : int;
+  def g = f()
+}
+
+class T <: S {
+  override def f = 7
+
+  test "use" {
+    var x = new T
+    var r = 7 == x.g()
+    delete x
+    r
+  }
+}
