@@ -5,8 +5,10 @@ public class Box[T : Type] {
   var x : T;
 
   class def f(this : Box[T], y : T) : T = y
-  class def g(this : Box[T], y : T) : T = x
+  class def g(this : Ref[Box[T]], y : T) : T = x
   class def h(this : Box[T], y : T) : Ref[T] = x
+
+  class def r(this : Ref[Box[T]], y : T) : Box[T] = this
 
   public new (x := x : T);
 
@@ -31,5 +33,12 @@ public class Box[T : Type] {
   }
   test "use h static" {
     7 == Box[int].h(a, a.x)
+  }
+
+  test "use r" {
+    7 == a.r(a.x).x
+  }
+  test "use r static" {
+    7 == Box[int].r(a, a.x).x
   }
 }
