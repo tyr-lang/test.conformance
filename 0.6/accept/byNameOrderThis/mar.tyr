@@ -1,0 +1,12 @@
+/**
+ * Ensure that only the first parameter can be called this
+ */
+public type T {
+
+  // note: this should create an error
+  type def f(x : int, this : int) = x + 2 * this
+
+  test "use" <: noCompile {
+    true
+  }
+}

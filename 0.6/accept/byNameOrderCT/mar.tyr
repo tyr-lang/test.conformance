@@ -1,0 +1,13 @@
+/**
+ * Ensure that by name parameters are correctly ordered.
+ */
+public type T[x : int, y : int] {
+  type def f = x + 2 * y
+
+  test "call" {
+    7 == T[3, 2].f()
+  }
+  test "call order" {
+    T[x := 3, y := 2].f() == T[y := 2, x := 3].f()
+  }
+}
