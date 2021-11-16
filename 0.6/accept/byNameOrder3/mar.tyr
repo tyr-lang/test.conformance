@@ -2,14 +2,14 @@
  * Ensure that by name parameters are correctly ordered.
  */
 public type T {
-  type def f(x : int, m : 0U.type = 0U, y : int) = x + 2 * y + 4 * m.sign()
+  type def f(x : int, m : 0u32.type = 0u32, y : int) = x + 2 * y + 4 * m.sign()
 
   test "call" {
-    7 == f(3, 0U, 2)
+    7 == f(3, 0u32, 2)
   }
 
   test "call default" {
-    7 == f(3, 2)
+    7 == f(3, y := 2)
   }
 
   test "call order default" {
@@ -17,15 +17,15 @@ public type T {
   }
 
   test "call order positional" {
-    f(x := 3, y := 2, 4U) == f(y := 2, x := 3, 4U)
+    f(x := 3, y := 2, 4u32) == f(y := 2, x := 3, 4u32)
   }
 
   test "call order positional position" {
-    // the location of positional parameters should not matter at all
-    f(x := 3, 4U, y := 2) == f(4U, y := 2, x := 3)
+    // the location of positional parameters shou32ld not matter at all
+    f(x := 3, 4u32, y := 2) == f(4u32, y := 2, x := 3)
   }
 
   test "call order full" {
-    f(x := 3, y := 2, m := 4U) == f(m := 4U y := 2, x := 3)
+    f(x := 3, y := 2, m := 4u32) == f(m := 4u32, y := 2, x := 3)
   }
 }
