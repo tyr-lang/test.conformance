@@ -1,0 +1,49 @@
+/**
+ * Ensure implicits on object member applications are performed as intended
+ *
+ * @note add a base interface to ensure that the correct function is used
+ */
+public interface Base[T : Type] {
+
+  /**
+   * In this form, any override, even the implicit ones, will have the issue of
+   * not being assignable to the parent this. I consider this acceptable when it
+   * comes to explicit this. However, I would request any override to be
+   * explicit.
+   */
+  def r(this : Ref[Base[T]], y : T) : Base[T] = this
+  def s(this : Ref[Base[T]], y : T) : Base[T] = this
+}
+
+public class Box[T : Type] <: Base[T] {
+  var x : T;
+
+  override
+  def r(this : Ref[Box[T]], y : T) : Box[T] = this
+
+  override
+  def s(this : Ref[Base[T]], y : T) : Base[T] = this
+
+  public new (x := x : T);
+
+  type var a = new Box[int](7);
+
+  test "use r" {
+    7 == a.r(a.x).x
+  }
+  test "use r static" {
+    7 == Box[int].r(a, a.x).x
+  }
+
+  test "use s simple" {
+    x == a.s(a.x)
+  }
+  test "use s" <: noCompile {
+    // cannot prove that x is accessible
+    7 == a.s(a.x).x
+  }
+  test "use s static" <: noCompile {
+    // cannot prove that x is accessible
+    7 == Box[int].s(a, a.x).x
+  }
+}
