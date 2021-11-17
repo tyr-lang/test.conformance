@@ -4,7 +4,10 @@
 public type T {
 
   // note: this should create an error
-  type def f(x : int, this : int) = x + 2 * this
+  type def f(x : int, this : T) = x
+
+  // note: this should also create one or two errors
+  type def f(this : T, this : T) = 2
 
   test "use" <: noCompile {
     true
