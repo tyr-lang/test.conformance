@@ -1,0 +1,20 @@
+/**
+ * Ensure function pointers from class members are correctly handeled during
+ * global init. Also, ensure that function pointers can be compared.
+ */
+public class T {
+  val x : int
+
+  class def r(y : T) : T = y
+
+  new (x := x : int);
+
+  type var a = new T(7);
+
+  // use type inference to create the function type
+  type var f = a.r
+
+  test "use r" {
+    7 == f(a).x
+  }
+}
