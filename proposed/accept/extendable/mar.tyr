@@ -1,0 +1,32 @@
+/**
+ * Allow that a type can be extended by other packages.
+ */
+property _root_.tyr.lang.reflect.extendable;
+
+/**
+ * Extension of the argument type.
+ *
+ * @note: Extension argument types must be exttypes
+ *
+ * @note: It is not legal to extend type instances
+ *
+ * @note: The CT formals of T are visible in the body
+ *
+ * @note: This requires a TIR-change that causes correct resolution of extensions.
+ * It is not an option to add the extension to the affected type in serialized TIR
+ * as this could lead to an ODR-violation.
+ */
+type _root_.tyr.lang.reflect.Extension[T : Type] {
+  // can have only type def members with explicit this
+}
+
+/**
+ * Add some function to integer
+ */
+type MyInt <: Extension[Integer] {
+  type def example(this : Integer) = this - Size;
+
+  test "use" {
+    -32 == 0.example()
+  }
+}
