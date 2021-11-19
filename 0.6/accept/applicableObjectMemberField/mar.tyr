@@ -1,0 +1,26 @@
+/**
+ * Ensure implicits on object member applications are performed as intended
+ *
+ * @note this variant stores the functions in fields
+ */
+public class Box[T : Type] {
+  var x : T;
+
+  def r(this : Ref[Box[T]], y : T) : Box[T] = this
+
+  public new (x := x : T);
+
+  type var a = new Box[int](7);
+
+  // use type inference to create the function type
+  type var f = a.r
+
+  test "use r" {
+    f = a.r;
+    7 == f(a, a.x).x
+  }
+  test "use r static" {
+    f = Box[int].r;
+    7 == f(a, a.x).x
+  }
+}
