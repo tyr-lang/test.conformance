@@ -1,0 +1,19 @@
+/**
+ * Ensure that a chain of vars results in the intended type.
+ */
+type T {
+  test "update" {
+    var x = 4
+    var y = x
+    var z = y
+    z = 0
+    4 == x && 0 == z
+  }
+  test "explicit" {
+    var x = 4
+    var y : Ref[int] = x
+    var z : Ref[Ref[int]] = y
+    z = 0
+    0 == x && 0 == z
+  }
+}
