@@ -1,0 +1,35 @@
+/**
+ * Ensure implicits on class member applications are performed as intended
+ *
+ * @note this variant stores the functions in local variables
+ */
+public class Box[T : Type] {
+  var x : T;
+
+  type def r(this : Ref[Box[T]], y : T) : Box[T] = this
+
+  public new (x := x : T);
+
+  type var a = new Box[int](7);
+
+  test "use r" {
+    var f = a.type.r;
+    7 == f(a, a.x).x
+  }
+  test "use r proto" <: noCompile {
+    var f = r;
+    // this won't work because there cannot be a meterialized instance of
+    // Box.r.this
+    // note to self: maybe, there should be a check to have this fail on var
+    7 == f(a, a.x).x
+  }
+  test "use r member" <: noCompile {
+    // noCompile: not part of the vtable
+    var f = a.r;
+    7 == f(a, a.x).x
+  }
+  test "use r static" {
+    var f = Box[int].r;
+    7 == f(a, a.x).x
+  }
+}
