@@ -1,0 +1,12 @@
+/**
+ * Use an extern function from libc.
+ *
+ * @note extern.c should be transitively available from tyr.lang.
+ */
+type T {
+  type def rand : int extern c.rand;
+
+  test "use" {
+    rand() != rand()
+  }
+}
