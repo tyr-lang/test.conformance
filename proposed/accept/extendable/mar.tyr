@@ -15,6 +15,11 @@ property _root_.tyr.lang.reflect.extendable;
  * @note: This requires a TIR-change that causes correct resolution of extensions.
  * It is not an option to add the extension to the affected type in serialized TIR
  * as this could lead to an ODR-violation.
+ *
+ * @note: The extension should, in contrast to basically everything else, not be
+ *        visible for transitive dependencies. This would allow e.g. C-style
+ *        implicit integer conversions to be performed in exactly those libraries
+ *        that choose to have them.
  */
 type _root_.tyr.lang.reflect.Extension[T : Type] {
   // can have only type def members with explicit this
