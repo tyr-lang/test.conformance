@@ -1,0 +1,4 @@
+/**
+ * Extern function checks (draupnir test)
+ */
+type T {test "fail"{false}}

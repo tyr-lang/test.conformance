@@ -1,0 +1,7 @@
+/**
+ * Extern function checks
+ */
+type T {
+  // the lib does not exist
+  type def cos(x : double) : double extern undefLib.cos;
+}

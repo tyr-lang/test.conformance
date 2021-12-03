@@ -1,0 +1,17 @@
+/**
+ * Use an extern function from libc.
+ *
+ * @note extern.c should be transitively available from tyr.lang.
+ */
+type T {
+  // note this won't work because, apparently, cos is not a function
+  type def cos(x : double) : double extern c.cos;
+  type def cos(x : float) : float extern c.cosf;
+
+  test "use f" {
+    1.0f == cos(0.0f)
+  }
+  test "use d" {
+    1.0 == cos(0.0)
+  }
+}
