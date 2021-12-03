@@ -1,5 +1,2 @@
 src=.
 name=test
-
-# note: this should not be required ultimately
-extern c from libc.so load libc
