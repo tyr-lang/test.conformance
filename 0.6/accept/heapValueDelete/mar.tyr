@@ -1,0 +1,31 @@
+// has no delete, must not be deleted
+type ptr := mem.HeapPointer[IntegerLiteral[32]];
+
+/**
+ * Check that HeapPointer comparison works as intended.
+ */
+type T {
+
+  test "deref applicable" {
+    var some : ptr = new ptr(7)
+    var r = 7 == some
+    delete some
+    r
+  }
+
+  test "deref and reset" {
+    var some : ptr = new ptr(7)
+    var r = 7 == some
+    delete some
+    r &! null == some
+  }
+
+  test "update" {
+    var some : ptr = new ptr
+    some = 4
+    val r = some == 4
+    some = 7
+    delete some
+    r
+  }
+}

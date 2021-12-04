@@ -1,0 +1,35 @@
+// has no delete, must not be deleted
+type ptr := mem.HeapPointer[T];
+
+/**
+ * Check that HeapPointer comparison works as intended.
+ */
+type T {
+
+  type var init = false
+  type var deleted = false
+
+  new {
+    init = true
+  }
+
+  delete {
+    deleted = true
+  }
+
+  test "delete" {
+    init = false
+    var some : ptr = new ptr(new T)
+    deleted = false
+    delete some
+    deleted &! init
+  }
+
+  test "delete uninit" {
+    init = false
+    var some : ptr = new ptr
+    deleted = false
+    delete some
+    deleted &! !init
+  }
+}
