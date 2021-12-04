@@ -1,0 +1,25 @@
+/**
+ * Use an extern value from libc.
+ *
+ * @note extern.c should be transitively available from tyr.lang.
+ */
+type T {
+  type val stdout : mem.OpaquePointer["FILE"] extern c.stdout;
+
+  type val cstdout : mem.OpaquePointer["FILE"] extern c.stdout;
+
+  test "null L" {
+    null != stdout;
+  }
+  test "null R" {
+    stdout != null;
+  }
+
+  test "rename" {
+    stdout == cstdout;
+  }
+
+  test "can print" {
+    "hello?\n"!!
+  }
+}

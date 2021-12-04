@@ -1,0 +1,12 @@
+/**
+ * Use an extern value from libc without explicit typing.
+ */
+type T {
+  // shared objects hold no type information. Hence, it is an error to not type
+  // such values in Tyr
+  type val stdout extern c.stdout;
+
+  test "null L" {
+    false;
+  }
+}
