@@ -1,0 +1,38 @@
+type ptr := mem.HeapPointer[int];
+
+/**
+ * Check that HeapPointer comparison works as intended.
+ */
+type T {
+  type val none : ptr = null
+
+  type val some : ptr = new ptr(7)
+
+  test "null L none" {
+    null == none
+  }
+  test "null R none" {
+    none == null
+  }
+
+  test "null L" {
+    null != some
+  }
+  test "null R" {
+    some != null
+  }
+
+  test "deref applicable L" {
+    7 == some
+  }
+
+  test "deref applicable R" {
+    some == 7
+  }
+
+  test "update" {
+    some = 4
+    some == 4
+    some = 7
+  }
+}
