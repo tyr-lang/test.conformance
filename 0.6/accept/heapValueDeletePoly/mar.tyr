@@ -1,0 +1,51 @@
+// has poly delete, must behave like calling S.delete
+type ptr := mem.HeapPointer[S];
+
+/**
+ * Check that HeapPointer comparison works as intended.
+ */
+class S {
+
+  type var deleted = false
+
+  new;
+
+  delete {
+    deleted = true
+  }
+}
+
+class T <: S {
+
+  type var deleted = false
+
+  new;
+
+  delete {
+    deleted = true
+  }
+
+  test "delete S" {
+    var some : ptr = new ptr(new S)
+    S.deleted = false
+    T.deleted = false
+    delete some
+    S.deleted &! !T.deleted
+  }
+
+  test "delete T" {
+    var some : ptr = new ptr(new T)
+    S.deleted = false
+    T.deleted = false
+    delete some
+    !S.deleted &! T.deleted
+  }
+
+  test "delete null" {
+    var some : ptr = new ptr(null)
+    S.deleted = false
+    T.deleted = false
+    delete some
+    !S.deleted &! !T.deleted
+  }
+}

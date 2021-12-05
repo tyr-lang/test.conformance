@@ -1,0 +1,16 @@
+// abstract, but should behave like a delete expression
+type ptr := mem.HeapPointer[Object];
+
+/**
+ * Check that HeapPointer comparison works as intended.
+ */
+class T {
+  test "delete literal" {
+    var some : ptr = new ptr("survived")
+    delete some
+    // use the string again
+    "survived"!!;
+    // this test is fine if it did not crash
+    true
+  }
+}
