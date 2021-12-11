@@ -1,0 +1,23 @@
+/**
+ * Check super constructor call from a class
+ */
+class S {
+  var x : int;
+  new (x := x : int);
+}
+
+class T <: S {
+  new (x : int) {
+    S.`new`(this, x)
+  }
+
+  test "use S" {
+    var s = new S(7)
+    7 == s.x
+  }
+
+  test "use T" {
+    var s = new T(7)
+    7 == s.x
+  }
+}

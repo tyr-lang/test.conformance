@@ -1,0 +1,25 @@
+/**
+ * Check super constructor call from a type
+ */
+type S {
+  var x : int;
+  new (x := x : int);
+}
+
+type T <: S {
+  new (x : int) {
+    // note to self: there should be no way to get this to work
+    // note: here, we won't get the implicit unsafe upcast of Ref[T] to Ref[S]
+    S.`new`(this, x)
+  }
+
+  test "use S" {
+    var s = new S(7)
+    7 == s.x
+  }
+
+  test "use T" {
+    var s = new T(7)
+    7 == s.x
+  }
+}
