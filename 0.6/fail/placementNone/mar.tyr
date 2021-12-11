@@ -1,0 +1,8 @@
+/**
+ * Test error reporting in case of non-existing member initialization
+ */
+public type T {
+  new (x := x : T);
+
+  test "no compile" {false}
+}
