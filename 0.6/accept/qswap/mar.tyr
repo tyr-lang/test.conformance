@@ -35,6 +35,12 @@ type SwapQ1[A : Type, B : Type] {
     var x = new SwapQ1[int, float](0, 0.0f);
     x = x.swap().swap().swap().swap()
   }
+
+  test "swap 4 eq" {
+    var x = new SwapQ1[int, float](0, 0.0f);
+    val y = x.swap().swap().swap().swap()
+    x.x == y.x &! x.y == y.y
+  }
 }
 
 type SwapQ2[A : Type, B : Type] {
@@ -44,7 +50,7 @@ type SwapQ2[A : Type, B : Type] {
 
   new (x := x : A, y := y : B);
 
-  def swap : SwapQ1[B,A] {
-    return new SwapQ1[B,A](y, x)
+  def swap : SwapQ1[A,B] {
+    return new SwapQ1[A,B](x, y)
   }
 }

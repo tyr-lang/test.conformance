@@ -1,0 +1,13 @@
+/**
+ * Test substyping using templates across package boarders
+ */
+public type V [T : Type] <: superchain1.U[T] {
+
+  protected new (x : T){
+    superchain1.U[T].new(x)
+  }
+
+  test "use" {
+    7 == new V[int](7).x
+  }
+}

@@ -1,0 +1,15 @@
+/**
+ * Test substyping using templates across package boarders
+ */
+public type U [T : Type] {
+
+  // note to self: cannot be protected because the tests live in the scope of
+  // the herbrand U and that has no access to x (and should not have btw.)
+  public val x : T;
+
+  protected new (x := x : T);
+
+  test "use" {
+    7 == new U[int](7).x
+  }
+}

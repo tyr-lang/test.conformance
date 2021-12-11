@@ -1,2 +1,3 @@
 src=.
 name=test.template.superchain2
+with=test.template.superchain1

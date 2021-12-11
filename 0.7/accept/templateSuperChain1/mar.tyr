@@ -1,8 +1,0 @@
-/**
- * Test substyping using templates across package boarders
- */
-type U [T : Type] {
-  val x : T;
-
-  new (x := x : T);
-}

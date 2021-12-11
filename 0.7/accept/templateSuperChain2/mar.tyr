@@ -1,7 +1,0 @@
-/**
- * Test substyping using templates across package boarders
- */
-type V [T : Type] <: superchain1.U[T] {
-
-  new (x := x : T);
-}

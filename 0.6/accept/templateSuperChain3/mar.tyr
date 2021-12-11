@@ -3,7 +3,9 @@
  */
 type W [T : Type] <: superchain2.V[T] {
 
-  new (x := x : T);
+  new (x : T){
+    superchain2.V[T].new(x)
+  }
 
   test "int" {
     new W[int](0).x == 0
