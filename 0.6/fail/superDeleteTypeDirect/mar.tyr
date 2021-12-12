@@ -1,0 +1,18 @@
+/**
+ * Check super destructor call from a type
+ */
+type S {
+  type var x = false;
+  delete {x = true}
+}
+
+type T <: S {
+  delete {
+    // cannot work becaus this : Ref[T] is invariant
+    S.`delete`(this)
+  }
+
+  test "use S" {
+    false
+  }
+}

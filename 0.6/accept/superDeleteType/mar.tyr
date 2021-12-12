@@ -1,0 +1,33 @@
+/**
+ * Check super destructor call from a type
+ */
+type S {
+  type var x : bool
+  new;
+  delete {x = true}
+}
+
+type T <: S {
+  new;
+  delete {
+    S.delete
+  }
+
+  test "var S" {
+    S.x = false;
+    var s = new S
+    !S.x && {
+      delete s
+      S.x
+    }
+  }
+
+  test "var T" {
+    S.x = false;
+    var s = new T
+    !S.x && {
+      delete s
+      S.x
+    }
+  }
+}

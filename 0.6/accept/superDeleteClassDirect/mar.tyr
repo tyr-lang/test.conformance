@@ -1,0 +1,29 @@
+/**
+ * Check super destructor call from a class
+ */
+class S {
+  type var x = false;
+  delete {x = true}
+}
+
+class T <: S {
+  delete {
+    S.`delete`(this)
+  }
+
+  test "use S" {
+    var s = new S
+    !S.x && {
+      delete s
+      S.x
+    }
+  }
+
+  test "use T" {
+    var s = new T
+    !S.x && {
+      delete s
+      S.x
+    }
+  }
+}
