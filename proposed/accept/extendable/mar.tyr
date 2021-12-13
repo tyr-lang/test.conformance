@@ -21,7 +21,7 @@ property _root_.tyr.lang.reflect.extendable;
  *        implicit integer conversions to be performed in exactly those libraries
  *        that choose to have them.
  */
-type _root_.tyr.lang.reflect.Extension[T : Type] {
+property _root_.tyr.lang.reflect.Extension[T : Type] {
   // can have only type def members with explicit this
 }
 
