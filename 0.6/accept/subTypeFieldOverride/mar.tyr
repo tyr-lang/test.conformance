@@ -1,0 +1,28 @@
+/**
+ * Check that subtypes cannot declare fields
+ */
+type S {
+  var x : int;
+  new (x := x : int);
+}
+
+type T <: S {
+  // an override and, hence, allowed because it wont affect the structure
+  var x : IntegerLiteral[32];
+
+  new (x := x : IntegerLiteral[32]);
+
+  test "S" {
+    var x = new S(0+1)
+    1 == x.x
+  }
+  test "T no lit" <: noCompile {
+    var x = new T(0+1)
+    1 == x.x
+  }
+
+  test "T" {
+    var x = new T(1)
+    1 == x.x
+  }
+}
