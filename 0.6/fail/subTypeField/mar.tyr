@@ -1,0 +1,18 @@
+/**
+ * Check that subtypes cannot declare fields
+ */
+type S {
+  var x : int;
+  new (x := x : int);
+}
+
+type T <: S {
+  // must not be allowed
+  var y : int;
+
+  new (x : int) {
+    S.new(x)
+  }
+
+  test "use" {false}
+}
