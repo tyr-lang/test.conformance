@@ -15,7 +15,7 @@ Hence, the layout of the repository is:
 
 ./[version]/[accept/fail]/[test]/[testfiles/**]
 
-version: The name of the release, e.g "0.5". Tests added after the first release of a version ought to be located in name-reg, e.g. "0.5-reg".
+version: The name of the release, e.g "0.5.0". Tests added after the first release of a version ought to be located in name-reg, e.g. "0.5.0-reg".
 
 accept/fail: Tests that shall not pass the compiler have to be placed below fail. Other tests shall be placed in accept. An accepted test packag passes if it contains at least one test and all tests pass.
 
@@ -35,4 +35,4 @@ A compiler conforms with a version of Tyr iff it passes all tests below that ver
 
 We will migrate old tests to semantic equivalents if the current release renders them illegal, as long as the major version is 0.
 We will certainly adapt all Tests when generic type parameters are implemented.
-This section ought to be deleted on the release of version 1.0.
+This section ought to be deleted on the release of version 1.0.0.
