@@ -1,0 +1,6 @@
+src=.
+name=test
+
+# whenever an entry point could be provided by draupnir, this value is used
+# instead of creating an error message if multiple entry points exist
+entryPoint=test.T.defaultEP

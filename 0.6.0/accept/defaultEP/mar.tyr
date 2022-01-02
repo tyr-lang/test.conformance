@@ -1,0 +1,12 @@
+/**
+ * This test should build even without specifying an entry point as the package
+ * definition defines one.
+ */
+type T {
+  type def defaultEP <: entryPoint = true
+  type def otherEP <: entryPoint = false
+
+  test "direct call" {
+    !otherEP() && defaultEP()
+  }
+}
