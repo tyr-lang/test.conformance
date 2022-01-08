@@ -5,3 +5,4 @@ out.*.sg
 *.dot
 **/*.tl
 *.bc
+*.tests
