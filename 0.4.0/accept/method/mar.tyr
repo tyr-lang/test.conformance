@@ -1,5 +1,8 @@
 /**
  * test global functions
+ *
+ * @note revoked parameterless call in Tyr 0.6.0 because this creates an
+ *       ambiguity with function pointer access
  */
 type T {
 
@@ -18,28 +21,37 @@ type T {
     h()
     !g()
   }
-  
-  test "while" {
+
+  test "while no param" <: noCompile {
     while(g) f();
     true
   }
-  
-  test "while short" {
+
+  test "while" {
+    while(g()) f();
+    true
+  }
+
+  test "while short no param" <: noCompile {
     while g f
+  }
+
+  test "while short" {
+    while g() f
   }
 
   test "while call" {
     while(g()) f();
     true
   }
-  
-  test "do while" {
+
+  test "do while" <: noCompile {
     do {
       f()
     } while(g);
     true
   }
-  
+
   test "do while call" {
     do {
       f()
