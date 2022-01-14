@@ -1,0 +1,13 @@
+/**
+ * parameter values are not assignable
+ */
+type T {
+  
+  type def f(x : int) : void {
+    x = 1
+  }
+
+  test "f" {
+    f(1)
+  }
+}
