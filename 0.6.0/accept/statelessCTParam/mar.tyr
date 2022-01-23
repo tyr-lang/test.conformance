@@ -1,14 +1,21 @@
 /**
  * Check that CT Params are stateless
  *
- * @note if we had CT-evaluation, it would be legal to have
+ * @note if we had CT evaluation, it would be legal to have
  *       new container.FlatSizedArray[int, {val x = 0U; x}]
  *       as the block would have to be evaluated immediately and x would not
  *       exist at runtime
+ *
+ * @note if we improve CT evaluation, this test might require adaptation
  */
 type T {
-  test "use" <: noCompile {
+  test "CT value" {
     val x = 0U;
+    new container.FlatSizedArray[int, x]
+  }
+
+  test "CT var" <: noCompile {
+    var x = 0U;
     new container.FlatSizedArray[int, x]
   }
 }
