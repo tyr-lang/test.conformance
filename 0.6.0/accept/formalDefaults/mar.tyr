@@ -16,12 +16,12 @@ type InvBox[D : T, T : Type = int]{
 type T {
   test "box" {
     // note to self: this should not work
-    1 == new Box[1]
+    1 == new Box[1].v
   }
   test "box explicit" {
-    1 == new Box[D := 1]
+    1 == new Box[D := 1].v
   }
   test "invbox" {
-    1 == new InvBox[1]
+    1 == new InvBox[1].v
   }
 }
