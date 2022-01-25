@@ -15,12 +15,21 @@ type InvBox[D : T, T : Type]{
 
 type T {
   test "box" {
-    1 == new Box[int, 1]
+    1 == (new Box[int, 1]).v
+  }
+  test "box no brace" {
+    1 == new Box[int, 1].v
   }
   test "box explicit" {
-    1 == new Box[D := 1, T := int]
+    1 == (new Box[D := 1, T := int]).v
   }
   test "invbox" {
-    1 == new InvBox[1, int]
+    1 == (new InvBox[1, int]).v
+  }
+  test "fun with types" <: noCompile {
+    // note: this test is currently a no compile test, because the compiler
+    // cannot prove that this is the case; if CT evaluation is improved
+    // substentially, this test might turn into valid Tyr
+    1 == (new (new Box[Type, Box]).v[int, 1]).v
   }
 }
