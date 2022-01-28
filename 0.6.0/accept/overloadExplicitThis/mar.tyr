@@ -1,0 +1,17 @@
+/**
+ * test evaluation and evaluation order of overload resolution and implicit and
+ * explicit this
+ */
+type T {
+  test "plus" {
+    // note: this is possible because it is basically a function pointer access
+    // from 2 that is immediately applied with positional parameters
+    7 == 2.`+`(3, 4)
+  }
+  test "plus explicit" {
+    // note: this is possible because the this parameter name should be retained
+    // in the function type and the implicit this (2) should be replaced by the
+    // explicit this (3)
+    7 == 2.`+`(this := 3, 4)
+  }
+}
