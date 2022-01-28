@@ -25,4 +25,8 @@ type T {
   test "invbox" {
     1 == new InvBox[1].v
   }
+
+  test "invbox double" <: noCompile {
+    1 == new InvBox[1.0].v
+  }
 }

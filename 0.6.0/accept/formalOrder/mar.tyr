@@ -32,4 +32,12 @@ type T {
     // substentially, this test might turn into valid Tyr
     1 == (new (new Box[Type, Box]).v[int, 1]).v
   }
+
+  test "int double" <: noCompile {
+    1 == (new Box[int, 1.0]).v
+  }
+
+  test "three numbers" <: noCompile {
+    1 == (new Box[1, 2, 3]).v
+  }
 }
