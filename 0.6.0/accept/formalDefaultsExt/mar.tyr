@@ -1,0 +1,23 @@
+/**
+ * repeat formal order defaults test, but with external definitions
+ */
+with test.fo2.Box;
+with test.fo2.InvBox;
+
+type T {
+  test "box" <: noCompile {
+    // note to self: this should not work because positional matching happens
+    // before default evaluation
+    1 == new Box[1].v
+  }
+  test "box explicit" {
+    1 == new Box[D := 1].v
+  }
+  test "invbox" {
+    1 == new InvBox[1].v
+  }
+
+  test "invbox double" <: noCompile {
+    1 == new InvBox[1.0].v
+  }
+}
