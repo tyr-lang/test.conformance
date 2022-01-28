@@ -1,0 +1,22 @@
+/**
+ * test evaluation and evaluation order of overload resolution and implicit and
+ * explicit this using blocks
+ */
+type T {
+  test "print" {
+    // test output should be `yohohoohooo`
+    {
+      "yo"!!;
+      3
+    }.`+`(this := {
+      "ho"!!;
+      4
+    }, {
+      "hoo"!!;
+      7
+    }) == {
+      "hooo"!!;
+      11
+    }
+  }
+}
