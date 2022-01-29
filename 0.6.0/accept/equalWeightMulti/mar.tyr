@@ -1,0 +1,26 @@
+/**
+ * Ensure that equal weight error can deal with more than two options
+ *
+ * @note this test should be inspected manually
+ */
+type T {
+  type def f(x : Ref[int], y : int, z : int) : int = x
+  type def f(x : int, y : Ref[int], z : int) : int = y
+  type def f(x : int, y : int, z : Ref[int]) : int = z
+
+  test "use" {
+    var v = 1
+    // obviously, this is perfectly fine
+    1 == f(v, 2, 3)
+  }
+  test "use vv" <: noCompile {
+    var v = 1
+    // this should not compile and create an error pointing to two fs above
+    2 == f(v, v, 3)
+  }
+  test "use vvv" <: noCompile {
+    var v = 1
+    // this should not compile and create an error pointing to all fs above
+    2 == f(v, v, v)
+  }
+}
