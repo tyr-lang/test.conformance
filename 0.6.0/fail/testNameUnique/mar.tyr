@@ -1,0 +1,8 @@
+/**
+ * Test names are expected to be unique so ensure that there is a test for that
+ */
+type T {
+  test "A" { false }
+  test "A" { false }
+  test "B" { true }
+}

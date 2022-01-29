@@ -1,0 +1,17 @@
+/**
+ * Test should be executed from a static context within the declaring type
+ */
+type T {
+  var x = true;
+
+  test "use" <: noCompile {
+    x
+  }
+}
+class C {
+  var x = true;
+
+  test "use" <: noCompile {
+    x
+  }
+}
