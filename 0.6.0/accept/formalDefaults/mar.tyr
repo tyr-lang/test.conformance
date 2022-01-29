@@ -2,15 +2,15 @@
  * test order of and dependency between formal parameters using a default value
  */
 public type Box[T : Type = int, D : T]{
-  val v : T;
+  public val v : T;
 
-  new (v := V : T = D){}
+  public new (v := V : T = D){}
 }
 
 public type InvBox[D : T, T : Type = int]{
-  val v : T;
+  public val v : T;
 
-  new (v := V : T = D){}
+  public new (v := V : T = D){}
 }
 
 type T {
