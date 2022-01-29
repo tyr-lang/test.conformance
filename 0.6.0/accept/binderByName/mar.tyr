@@ -1,0 +1,24 @@
+/**
+ * Test that binder applications can pass parameters by name
+ */
+type T {
+  type def cond(c : bool, u : int = 0, t : Block[int], e : Block[int]) : int {
+    if c t.eval() else e.eval()
+  }
+
+  test "bare" {
+    -1 == cond(true, 1) do ({-1} {2})
+  }
+
+  test "binder place" {
+    -1 == cond(1, c := true) do ({-1} {2})
+  }
+
+  test "binder place default" {
+    -1 == cond(c := true) do ({-1} {2})
+  }
+
+  test "place all default" {
+    -1 == cond(c := true, t := -1, e := {2})
+  }
+}
