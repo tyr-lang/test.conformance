@@ -16,7 +16,7 @@ class Test <: WithFun {
     delete new Test
   }
 
-  test "new" <: noCompile {
+  test "new interface" <: noCompile {
     delete new WithFun
   }
 

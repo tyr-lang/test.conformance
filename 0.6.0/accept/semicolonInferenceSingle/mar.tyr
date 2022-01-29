@@ -11,7 +11,7 @@ type T {
   test "post" <: noCompile {
     true &&
   }
-  test "post" <: noCompile {
+  test "post 2" <: noCompile {
     true !
   }
 }
