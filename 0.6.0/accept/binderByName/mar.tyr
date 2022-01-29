@@ -14,7 +14,14 @@ type T {
     -1 == cond(1, c := true) do ({-1} {2})
   }
 
-  test "binder place default" {
+  test "binder place default" <: noCompile {
+    // note to self: the blocks would be tried to match against u before
+    // applying defaults and we want to keep it like that
+    // One might argue that this is a corner case where we could actually allow
+    // what's in the next line. But, for now, this is not the case
+    // note: unfortunately, this means that binder application syntax cannot be
+    // used if one wants to use defaults as well; I noticed this after like four
+    // years; so, it cannot be much of an issue
     -1 == cond(c := true) do ({-1} {2})
   }
 
