@@ -1,0 +1,13 @@
+/**
+ * It is not legal to override an consumed function without an consumed property.
+ */
+class S {
+  public def f : int = 1;
+}
+
+class T <: S {
+  override[S.f]
+  def f : int <: mem.consumed = 2;
+
+  test "dead" { true }
+}
