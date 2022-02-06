@@ -1,0 +1,11 @@
+/**
+ * test to ensure that runtime type variables require types with a runtime
+ * representation
+ */
+type T {
+  // note: this : Class would be legal. It might be legal for native functions.
+  type def f(this : Type, v : this) : this = v
+  test "fail" {
+    false
+  }
+}
