@@ -4,9 +4,8 @@
 type T {
   new;
 
-  def - : ({ if(7==8) true
-            else false
-            int
+  def - : ({ if(7==8) bool
+            else int
           }) = -1;
 
   test "basic" {
