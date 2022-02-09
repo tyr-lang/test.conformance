@@ -1,0 +1,29 @@
+/**
+ * Check casts offered by classes
+ */
+type T {
+  test "identity" {
+    "s" == StringLiteral ! "s"
+  }
+  test "identity poly" {
+    "s" == String ! "s"
+  }
+  test "shrink var" {
+    var s : String = "s"
+    "s" == StringLiteral ! s
+  }
+
+  test "null" {
+    null == String ! null
+  }
+
+  // note: there is no test resulting in a class cast exception or similar
+  // because the actual behaviour here is unspecified
+
+  test "no class any " <: noCompile {
+    0 == any ! 0
+  }
+  test "no class int" <: noCompile {
+    0 == int ! 0
+  }
+}

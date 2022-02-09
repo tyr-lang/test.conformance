@@ -12,7 +12,7 @@ type T {
     0i8 == byte !! 0
   }
   test "pointer" {
-    null == string !! 0
+    null == String !! 0
   }
   test "no repr" <: noCompile {
     0 == any !! 0
