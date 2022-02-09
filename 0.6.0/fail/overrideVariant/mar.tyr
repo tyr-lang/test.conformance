@@ -1,0 +1,16 @@
+/**
+ * Implicit inheritance requires invariance
+ */
+class S {
+  def f: int = 2;
+}
+
+interface I {
+  def f = 2;
+}
+
+class T  <: S, I {
+  // implicit f is either int or IntegerLiteral[32]
+
+  test "dead" { false }
+}
