@@ -1,0 +1,15 @@
+/**
+ * test that precedence must be a constant
+ *
+ * @note if someone manages to build a compiler that can compile this test with
+ * a precedence of 7, we can move it to accept ;)
+ */
+public type T {
+  public type def - : boolean
+  <: operator.precedence[{var x = 7; IntegerLiteral[32] !! x}]
+  = false;
+
+  test "use" {
+    -T
+  }
+}
