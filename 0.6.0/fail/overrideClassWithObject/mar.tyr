@@ -1,0 +1,18 @@
+/**
+ * It is not legal to override a class def with an object def
+ */
+class S {
+  class def f(this : S) : int <: inline = 2;
+}
+
+interface I {
+  def f : int <: inline = 2;
+}
+
+class T  <: S, I {
+  
+  override [S.f, I.f]
+  class def f : int <: inline = 2;
+
+  test "dead" { false }
+}
