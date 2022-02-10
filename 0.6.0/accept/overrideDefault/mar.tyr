@@ -1,0 +1,21 @@
+/**
+ * Test that override maintains default values.
+ */
+interface I {
+  def fun (x : int) : int = x
+}
+
+class S <: abstract {
+  def fun (x : int = 3) : int;
+}
+
+class T <: S, I {
+
+  test "use" {
+    var x = new T
+
+    val r = x.fun()
+    delete x
+    3 == r
+  }
+}
