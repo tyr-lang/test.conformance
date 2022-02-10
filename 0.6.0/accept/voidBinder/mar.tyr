@@ -1,0 +1,27 @@
+/**
+ * test combination of void and binder applications
+ */
+type T {
+
+  type def f(bb : Block[void]) : void {
+    if(true) {
+      bb.eval();
+      return;
+    }
+  }
+
+  test "explicit" {
+    f do {
+      f do {
+        return
+      }
+    }
+  }
+
+  test "empty" {
+    f do {
+      f do {
+      }
+    }
+  }
+}
