@@ -1,5 +1,12 @@
 /**
- * test combination of void and binder applications
+ * test combination of void, return and binder applications
+ *
+ * @note It turns out that this test is kind of a specification change as it
+ * adds the rule that substitution should silently stop if the CFG becomes
+ * terminated by a replacement. For the record, I have to add that this was
+ * always the intended way of handling the situation. If you think about it, you
+ * will realize that this is the only way to allow callers of a binder to pass
+ * arbitrary code. Therefore, it is the least surprising choice here.
  */
 type T {
 
@@ -10,10 +17,31 @@ type T {
     }
   }
 
+  test "return return binder" {
+    // note to self: it should not be possible to create an example where adding
+    // a return causes an error
+    true || {
+      false
+      return false
+    }
+    true
+  }
+
+  test "return return" <: noCompile {
+    return
+    return
+  }
+
+  test "single" {
+    f do {
+      return true
+    }
+  }
+
   test "explicit" {
     f do {
       f do {
-        return
+        return true
       }
     }
   }
