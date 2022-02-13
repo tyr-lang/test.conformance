@@ -12,6 +12,7 @@ class T {
   }
 
   test "var new delete" {
+    state = 0;
     var x : T = null
     0 == state && {
       x = new T
@@ -23,6 +24,7 @@ class T {
   }
 
   test "val new delete" {
+    state = 0;
     val x = new T
     {
       null != x && 1 == state
