@@ -1,0 +1,17 @@
+/**
+ * Check that a return can be used in a constructor and destructor is type
+ * checked. Both are void.
+ */
+class T {
+  new {
+    return true;
+  }
+  delete {
+    return true;
+  }
+
+  test "use" {
+    delete new T
+    true
+  }
+}

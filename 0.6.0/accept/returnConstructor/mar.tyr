@@ -1,0 +1,16 @@
+/**
+ * Check that a return can be used in a constructor and destructor.
+ */
+class T {
+  new {
+    return;
+  }
+  delete {
+    return;
+  }
+
+  test "use" {
+    delete new T
+    true
+  }
+}
