@@ -1,0 +1,20 @@
+/**
+ * Test switch substitution and return form case blocks.
+ */
+type Switch[default : bool] {
+  type def f(x : int) : bool = switch x {
+      if 0 : {return false}
+      if 7 : true
+      else {return default}
+    }
+
+  test "seven" {
+    Switch[false].f(7)
+  }
+  test "true" {
+    Switch[true].f(3)
+  }
+  test "false" {
+    !Switch[false].f(3)
+  }
+}
