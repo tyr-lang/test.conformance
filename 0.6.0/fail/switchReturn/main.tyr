@@ -1,0 +1,15 @@
+/**
+ * Test switch return without an explicit type. Honestly, this has nothing to do
+ * with switch.
+ */
+type Switch[default : bool] {
+  type def f(x : int) = switch x {
+      if 0 : {return false}
+      if 7 : true
+      else {return default}
+    }
+
+  test "use" {
+    false
+  }
+}
