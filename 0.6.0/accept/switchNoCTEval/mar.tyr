@@ -5,10 +5,18 @@ type T {
   // lacks CT property
   type def f(x : int) = x * 5
 
-  test "ct case" <: noCompile {
+  test "call" <: noCompile {
     var x = 5
     switch x {
       if f(1): true
+      else false
+    }
+  }
+
+  test "block" <: noCompile {
+    var x = 5
+    switch x {
+      if {f(1)}: true
       else false
     }
   }
