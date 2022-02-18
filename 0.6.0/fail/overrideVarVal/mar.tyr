@@ -1,0 +1,18 @@
+/**
+ * Test explicit override mixing var and val fields
+ */
+interface I {
+  var fun : int = 1
+}
+interface J {
+  val fun : int = 2
+}
+
+class T <: I, J {
+
+  //implicit
+
+  test "dead" {
+    false
+  }
+}
