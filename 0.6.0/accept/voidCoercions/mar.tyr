@@ -1,0 +1,41 @@
+/**
+ * Some similar tests for cases where an expected type must or must not be void
+ */
+class T {
+  test "bool block" <: noCompile {
+    {}:bool
+  }
+  test "bool if single" <: noCompile {
+    (if true{}):bool
+  }
+  test "bool while" <: noCompile {
+    (while false{}):bool
+  }
+  test "while guard" <: noCompile {
+    while {}{}
+  }
+  test "do while guard" <: noCompile {
+    do {} while {}
+  }
+  test "STA" <: noCompile {
+    T.type : void
+  }
+  test "DTA" <: noCompile {
+    T.class : void
+  }
+  test "DTA void" <: noCompile {
+    {}.class : Class
+  }
+  test "new void" <: noCompile {
+    (new T) : void
+  }
+  test "delete bool" <: noCompile {
+    (delete new T) : bool
+  }
+  test "void var" <: noCompile {
+    var x = {}
+  }
+  test "any var" <: noCompile {
+    var x = mem.raw.`new`(T)
+  }
+}

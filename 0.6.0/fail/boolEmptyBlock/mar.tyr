@@ -1,8 +1,0 @@
-/**
- * Empty blocks have type void.
- */
-type T {
-  test "bool block" {
-    {}:bool
-  }
-}
