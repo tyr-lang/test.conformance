@@ -1,0 +1,24 @@
+/**
+ * Test explicit override explicit no this and type def realizations
+ */
+interface I {
+  class def fun() : int = 1
+}
+interface J <: I {
+}
+
+class T <: J {
+
+  override[I.fun]
+  type def fun() : int = 3
+
+  test "use" {
+    var x = new T;
+    {
+      3 == x.fun()
+    } && {
+      delete x;
+      true
+    }
+  }
+}
