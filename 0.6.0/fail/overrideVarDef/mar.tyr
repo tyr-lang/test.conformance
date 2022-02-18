@@ -1,0 +1,20 @@
+/**
+ * Test explicit override mixing functions and fields
+ */
+interface I {
+  def fun (x : T) : int = 1
+}
+interface J {
+  val fun : int = 2
+}
+
+class S {
+  def fun (x : T) : int;
+}
+
+class T <: S, I, J {
+
+  test "dead" {
+    false
+  }
+}
