@@ -5,6 +5,12 @@ class T {
   test "bool block" <: noCompile {
     {}:bool
   }
+  test "switch condition" <: noCompile {
+    switch {}{else {}}
+  }
+  test "if condition" <: noCompile {
+    if {}{}
+  }
   test "bool if single" <: noCompile {
     (if true{}):bool
   }
