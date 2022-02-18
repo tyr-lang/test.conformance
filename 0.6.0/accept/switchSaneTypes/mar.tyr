@@ -1,0 +1,15 @@
+/**
+ * Check switch typing and CT-evaluation conditions
+ */
+type T {
+  test "guard void" <: noCompile {
+    (switch {} {else true}):bool
+  }
+  test "ct case" <: noCompile {
+    var x = 5
+    switch x {
+      if x: true
+      else false
+    }
+  }
+}
