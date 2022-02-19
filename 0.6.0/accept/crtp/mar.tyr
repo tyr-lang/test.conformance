@@ -1,0 +1,19 @@
+/**
+ * Check if CRTP is allowed
+ */
+class Box[T : Class] {
+  def get() : T = T ! this
+}
+
+class Base <: Box[Base] {
+
+  test "use" {
+    var b = (new Base).get();
+    {
+      b.implicit().type == b.implicit().class
+    } && {
+      delete b
+      true
+    }
+  }
+}

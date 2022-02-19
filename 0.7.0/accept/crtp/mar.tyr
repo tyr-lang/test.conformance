@@ -1,0 +1,24 @@
+/**
+ * In 0.7.0, we have to decide if b.type, in an RT context, is either an error
+ * or will result in an implicit conversion from Ref[Base] to Base.
+ * A third option would be to have constants representing types and interfaces
+ * too. This, however, has significant impact on startup time.
+ *
+ * Currently, I'm really not sure what is to be preferred.
+ */
+class Box[T : Class] {
+  def get() : T = T ! this
+}
+
+class Base <: Box[Base] {
+
+  test "use" {
+    var b = (new Base).get();
+    {
+      b.type == b.implicit().class
+    } && {
+      delete b
+      true
+    }
+  }
+}

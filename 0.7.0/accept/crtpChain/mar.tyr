@@ -1,0 +1,24 @@
+/**
+ * Check if CRTP is allowed with super types; this only from the compiler's
+ * perspective related to the original form of CRTP
+ */
+class Box[T : Class] <: T {
+  def get() : T = this
+}
+
+class Base {
+
+}
+
+class T <: Box[Base] {
+
+  test "use" {
+    var b = (new T).get();
+    {
+      b.type == b.implicit().class
+    } && {
+      delete b
+      true
+    }
+  }
+}

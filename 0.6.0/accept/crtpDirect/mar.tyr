@@ -1,0 +1,19 @@
+/**
+ * Check if CRTP is allowed; no explicit implicit call
+ */
+class Box[T : Class] {
+  def get() : T = T ! this
+}
+
+class Base <: Box[Base] {
+
+  test "use" {
+    val b = (new Base).get();
+    {
+      b.type == b.class
+    } && {
+      delete b
+      true
+    }
+  }
+}
