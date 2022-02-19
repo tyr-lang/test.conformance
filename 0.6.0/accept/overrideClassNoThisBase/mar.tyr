@@ -9,7 +9,8 @@ interface J <: I {
 
 class T <: J {
 
-  override[J.fun]
+  // the explicit and implicit method slots should count as the same method slot
+  override[I.fun]
   type def fun() : int = 3
 
   test "use" {
