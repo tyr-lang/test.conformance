@@ -11,7 +11,7 @@ class T <: J {
 
   // the explicit and implicit method slots should count as the same method slot
   override[I.fun]
-  type def fun() : int = 3
+  class def fun() : int = 3
 
   test "use" {
     var x = new T;

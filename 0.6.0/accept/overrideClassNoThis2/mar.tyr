@@ -10,7 +10,7 @@ interface J <: I {
 class T <: J {
 
   override[I.fun]
-  type def fun(x : int) : int = 3*x
+  class def fun(x : int) : int = 3*x
 
   test "use" {
     var x = new T;
