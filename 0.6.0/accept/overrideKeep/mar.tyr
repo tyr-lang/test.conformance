@@ -22,14 +22,47 @@ class T <: S, I, J {
   override [I.fun]
   type def fun(this : J, x : I) := J.fun;
 
-  test "call T" <: noCompile {
+  test "call T obj" {
     var x = new T
 
-    // note: out of duality, we will get an overload resolution error here
+    // note: in this form, the obj def is checked first and shadows the type def
     val r = x.fun(x)
     delete x
     3 == r
   }
+  test "call T typ" <: noCompile {
+    var x = new T
+
+    // note: out of duality, we will get an overload resolution error here
+    val r = T.fun(x,x)
+    delete x
+    3 == r
+  }
+  test "call T typ J" {
+    var x = new T
+
+    // note: explicit look in J's ITable
+    val r = (Ref[J] !! x).fun(x,x)
+    delete x
+    2 == r
+  }
+  test "call T typ J static" {
+    var x = new T
+
+    // note: explicit cast to this to avoid ambiguity
+    val r = T.fun((Ref[J] !! x),x)
+    delete x
+    2 == r
+  }
+  test "call T dual" {
+    var x = new T
+
+    // note: in this form, the obj def is checked first and shadows the type def
+    val r = x.fun(this := x, x)
+    delete x
+    3 == r
+  }
+
   test "call S" {
     var t = new T
     var x : S = t
