@@ -20,4 +20,8 @@ class T <: S {
     var s = new T(7)
     7 == s.x
   }
+
+  test "invalid" <: noCompile {
+    S.new(0)
+  }
 }

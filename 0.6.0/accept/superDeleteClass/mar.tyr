@@ -28,4 +28,8 @@ class T <: S {
       S.x
     }
   }
+
+  test "invalid" <: noCompile {
+    S.delete
+  }
 }

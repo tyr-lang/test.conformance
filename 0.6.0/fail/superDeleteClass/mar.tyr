@@ -1,0 +1,17 @@
+/**
+ * Check super destructor call from a class
+ */
+class S {
+  type var x : bool
+  delete {x = true}
+}
+
+class T <: S {
+  delete {
+    Object.delete
+  }
+
+  test "fail" {
+    false
+  }
+}
