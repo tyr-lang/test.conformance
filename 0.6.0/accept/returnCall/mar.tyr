@@ -1,0 +1,12 @@
+/**
+ * Check that calling the result of a return expression results in a useful
+ * error.
+ */
+type T {
+  test "void" <: noCompile {
+    (return)(3);
+  }
+  test "int" <: noCompile {
+    (return 3)(3);
+  }
+}
