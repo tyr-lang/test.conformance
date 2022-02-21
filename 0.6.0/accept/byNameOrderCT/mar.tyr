@@ -10,4 +10,8 @@ public type T[x : int, y : int] {
   test "call order" {
     T[x := 3, y := 2].f() == T[y := 2, x := 3].f()
   }
+
+  test "double x" <: noCompile {
+    T[x := 3, x := 2]
+  }
 }
