@@ -1,0 +1,47 @@
+/**
+ * Check casts and type checks offered by interfaces
+ */
+interface I;
+
+class T <: I {
+
+  test "check string" {
+    ! I ? "s"
+  }
+  test "check null" {
+    I ? null
+  }
+  test "check instance" {
+    var x = new T
+    I ? x && {
+      delete x
+      true
+    }
+  }
+  test "check instance poly" {
+    var x : Object = new T
+    I ? x && {
+      delete x
+      true
+    }
+  }
+
+  test "cast instance" {
+    var x = new T;
+    (x == I ! x) && {
+      delete x
+      true
+    }
+  }
+  test "cast instance poly" {
+    var x : Object = new T;
+    (x == I ! x) && {
+      delete x
+      true
+    }
+  }
+
+  test "cast null" {
+    null == I ! null
+  }
+}
