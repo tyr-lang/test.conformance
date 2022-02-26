@@ -8,10 +8,10 @@ Further, there is a short section of things that will never get into the languag
 Lastly, all features have a short rationale.
 
 
-Existing Features
-=================
+# Existing Features
 
-Core concepts:
+
+## Core concepts:
 
  - Static name and type binding
    * Any modern programming language does that ;)
@@ -63,7 +63,7 @@ Core concepts:
 
 
 
-Modular programming (libraries, scopes):
+## Modular programming (libraries, scopes):
 
  - Version guard (tl/TIR Package hash)
  
@@ -98,7 +98,7 @@ Modular programming (libraries, scopes):
 
 
 
-Structured programming
+## Structured programming
    
  - Statements are expressions
 
@@ -126,40 +126,43 @@ Structured programming
 
 
 
-Generic programming (macros, templates, generics):
+## Generic programming (macros, templates, generics):
 
- - λ-polymorphic templates over types and CT-literal values (int, bool, string)
+- λ-polymorphic templates over types and CT-literal values (int, bool, string)
 
- - Felden-template type theory (TIR-substitutions/-updates)
+- Felden-template type theory (TIR-substitutions/-updates)
  
- - Compiler-enforced ODR
+- Compiler-enforced ODR
  
- - Mutually recursive template definitions (e.g. tyr.lang.Array)
+- Mutually recursive template definitions
+  * Example: [tyr.lang.container.ArrayBuffer](https://github.com/tyr-lang/stdlib/blob/master/lang/src/container/arrayBuffer.tyr) and [tyr.lang.container.Iterator](https://github.com/tyr-lang/stdlib/blob/master/lang/src/container/iterator.tyr)
  
- - Transparent type alias definitions (e.g. tyr.lang.int)
+- Transparent type alias definitions (e.g. tyr.lang.int)
+  * Also in: C (typedef)
+  * Example: [tyr.lang.int](https://github.com/tyr-lang/stdlib/blob/master/lang/src/integer.tyr#L112)
 
- - Must inline (tyr.lang.inline)
+- Must inline (tyr.lang.inline)
 
- - Block parameters (tyr.lang.Block)
-   * Block parameters are the high-performance counter part of lambda expressions
-   * Block parameters, in constrast to macros, can be understood by IDEs and humans
+- Block parameters (tyr.lang.Block)
+  * Block parameters are the high-performance counter part of lambda expressions
+  * Block parameters, in constrast to macros, can be understood by IDEs and humans
 
- - Blockparameter parameters (tyr.lang.BlockParameter)
-   * Block parameter parameters allow functions whose calls are realized by inlining to access the caller's local variables
+- Blockparameter parameters (tyr.lang.BlockParameter)
+  * Block parameter parameters allow functions whose calls are realized by inlining to access the caller's local variables
 
- - Generalized binder (f(..) .. do {..})
-   * This is the 2020 version of for loops
-   * It enables library authors to write high-quality container APIs without resorting to language magic
+- Generalized binder (f(..) .. do {..})
+  * This is the 2020 version of for loops
+  * It enables library authors to write high-quality container APIs without resorting to language magic
    
- - Generalized binder variable type inference ("".forall c do {true})
+- Generalized binder variable type inference ("".forall c do {true})
  
- - Explicit implicit conversions (tyr.lang.Proxy, def implicit)
+- Explicit implicit conversions (tyr.lang.Proxy, def implicit)
 
- - Type templates ([..])
+- Type templates ([..])
 
 
 
-Object-oriented programming:
+## Object-oriented programming:
 
  - full lattice type theory
  
@@ -210,7 +213,7 @@ Object-oriented programming:
 
 
 
-Type-oriented programming:
+## Type-oriented programming:
 
  - All ground types are defined in Tyr code
   * any
@@ -223,24 +226,25 @@ Type-oriented programming:
 
 
 
-Planned Features
-================
+# Planned Features
+ 
+ - [continuous] extended CT evaluation
 
  - [0.7] function templates
+ 
+ - [0.7] Forall-polymorphic generic template parameters at least for Object subtypes
+ 
+ - [0.7] Variant template arguments at least for Object subtypes
  
  - [likely 0.7] enum
  
  - [likely soon] tagged union
  
  - [likely soon] inline enum, inline type val (no RT representation)
- 
- - [continuous] extended CT evaluation
- 
- - [1.0] initializer elaboration order checks (check that RT values are not used before initialization)
- 
- - [1.0] global initializer / shutdown hooks
 
  - [0.7] switch type / switch enum
+ 
+ - [0.7] warning free / category-specific tests
  
  - [0.8] provable tests (CT evaluation + optimized to true)
  
@@ -249,21 +253,19 @@ Planned Features
  - [1.0] optional checking of unchecked conversions in tests
 
  - [1.0] optional checking of unsound variance in tests, maybe also in production
- 
- - [0.7] warning free / category-specific tests
 
  - [0.8] Exceptions, try-catch, try-finally
  
  - [0.8] Fatal exceptions
    * Every Java programmer likes catch blocks eating InterruptedExceptions. Not.
- 
- - [0.7] Forall-polymorphic generic template parameters at least for Object subtypes
- 
- - [0.7] Variant template arguments at least for Object subtypes
- 
- - [1.0] Type unions and intersections
 
  - [likely 0.7] Java-style varargs or CT HLists argument types
+ 
+ - [1.0] Type unions and intersections
+ 
+ - [1.0] initializer elaboration order checks (check that RT values are not used before initialization)
+ 
+ - [1.0] global initializer / shutdown hooks
 
  - [1.0] Project parameters, e.g. architecture
 
@@ -275,8 +277,7 @@ Planned Features
 
 
 
-Non-Features
-============
+# Non-Features
 
  - Type safety in the sense of formal correctness of cast free code
    * We have a C API
@@ -292,7 +293,9 @@ Non-Features
  
  - Lambda expressions / Closures / Anonymous functions
 
- - GC
+ - GC / implicit RC for heap objects
+   * Having a GC in a programming language is the most fundamental decision and it cannot be changed later on. When Tyr started in 2017, it was meant as a research project for the type-oriented programming paradigm. Hence, the name Tyr (TYpe oriented Research language). In such a setup, having a GC is not an option.
+   * In practice, GC overhead is at least a factor of two. 
  
  - runtime Tyr code loading
    * Cannot be combined with O(1) OOP algorithms and a lot of OOP-related optimizations.
