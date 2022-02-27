@@ -5,7 +5,7 @@ This document is a short summary of what's already in the language.
 It is meant to serve as a complete description rather than a sales document or a comparison with another programming language.
 Also, it contains what is planned to get into the language.
 Further, there is a short section of things that will never get into the language.
-Lastly, all features have a short rationale.
+Lastly, all features have a short rationale and an example.
 
 
 # Existing Features
@@ -13,53 +13,136 @@ Lastly, all features have a short rationale.
 
 ## Core concepts:
 
- - Static name and type binding
-   * Any modern programming language does that ;)
+- C-style Syntax
+  * Everybody should be able to read Tyr code in order to learn from examples.
+  * Note: the closest relative in terms of syntax is Scala
+  * Also in: most modern programming and scripting languages
+  * Example: [Fibonacci example](https://github.com/tyr-lang/test.conformance/blob/master/0.4.0/accept/fibonacciFields/main.tyr)
 
- - Language-defined built-in types (tyr.lang.native)
-   * Having as few special rules as possible allows library authors almost the flexibility of language authors
-   * Having base constructs defined in Tyr code enforces the code generator to create good code for everybody
-   * Having implementation of base concepts like casts and type checks in Tyr code makes their cost transparent
-   * Native functions can be realized as single CPU instruction where applicable and yield the same code as predefined operators in most C-style languages
 
- - Language-defined operators/operator overloading (tyr.lang.operator)
-   * Using commonly understood operator symbols results in a massive increase of conciseness and readability
-   * Having this in the language allows library authors to introduce symbols that are understood in their domain
-   * Type-specific symbols, precedence and associativity are a cure to C++'s abuse of unplausible operator symbols
+- Static name and type binding
+  * This is mandatory for some other concepts and most type-related features
+  * If done well, this will always increase productivity in medium and large scale projects
+  * It is the foundation of good IDEs and code analysis tools
+  * Also in: almost all programming and some scripting languages
+  * Example: [Cross pair swap](https://github.com/tyr-lang/test.conformance/blob/master/0.6.0/accept/qswap/mar.tyr)
 
- - Call operators/Functors (apply/update)
-   * 
-   
- - Properties can modify entity definitions (e.g. tyr.lang.native or tyr.lang.operator.precedence)
-   * This is similar to attributes in C++ or annotations in Java
-   * The user can define arbitrary properties 
-   * Currently, the only way of doing something with user-defined properties requires the creation of a tool working on .tl-files. This is pretty easy, as .tl-files are regular OGSS files holding TIR type instances.
 
- - semicolon inference
- 
- - identifier literals
- 
- - typed integer, unsigned and float literals
+- Language-defined built-in types (tyr.lang.native)
+  * Having as few special rules as possible allows library authors almost the flexibility of language authors
+  * Having base constructs defined in Tyr code forces the compiler to create good code for everybody
+  * Having implementation of base concepts like casts and type checks in Tyr code makes their cost transparent
+  * Native functions can be realized as single CPU instruction where applicable and yield the same code as predefined operators in most C-style languages
+  * Also in: some dynamic languages; Swift
+  * Example: [bool](https://github.com/tyr-lang/stdlib/blob/master/lang/src/bool.tyr) and [Ref](https://github.com/tyr-lang/stdlib/blob/master/lang/src/pointer.tyr#L35)
 
- - CT/RT-bracing ([], ())
-   * Having 
- 
- - Function representational transparency (even constructors are usable functions)
- 
- - Function placement realizations
-   * copying the same code over and over is expensive, increases maintenance cost and results in more and, therefore, slower program startup
-   * identical function folding can only partly undo this harm and will only reduce the execution overhead on startup and memory
 
- - Elaboration checks/implicit infinite predefines
- 
- - test concept built into the language
- 
- - nocompile tests
-   * allow to ensure that something is not possible, e.g. not accessible from other packages
+- Language-defined operators/operator overloading (tyr.lang.operator)
+  * Using commonly understood operator symbols results in a massive increase of conciseness and readability
+  * Having this in the language allows library authors to introduce symbols that are understood in their domain
+  * Type-specific symbols, precedence and associativity are a cure to C++'s abuse of unplausible operator symbols
+  * Also in: Scala, Swift; many others
+  * Example: [Integer](https://github.com/tyr-lang/stdlib/blob/master/lang/src/integer.tyr)
 
- - C API (extern realization)
+
+- Call operators/Functors (apply/update)
+  * Complex function-like types can be used like functions
+  * Containers are partial functions and should be used like that
+  * Also in: Scala; many others in related variants
+  * Example: [Array usage](https://github.com/tyr-lang/test.conformance/blob/master/0.5.0/accept/arrayTest/mar.tyr), [Array implementation](https://github.com/tyr-lang/stdlib/blob/master/lang/src/container/array.tyr)
+
+
+- Properties can modify entity definitions (e.g. tyr.lang.native or tyr.lang.operator.precedence)
+  * The user can define arbitrary properties 
+  * Currently, the only way of doing something with user-defined properties requires the creation of a tool working on .tl-files. This is pretty easy, as .tl-files are regular OGSS files holding TIR type instances.
+  * Also in: C++ (attributes), Java (annotations); many others in related variants
+  * Example: [Ref](https://github.com/tyr-lang/stdlib/blob/master/lang/src/pointer.tyr#L35)
+
+
+- Semicolon inference and whitespace insensitivity
+  * Improves productivity and readability if code is formatted anyway
+  * Flexibility for project-specific coding guidelines
+  * Flexibility for formatting of complex expressions like object initialization
+  * Also in: Common in modern languages
+  * Example: [Ref](https://github.com/tyr-lang/stdlib/blob/master/lang/src/container/iterable.tyr)
+
+
+- Identifier literals
+  * Allow code generators and migration tools to escape keywords
+  * Straight-forward way of using constructor implementations as functions to re-initialize objects
+  * Also in: Scala
+  * Example: [Explicit constructor function call](https://github.com/tyr-lang/test.conformance/blob/d7524f0b08976f831ecbe980c48f82dcdccc202c/0.6.0/accept/superNewClassDirect/mar.tyr#L11)
+
  
- - Sourcecode and string literals are UTF-8-encoded and have \n line endings
+- Typed integer, unsigned and float literals
+  * In practice, representation of a numeric value matters as it affects precision or overflows
+  * Having typed integer literals is more concise and readable than having a cast and braces on every integer literal when doing bit operations
+  * This is required for strict forward-flow typing without implicit coercions
+  * Also in: All C-style languages in a less excessive form
+  * Example: [Literals](https://github.com/tyr-lang/test.conformance/blob/master/0.4.0/accept/literals/mar.tyr)
+
+
+- CT/RT-bracing ([], ())
+  * Compile time and runtime function and type applications have different requirements and effects and should, hence, be distinguished
+  * Using brackets instead of comparison operators improves readability and resolves ambiguities
+  * Also in: Scala
+  * Example: [Template type constructor call](https://github.com/tyr-lang/test.conformance/blob/master/0.5.0/accept/minTemplateNew/mar.tyr)
+
+ 
+- Function representational transparency
+  * All functions can be used like static functions of their implicit type. Even constructors and destructors
+  * A dispatching function is still a function and should be usable like one
+  * This saves memory in text segments, reduces copy and past programming and allows reuse of existing accessible implementations
+  * Also in: Scripting languages
+  * Example: [Explicit constructor function call](https://github.com/tyr-lang/test.conformance/blob/d7524f0b08976f831ecbe980c48f82dcdccc202c/0.6.0/accept/superNewClassDirect/mar.tyr#L11)
+
+ 
+- Function placement realizations (def f := g)
+  * Copying the same code over and over is expensive, increases maintenance cost and results in more and, therefore, slower program startup
+  * Identical function folding can only partly undo this harm and will only reduce the execution overhead on startup and memory
+  * Furthermore, this allows elegant and concise resolution of inheritance conflicts
+  * Also in: (none known)
+  * Example: [ArrayBuffer append](https://github.com/tyr-lang/stdlib/blob/c15296504c2eedf2e7344ca617d90eb0637c9878/lang/src/container/arrayBuffer.tyr#L60) and [Override conflict resolution](https://github.com/tyr-lang/test.conformance/blob/master/0.6.0/accept/overrideKeep/mar.tyr)
+
+
+- Per entity elaboration checks/implicit infinite predefines
+  * Elaboration allows a compiler to run multiple phases at the same time and keep track of the progress per entity
+  * Elaboration checks are required for expressiveness, inference and recursive templates
+  * Many languages do this either top-down requiring predefines or by reduction of expressiveness
+  * Note: together with compiled modules, this contributes about half of the implementation's complexity and code in semantic analysis
+  * Also in: Ada (per package instead of per entity)
+  * Example: [Iterator.toBuffer](https://github.com/tyr-lang/stdlib/blob/c15296504c2eedf2e7344ca617d90eb0637c9878/lang/src/container/iterator.tyr#L120)
+
+
+- Test concept built into the language
+  * Encourage test-driven development
+  * Built-in tests can do things that test frameworks cannot, e.g. bypass access checks, noCompile tests
+  * Tests are close to the implementation whilst testcode is automatically removed in production
+  * Also in: (none known)
+  * Example: [bool](https://github.com/tyr-lang/stdlib/blob/master/lang/src/bool.tyr)
+
+
+- noCompile tests
+  * Allow to ensure that something is not possible, e.g. not accessible from other packages
+  * Can ensure that certain operations cannot be performed on unmodifiable views
+  * Can ensure that certain implicit conversions are not possible
+  * Also in: (none known)
+  * Example: [Unmodifiable](https://github.com/tyr-lang/test.conformance/blob/master/0.4.0/accept/arithmetic/mar.tyr), [inaccessible](https://github.com/tyr-lang/test.conformance/blob/master/0.6.0/accept/privateExt/mar.tyr), [inapplicable](https://github.com/tyr-lang/test.conformance/blob/master/0.6.0/accept/castClass/mar.tyr)
+
+
+- C API / extern realization
+  * C is the lingua franca of programming
+  * Allow access to C data and functions under Tyr conventions
+  * Also in: Ada (pragma import); almost all languages in various forms
+  * Example: [Overloaded OpenGL API](https://github.com/feldentm/thyGL/blob/891b248b75f0f98c13a2395e34e5587efbf086a4/src/gl.tyr#L62), [OpenGL integration](https://github.com/feldentm/thyGL/blob/891b248b75f0f98c13a2395e34e5587efbf086a4/package.draupnir#L7)
+
+
+- Sourcecode and string literals are UTF-8-encoded and have \n line endings
+  * This is required for deterministic builds if bytes are read from string literals
+  * Massive simplification of code generation
+  * This is exactly what you need in cloud programming
+  * Also in: common in modern languages
+  * Example: [Strings](https://github.com/tyr-lang/test.conformance/blob/master/0.6.0/accept/strings/mar.tyr), [UTF-8](https://github.com/tyr-lang/test.conformance/blob/master/0.6.0/accept/stringEncoding/mar.tyr)
 
 
 
@@ -278,6 +361,9 @@ Lastly, all features have a short rationale.
 
 
 # Non-Features
+
+- Semantics-based parsing
+  * Parsing is a separate phase which is required to build good IDEs
 
  - Type safety in the sense of formal correctness of cast free code
    * We have a C API
