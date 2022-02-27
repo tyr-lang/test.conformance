@@ -213,29 +213,73 @@ Lastly, all features have a short rationale and an example.
 
 ## Structured programming
    
- - Statements are expressions
+- Statements are expressions
+  * Most statements have a last operation's result that can serve as result of the statement
+  * Tyr, in fact, has types to cover all potential results, even for return statements
+  * Redruces need to predefine variables or to create variables just to move single values to the next statement
+  * Also in: many others
+  * Example: [Complex operations in single expression tests](https://github.com/tyr-lang/test.conformance/blob/master/0.6.0/accept/stringBytes/mar.tyr)
 
- - blocks are expressions
-  * massive help in concise high performance programming
-  
- - if else
-  * standard ternary operator
-  
- - switch int
-  * standard switch without falthrough
-  * fallthrough is dangerous and not required because we have OOP
-  
- - while/do while
- 
- - verbose multi line string literals
 
- - function pointers
- 
- - default parameters
- 
- - optional by-name parameter passing
+- Blocks are expressions
+  * Massive help in concise high performance programming
+  * Often an alternative to single call site utility functions
+  * Also in: gnu C++; many others
+  * Example: [Free after evaluation](https://github.com/tyr-lang/test.conformance/blob/master/0.5.0/accept/objectCreationEffectless/mar.tyr); [syntactic blocks are simple expressions](https://github.com/tyr-lang/test.conformance/blob/master/0.4.0/accept/statements/main.tyr)
 
- - basic CT code evaluation
+
+- if else
+  * Standard ternary operator or switch bool
+  * Also in: almost all others
+  * Example: [bool.&&](https://github.com/tyr-lang/stdlib/blob/c15296504c2eedf2e7344ca617d90eb0637c9878/lang/src/bool.tyr#L17)
+
+
+- switch int
+  * Standard switch without falthrough
+  * Fallthrough is dangerous and not required because we have OOP
+  * Also in: most others
+  * Example: [Switch with templates and return](https://github.com/tyr-lang/test.conformance/blob/master/0.6.0/accept/switchReturn/main.tyr)
+
+
+- while/do while
+  * Standard loops; while is void, do while yields the last iteration's result
+  * Also in: most others
+  * Example: [Simple loops](https://github.com/tyr-lang/test.conformance/blob/d7524f0b08976f831ecbe980c48f82dcdccc202c/0.6.0/accept/semicolonInference/mar.tyr#L46)
+
+
+- Verbose multi line string literals
+  * Easy way of entering text to be shown to the user
+  * Also in: most modern languages; sometimes with escaping or interpolation
+  * Example: [Strings](https://github.com/tyr-lang/test.conformance/blob/master/0.6.0/accept/strings/mar.tyr)
+
+
+- Function pointers
+  * standard concept
+  * Also in: all system programming languages
+  * Example: [local pointer](https://github.com/tyr-lang/test.conformance/blob/master/0.6.0/accept/applicableObjectMemberVar/mar.tyr)
+
+
+- Default parameters
+  * Improve usability of APIs with rarely used options
+  * Note: This makes overload resolution a lot more complex. It is, therefore, uncommon in languages with overload resolution
+  * Also in: Ada, C++; many others
+  * Example: [default parameters](https://github.com/tyr-lang/test.conformance/blob/master/0.6.0/accept/byNameOrder3/mar.tyr)
+
+
+- Optional by-name parameter passing
+  * Increase robustness and readability of calls taking several parameters
+  * In compiled languages like Tyr, it has better runtime performance than builder pattern or passing a struct
+  * Note: This makes overload resolution and the function type theory more complex
+  * Also in: Ada, R; most scripting languages
+  * Example: [by-name parameters](https://github.com/tyr-lang/test.conformance/blob/master/0.6.0/accept/byNameOrder/mar.tyr)
+
+
+- Basic CT code evaluation
+  * Evaluating code in the compiler results in faster runtime and increases expressiveness
+  * Note: In combination with type inference, this can lead to errors in seemingly unchanged parts of the program
+  * Note: This requires a lot of code in the compiler
+  * Also in: All programming languages with optimizing compilers
+  * Example: [Literal from unary minus](https://github.com/tyr-lang/test.conformance/blob/d7524f0b08976f831ecbe980c48f82dcdccc202c/0.4.0/accept/switch/mar.tyr#L47)
 
 
 
@@ -310,6 +354,9 @@ Lastly, all features have a short rationale and an example.
    * Some types hold other ressources, like file handles, locks, server communication, state transitions. Not releaseing them can have desastrous consequnces. See Java's try-with-ressource and finalizers desaster.
  
  - Super constructor / destructor calls (T.new/T.delete)
+ 
+ - Shortcut field initializer (new(f := x))
+   * Example qswap
  
  - local scope member access (geht das wirklich? habe ich da einen test)
  type Y {
