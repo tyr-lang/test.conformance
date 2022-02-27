@@ -148,36 +148,66 @@ Lastly, all features have a short rationale and an example.
 
 ## Modular programming (libraries, scopes):
 
- - Version guard (tl/TIR Package hash)
- 
- - Compile against compiled libraries (Ext Refs, this/ext state)
-   * for a user, this is like Java's JARs
-   * in fact, this is a lot more and more efficient, because ExtRefs use OGSS IDs into dependent tl
-   * Smaller tl-files
-   * No classloader, RT-check required
-   * ODR is checked by the compiler instead of C++'s user-imposed checking
-   * Macros, templates and consistency
-   * Templates are not re-instantiated if an instance exists in a dependency
+- Version guard (tl/TIR Package hash)
+  * Compiled Tyr libraries contain hashes preventing accidental combination of incompatible dependency versions
+  * Prerequisite for compiler-enforced ODR preventing all ODR-related bugs
+  * This is a must have for large scale projects
+  * Also in: (none known); this is related to having only specific versions in package systems like maven
+  * Example: (none; abuse results in an error message)
 
- - Language defined package/build system (draupnir)
-  * required to scale
-  * fix issues with packaging in C++ and Java
-   
- - Library scopes (e.g. tyr.lang)
-  * ensure that library contributions do not conflict
-  * make clear who contributes what in projects with a lot of dependencies
-  
- - Implicit directory-based subscoping (e.g. tyr.lang.operator)
-  
- - Scoped imports (with)
-  * Allow sources and top level entities to use members without having to fully qualify names
-  * Basically C++'s using/using namespace
-  
- - Default visibility is library-private
-  * public without exports in Java 9+
  
- - Public visibility exports entities to other libraries
-  * dlexports in C++, exports in Java 9+
+- Compile against compiled libraries (Ext Refs, this/ext state)
+  * Smaller .tl-files, no reprocessing of code or declarations
+  * For a user, this is like Java's JARs. However, this is a lot more and more efficient, because ExtRefs use OGSS IDs into dependent tl
+  * No classloader or RT-check required
+  * ODR is checked by the compiler instead of C++'s user-imposed checking; if it compiles, it is also consistent
+  * Templates are not re-instantiated if an instance exists in a dependency
+  * Also in: Java is loosely related; some big inhale compilers/code analysers
+  * Example: [project](https://github.com/tyr-lang/test.conformance/blob/master/0.4.0/accept/test3/package.draupnir) and [code](https://github.com/tyr-lang/test.conformance/blob/master/0.4.0/accept/test3/main.tyr)
+
+
+- Language defined package/build system (draupnir)
+  * Massive productivity boost compared to Make or shell scripts
+  * Required for a module concept in a language definition
+  * Required to scale
+  * Fix issues with packaging in C++ and Java
+  * Note: There is a difference between there is one or more build systems for a programming language and the build system is defined by the language authors
+  * Also in: GNAT/Ada, cargo/Rust; many others
+  * Example: [project](https://github.com/tyr-lang/test.conformance/blob/master/0.4.0/accept/test3/package.draupnir)
+
+
+- Library scopes
+  * Ensure that library contributions do not conflict
+  * Make clear who contributes what in projects with a lot of dependencies
+  * Imports reduce the coding overhead to a minimum
+  * Also in: Non-legacy Java 9 with modules and a module name is package name convention
+  * Example: [project](https://github.com/feldentm/thySDL/blob/master/package.draupnir) and [code](https://github.com/feldentm/thySDL/blob/master/src/sdl.tyr)
+
+
+- Implicit directory-based subscoping
+  * Force code repositories into a clean structure
+  * Helps large-scale software development
+  * Also in: Java with IDE support
+  * Example: [tyr.lang.container](https://github.com/tyr-lang/stdlib/tree/master/lang/src/container)
+
+
+- Scoped imports (with)
+  * Allow sources and top level entities to use members without having to fully qualify names
+  * Also in: C++'s using/using namespace
+  * Example: [file](https://github.com/tyr-lang/test.conformance/blob/master/0.6.0/accept/importSimple/mar.tyr), [type](https://github.com/tyr-lang/test.conformance/blob/master/0.6.0/accept/importsInner/mar.tyr)
+
+
+- Default visibility is library-private
+  * If no visibility is defined, the entity can be used within the same library
+  * This allows grouping library-internal code into useful packages without being forced to publish internal API or introduce a friend concept
+  * Also in: public without exports in Java 9+
+  * Example: [Tyr runtime type IDs](https://github.com/tyr-lang/stdlib/blob/master/lang/src/class.tyr)
+
+
+- Public visibility exports entities to other libraries
+  * A clear public API of a library results in low global maintenance cost and improved scalability of development
+  * Also in: dlexports in C++, exports in Java 9+; many others
+  * Example: [runtime type checks and casts](https://github.com/tyr-lang/stdlib/blob/master/lang/src/class.tyr)
 
 
 
@@ -254,6 +284,8 @@ Lastly, all features have a short rationale and an example.
  - single inheritance between classes (class)
  
  - O(1) class member access, type check and cast
+  * Encourage correct abstraction
+  * Deep class hierarchies impose no runtime penalty
  
  - multiple inheritance of structural promises (interface <: Object)
  
@@ -290,9 +322,10 @@ Lastly, all features have a short rationale and an example.
  - explicit methodslots
  * interface conflict resolution
  
- - scoped public/protected visibility (private[])
+ - scoped private/protected visibility (private[] protected[])
  
- - scoped protected visibility (protected
+ - inherited visibility (override)
+  * note: this can lead to visibilities that cannot be expressed otherwise for multi inheritance
 
 
 
@@ -311,52 +344,88 @@ Lastly, all features have a short rationale and an example.
 
 # Planned Features
  
- - [continuous] extended CT evaluation
+- [continuous] extended CT evaluation
+  * likely an unlimited endevour
 
- - [0.7] function templates
- 
- - [0.7] Forall-polymorphic generic template parameters at least for Object subtypes
- 
- - [0.7] Variant template arguments at least for Object subtypes
- 
- - [likely 0.7] enum
- 
- - [likely soon] tagged union
- 
- - [likely soon] inline enum, inline type val (no RT representation)
+- [0.7] function templates
+  * planned from the beginning
 
- - [0.7] switch type / switch enum
- 
- - [0.7] warning free / category-specific tests
- 
- - [0.8] provable tests (CT evaluation + optimized to true)
- 
- - [0.8] leak free tests
+- [0.7] Forall-polymorphic generic template parameters at least for Object subtypes
+  * the last research question exected to be answered in the forseeable future
 
- - [1.0] optional checking of unchecked conversions in tests
+- [0.7] Variant template arguments at least for Object subtypes
+  * required by some special types
 
- - [1.0] optional checking of unsound variance in tests, maybe also in production
+- [likely 0.7] Java-style varargs or CT HLists argument types; any varargs
+  * required to build some APIs
+  * any varargs should reflect C varargs
 
- - [0.8] Exceptions, try-catch, try-finally
- 
- - [0.8] Fatal exceptions
-   * Every Java programmer likes catch blocks eating InterruptedExceptions. Not.
+- [likely 0.7] enum
+  * required for good C APIs
 
- - [likely 0.7] Java-style varargs or CT HLists argument types
- 
- - [1.0] Type unions and intersections
- 
- - [1.0] initializer elaboration order checks (check that RT values are not used before initialization)
- 
- - [1.0] global initializer / shutdown hooks
+- [likely soon] tagged union
+  * required for good C APIs
 
- - [1.0] Project parameters, e.g. architecture
+- [likely soon] inline enum, inline type val (no RT representation)
+  * nice to have code quality feature
 
- - [1.x] Self-hosting compiler
+- [0.7] switch type / switch enum
+  * must have for case handling
+  * like Visitors, it can reduce linear switching costs to constant time, but requires no Visitor base type to have been declared upfront
+
+- [0.7] warning free / category-specific tests
+  * increase precision of tests by reducing expected messages to certain categories
+  * most tests should not even create a warning; some should create a specific warning
+
+- [0.8] provable tests (CT evaluation + optimized to true)
+  * a lot of high performance abstractions should be optimized out by the compiler at least for base cases
+  * required to assert that certain properties depend only on compile time constants
+
+- [0.8] leak free tests
+  * most test should not cause memory leaks
+
+- [1.0] optional checking of unchecked conversions in tests
+  * unchecked conversions could be checked if the code generator would emit explicit checks
+  * these checks are expensive and, hence, not useful in production
+  * these checks can detect programming errors
+
+
+- [1.0] optional checking of unsound variance in tests, maybe also in production
+  * unsound variance could be checked if the code generator would emit explicit checks for parameter/field access
+  * these checks are expensive and, hence, usually not useful in production
+  * these checks can detect programming errors
+
+
+- [0.8] Exceptions, try-catch, try-finally
+  * Exceptions are a proven error propagation mechanism
  
- - [1.x] Static memory and ressource management via MAY ownership
-   * If the compiler could know that memory descopes, it should also free it
-   * note: Rust is a MUST ownership system which is something completely different
+- [0.8] Fatal exceptions
+  * Some errors cannot be resolved and must result in orderly program termination
+ 
+- [1.0] Type unions and intersections
+  * Required for precise typing of e.g. if else or switch results
+ 
+- [1.0] initializer elaboration order checks (check that RT values are not used before initialization)
+  * Value initialization should be checked akin to entity initialization
+  * Note: this is more complex, because the global CFG has to be analyzed correctly
+  * Note: this can also be implemented as external checker
+ 
+- [1.0] global initializer / shutdown hooks
+  * Useful applications in IO and other ressource management e.g. shutdown of global connection pools, termination of child proceses on crash
+
+- [1.0] Project parameters, e.g. architecture
+  * Required for platform and architecture specific code
+
+- [1.0] Template type parameter inference
+  * nice to have productivity feature
+  * note: ambiguities to herbrand types must be investigated; may require new syntax for herbrand type access
+
+- [1.x] Self-hosting compiler
+  * must have display of productive usability
+
+- [1.x] Static memory and ressource management via MAY ownership
+  * If the compiler could know that memory descopes, it should also free it
+  * note: Rust is a MUST ownership system which is something completely different
 
 
 
@@ -365,33 +434,52 @@ Lastly, all features have a short rationale and an example.
 - Semantics-based parsing
   * Parsing is a separate phase which is required to build good IDEs
 
- - Type safety in the sense of formal correctness of cast free code
-   * We have a C API
-   * Code is not free of casts
-   * It will just encourage the usage of unchecked casts
-   * Code should reflect the architecture and thoughts of programmers
-   * Nonetheless, we will try our best not to introduce any unsound conversion
-     that cannot be checked by changing the compiler backend.
 
- - Top-level data entities
- 
- - Nested classes
- 
- - Lambda expressions / Closures / Anonymous functions
+- Type safety in the sense of formal correctness of cast free code
+  * We have a C API
+  * Code is not free of casts
+  * It will just encourage the usage of unchecked casts
+  * Code should reflect the architecture and thoughts of programmers
+  * Nonetheless, we will try our best not to introduce any unsound conversion
+    that cannot be checked by changing the compiler backend.
 
- - GC / implicit RC for heap objects
-   * Having a GC in a programming language is the most fundamental decision and it cannot be changed later on. When Tyr started in 2017, it was meant as a research project for the type-oriented programming paradigm. Hence, the name Tyr (TYpe oriented Research language). In such a setup, having a GC is not an option.
-   * In practice, GC overhead is at least a factor of two. 
- 
- - runtime Tyr code loading
-   * Cannot be combined with O(1) OOP algorithms and a lot of OOP-related optimizations.
-     This is because the exact type hierarchy is no longer known.
-     Hence, one cannot, for instance, remove entities from itables or vtables that have only one realization in a given program.
-   * is not really required in the cloud age
-   * runtime code loading can cause very complex and expensive bugs, especially with ODR violations in C++ and Java
-   * Still, even today one can use dlopen and load C or C++ code at runtime
 
- - JIT
-   * if no runtime code loading exists, JIT is a bad idea in almost all cases
- 
- - easy to use cheap reflection
+- Top-level data entities
+  * Harmful for tool support and IDEs
+  * Harmful for high-quality error messages and quickfix proposals
+  * type var/vals are a good alternative
+
+
+- Nested classes
+  * Harmful for tool support and IDEs
+  * Harmful for high-quality error messages and quickfix proposals
+
+
+- Lambda expressions / Closures / Anonymous functions
+  * Harmful for high-quality and high-performance code
+  * Harmful for tool support and IDEs
+  * Generalized binders and function objects are good alternatives
+
+
+- GC / implicit RC for heap objects
+  * Having a GC in a programming language is the most fundamental decision and it cannot be changed later on. When Tyr started in 2017, it was meant as a research project for the type-oriented programming paradigm. Hence, the name Tyr (TYpe-oriented Research language). In such a setup, having a GC is not an option.
+  * In practice, GC overhead is at least a factor of two
+  * In practice, GC does not prevent memory leaks
+
+
+- Runtime Tyr code loading
+  * Cannot be combined with O(1) OOP algorithms and a lot of OOP-related optimizations.
+    This is because the exact type hierarchy is no longer known.
+    Hence, one cannot, for instance, remove entities from itables or vtables that have only one realization in a given program.
+  * is not really required in the cloud age
+  * runtime code loading can cause very complex and expensive bugs, especially with ODR violations in C++ and Java
+  * Still, even today one can use dlopen and load C or C++ code at runtime
+
+
+- Just-In-Time compilation
+  * If no runtime code loading exists, JIT is a bad idea in almost all cases
+
+
+- Easy-to-use cheap reflection
+  * Allows code styles that harm scalability and performance
+  * Class members are a good alternative
