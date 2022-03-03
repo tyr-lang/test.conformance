@@ -1,0 +1,107 @@
+/**
+ * Test interface class inheritance
+ */
+interface I {
+  def fun (x : S) : int = 1
+}
+
+class S {
+  def fun (x : S) : int = 3
+}
+interface J <: S, I {
+  // def fun (x : S) : int = 3
+}
+interface K <: I {
+  // def fun (x : S) : int = 3
+}
+
+
+class T <: J /* indirect S, I */ {
+  // manual inspection: no implementation, two itable entries pointing to S.fun
+  
+  test "call" {
+    var x = new T
+
+    val r = x.fun(x)
+    delete x
+    3 == r
+  }
+  
+  test "instance" {
+    var x = new T
+
+    val r = S ? x
+    delete x
+    r
+  }
+
+  test "interfaces I" {
+    var x = new T
+
+    val r = I ? x
+    delete x
+    r
+  }
+
+  test "interfaces J" {
+    var x = new T
+
+    val r = J ? x
+    delete x
+    r
+  }
+
+  test "interfaces K" {
+    var x = new T
+
+    val r = ! K ? x
+    delete x
+    r
+  }
+}
+
+class S2 <: S, K;
+
+// class diamond case
+class T2 <: S2, J {
+  
+  test "call" {
+    var x = new T2
+
+    val r = x.fun(x)
+    delete x
+    3 == r
+  }
+  
+  test "instance" {
+    var x = new T2
+
+    val r = S ? x && S2 ? x
+    delete x
+    r
+  }
+
+  test "interfaces I" {
+    var x = new T2
+
+    val r = I ? x
+    delete x
+    r
+  }
+
+  test "interfaces J" {
+    var x = new T2
+
+    val r = J ? x
+    delete x
+    r
+  }
+
+  test "interfaces K" {
+    var x = new T2
+
+    val r = K ? x
+    delete x
+    r
+  }
+}
