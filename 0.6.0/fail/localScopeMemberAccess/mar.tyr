@@ -1,0 +1,13 @@
+/**
+ * Test that members can be accessed from local scope
+ */
+class T;
+
+type Y {
+  type def f(this: T) = true
+
+  test "use" {
+    var x = new T
+    x.f()
+  }
+}
