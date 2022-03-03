@@ -7,4 +7,21 @@ class T {
     c = T;
     T == c && c == T
   }
+
+  test "new" <: noCompile {
+    var c : Class = null;
+    c = T;
+    val r = T == c && c == T
+    // cannot prove that a constructor exists
+    delete new c;
+    r
+  }
+
+  test "new val" {
+    val c = T;
+    val r = T == c && c == T
+    // type vals are CT-evaluated
+    delete new c;
+    r
+  }
 }
