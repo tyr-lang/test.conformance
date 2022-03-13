@@ -1,0 +1,162 @@
+/**
+ * Test interface calls with abstract prototype
+ */
+type direct {
+  test "foreach" {
+    val buffer = new container.ArrayBuffer[int]
+
+    buffer += 3
+    buffer += 4
+    buffer += 5
+
+    var result = 0
+    buffer.foreach v do {
+      result += v
+    }
+
+    delete buffer
+
+    12 == result
+  }
+
+  test "count" {
+    val buffer = new container.ArrayBuffer[int]
+
+    buffer += 3
+    buffer += 4
+    buffer += 5
+
+    var result = buffer.count v do (3 < v)
+
+    delete buffer
+
+    2 == result
+  }
+
+  test "forall" {
+    val buffer = new container.ArrayBuffer[int]
+
+    buffer += 3
+    buffer += 4
+    buffer += 5
+
+    var result = buffer.forall v do (3 < v)
+
+    delete buffer
+
+    !result
+  }
+
+  test "exists" {
+    val buffer = new container.ArrayBuffer[int]
+
+    buffer += 3
+    buffer += 4
+    buffer += 5
+
+    var result = buffer.exists v do (3 < v)
+
+    delete buffer
+
+    result
+  }
+
+  test "fold" {
+    val buffer = new container.ArrayBuffer[int]
+
+    buffer += 3
+    buffer += 4
+    buffer += 5
+
+    val result = buffer.fold(0) l,r do { l+r }
+
+    delete buffer
+
+    12 == result
+  }
+}
+
+type iterable {
+  test "foreach" {
+    val buffer : container.Iterable[int] = {
+      val b = new container.ArrayBuffer[int]
+      b += 3
+      b += 4
+      b += 5
+      b
+    }
+
+    var result = 0
+    buffer.foreach v do {
+      result += v
+    }
+
+    delete buffer
+
+    12 == result
+  }
+
+  test "count" {
+    val buffer : container.Iterable[int] = {
+      val b = new container.ArrayBuffer[int]
+      b += 3
+      b += 4
+      b += 5
+      b
+    }
+
+    var result = buffer.count v do (3 < v)
+
+    delete buffer
+
+    2 == result
+  }
+
+  test "forall" {
+    val buffer : container.Iterable[int] = {
+      val b = new container.ArrayBuffer[int]
+      b += 3
+      b += 4
+      b += 5
+      b
+    }
+
+    var result = buffer.forall v do (3 < v)
+
+    delete buffer
+
+    !result
+  }
+
+  test "exists" {
+    val buffer : container.Iterable[int] = {
+      val b = new container.ArrayBuffer[int]
+      b += 3
+      b += 4
+      b += 5
+      b
+    }
+
+    var result = buffer.exists v do (3 < v)
+
+    delete buffer
+
+    result
+  }
+
+  test "fold" {
+    val buffer : container.Iterable[int] = {
+      val b = new container.ArrayBuffer[int]
+      b += 3
+      b += 4
+      b += 5
+      b
+    }
+
+    val result = buffer.fold(0) l,r do { l+r }
+
+    delete buffer
+
+    12 == result
+  }
+}
