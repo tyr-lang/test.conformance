@@ -1,4 +1,4 @@
-This document is a short summary of what's already in the language.
+This document is a summary of what's already in the language.
 It is meant to serve as a complete description rather than a sales document or a comparison with another programming language.
 Also, it contains what is planned to get into the language.
 Further, there is a short section of things that will never get into the language.
