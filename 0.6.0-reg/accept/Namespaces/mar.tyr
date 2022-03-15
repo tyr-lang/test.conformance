@@ -20,11 +20,11 @@ class T {
   }
 
   test "array" {
-    T != Array
+    T != Array[int]
   }
 
   test "array alias" {
-    impl.Array == Array
+    impl.Array[int] == Array[int]
   }
 }
 
