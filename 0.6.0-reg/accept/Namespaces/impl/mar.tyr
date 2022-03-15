@@ -1,0 +1,7 @@
+class T {
+  test "use" {
+    T == _root_.test.inner.namespace.impl.T
+  }
+}
+
+type Array := tyr.lang.container.Array

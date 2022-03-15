@@ -1,0 +1,41 @@
+with tyr.lang.container.Array
+
+with globalB := test.inner;
+
+class T {
+  test "sub" {
+    T != impl.T
+  }
+
+  test "use" {
+    T == _root_.test.inner.namespace.T
+  }
+
+  test "with" <: noCompile {
+    T == localB.namespace.T
+  }
+
+  test "with file" {
+    T == globalB.namespace.T
+  }
+
+  test "array" {
+    T != Array
+  }
+
+  test "array alias" {
+    impl.Array == Array
+  }
+}
+
+class local {
+  with localB := test.inner;
+
+  test "with" {
+    T == localB.namespace.T
+  }
+
+  test "with file" {
+    T == globalB.namespace.T
+  }
+}
