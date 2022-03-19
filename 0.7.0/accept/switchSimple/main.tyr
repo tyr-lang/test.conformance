@@ -1,0 +1,23 @@
+/**
+ * Test that switch can be used without the : between the guard and the effect.
+ * @note to self: I should check if the previous way with a : should be
+ *       eliminated all together because it creates an ambiguity with coercions
+ *       that will result in a perceived "if 0 : x : int" becoming "if (0:x) : int" (check that this really happens first)
+ */
+type Switch[default : bool] {
+  type def f(x : int) : bool = switch x {
+      if 0 {return false}
+      if 7 true
+      else {return default}
+    }
+
+  test "seven" {
+    Switch[false].f(7)
+  }
+  test "true" {
+    Switch[true].f(3)
+  }
+  test "false" {
+    !Switch[false].f(3)
+  }
+}
