@@ -1,0 +1,11 @@
+/**
+ * Ensure that trying to apply a constructor that is not applicable, no search
+ * in the super type is performed.
+ */
+private type T {
+  test "use" <: noCompile {
+    // currently, this results in trying to use Seq[int].new which is outright idiotic
+    // instead, an error should be created that shows available constructors
+    var p = new container.Array[int]
+  }
+}
