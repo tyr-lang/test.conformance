@@ -1,0 +1,63 @@
+type Array := container.ArrayBuffer[int];
+
+/**
+ * Test that global initializers initialized from Refs do neither infer the Ref
+ * type nor crash because implicit is not called implicitly.
+ */
+type T {
+
+  type val value : Array = {
+    val r = new Array
+
+    r += 1
+    r += 2
+    r += 3
+
+    r
+  }
+
+  type val explicit : Array = {
+    var r = new Array
+
+    r += 1
+    r += 2
+    r += 3
+
+    r.implicit()
+  }
+
+  type val implicit : Array = {
+    var r = new Array
+
+    r += 1
+    r += 2
+    r += 3
+
+    r
+  }
+
+  type val inferred = {
+    var r = new Array
+
+    r += 1
+    r += 2
+    r += 3
+
+    r
+  }
+
+  type def sum(arr : Array) = arr.fold(0) l,r do (l+r)
+
+  test "val" {
+    6 == sum(value)
+  }
+  test "var explicit" {
+    6 == sum(explicit)
+  }
+  test "implicit" {
+    6 == sum(implicit)
+  }
+  test "inferred" {
+    6 == sum(inferred)
+  }
+}
