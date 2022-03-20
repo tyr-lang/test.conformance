@@ -1,0 +1,5 @@
+/**
+ * Check override is no type visibility.
+ */
+override type T <: any {
+}

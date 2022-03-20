@@ -1,0 +1,5 @@
+/**
+ * Check protected is no type visibility.
+ */
+protected type T <: any {
+}
