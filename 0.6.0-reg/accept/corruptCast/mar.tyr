@@ -1,0 +1,10 @@
+type T {
+  test "corrupt cast" {
+    var p = 0
+    val ref : Ref[int] = p
+    // cast is highly dubious and, hence, results in a warning
+    // nonetheless, the code should compile and work
+    0 != int !! ref
+    true
+  }
+}
