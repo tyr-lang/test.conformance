@@ -2,9 +2,6 @@
  * This test is meant to ensure that default constructor, destructor and
  * initialization of class fields work as intended.
  */
-
-with tyr.io.CString;
-
 class Upper {
   // pick a strange value to ensure that it is not zero out of accident
   class var instances : int = 31337
@@ -17,19 +14,6 @@ class Upper {
   }
 
   def f = true
-
-  type def print(this : int) : void {
-    var format = new CString("%i\n");
-    printf1i(format, this)
-    delete format
-  }
-
-  type def printf1i (format : CString, value : int) : int extern c.printf
-
-  type def dump {
-    "Upper "!!; print(Upper.instances)
-    "Lower "!!; print(Lower.instances)
-  }
 }
 
 class Lower <: Upper {
@@ -73,17 +57,14 @@ class Lower <: Upper {
     val y = new Upper
 
     val first = 31338 == Upper.instances &! 31338 == Lower.instances
-    dump()
 
     delete x
 
     val second = 31338 == Upper.instances &! 31337 == Lower.instances
-    dump()
 
     delete y
 
     val third = 31337 == Upper.instances &! 31337 == Lower.instances
-    dump()
 
     first &! second &! third
   }
