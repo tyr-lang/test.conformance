@@ -2,10 +2,10 @@
  * Create an array type with < > access operators, just as a proof of concept
  */
 class Array {
-  var data : container.FlatSizedArray[int, 2L]
+  var data : container.FlatSizedArray[int, 2U]
   
   new {
-    data = new container.FlatSizedArray[int, 2L]
+    data = new container.FlatSizedArray[int, 2U]
   }
   delete;
 
