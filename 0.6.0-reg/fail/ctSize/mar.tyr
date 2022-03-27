@@ -1,0 +1,9 @@
+/**
+ * Check that 0L is no size_t
+ */
+type T[S : container.size_t] {
+  test "use" {
+    T[0L]
+    false
+  }
+}

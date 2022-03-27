@@ -1,0 +1,12 @@
+/**
+ * Check that a type parameter of type int is no size_t
+ */
+type U[S : int] {
+  // should not compile; not type correct, not applicable
+  val base = new container.FlatSizedArray[int, S]
+
+  test "use" {
+    // it should not be required to have an instance of U U[0]
+    false
+  }
+}
