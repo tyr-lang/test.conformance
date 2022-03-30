@@ -1,0 +1,15 @@
+/**
+ * ensure that formals can be unapplied
+ */
+class Vector[D : container.size_t] {
+
+  test "unapply" {
+    var v = new Vector[2U]
+
+    val r = 2U == v.D
+
+    delete v
+
+    r
+  }
+}
