@@ -1,0 +1,37 @@
+/**
+ * Ensure that this substitution results in usabel code
+ */
+type Utils[T : Type] {
+  type def sumIf(xs   : container.Iterable[T],
+                 x    : BlockParameter[T],
+                 cond : Block[bool],
+                 map  : Block[int]) {
+    var r = 0
+    xs.foreach i do {
+      // update the parameter to the current value
+      x = i
+
+      // if the condition evaluates to true
+      if(cond.eval()) {
+        // add the result of eval to the result returned by us
+        r += map.eval()
+      }
+    }
+    r
+  }
+
+  test "sum length" {
+    var xs = new container.ArrayBuffer[String]
+
+    xs += null
+    xs += "one"
+    xs += "two"
+    xs += "three"
+
+    Utils[String].sumIf(xs) x do {
+      null != x && x.bytes().exists c do (111i8!=c)
+    } {
+      int !! x.size()
+    }
+  }
+}
