@@ -20,7 +20,7 @@ class T <: S, I, J {
   // a second override of a function that would be folded into the one above
   // requires explicit this
   override [I.fun]
-  type def fun(this : T, x : I) := J.fun;
+  type def fun(this : J, x : I) := J.fun;
 
   test "call T obj" {
     var x = new T
@@ -30,7 +30,7 @@ class T <: S, I, J {
     delete x
     3 == r
   }
-  test "call T typ" {
+  test "call T" {
     var x = new T
 
     // note: my change in Tyr 0.6.1 turned this legal because the object def is
@@ -38,6 +38,15 @@ class T <: S, I, J {
     val r = T.fun(x, x)
     delete x
     3 == r
+  }
+  test "call T typ I" {
+    var x = new T
+
+    // note: my change in Tyr 0.6.1 turned this legal because the object def is
+    // a more precise match
+    val r = T.fun(x, Ref[I] !! x)
+    delete x
+    2 == r
   }
   test "call T typ J" {
     var x = new T
@@ -51,7 +60,7 @@ class T <: S, I, J {
     var x = new T
 
     // note: explicit cast to this to avoid ambiguity
-    val r = T.fun(x, (Ref[J] !! x))
+    val r = T.fun((Ref[J] !! x),x)
     delete x
     2 == r
   }
