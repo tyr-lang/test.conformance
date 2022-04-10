@@ -7,8 +7,8 @@ type literals {
     1 != 0
   }
   test "long" {
-    0x0 == 0L &&
-    0x1 != 0i64
+    0x0 == 0U &&
+    0x1 != 0u64
   }
   test "integer type" {
     0 : int
@@ -25,7 +25,8 @@ type literals {
     0L : Integer[64]
     0i64 : Integer[64]
     0i1 : Integer[1]
-    0x20i64 == 32L
+    0x20i64 == 32L &&
+    0x20u64 == 32U
   }
 
   test "float" {
