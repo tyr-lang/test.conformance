@@ -1,0 +1,9 @@
+/**
+ * test properties of literals
+ */
+type literals {
+  test "long long" {
+    // this is a bit hard on the parser if one resorts to standard code
+    -81985529216486896L == 0xfedcba9876543210L
+  }
+}
