@@ -1,0 +1,57 @@
+with container.ArrayBuffer
+with container.size_t
+with container.index_t
+
+/**
+ * Ensure that a type with a default type parameter can be constructed without passing parameters
+ */
+type Cursor[T : Type = StringLiteral] <: proxy[T] {
+
+  val target : ArrayBuffer[T := T]
+  var position : size_t
+
+  new (target := target : ArrayBuffer[T]){
+    this.position = 0U
+  }
+
+  def step(this : Ref[Cursor[T]], stride : index_t = 1.implicit()) : void {
+    position += stride.unpack
+  }
+
+  def implicit() : T = target(position)
+
+  test "empty" {
+    var arr = new ArrayBuffer[StringLiteral]
+    arr += "first"
+    arr += "second"
+
+    // empty list should result in defaults being used
+    var c = new Cursor[](arr)
+
+    val r = "first" == c && {
+      c.step()
+      "second" == c
+    }
+
+    delete arr
+    r
+  }
+
+  test "missing" {
+    var arr = new ArrayBuffer[StringLiteral]
+    arr += "first"
+    arr += "second"
+
+    // missing list should also result in defaults being used as there is no
+    // overloading on types
+    var c = new Cursor(arr)
+
+    val r = "first" == c && {
+      c.step()
+      "second" == c
+    }
+
+    delete arr
+    r
+  }
+}
