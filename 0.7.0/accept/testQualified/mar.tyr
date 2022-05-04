@@ -1,0 +1,12 @@
+/**
+ * @note tests that noCompile accepts category parameters
+ */
+type T {
+  test "basic" <: noCompile[naming] {
+    erfundenerWert
+  }
+
+  test "typing" <: noCompile[typing] {
+    true : int
+  }
+}

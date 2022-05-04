@@ -1,0 +1,8 @@
+/**
+ * @note tests that noCompile accepts category parameters
+ */
+type T {
+  test "cc" <: noCompile[7] {
+    true
+  }
+}
