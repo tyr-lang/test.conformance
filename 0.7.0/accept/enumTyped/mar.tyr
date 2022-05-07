@@ -1,0 +1,71 @@
+/**
+ * This test shows typed enum usage.
+ *
+ * Also, enum constants exist within the namespace of the enum.
+ *
+ * Enum constants can be imported.
+ */
+enum color /* implicitly <: int */ {
+  red, green, blue
+}
+
+enum Color <: Unsigned[64] {
+  red, green, blue
+}
+
+type T {
+  with color.red
+  with color.green
+  with color.blue
+
+  test "compare enum" {
+    red == red && green != red && blue != red
+  }
+
+  test "compare int" {
+    0 == red && 1 == green && 2 == blue
+  }
+
+  test "compare ulong" {
+    0U == Color.red
+  }
+
+  test "compare Color" <: noCompile[naming] {
+    // no such operator
+    red == Color.red
+  }
+
+  test "compare Color" <: noCompile[typing] {
+    // red is an alias of 0U
+    red == Color.red : int
+  }
+
+  test "coerce base" {
+    val c = red : int
+    true
+  }
+
+  test "coerce enum" <: noCompile[typing] {
+    // not safe, not allowed
+    val c = 0 : color
+    false
+  }
+
+  test "coerce enum identity" {
+    // allowed
+    val c = red : color
+    true
+  }
+
+  test "coerce enum Color" <: noCompile[typing] {
+    // not allowed
+    val c = red : Color
+    false
+  }
+
+  test "cast enum" {
+    // casts can be used to create unsafe values here, too
+    val c = color !! 0
+    red == c
+  }
+}

@@ -1,0 +1,6 @@
+/**
+ * For now, only Integer and Unsigned base types are allowed
+ */
+enum color <: void {
+  zero
+}

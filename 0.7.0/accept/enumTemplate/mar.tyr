@@ -1,0 +1,33 @@
+/**
+ * This test shows enums the effect of enum template parameters.
+ *
+ * @note enum instances should get implicitly retyped into the respective
+ *       literal subtype.
+ */
+enum mixed {
+  zero,
+  naught = 0,
+  one
+}
+
+class T[v : IntegerLiteral[32]] {
+  with mixed.zero
+  with mixed.naught
+  with mixed.one
+
+  test "instance" {
+    null != T[zero]
+  }
+
+  test "herbrand zero" {
+    T[zero] == T[naught]
+  }
+
+  test "herbrand all" {
+    T[0] == T[naught] && T[1] == T[one] && T[zero] != T[one] 
+  }
+
+  test "unpack all" {
+    0 == T[naught].v && 1 == T[one].v && T[zero].v != T[one].v
+  }
+}

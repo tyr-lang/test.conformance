@@ -1,0 +1,6 @@
+/**
+ * This test shows enums with explicit values get type checked.
+ */
+enum color <: int{
+  zero = 0U
+}

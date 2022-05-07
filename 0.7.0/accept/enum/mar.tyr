@@ -1,0 +1,6 @@
+/**
+ * This test shows basic enum usage.
+ */
+enum color {
+  red, green, blue
+}

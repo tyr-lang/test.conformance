@@ -1,0 +1,33 @@
+/**
+ * This test shows switch can bind the value used for switching to a name
+ */
+type T {
+  test "bind" {
+    switch x := 0 {
+      if 0 true
+      else false
+    }
+  }
+
+  test "use" {
+    0 == switch x := 0 {
+      if 0 x
+      else x
+    }
+  }
+
+  // typing rules for val apply
+  test "val typing" {
+    0 == switch x := 0 {
+      if 0 (x : IntegerLiteral[32])
+      else (x : int)
+    }
+  }
+
+  test "type" <: noCompile[typing] {
+    switch x := 0 {
+      if 0 (x : long)
+      else (x : int)
+    }
+  }
+}

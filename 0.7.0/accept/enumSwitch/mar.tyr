@@ -1,0 +1,115 @@
+/**
+ * This test shows switch over enums
+ */
+enum mixed {
+  zero,
+  naught = 0,
+  one
+}
+
+enum other {
+  zero
+}
+
+type T {
+  with mixed.zero
+  with mixed.naught
+  with mixed.one
+
+  test "use" {
+    val c = zero
+    switch c {
+      if zero true
+      else false
+    }
+  }
+
+  test "use 2" {
+    switch naught {
+      if zero true
+      else false
+    }
+  }
+
+  // note to self: likely another category
+  test "duplicate" <: noCompile[typing] {
+    switch naught {
+      if zero true
+      // twice the same value
+      if naught true
+      else false
+    }
+  }
+
+  test "enum" <: noCompile[typing] {
+    switch naught {
+      // no, switch expected type is mixed
+      if 0 true
+      else false
+    }
+  }
+
+  test "enum other" <: noCompile[typing] {
+    switch naught {
+      // no, switch expected type is mixed
+      if other.zero true
+      else false
+    }
+  }
+
+  test "int" {
+    val c : int = zero
+    switch c {
+      // CT-evaluates to 0
+      if other.zero true
+      else false
+    }
+  }
+
+  test "int mixed" {
+    val c : int = zero
+    switch c {
+      // CT evaluates to 0
+      if other.zero true
+      // CT evaluates to 1, fine for us
+      if one false
+      if 2 false
+      else false
+    }
+  }
+
+  test "int duplicate" {
+    switch 7 {
+      // CT evaluates to 0
+      if other.zero true
+      // CT evaluates to 0 ⇒ duplicate
+      if zero false
+      else false
+    }
+  }
+
+  test "enum join" {
+    var x = 0
+    val c = switch x {
+      if 0 other.zero
+      else zero
+    }
+    0 == (c : IntegerLiteral[32])
+  }
+
+  test "enum join enum" <: noCompile[typing] {
+    var x = 0
+    val c : mixed = switch x {
+      if 0 other.zero
+      else zero
+    }
+  }
+
+  test "enum join enum 2" <: noCompile[typing] {
+    var x = 0
+    val c : other = switch x {
+      if 0 other.zero
+      else zero
+    }
+  }
+}

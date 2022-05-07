@@ -1,0 +1,85 @@
+/**
+ * This test shows switch can bind the value used for switching to a name.
+ * That name is a CT constant in if branches and a value on other branches.
+ *
+ * @note to self: this is kind of tricky but I need the mechanism anyway to
+ * represent tagged union switches and type switches
+ */
+type T[v : int] {
+  test "bind type" {
+    0 == switch x := 0 {
+      // the compiler needs to find out that x is 0 here
+      if 0 T[x].v
+      else x
+    }
+  }
+
+  // note to self: or another category maybe
+  test "bind type else" <: noCompile[typing] {
+    0 == switch x := 0 {
+      if 0 x
+      // x is an RT value here; cannot be allowed
+      else T[x].v
+    }
+  }
+
+  test "bind switch" {
+    0 == switch x := 0 {
+      if 0 switch y := x {
+        // the compiler needs to find out that x is 0 here
+        if x x
+        else y
+      }
+      else x
+    }
+  }
+
+  test "bind switch 3 x" {
+    0 == switch x := 0 {
+      if 0 switch y := x {
+        if x switch z := y {
+          if x z
+          else z
+        }
+        else y
+      }
+      else x
+    }
+  }
+
+  test "bind switch 3 y" {
+    0 == switch x := 0 {
+      if 0 switch y := x {
+        if x switch z := y {
+          if y z
+          else z
+        }
+        else y
+      }
+      else x
+    }
+  }
+
+  test "bind switch 3 duplicate" {
+    0 == switch x := 0 {
+      if 0 switch y := x {
+        // the compiler needs to find out that x is 0 here
+        if x x
+        else y
+      }
+      else x
+    }
+  }
+
+  // note to self: or another category maybe
+  test "bind switch else" <: noCompile[typing] {
+    0 == switch x := 0 {
+      if 0 x
+      else switch y := x {
+        // x is an RT value here; cannot be allowed
+        if x y
+        else y
+      }
+    }
+  }
+}

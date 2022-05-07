@@ -1,0 +1,99 @@
+/**
+ * This test shows enums with explicit values.
+ *
+ * Also, enum constants exist within the namespace of the enum.
+ *
+ * Enum constants can be imported.
+ */
+enum color {
+  // we could use bit masks as constants; order is not relevant
+  red = 0xff0000i, green = 0xff00i, blue = 0xffi
+}
+
+/**
+ * Multiple constants can have the same value
+ */
+enum same {
+  dead = 0,
+  deceased = 0,
+  belowground = 0,
+  departed = 0
+}
+
+/**
+ * An uninitialized constant gets the value of the previous incremented by one.
+ * The first constant gets an implizit zero.
+ */
+enum mixed {
+  one = 1,
+  two,
+  three
+}
+
+type T {
+  with color.red
+  with color.green
+  with color.blue
+
+  with same.dead
+  with same.deceased
+  with same.belowground
+  with same.departed
+
+  with mixed.one
+  with mixed.two
+  with mixed.three
+
+  test "decompose color" {
+    val c = 0xab00cdi
+    0 != c & red && 0 == c & green && 0 != c & blue
+  }
+
+  test "compare same" {
+    dead == deceased && dead == belowground && dead == departed
+  }
+
+  test "mixed math" {
+    three == one + two
+  }
+
+  test "mixed values" {
+    1 == one && 2 == two && 3 == three
+  }
+
+  test "Literal value" {
+    val c = one
+    1 == (c : LiteralInteger[32])
+  }
+
+  test "Literal value" <: noCompile[typing] {
+    // forget about the enum type
+    var c = one : LiteralInteger[32]
+    // won't work, behaves like a regular integer
+    c : LiteralInteger[32]
+  }
+
+  test "Literal enum value" {
+    // c should be Ref[mixed]
+    var c = one
+    
+    (c : Ref[mixed]) == (c : LiteralInteger[32])
+  }
+
+  test "enum var" {
+    // c should be Ref[mixed]
+    var c = one
+    
+    c = zero
+
+    0 == c
+  }
+
+  test "enum var +" <: noCompile[naming] {
+    // c should be Ref[mixed]
+    var c = one
+
+    // the issue here is that no operator = exists that turns an int into mixed
+    c = zero + one
+  }
+}
