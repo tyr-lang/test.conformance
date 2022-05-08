@@ -1,0 +1,16 @@
+/**
+ * This test shows tagged unions
+ */
+// make zero visible as single identifier
+with other.zero
+
+type unionZero;
+type unionOne {
+  var x : int
+}
+
+enum union <: mixed {
+  if one unionZero
+  // not allowed, all need to be constants from mixed
+  if zero unionOne
+}

@@ -1,0 +1,147 @@
+/**
+ * This test shows usage of tagged unions
+ */
+enum mixed {
+  zero,
+  one
+}
+
+enum other {
+  zero,
+  one
+}
+
+enum union <: mixed {
+  if zero String
+  if one int
+  else double
+}
+
+type T {
+  test "use" {
+    var c = new union
+
+    switch v := c {
+      // note: switch should implicitly perform a closed lookup in mixed
+      if zero v : String
+      if one  v : int
+      else    v : double
+    }
+    true
+  }
+
+  test "use explicit" {
+    var c = new union
+
+    switch v := c {
+      // explicit access of the correct instances should be fine
+      if mixed.zero v : String
+      if mixed.one  v : int
+      else    v : double
+    }
+    true
+  }
+
+  test "use explicit other" <: noCompile[typing] {
+    var c = new union
+
+    switch v := c {
+      // explicit access of the other enum is not
+      if other.zero v : String
+      if mixed.one  v : int
+      else    v : double
+    }
+    true
+  }
+
+  test "use union" <: noCompile[typing] {
+    var c = new union
+
+    switch v := c {
+      // note: v is a String here
+      if zero v : union
+      if one  v : int
+      else    v : double
+    }
+    true
+  }
+
+  test "use base" <: noCompile[typing] {
+    var c = new union
+
+    switch v := c {
+      // note: v is a String here
+      if zero v : mixed
+      if one  v : int
+      else    v : double
+    }
+    true
+  }
+
+  test "update" {
+    var c = new union
+
+    switch v := c {
+      if zero { v = "" }
+      if one  { v = 7 }
+      else    { v = 3.14 }
+    }
+    true
+  }
+
+  test "update some" {
+    var c = new union
+
+    switch v := c {
+      if zero { v = "" }
+      else    {}
+    }
+    true
+  }
+
+  test "update nonexhaustive" <: noCompile[naming] {
+    var c = new union
+
+    switch v := c {
+      if zero { v = "" }
+      // v will have type mixed in this case
+      else    { v = 3.14 }
+    }
+    true
+  }
+
+  test "update nonexhaustive 2" {
+    var c = new union
+
+    switch v := c {
+      if zero { v = "" }
+      // update the tag to zero
+      else    { v = zero }
+    }
+    true
+  }
+
+  test "update val" <: noCompile[naming] {
+    val c = new union
+
+    switch v := c {
+      // v is a val. So, no '=' visible
+      if zero { v = "" }
+      if one  { v = 7 }
+      else    { v = 3.14 }
+    }
+    true
+  }
+
+  test "update" <: noCompile[typing] {
+    var c = new union
+
+    switch v := c {
+      // unpacking tagged unions requires a CT enum constant of the tag's type
+      if 0 { v = "" }
+      if 1 { v = 7 }
+      else { v = 3.14 }
+    }
+    true
+  }
+}

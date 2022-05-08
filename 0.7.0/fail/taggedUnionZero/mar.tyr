@@ -1,0 +1,19 @@
+/**
+ * This test shows tagged unions
+ */
+enum mixed {
+  zero,
+  naught = 0,
+  one
+}
+
+type unionZero;
+type unionOne {
+  var x : int
+}
+
+enum union <: mixed {
+  if zero unionZero
+  // not allowed, both have the same RT representation
+  if naught unionOne
+}

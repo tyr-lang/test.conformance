@@ -1,0 +1,13 @@
+/**
+ * This test shows tagged unions
+ */
+enum mixed {
+  zero,
+  naught = 0,
+  one
+}
+
+enum union <: mixed {
+  // not allowed, requires at least one if clause
+  else void
+}

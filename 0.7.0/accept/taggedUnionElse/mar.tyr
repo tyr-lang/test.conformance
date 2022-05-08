@@ -1,0 +1,31 @@
+/**
+ * This test shows tagged unions
+ *
+ * @note else is used if another value is encountered. By default void is used.
+ */
+enum mixed {
+  zero,
+  naught = 0,
+  one
+}
+
+type unionOne {
+  var x : int
+}
+type unionElse {
+  var x : double;
+}
+
+enum union <: mixed {
+  if zero void
+  if one unionOne
+  else unionElse
+}
+
+type T {
+  test "repr" {
+    // implicit constructor creating an uninitialized stack-allocated union
+    var c = new union
+    true
+  }
+}

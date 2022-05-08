@@ -1,0 +1,38 @@
+/**
+ * This test shows tagged unions
+ */
+enum mixed {
+  zero,
+  naught = 0,
+  one
+}
+
+type unionZero;
+type unionOne {
+  var x : int
+}
+
+enum union <: mixed {
+  if zero unionZero
+  if one unionOne
+}
+
+type T {
+  test "repr" {
+    // implicit constructor creating an uninitialized stack-allocated union
+    var c = new union
+    true
+  }
+
+  test "update" {
+    // implicit constructor creating an uninitialized stack-allocated union
+    var c = new union
+    c = mixed.one
+    // bind v as Ref[union]
+    switch v := c {
+      if one v.x = 0
+    }
+
+    true
+  }
+}

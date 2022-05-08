@@ -1,0 +1,11 @@
+/**
+ * This test shows tagged unions
+ */
+enum mixed {
+  naught,
+  one
+}
+
+enum other {
+  zero
+}
