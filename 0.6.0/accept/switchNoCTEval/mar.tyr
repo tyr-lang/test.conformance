@@ -8,7 +8,7 @@ type T {
   test "call" <: noCompile {
     var x = 5
     switch x {
-      if f(1): true
+      if f(1) true
       else false
     }
   }
@@ -16,7 +16,7 @@ type T {
   test "block" <: noCompile {
     var x = 5
     switch x {
-      if {f(1)}: true
+      if {f(1)} true
       else false
     }
   }

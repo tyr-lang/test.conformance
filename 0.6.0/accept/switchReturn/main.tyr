@@ -3,8 +3,8 @@
  */
 type Switch[default : bool] {
   type def f(x : int) : bool = switch x {
-      if 0 : {return false}
-      if 7 : true
+      if 0 {return false}
+      if 7 true
       else {return default}
     }
 

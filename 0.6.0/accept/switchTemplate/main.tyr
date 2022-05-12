@@ -5,8 +5,8 @@
  */
 type Switch[default : bool] {
   type def f(x : int) = switch x {
-      if 0 : false
-      if 7 : true
+      if 0 false
+      if 7 true
       else default
     }
 

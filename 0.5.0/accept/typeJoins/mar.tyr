@@ -87,8 +87,8 @@ type MyInt {
 
   test "multi int" {
     val v = switch phiX {
-      if 0 : 0
-      if 7 : 4
+      if 0 0
+      if 7 4
       else (1 : int)
     }
     v : int
@@ -97,8 +97,8 @@ type MyInt {
 
   test "multi any" <: noCompile {
     val v = switch phiX {
-      if 0 : 0
-      if 7 : null
+      if 0 0
+      if 7 null
       else (1 : int)
     }
     // v.type == void
@@ -106,8 +106,8 @@ type MyInt {
 
   test "multi String" {
     val v = switch phiX {
-      if 0 : ("" : String)
-      if 7 : null
+      if 0 ("" : String)
+      if 7 null
       else ""
     }
     v : String
@@ -116,8 +116,8 @@ type MyInt {
 
   test "multi object" {
     val v = switch phiX {
-      if 0 : "".type
-      if 7 : null
+      if 0 "".type
+      if 7 null
       else ""
     }
     v.type == Object

@@ -5,14 +5,14 @@ type T {
 
   test "basic -- full braces" {
     switch (0) {
-      if 0 : { true }
+      if 0 { true }
       else { false }
     }
   }
 
   test "basic -- no braces" {
     switch 0 {
-      if 0 : true
+      if 0 true
       else false
     }
   }
@@ -23,15 +23,15 @@ type T {
 
   test "else 1" {
     1 == (switch 0 { 
-      if 0 : 1
-      if 1 : 0
+      if 0 1
+      if 1 0
       else -1
     })
   }
 
   test "--1" {
     - -1 == -(switch -1 { 
-      if -1 : { -1 }
+      if -1 { -1 }
       else 0
     })
   }
@@ -44,7 +44,7 @@ type T {
 
   test "- - 1" {
     - -1 == - (switch (- 1) { 
-      if (- 1) : (- 1)
+      if (- 1) (- 1)
       else 0
     })
   }
