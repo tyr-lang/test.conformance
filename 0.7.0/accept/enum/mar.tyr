@@ -4,3 +4,9 @@
 enum color {
   red, green, blue
 }
+
+type T {
+  test "use" {
+    color.red != color.green
+  }
+}
