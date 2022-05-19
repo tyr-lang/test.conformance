@@ -35,7 +35,7 @@ type T {
     red == Color.red
   }
 
-  test "compare Color" <: noCompile[typing] {
+  test "compare Color int" <: noCompile[naming] {
     // red is an alias of 0U
     red == Color.red : int
   }
@@ -57,7 +57,7 @@ type T {
     true
   }
 
-  test "coerce enum Color" <: noCompile[typing] {
+  test "coerce enum Color" <: noCompile[naming] {
     // not allowed
     val c = red : Color
     false
