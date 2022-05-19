@@ -63,30 +63,30 @@ type T {
 
   test "Literal value" {
     val c = one
-    1 == (c : LiteralInteger[32])
+    1 == (c : IntegerLiteral[32])
   }
 
-  test "Literal value" <: noCompile[typing] {
+  test "Literal value from int" <: noCompile[typing] {
     // forget about the enum type
-    var c = one : LiteralInteger[32]
+    var c = one : IntegerLiteral[32]
     // won't work, behaves like a regular integer
-    c : LiteralInteger[32]
+    c : IntegerLiteral[32]
   }
 
   test "Literal enum value" {
     // c should be Ref[mixed]
     var c = one
     
-    (c : Ref[mixed]) == (c : LiteralInteger[32])
+    (c : Ref[mixed]) == (c : IntegerLiteral[32])
   }
 
   test "enum var" {
     // c should be Ref[mixed]
     var c = one
     
-    c = zero
+    c = two
 
-    0 == c
+    2 == c
   }
 
   test "enum var +" <: noCompile[naming] {
@@ -94,6 +94,6 @@ type T {
     var c = one
 
     // the issue here is that no operator = exists that turns an int into mixed
-    c = zero + one
+    c = two + one
   }
 }
