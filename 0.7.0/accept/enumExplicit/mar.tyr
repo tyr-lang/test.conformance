@@ -66,10 +66,12 @@ type T {
     1 == (c : IntegerLiteral[32])
   }
 
-  test "Literal value from int" <: noCompile[typing] {
+  test "Literal value from int" <: noCompile[naming] {
     // forget about the enum type
-    var c = one : IntegerLiteral[32]
+    var c = IntegerLiteral[32] !! one
     // won't work, behaves like a regular integer
+    // yeah and it's a naming issue because there could be another c that is a
+    // Literal ;)
     c : IntegerLiteral[32]
   }
 
