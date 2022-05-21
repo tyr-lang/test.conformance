@@ -1,0 +1,48 @@
+/**
+ * Test correct representation of enums and enum usages in ext and odr use cases
+ */
+with test.enumODR.base;
+with test.enumODR.c1;
+with test.enumODR.c2;
+
+public type color := base.color
+public type box := base.Box[color]
+
+type T {
+  with base.color.red
+
+  test "use color" {
+    color.blue == base.color.blue;
+  }
+
+  test "use color c2" {
+    c2.color.green == base.color.green;
+  }
+
+  test "use box" {
+    color.blue == new box(color.blue).get;
+  }
+
+  test "class eq base" {
+    box.class == base.Box[base.color].class
+  }
+  test "class eq c1" {
+    box.class == c1.box.class
+  }
+  test "class eq c2" {
+    box.class == c2.box.class
+  }
+
+  test "red eq base" {
+    new box(red).get == new base.Box[base.color](red).get
+  }
+  test "red eq c1" {
+    new box(red).get == new c1.Box[c2.color](red).get
+  }
+  test "red eq c2" {
+    new box(red).get == new c2.Box[base.color](red).get
+  }
+  test "red eq c2 color" {
+    new box(red).get == new c1.Box[base.color](c2.color.red).get
+  }
+}

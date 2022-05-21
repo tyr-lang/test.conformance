@@ -1,0 +1,16 @@
+/**
+ * Test correct representation of enums and enum usages in ext and odr use cases
+ */
+public enum color {
+  red, green, blue
+}
+
+public class Box[T : Type] {
+  public val get : T;
+  new (get := v : T);
+
+  test "use" {
+    // note: do *not* instantiate with color
+    7 == new Box[int](7).get;
+  }
+}

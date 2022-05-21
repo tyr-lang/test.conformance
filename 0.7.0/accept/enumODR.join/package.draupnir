@@ -1,0 +1,4 @@
+src=.
+with=test.enumODR.c1
+with=test.enumODR.c2
+name=test
