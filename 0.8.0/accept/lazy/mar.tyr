@@ -1,0 +1,43 @@
+/**
+ * See if something like Lazy can be implemented.
+ *
+ * @note This is in fact a test allowing for CT Block arguments and context
+ *       binding checks therein.
+ *
+ * TODO there should be something like "LazyClass[Init : Block[T]] <: Lazy[Init.T, null, Init];"
+ */
+type Lazy[T : Type, Uninit : T, Init : Block[T]] <: proxy[T] {
+  private var v;
+  new {
+    v = Uninit;
+  }
+  public def implicit() : T {
+    if (Uninit == v)
+      v = Init.eval();
+
+    v
+  }
+
+  test "use" {
+    var v = new Lazy[int, 0, 7]
+    7 == v
+  }
+
+  // note: we require a global variable because a local variable should not be visible
+  type var x;
+  test "order" {
+    x = 0
+    var v = new Lazy[int, 0, ++x]
+    var w = new Lazy[int, 0, ++x]
+    var r : int = w;
+    2 == v && 1 == w && 1 == r && 2 == x
+  }
+  
+  test "local" <: noCompile[TBD] {
+    var x = 0;
+    // it should be an error to bind x here
+    // note: it should also never be allowed to bind non-eternal entities because they can descope before the type
+    var v = new Lazy[int, 0, x]
+    7 == v
+  }
+}
