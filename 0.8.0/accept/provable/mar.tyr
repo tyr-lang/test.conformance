@@ -1,5 +1,7 @@
 /**
  * Check translation of provable tests
+ *
+ * TODO there should be a notProvable failing if the test body can be compressed to a BoolLiteral
  */
 type T {
   test "trivial" <: provable {
