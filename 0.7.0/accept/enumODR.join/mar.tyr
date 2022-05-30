@@ -23,14 +23,19 @@ type T {
     color.blue == new box(color.blue).get;
   }
 
-  test "class eq base" {
+  test "class class eq base" {
+    // note: the .class is not desired, but caused a crash.
+    // So, we keep the test
     box.class == base.Box[base.color].class
   }
+  test "class eq base" {
+    box : Class == base.Box[base.color] : Class
+  }
   test "class eq c1" {
-    box.class == c1.box.class
+    box : Class == c1.box : Class
   }
   test "class eq c2" {
-    box.class == c2.box.class
+    box : Class == c2.box : Class
   }
 
   test "red eq base" {
