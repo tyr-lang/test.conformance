@@ -7,7 +7,7 @@ public enum color {
 
 public class Box[T : Type] {
   public val get : T;
-  new (get := v : T);
+  public new (get := v : T);
 
   test "use" {
     // note: do *not* instantiate with color

@@ -3,6 +3,7 @@
  */
 with test.enumODR.base;
 public type color := base.color
+public type Box := base.Box
 public type box := base.Box[color]
 
 type T {

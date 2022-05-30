@@ -2,6 +2,7 @@
  * Test correct representation of enums and enum usages in ext and odr use cases
  */
 with test.enumODR.base;
+public type Box := base.Box
 public type box := base.Box[base.color]
 
 type T {
