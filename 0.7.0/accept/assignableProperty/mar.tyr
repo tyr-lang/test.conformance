@@ -1,0 +1,49 @@
+/**
+ * Check that assignable checks against properties result in useful errors.
+ *
+ * @note Apparently, properties count as Types. This should be reviewed.
+ *
+ * @todo check that errors are useful; also, there should be no RT representation of properties
+ */
+type T {
+
+  test "val proxy" {
+    val s = proxy;
+    s == 1
+  }
+
+  test "val proxy null" {
+    val s = proxy;
+    s == null
+  }
+
+  test "var proxy" {
+    var s = proxy;
+    s == 1
+  }
+
+  test "val proxy proxy" {
+    val s = proxy[byte];
+    s == proxy[int]
+  }
+
+  test "var proxy proxy" {
+    var s = proxy[byte];
+    s == proxy[int]
+  }
+
+  test "var proxy reverse" {
+    var s = proxy;
+    1 == s
+  }
+
+  test "assignable proxy" {
+    var s : T = proxy;
+    1 == s.g
+  }
+
+  test "assignable proxy reverse" {
+    var s = 7
+    s == proxy
+  }
+}
