@@ -1,0 +1,28 @@
+/**
+ * Check that a overridden fields do not need an explicit type.
+ *
+ * @note this is only useful if clashes with interface fields exist
+ */
+class S {
+  var g = 1
+}
+
+type A := S;
+
+class T <: A {
+
+  override[g]
+  var g;
+
+  new (g := x : int);
+
+  test "use S" {
+    var s = new S;
+    1 == s.g
+  }
+
+  test "use T poly" {
+    var s : A = new T(7)
+    7 == s.g
+  }
+}
