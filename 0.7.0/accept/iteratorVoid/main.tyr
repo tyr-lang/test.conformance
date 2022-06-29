@@ -1,0 +1,14 @@
+with container.ArrayBuffer
+
+/**
+ * Test that Iterator[void] results in a useable class. (not as in useful)
+ */
+type T {
+  test "use" {
+    var arr = new ArrayBuffer[void]
+    var it = arr.iterator()
+    val r = it.hasNext() == arr.empty() && it.forall c do (false)
+    delete arr
+    r
+  }
+}
