@@ -1,0 +1,4 @@
+/**
+ * For now, this is not allowed
+ */
+type prop := mem.eternal
