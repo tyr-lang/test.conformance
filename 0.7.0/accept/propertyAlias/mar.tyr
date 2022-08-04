@@ -1,0 +1,10 @@
+/**
+ * Apparently, all type constructors can be used in type alias declarations
+ */
+type prop := mem.eternal
+
+type T <: prop {
+    test "use"{
+        true
+    }
+}
