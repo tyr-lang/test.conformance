@@ -1,0 +1,24 @@
+with container.Iterator
+
+/**
+ * Test template identities
+ *
+ * @note to self: Template functions with class or object lifetime in classes
+ *                cannot dispatch. In the same way as inline functions. The
+ *                reason in that case is that they would require an unlimited
+ *                number of IVTable slots. Each.
+ */
+type T {
+
+  def f[V : Type](x : V) = x
+
+  test "regular" {
+    T.f[int](7) == 7
+  }
+  test "usage" {
+    T.f[V][int](7) == 7
+  }
+  test "twice" {
+    T.f[V][V][int](7) == 7
+  }
+}

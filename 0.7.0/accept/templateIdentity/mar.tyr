@@ -1,0 +1,20 @@
+with container.Iterator
+
+/**
+ * Test template identities
+ */
+class T[V : Type] {
+
+  test "usage" {
+    T[V][int] == T[int]
+  }
+
+  test "unapplied" {
+    // note to self: this may not be legal as the argument has a free variable
+    T[V][T] == T[T[V]]
+  }
+
+  test "ext" {
+    Iterator[Iterator.T][byte] == Iterator[byte]
+  }
+}
