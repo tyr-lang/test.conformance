@@ -9,12 +9,28 @@ type T {
     f[0]
   }
 
-  test "check" {
+  test "call" {
+    f[0]()
+  }
+
+  test "check fp" <: noCompile {
     f[0] == 0
   }
 
-  test "check 2" {
-    f[31337] = 31337 &&
+  test "check 2a fp" <: noCompile {
+    f[31337] = 31337
+  }
+
+  test "check 2b fp" <: noCompile {
     f[-1] != ~1
+  }
+
+  test "check" {
+    f[0]() == 0
+  }
+
+  test "check 2" {
+    f[31337]() == 31337 &&
+    f[-1]() != ~1
   }
 }
