@@ -8,14 +8,14 @@ type T[x : IntegerLiteral[32]] {
   type def g : int = f[x]()
 
   test "usage" {
-    T[1].f[1]
+    T[1].f[1]()
   }
 
   test "check" {
-    T[1].f[2] == 2
+    T[1].f[2]() == 2
   }
 
   test "check 2" {
-    T[1].g == 1
+    T[1].g() == 1
   }
 }
