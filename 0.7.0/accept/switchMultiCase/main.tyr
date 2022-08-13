@@ -1,0 +1,24 @@
+/**
+ * Test that multiple cases in a switch can be combined creating only a single
+ * BB for the realization. This should work for all sorts of switch expressions.
+ *
+ * @note for the moment, I know no way to check that a block is not duplicated;
+ *       hence, the test requires manual inspection of the resulting code
+ */
+type Switch {
+  type def f(x : int) : bool = switch x {
+      if 0 {return false}
+      if 2, 3 false
+      if 7, else true
+    }
+
+  test "seven" {
+    f(7)
+  }
+  test "true" {
+    f(33)
+  }
+  test "false" {
+    !f(3) && !f(2)
+  }
+}
