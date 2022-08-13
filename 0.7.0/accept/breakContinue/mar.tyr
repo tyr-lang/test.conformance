@@ -1,0 +1,67 @@
+/**
+ * For some reason, break and continue was not required, yet. If binders are
+ * used to loop, it is not required. However, sometimes implementing the whole
+ * loop would be nice :)
+ */
+type T {
+
+  test "break true" {
+    while(true){
+      break
+    }
+    true
+  }
+
+  test "continue true" {
+    var i = 0
+    while(true){
+      ++i
+      if(i < 10)
+        continue
+
+      if(10 == i)
+        return true
+
+      return false
+    }
+    true
+  }
+
+  test "nested" {
+    var i = 0
+    var done = false
+    while true {
+      while true {
+        ++i
+        if(i < 10)
+          continue
+
+        if(10 == i)
+          break
+
+        return false
+      }
+      if(!done) {
+        done = true
+        i = 0
+        continue
+
+      } else if(10 == i){
+        break
+      }
+
+      return false;
+    }
+    true
+  }
+
+  test "break nothing" <: noCompile {
+    break
+    false
+  }
+
+  test "continue nothing" <: noCompile {
+    continue
+    false
+  }
+}
