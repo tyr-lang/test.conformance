@@ -1,0 +1,23 @@
+/**
+ * Test instantiation of simple template functions.
+ * More precisely, substitution of default function CT args
+ *
+ * @note allowing this implies that the result type of f is recalculated on
+ *       substitution as the intersection of x and y is any
+ */
+type T[x : Type] {
+
+  type def f[y : Type = x](cond : bool, a : x, b : y) = if cond a else b
+
+  test "usage" {
+    T[int].f[int](false, 1, 2)
+  }
+
+  test "default" {
+    T[int].f(true, 2, 1) == 2
+  }
+
+  test "object" {
+    null != T[String].g[Class](true, "String", String)
+  }
+}
