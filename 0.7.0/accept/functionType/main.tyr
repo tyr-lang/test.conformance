@@ -1,0 +1,18 @@
+/**
+ * add syntax for function types because it allows us to pass native functions
+ * as is and is easier to use than type interfaces
+ */
+class Apply[F : def (int) : int] {
+
+  def apply(x : int) = F(x)
+
+  test "unapply" {
+    var f = new Apply[int.`-`]
+
+    val r = -2 == f(2)
+
+    delete f
+
+    r
+  }
+}
