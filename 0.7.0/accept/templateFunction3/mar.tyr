@@ -5,18 +5,24 @@ type T[T : Type, v : Ref[T]] {
 
   type def make : T = v
 
+  type var mx : int;
+  type val x : Ref[int] = mx;
   test "usage" {
-    var x = 0;
+    x = 0;
     T[int, x].make();
   }
 
+  type var my : int;
+  type val y : Ref[int] = my;
   test "check" {
-    var y = 0;
+    y = 0;
     T[int, y].make() == 0;
   }
 
+  type var mz : int;
+  type val z : Ref[int] = mz;
   test "check mut" {
-    var z = 0;
+    z = 0;
     T[int, z].make() == 0;
     ++z;
     T[int, z].make() == 1;
