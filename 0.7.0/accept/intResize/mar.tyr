@@ -1,0 +1,30 @@
+/**
+ * Test resize functions of Integer and Unsigned.
+ */
+type T {
+
+  test "call" {
+    255u8.resize[32]()
+    true
+  }
+
+  test "uchar" {
+    255u8.resize[32]() == 255u
+  }
+
+  test "overflow" {
+    255.resize[8]().resize[32]() != 255
+  }
+
+  test "short" {
+    255i16.resize[32]() == 255
+  }
+
+  test "sext" {
+    -1i8.unsign().resize[32]().sign() != -1
+  }
+
+  test "sext magic trick" {
+    -1i8.unsign().resize[32]().sign() == 255
+  }
+}
