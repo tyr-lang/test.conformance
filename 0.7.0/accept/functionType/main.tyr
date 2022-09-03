@@ -6,7 +6,7 @@ class Apply[F : def (int) : int] {
 
   def apply(x : int) = F(x)
 
-  test "unapply" {
+  test "use" {
     var f = new Apply[int.`-`]
 
     val r = -2 == f(2)
@@ -15,4 +15,21 @@ class Apply[F : def (int) : int] {
 
     r
   }
+}
+
+class CTApply[
+  F : def [size : IntegerLiteral[32]](this : int) : IntegerLiteral[size]
+] {
+  type def apply() := F[8]
+
+  test "use" {
+    var f = new Apply[int.resize]
+
+    val r = 2i8 == f(2)
+
+    delete f
+
+    r
+  }
+
 }
