@@ -1,0 +1,10 @@
+/**
+ * Test ODR-correctness of function templates
+ */
+public type T {
+  public type val f = base.T.f[7]
+
+  test "use" {
+    7 == f()
+  }
+}

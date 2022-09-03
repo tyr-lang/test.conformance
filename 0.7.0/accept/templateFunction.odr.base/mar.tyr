@@ -1,0 +1,6 @@
+/**
+ * Test ODR-correctness of function templates
+ */
+public type T {
+  public type def f[x : IntegerLiteral[32]] : int = x
+}

@@ -1,0 +1,4 @@
+src=.
+name=test.tf.odr.join
+with=test.tf.odr.c1
+with=test.tf.odr.c2

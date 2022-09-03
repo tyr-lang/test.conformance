@@ -1,0 +1,16 @@
+/**
+ * Test ODR-correctness of function templates
+ */
+public type T {
+  test "use c1" {
+    7 == c1.T.f()
+  }
+
+  test "use c2" {
+    7 == c2.T.f()
+  }
+
+  test "eq" {
+    c1.T.f == c2.T.f
+  }
+}
