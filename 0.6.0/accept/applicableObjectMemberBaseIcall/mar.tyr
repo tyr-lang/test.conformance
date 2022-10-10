@@ -24,7 +24,9 @@ public class Box[T : Type] <: Base[T] {
   override def r(this : Ref[Box[T]], y : T) : Box[T] = this
 
   public new (x := x : T);
+}
 
+public class T {
   type var a = new Box[int](7);
 
   test "use f" {

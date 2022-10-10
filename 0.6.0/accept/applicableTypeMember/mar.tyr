@@ -1,17 +1,19 @@
 /**
  * Ensure implicits on type member applications are performed as intended
  */
-public class Box[T : Type] {/*
+public class Box[T : Type] {
   var x : T;
 
   type def f(this : Box[T], y : T) : T = y
   type def g(this : Box[T], y : T) : T = x
   type def h(this : Box[T], y : T) : Ref[T] = x
-*/
-  type def r(this : Ref[Box[T]], y : T) : Box[T] = this
-/*
-  public new (x := x : T);
 
+  type def r(this : Ref[Box[T]], y : T) : Box[T] = this
+
+  public new (x := x : T);
+}
+
+public class T {
   type var a = new Box[int](7);
 
   test "use f" {
@@ -40,5 +42,5 @@ public class Box[T : Type] {/*
   }
   test "use r static" {
     7 == Box[int].r(a, a.x).x
-  }*/
+  }
 }
