@@ -54,4 +54,13 @@ type Cursor[T : Type = StringLiteral] <: proxy[T] {
     delete arr
     r
   }
+
+  /**
+   * this test was added as template/canonical split introduced a regression
+   * leading parameterless uses to result in canonical instances instead of
+   * defaults which is not correct for constructors.
+   */
+  test "min default" {
+    var c : Cursor[StringLiteral] = new Cursor(null);
+  }
 }
