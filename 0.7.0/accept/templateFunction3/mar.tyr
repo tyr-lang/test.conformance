@@ -4,7 +4,9 @@
 type T[T : Type, v : Ref[T]] {
 
   type def make : T = v
+}
 
+type A {
   type var mx : int;
   type val x : Ref[int] = mx;
   test "usage" {
