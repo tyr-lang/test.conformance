@@ -1,0 +1,12 @@
+/**
+ * Test ODR-correctness of class templates
+ */
+public type C := base.T[7];
+
+public type T {
+  public type val v = C.v
+
+  test "use" {
+    7 == v
+  }
+}

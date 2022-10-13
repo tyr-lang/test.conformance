@@ -1,0 +1,6 @@
+/**
+ * Test ODR-correctness of class templates
+ */
+public class T[x : IntegerLiteral[32]] {
+  public type val v : int = x
+}

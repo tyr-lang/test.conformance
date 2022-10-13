@@ -1,0 +1,4 @@
+src=.
+name=test.tc.odr.join
+with=test.tc.odr.c1
+with=test.tc.odr.c2

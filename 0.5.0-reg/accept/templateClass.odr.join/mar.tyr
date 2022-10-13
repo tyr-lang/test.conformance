@@ -1,0 +1,16 @@
+/**
+ * Test ODR-correctness of class templates
+ */
+public type T {
+  test "use c1" {
+    7 == c1.T.v
+  }
+
+  test "use c2" {
+    7 == c2.T.v
+  }
+
+  test "eq" {
+    c1.C.class == c2.C.class
+  }
+}
