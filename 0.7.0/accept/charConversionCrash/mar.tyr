@@ -1,16 +1,11 @@
 /**
  * Check that inline char conversion does not crash the backend
  */
-class T {
-  private type def char(v : byte) <: inline = character !! v.unsign().resize[21]()
-
-  def toChar(b : byte) : character {
-      return char(b&0x7fi8)
-  }
+type T {
+  type def char(v : byte) <: inline = character !! v.unsign().resize[21]()
 
   test "use" {
-    var chars = new T
-
-    delete chars
+    var b = 0i8
+    0u21 == char(b&0x7fi8)
   }
 }
