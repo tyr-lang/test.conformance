@@ -1,0 +1,17 @@
+with container.Iterator
+
+/**
+ * Test that size can be unapplied from a template instance and other template
+ * unapplies.
+ */
+type T {
+  test "param" {
+    32 == int.Size
+  }
+  test "base" {
+    Iterator[int] == Iterator[byte].__base__[int]
+  }
+  test "reapply" {
+   Iterator[byte] == Iterator[byte].__base__[Iterator[byte].T]
+  }
+}
