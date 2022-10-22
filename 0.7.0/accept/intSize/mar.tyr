@@ -1,0 +1,8 @@
+/**
+ * Test that size can be unapplied from a template instance
+ */
+type T {
+  test "unapply" {
+    32 == int.Size
+  }
+}
