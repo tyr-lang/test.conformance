@@ -14,8 +14,8 @@ type T {
     z = y;
   }
   
-  new {
-    z = 0;
+  new (r : int = 0) {
+    z = 2 * r;
   }
   
   def implicit : int = 0 + 2*z
@@ -23,31 +23,31 @@ type T {
   test "usage" <: noCompile {
     7 == new T[1][1](1)
   }
-  
+
   test "usage 2" {
     6 == new T[1](1)
   }
-  
+
   test "usage 2 default" <: noCompile {
     6 == new T[][1](1)
   }
-  
+
   test "usage 3" <: noCompile {
     3 == new T[1][1]
   }
-  
+
   test "usage 4" {
     2 == new T[1]
   }
-  
+
   test "usage 5" {
     4 == new T(1)
   }
-  
+
   test "usage 6" {
     0 == new T
   }
-  
+
   test "illegal" <: noCompile {
     new T[1](1)(1)
   }
