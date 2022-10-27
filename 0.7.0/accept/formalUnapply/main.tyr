@@ -12,4 +12,17 @@ class Vector[D : container.size_t] {
 
     r
   }
+
+  test "unapply ref" {
+    var v = new Vector[2U]
+
+    // note: one of the consequences of libaral unapply rules is that we can
+    // always get to the base type of a Ref and from there to the Parameter of
+    // the base type
+    val r = 2U == v.T.D
+
+    delete v
+
+    r
+  }
 }
