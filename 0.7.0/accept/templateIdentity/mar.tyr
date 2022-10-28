@@ -2,19 +2,51 @@ with container.Iterator
 
 /**
  * Test template identities
+ *
+ * @note in contrast to the original proposal, the herbrand type is no longer
+ *       identical with the template
+ *
+ * @note This test displays ways to create instances of types with free
+ *   variables. It is under no circumstances correct to use them in a way that
+ *   would require their representation by a backend. Also, expect that this
+ *   feature could be removed in a future revision without further notice as it
+ *   allows CT variables to escape their scope.
+ *
+ * @note Currently, a type template offers its parameters as members. This may
+ *   cacheng in any version without further notice. This test relies on this
+ *   behaviour.
  */
 class T[V : Type] {
 
   test "usage" {
-    T[V][int] == T[int]
+    T[T.V].__base__[int] == T[int]
+  }
+
+  test "unapplied type function" <: noCompile{
+    // note: won't compile because T is no longer a Type but a [Type]Type
+    T[T.V][T].V[int] == T[T[T.V]].V.__base__[int]
   }
 
   test "unapplied" {
+    // note: more complex than the original proposal to get rid of the free
+    // variables
+    T[T.V].__base__[T[T.V]].V.__base__[int] == T[T[T.V]].V.__base__[int]
+  }
+
+  test "ext" {
+    Iterator[Iterator.T].__base__[byte] == Iterator[byte]
+  }
+
+  test "usage old" <: noCompile {
+    T[V][int] == T[int]
+  }
+
+  test "unapplied old" <: noCompile {
     // note to self: this may not be legal as the argument has a free variable
     T[V][T] == T[T[V]]
   }
 
-  test "ext" {
+  test "ext old" <: noCompile {
     Iterator[Iterator.T][byte] == Iterator[byte]
   }
 }
