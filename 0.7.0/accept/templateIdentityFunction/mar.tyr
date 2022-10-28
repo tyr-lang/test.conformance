@@ -9,16 +9,28 @@ with container.Iterator
  *                number of IVTable slots. Each.
  */
 type T {
+  new;
+
+  type val v : T = new T
 
   def f[V : Type](x : V) = x
 
+  test "usage explicit" {
+    f[bool].__base__[int](v, 7) == 7
+  }
+
   test "regular" {
-    T.f[int](7) == 7
+    v.f[int](7) == 7
+  }
+  test "usage this" <: noCompile {
+    // v cannot be used as an implicit this because an implicit this is the
+    // target of the most recent member access
+    v.f[bool].__base__[int](7) == 7
   }
   test "usage" {
-    T.f[V][int](7) == 7
+    f[bool].__base__[int](v, 7) == 7
   }
   test "twice" {
-    T.f[V][V][int](7) == 7
+    f[bool].__base__[bool].__base__[int](v, 7) == 7
   }
 }
