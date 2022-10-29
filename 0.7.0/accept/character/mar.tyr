@@ -8,25 +8,43 @@ type T {
     "".chars().forall c do (
       c == 42u21
     ) && 
-    ! "".bytes().exists c do (
+    ! "".chars().exists c do (
       c == 0u21
     )
   }
 
   test "char single" {
-    "c".bytes().forall c do {
+    "c".chars().forall c do {
       c == 'c'
     }
   }
 
-  test "char multi byte" {
-    "ᚠ".bytes().forall c do {
+  test "char two byte" {
+    "ö".chars().forall c do {
+      c == 'ö'
+    }
+  }
+
+  test "char three byte" {
+    "ᚠ".chars().forall c do {
       c == 'ᚠ'
     }
   }
 
+  test "char four byte" {
+    "💩".chars().forall c do {
+      c == '💩'
+    }
+  }
+
+  test "char invalid" {
+    "\xff\xff".chars().forall c do {
+      c == '�'
+    }
+  }
+
   test "escapes tick" {
-    "\'".bytes().forall c do {
+    "\'".chars().forall c do {
       c == '\''
     }
   }
