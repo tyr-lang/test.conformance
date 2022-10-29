@@ -1,0 +1,11 @@
+/**
+ * Test ODR-correctness of function templates
+ */
+public type T[R : Type] {
+  public type def f[x : IntegerLiteral[32]] : R = R !! x
+
+  test "use" {
+    // ensure that T[int] is instantiated
+    0 == T[int].f[0]()
+  }
+}

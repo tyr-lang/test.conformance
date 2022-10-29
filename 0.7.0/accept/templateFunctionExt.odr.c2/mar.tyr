@@ -1,0 +1,14 @@
+/**
+ * Test ODR-correctness of function templates
+ */
+public type T {
+  public type val f = base.T[int].f[7]
+  public type val g = base.T[byte].f[7]
+
+  test "use f" {
+    7 == f()
+  }
+  test "use g" {
+    7i8 == g()
+  }
+}

@@ -1,0 +1,3 @@
+src=.
+name=test.tf.ext.odr.c2
+with=test.tf.ext.odr.base
