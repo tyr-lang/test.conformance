@@ -1,0 +1,9 @@
+/**
+ * Check basic character usage
+ */
+type T {
+  test "empty" {
+    // Lexer or AST builder should complain
+    ''
+  }
+}
