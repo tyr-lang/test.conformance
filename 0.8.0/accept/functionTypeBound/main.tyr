@@ -1,0 +1,24 @@
+/**
+ * add syntax for function types because it allows us to pass native functions
+ * as is and is easier to use than type interfaces
+ *
+ * @note this is a lot harder than the part with unnamed parameters because the
+ *   usage of named CT params in the remainder of a function type cannot be
+ *   represented with the Tyr 0.6 function type IR
+ */
+class CTApply[
+  F : def [size : IntegerLiteral[32]](this : int) : IntegerLiteral[size]
+] {
+  type def apply() := F[8]
+
+  test "use" {
+    var f = new Apply[int.resize]
+
+    val r = 2i8 == f(2)
+
+    delete f
+
+    r
+  }
+
+}

@@ -7,7 +7,13 @@ class Apply[F : def (int) : int] {
   def apply(x : int) = F(x)
 
   test "use" {
-    var f = new Apply[int.`-`]
+    // note: in general, it cannot be that the overload resolution for the
+    // parameter is based on the type of F because the current inference
+    // strategy evaluates the parameter before the function, i.e. the type in
+    // this case. This is a fundamental decision that cannot be changed in
+    // general because we allow complex statements to yield what is "Apply" in
+    // this case. To solve this issue, even Tyr 0.4 had coercions.
+    var f = new Apply[int.`-` : def (int) : int]
 
     val r = -2 == f(2)
 
@@ -15,21 +21,4 @@ class Apply[F : def (int) : int] {
 
     r
   }
-}
-
-class CTApply[
-  F : def [size : IntegerLiteral[32]](this : int) : IntegerLiteral[size]
-] {
-  type def apply() := F[8]
-
-  test "use" {
-    var f = new Apply[int.resize]
-
-    val r = 2i8 == f(2)
-
-    delete f
-
-    r
-  }
-
 }
