@@ -1,0 +1,18 @@
+/**
+ * Ensure that using a function from a type interface results in correct code
+ * generation.
+ */
+type T {
+  type val eq <: inline = MinEQR[T].type;
+
+  var x : long;
+
+  new (x := x : long = 0L);
+
+  def == (x : T) = eq.equals(this, x)
+
+  test "use" {
+    val x = new T(2L)
+    x == x
+  }
+}
