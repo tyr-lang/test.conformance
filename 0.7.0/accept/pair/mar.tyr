@@ -12,6 +12,9 @@ type Pair [A : Type, B : Type] {
 
   def swap : Pair[B, A] = new Pair[B,A](b,a);
 
+  def == (p : Pair[A,B]) = eq.equals(this, p)
+  def != (p : Pair[A,B]) = !eq.equals(this, p)
+
   test "swap swap" {
     var p = new Pair[int, int](2,3)
     // this test requires Eq!
@@ -19,28 +22,7 @@ type Pair [A : Type, B : Type] {
   }
 
   test "swap swapk 2" {
-    var p = new Pair(int, long)(2,3L)
+    var p = new Pair[int, long](2,3L)
     p == p.swap().swap()
-  }
-}
-
-/* This type should also be fine */
-type Box [T : Type] {
-  var content : T;
-
-  new (content := content : T) {}
-
-  type def box [T: Type] (t : T) : Box[T] = new Box[T](t);
-  def unbox : T = content;
-
-  test "box unbox" {
-    var b = Box.box[int](7);
-    7 == b.unbox();
-  }
-
-  test "box box" {
-    var b = Box.box[int](7);
-    var bb = Box.box[b.type](b);
-    7 == bb.unbox().unbox();
   }
 }
