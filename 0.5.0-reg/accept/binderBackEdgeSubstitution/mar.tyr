@@ -1,0 +1,13 @@
+/**
+ * Ensure that a template substitution of a binder substitution in a loop
+ * results in a usable CFG
+ */
+type Util[T : Type] {
+  type def f(x : bool) : void {
+    while(true && x) {}
+  }
+
+  test "use" {
+    Util[byte].f(false)
+  }
+}
