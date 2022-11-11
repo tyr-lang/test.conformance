@@ -1,0 +1,7 @@
+/**
+ * Test that implicit new of public classes is accessible, i.e. visibility
+ *  should be inherited from the type instead of being fixed package private.
+ */
+public class Resource <: container.Seq[byte], abstract {
+  // the implicit new should be allowed to use the implicit new of Seq
+}
