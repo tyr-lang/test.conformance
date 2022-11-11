@@ -4,4 +4,9 @@
  */
 public class Resource <: container.Seq[byte], abstract {
   // the implicit new should be allowed to use the implicit new of Seq
+
+  test "use" {
+    // there should be exactly one realized constructor
+    null != Resource.`new`;
+  }
 }
