@@ -1,0 +1,17 @@
+/**
+ * Test usage of resources.
+ */
+type T {
+
+  test "use data" {
+    "user".bytes().sameElements[byte.`==`](data.iterator())
+  }
+
+  test "use secret" {
+    "weak password".bytes().sameElements[byte.`==`](paswd.iterator())
+  }
+
+  test "use inner" {
+    "text".bytes().sameElements[byte.`==`](inner.text.iterator())
+  }
+}

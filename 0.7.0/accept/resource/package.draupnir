@@ -1,0 +1,30 @@
+name=test.resource
+
+# set the resource root directory
+# note the extra 's'
+# note: resources are made available in namespace $name.$resources
+# note: defining resources with an effective empty list of resources is an error
+# note: subdirectories will be turned into sub-namespaces
+# note: file names are case sensitive and whitespace is preserved as is
+resources data
+
+# defining a second base path is not allowed
+# resources unused
+
+
+# accessible by other packages
+# note: the default visibility is package
+# note: implicitly, the file extension, i.e. any text after the last dot is
+#   omitted. This means that "
+public resource data
+
+# resources with that name will be included; it is not an error if excluded
+# resources appear multiple times under the same name
+exclude resource readme.md
+
+# secret of this package
+# beware: secrets are never fully secret; they can be read from binaries;
+#   reading them from tl-files is especially easy
+# note: if a name is followed by '=' and a path, the file will be made visible
+#   under that name instead of the default name
+resource paswd = secret.txt
