@@ -1,0 +1,13 @@
+/**
+ * In this example, T should not bind to anything.
+ *
+ * @note this test was added because it was once compilable and worked fine
+ *
+ * @note this worked because the first implementation of unapply did also allow
+ *       Seq.T without the Seq prefix because it is a parent and thus in scope
+ */
+public class Resource <: container.Seq[byte], abstract {
+
+  // T should not bind to Seq.T
+  public def apply(index : container.index_t) : T;
+}
