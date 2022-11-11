@@ -1,0 +1,20 @@
+/**
+ * Test usage of resources from test.resource.
+ */
+type T {
+  with r := test.resource
+
+  test "use data" {
+    "user".bytes().sameElements[byte.`==`](r.data.iterator())
+  }
+
+  test "use secret" <: noCompile {
+    // not visible
+    r.paswd
+  }
+
+  test "use inner" <: noCompile {
+    // not visible
+    r.inner.text
+  }
+}
