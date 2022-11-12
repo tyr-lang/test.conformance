@@ -1,0 +1,12 @@
+/**
+ * Test that a template function with defaults can be used like a function
+ */
+type T {
+  test "explicit" {
+    "some text".chars().sameElements[]("some text".chars())
+  }
+
+  test "implicit" {
+    "some text".chars().sameElements("some text".chars())
+  }
+}
