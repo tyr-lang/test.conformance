@@ -10,7 +10,7 @@ class U <: T {
   // no new, implicit new will call T.new
 
 
-  test "new abstract" <: noCompile {
+  test "new abstract" <: noCompile[E_OOP_ABSTRACT] {
     new T
   }
 

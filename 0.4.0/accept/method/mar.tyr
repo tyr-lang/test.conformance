@@ -22,7 +22,7 @@ type T {
     !g()
   }
 
-  test "while no param" <: noCompile {
+  test "while no param" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     while(g) f();
     true
   }
@@ -32,7 +32,7 @@ type T {
     true
   }
 
-  test "while short no param" <: noCompile {
+  test "while short no param" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     while g f
   }
 
@@ -45,7 +45,7 @@ type T {
     true
   }
 
-  test "do while" <: noCompile {
+  test "do while" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     do {
       f()
     } while(g);

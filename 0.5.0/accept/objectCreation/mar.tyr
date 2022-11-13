@@ -35,7 +35,7 @@ class T {
     }
   }
 
-  test "delete delete" <: noCompile {
+  test "delete delete" <: noCompile[TYP_ILLEGAL_EXPRESSION] {
     val x = new T
     // result of delete is void and void cannot be deleted
     delete delete x

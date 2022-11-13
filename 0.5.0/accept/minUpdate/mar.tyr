@@ -35,15 +35,16 @@ type Test {
     t.apply() = true
   }
 
-  test "no apply" <: noCompile {
+  test "no apply" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     val t = new Test
     // not allowed, as we did not define an apply(int)
     t(3) = true
   }
 
-  test "no call" <: noCompile {
+  test "no call" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {
     val t = new Test
     // not allowed, as we did not call apply()
+    // note: the error is that no = can be found
     t = true
   }
 }

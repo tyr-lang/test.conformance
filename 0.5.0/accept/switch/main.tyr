@@ -12,7 +12,7 @@ type Switch {
     }
   }
 
-  test "int / long" <: noCompile {
+  test "int / long" <: noCompile[TYP_MISMATCH] {
     var x = 3
     switch x {
       if 0 false

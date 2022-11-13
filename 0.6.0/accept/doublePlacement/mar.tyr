@@ -10,7 +10,7 @@ type T {
   test "box explicit" {
     1 == f(x := 1)
   }
-  test "box explicit double" <: noCompile{
+  test "box explicit double" <: noCompile[NAM_DUPLICATE_PARAMETER] {
     1 == f(x := 1, x := 2)
   }
 }

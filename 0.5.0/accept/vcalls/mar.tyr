@@ -15,7 +15,8 @@ class S {
   }
 
   // this test shall prevent that some CT-evaluation allows odd code
-  test "call on super" <: noCompile {
+  test "call on super" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {
+    // forget that we are an S and make f inaccessible
     val x : Object = new S
     val r = 0 == x.f()
     delete x

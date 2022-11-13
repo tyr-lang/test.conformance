@@ -5,7 +5,7 @@ with test.fo2.Box;
 with test.fo2.InvBox;
 
 type T {
-  test "box" <: noCompile {
+  test "box" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     // note to self: this should not work because positional matching happens
     // before default evaluation
     1 == new Box[1].v
@@ -17,7 +17,7 @@ type T {
     1 == new InvBox[1].v
   }
 
-  test "invbox double" <: noCompile {
+  test "invbox double" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     1 == new InvBox[1.0].v
   }
 }

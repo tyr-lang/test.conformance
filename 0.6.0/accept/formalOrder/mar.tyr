@@ -26,18 +26,18 @@ type T {
   test "invbox" {
     1 == (new InvBox[1, int]).v
   }
-  test "fun with types" <: noCompile {
+  test "fun with types" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     // note: this test is currently a no compile test, because the compiler
     // cannot prove that this is the case; if CT evaluation is improved
     // substentially, this test might turn into valid Tyr
     1 == (new (new Box[Type, Box]).v[int, 1]).v
   }
 
-  test "int double" <: noCompile {
+  test "int double" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     1 == (new Box[int, 1.0]).v
   }
 
-  test "three numbers" <: noCompile {
+  test "three numbers" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     1 == (new Box[1, 2, 3]).v
   }
 }

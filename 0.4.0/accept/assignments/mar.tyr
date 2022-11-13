@@ -18,8 +18,11 @@ type MyInt {
     v : IntegerLiteral[32]
   }
 
-  test "int val string" <: noCompile {
+  test "int val string" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     val v = 7;
+    // note: despite what one might be used to from other languages all static
+    // access is subject to overload resolution and the error is that we could
+    // not find a matching overload
     v : String
   }
 }

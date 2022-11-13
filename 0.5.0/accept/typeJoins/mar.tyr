@@ -13,12 +13,12 @@ type MyInt {
     // v.type == IntegerLiteral[32]
   }
 
-  test "any" <: noCompile {
+  test "any" <: noCompile[TYP_ILLEGAL_EXPRESSION] {
     val v = if phi 7 else 7L
     // v.type == void // because join knows that it cannot represent its result
   }
 
-  test "any string" <: noCompile {
+  test "any string" <: noCompile[TYP_ILLEGAL_EXPRESSION] {
     val v = if phi 7 else ""
     // v.type == void // because join knows that it cannot represent its result
   }
@@ -29,13 +29,13 @@ type MyInt {
     // v.type == int
   }
 
-  test "void" <: noCompile {
+  test "void" <: noCompile[TYP_ILLEGAL_EXPRESSION] {
     val v = if phi {} else {}
     v : void
     // v.type == void
   }
 
-  test "any void" <: noCompile {
+  test "any void" <: noCompile[BUG] {
     var x = 0
     val v = if phi x else {}
     // v.type == any
@@ -60,18 +60,18 @@ type MyInt {
     // v.type == Null
   }
 
-  test "int Null" <: noCompile {
+  test "int Null" <: noCompile[TYP_ILLEGAL_EXPRESSION] {
     val v = if phi 7 else Null
     // v.type == void
   }
 
-  test "var null" <: noCompile {
+  test "var null" <: noCompile[TYP_ILLEGAL_EXPRESSION] {
     var x = 7
     val v = if phi null else x
     // v.type == void
   }
 
-  test "var string" <: noCompile {
+  test "var string" <: noCompile[TYP_ILLEGAL_EXPRESSION] {
     var x = 7
     val v = if phi "" else x
     // v.type == void
@@ -95,7 +95,7 @@ type MyInt {
     // v.type == int
   }
 
-  test "multi any" <: noCompile {
+  test "multi any" <: noCompile[TYP_ILLEGAL_EXPRESSION] {
     val v = switch phiX {
       if 0 0
       if 7 null

@@ -5,7 +5,7 @@ type T {
   type def f(i : BlockParameter[int], j : BlockParameter[int], b : Block[void]) : bool = true
   type def f(i : int, j : BlockParameter[int], b : Block[void]) : bool = true
 
-  test "zero" <: noCompile {
+  test "zero" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     f(0,1) do { "noshow"!! }
   }
 
@@ -17,7 +17,7 @@ type T {
     f() i, j do { "noshow"!! }
   }
 
-  test "three" <: noCompile {
+  test "three" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     f() i, j, k do { "noshow"!! }
   }
 }

@@ -23,11 +23,13 @@ type point {
   def == (p : point) : bool = (x == p.x) &! y == p.y
 
 
-  test "new" <: noCompile {
+  test "new" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
+    // requires arguments
     val p = new point()
   }
 
-  test "plain new" <: noCompile {
+  test "plain new" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
+    // requires arguments
     new point()
   }
 

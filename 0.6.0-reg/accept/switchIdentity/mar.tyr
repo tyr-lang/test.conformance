@@ -2,7 +2,7 @@
  * Test that switch with identical cases is an error.
  */
 type Switch[default : bool] {
-  test "use" <: noCompile {
+  test "use" <: noCompile[E_SWITCH_CASE] {
     switch 1 {
       if 1 true
       if 1 false

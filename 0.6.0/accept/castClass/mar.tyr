@@ -20,10 +20,10 @@ type T {
   // note: there is no test resulting in a class cast exception or similar
   // because the actual behaviour here is unspecified
 
-  test "no class any " <: noCompile {
+  test "no class any " <: noCompile[NAM_NOT_FOUND] {
     0 == any ! 0
   }
-  test "no class int" <: noCompile {
+  test "no class int" <: noCompile[NAM_NOT_FOUND] {
     0 == int ! 0
   }
 }

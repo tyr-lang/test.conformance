@@ -14,7 +14,7 @@ type T {
     -1 == cond(1, c := true) do ({-1} {2})
   }
 
-  test "binder place default" <: noCompile {
+  test "binder place default" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     // note to self: the blocks would be tried to match against u before
     // applying defaults and we want to keep it like that
     // One might argue that this is a corner case where we could actually allow

@@ -11,7 +11,7 @@ public type T[x : int, y : int] {
     T[x := 3, y := 2].f() == T[y := 2, x := 3].f()
   }
 
-  test "double x" <: noCompile {
+  test "double x" <: noCompile[NAM_DUPLICATE_PARAMETER] {
     T[x := 3, x := 2]
   }
 }

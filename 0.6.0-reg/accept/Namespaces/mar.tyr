@@ -11,7 +11,7 @@ class T {
     T == _root_.test.inner.namespace.T
   }
 
-  test "with" <: noCompile {
+  test "with" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {
     T == localB.namespace.T
   }
 

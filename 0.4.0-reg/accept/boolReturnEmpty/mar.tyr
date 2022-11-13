@@ -7,7 +7,7 @@
  *       calculated
  */
 type T {
-  test "last block" <: noCompile {
+  test "last block" <: noCompile[SYN_TERMINATED] {
     val r = true
     {
     return r
@@ -15,7 +15,7 @@ type T {
     {}
   }
 
-  test "double block" <: noCompile {
+  test "double block" <: noCompile[SYN_TERMINATED] {
     val r = true
     {
     return r

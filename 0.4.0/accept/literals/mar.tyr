@@ -15,7 +15,7 @@ type literals {
     0 : Integer[32]
   }
 
-  test "integer type fail" <: noCompile {
+  test "integer type fail" <: noCompile[TYP_MISMATCH] {
     0 : Integer[64]
   }
 
@@ -46,7 +46,7 @@ type literals {
   }
 
   // this test becomes valid if floats are supported in 8bit
-  test "float 8 literal" <: noCompile {
+  test "float 8 literal" <: noCompile[TYP_NOT_REPRESENTABLE] {
     .0f8 : Float[8]
   }
 }

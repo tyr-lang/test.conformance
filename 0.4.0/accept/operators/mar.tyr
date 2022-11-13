@@ -19,21 +19,21 @@ type T {
     ! !t != !t
   }
 
-  test "basic error" <: noCompile {
+  test "basic error" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     val t : T = new T;
     true == !t ==
   }
 
-  test "basic error more" <: noCompile {
+  test "basic error more" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     val t : T = new T;
     true == !t == !t ==
   }
 
-  test "basic stuck" <: noCompile {
+  test "basic stuck" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     true -|===> false
   }
 
-  test "bool stuck" <: noCompile {
+  test "bool stuck" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     ! true ! false
   }
 }

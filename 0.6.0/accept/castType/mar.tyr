@@ -14,7 +14,9 @@ type T {
   test "pointer" {
     null == String !! 0
   }
-  test "no repr" <: noCompile {
+  test "no repr" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
+    // note: currently, the issue is that == does not accept any and fails
+    // overload resolution; there is no representation check at this point
     0 == any !! 0
   }
 }

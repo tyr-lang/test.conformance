@@ -13,12 +13,12 @@ type T {
     // obviously, this is perfectly fine
     1 == f(v, 2, 3)
   }
-  test "use vv" <: noCompile {
+  test "use vv" <: noCompile[TYP_AMBIGUOUS] {
     var v = 1
     // this should not compile and create an error pointing to two fs above
     2 == f(v, v, 3)
   }
-  test "use vvv" <: noCompile {
+  test "use vvv" <: noCompile[TYP_AMBIGUOUS] {
     var v = 1
     // this should not compile and create an error pointing to all fs above
     2 == f(v, v, v)

@@ -3,11 +3,11 @@
  */
 type T {
 
-  test "instance" <: noCompile {
+  test "instance" <: noCompile[SYN_MALFORMED_EXPRESSION] {
     val p : Ref[int]
   }
 
-  test "ref zero/null" <: noCompile {
+  test "ref zero/null" <: noCompile[TYP_MISMATCH] {
     val p : Ref[int] = 0
   }
 

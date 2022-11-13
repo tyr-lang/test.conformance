@@ -3,7 +3,8 @@
  */
 type Main {
 
-  test "parameter missmatch" <: noCompile {
+  test "parameter missmatch" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
+    // note to self: && does not take a BlockParameter
     true.`&&` du do { do {} while false}
   }
 }

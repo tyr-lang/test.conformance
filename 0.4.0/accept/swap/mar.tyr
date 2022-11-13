@@ -16,7 +16,7 @@ type Swap[A : Type, B : Type] {
     new Swap[int, float](0, 0.0f)
   }
 
-  test "swap" <: noCompile {
+  test "swap" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     var x = new Swap[int, float](0, 0.0f);
     x = x.swap()
   }

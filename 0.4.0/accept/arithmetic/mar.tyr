@@ -6,19 +6,19 @@ type test {
     val x = - -1;
   }
 
-  test "dec" <: noCompile {
+  test "dec" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     val y = 1--;
   }
 
-  test "dec fixed" <: noCompile {
+  test "dec fixed" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     val y = --1;
   }
 
-  test "complex dec" <: noCompile {
+  test "complex dec" <: noCompile[NAM_NOT_FOUND_OVERLOAD]{
     val z = 1 -- + - 1;
   }
 
-  test "complex dec fixed" <: noCompile {
+  test "complex dec fixed" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     val z = -- 1 + - 1;
   }
 
