@@ -1,7 +1,10 @@
 /**
  * Test calls to template constructors; check correct binding of apply
+ *
+ * @note to self: the root issue here is to allow a constructor call to turn
+ *   itself into a function via applicable
  */
-type T {
+type T <: proxy[int] {
 
   val z : int;
 
@@ -13,19 +16,17 @@ type T {
     z = y;
   }
   
-  new {
-    z = 0;
-  }
-  
+  new (z := z : int = 0);
+
   def apply(x : int) : int = this + x;
   
   def implicit : int = 2*z
-  
+  /*
   
   test "brackets" <: noCompile {
     6 == (new T)(1)(1)
   }
-  
+  */
   test "brackets 2" {
     6 == new (T)(1)(1)
   }
@@ -33,7 +34,7 @@ type T {
   test "brackets 2b" {
     6 == (new T(1))(1)
   }
-  
+  /*
   test "brackets 3" {
     4 == (new T)(1)
   }
@@ -72,5 +73,5 @@ type T {
   
   test "illegal" <: noCompile {
     new T(1)[1](1)
-  }
+  }*/
 }
