@@ -1,6 +1,0 @@
-/**
- * Check that a virtual member cannot be abstract in a non-abstract class
- */
-class T <: Iterable {
-  // should override iterator()
-}

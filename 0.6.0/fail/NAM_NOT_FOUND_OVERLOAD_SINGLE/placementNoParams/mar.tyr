@@ -1,0 +1,16 @@
+/**
+ * test regarding parameter inference of placement realizations
+ *
+ * @note I think that no version ever allowed this and from 0.6 on it is
+ * explicitly forbidden as it would create an issue with parameter elaboration.
+ * Because, in this case, body elaboration would be required to complete
+ * parameter elaboration of functions without parameters. On the other hand,
+ * declaring parameters is not the worst thing one would ask a programmer to do.
+ */
+type T {
+  type def plus := int.`+`;
+
+  test "use" {
+    false // instead of: 5 == plus(2,3)
+  }
+}

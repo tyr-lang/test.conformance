@@ -1,0 +1,27 @@
+/**
+ * Test interface function clashing with a function from a super type
+ *
+ * @note moved original test to fail as it had variant parameter inheritance
+ */
+interface I {
+  def fun (x : I) : int = 1
+}
+interface J {
+  def fun (x : T) : int = 2
+}
+
+class S {
+  def fun (x : T) : int = 3
+}
+
+class T <: S, I, J {
+  // manual inspection: no implementation, two itable entries pointing to S.fun
+  
+  test "call" {
+    var x = new T
+
+    val r = x.fun(x)
+    delete x
+    3 == r
+  }
+}

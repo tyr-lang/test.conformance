@@ -1,4 +1,0 @@
-/**
- * Check pack containment checking
- */
-pack[test.internal /* does not exist */] type T;

@@ -1,0 +1,6 @@
+/**
+ * Check that a virtual member cannot be abstract in a non-abstract class
+ */
+class T <: container.Iterable[int] {
+  // should override iterator()
+}

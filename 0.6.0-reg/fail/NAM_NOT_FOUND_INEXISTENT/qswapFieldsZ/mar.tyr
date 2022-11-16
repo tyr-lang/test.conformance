@@ -1,0 +1,39 @@
+/**
+ * Test instantiation of types in combination with elaboration order.
+ *
+ * @note the fail test is the equivalent of an example used to illustrate C++'s
+ *       behaviour and semantics
+ */
+type SwapQ1[A : Type, B : Type] {
+
+  var x : A;
+  var y : B;
+
+  new;
+
+  new(x := x : A, y := y : B);
+
+  def swap : SwapQ2[B,A] {
+    var r = new SwapQ2[B,A]
+    r.x = y
+    r.y = x
+    // there is no field z here
+    r.z = 3
+    return r
+  }
+}
+
+type SwapQ2[A : Type, B : Type] {
+
+  var x : A;
+  var y : B;
+
+  new;
+
+  def swap : SwapQ1[A,B] {
+    var r = new SwapQ1[A,B]
+    r.x = x
+    r.y = y
+    return r
+  }
+}

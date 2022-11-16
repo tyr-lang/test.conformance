@@ -1,0 +1,4 @@
+/**
+ * Check pack containment checking
+ */
+private[test.internal /* does not exist */] type T;

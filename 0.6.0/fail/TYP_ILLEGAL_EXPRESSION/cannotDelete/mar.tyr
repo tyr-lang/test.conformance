@@ -1,0 +1,12 @@
+/**
+ * Check that a type variable with base type Class can use Object members
+ */
+type Box[T : Type] {
+  var x : T;
+  new (x := x : T);
+
+  delete {
+    // should not be provable
+    delete x;
+  }
+}

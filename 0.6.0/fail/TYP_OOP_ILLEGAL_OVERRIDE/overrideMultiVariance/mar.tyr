@@ -1,0 +1,22 @@
+/**
+ * Test explicit override with multiple arguments.
+ *
+ * @note this is the original realization and cannot be compiled as the function
+ *       declaration is covariant but the realization is invariant in parameter
+ *       types.
+ */
+interface I {
+  def fun (x : T) : int = 1
+}
+interface J <: I {
+  def fun (x : I) : int = 2
+}
+
+class S {
+  def fun (x : T) : int = 3
+}
+
+class T <: S, I, J {
+  override [S.fun, I.fun, J.fun]
+  def fun(x : I) := S.fun;
+}

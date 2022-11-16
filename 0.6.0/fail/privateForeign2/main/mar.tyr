@@ -1,4 +1,4 @@
 /**
  * Check pack containment checking
  */
-pack[test.internal /* exist, but not a parent */] type T;
+private[test.internal /* exist, but not a parent */] type T;

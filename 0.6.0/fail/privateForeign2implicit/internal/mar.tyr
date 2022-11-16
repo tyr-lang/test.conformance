@@ -1,4 +1,4 @@
 /**
  * should work fine
  */
-pack type T;
+private type T;
