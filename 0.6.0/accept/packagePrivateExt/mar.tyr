@@ -7,7 +7,7 @@ type T {
     0 == x
   }
 
-  test "use" <: noCompile {
+  test "use" <: noCompile[E_OOP_PRIVACY_VIOLATED] {
     val x = "".class.minTID;
     false
   }

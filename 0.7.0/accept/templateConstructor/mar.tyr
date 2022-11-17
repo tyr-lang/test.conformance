@@ -47,7 +47,7 @@ type T[x : int = 0] {
     0 == new T
   }
 
-  test "illegal" <: noCompile {
+  test "illegal" <: noCompile[TYP_] {
     new T[1](1)(1)
   }
 }

@@ -8,12 +8,12 @@ type T {
     "user".bytes().sameElements[byte.`==`](r.data.iterator())
   }
 
-  test "use secret" <: noCompile {
+  test "use secret" <: noCompile[E_OOP_PRIVACY_VIOLATED] {
     // not visible
     r.paswd
   }
 
-  test "use inner" <: noCompile {
+  test "use inner" <: noCompile[E_OOP_PRIVACY_VIOLATED] {
     // not visible
     r.inner.text
   }

@@ -10,7 +10,7 @@ type BT {
     val x = new Box[float](.0f)
   }
 
-  test "use" <: noCompile {
+  test "use" <: noCompile [ E_OOP_PRIVACY_VIOLATED ] {
     val x = new Box[float](.0f)
     // should not compile
     .0f == x.x

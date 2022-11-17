@@ -21,7 +21,7 @@ class T <: S {
     7 == s.x
   }
 
-  test "invalid" <: noCompile {
+  test "invalid" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
     S.new(0)
   }
 }

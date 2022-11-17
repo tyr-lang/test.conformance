@@ -8,7 +8,7 @@ class T {
     T == c && c == T
   }
 
-  test "new" <: noCompile {
+  test "new" <: noCompile[TYP_NOT_A_TYPE] {
     var c : Class = null;
     c = T;
     val r = T == c && c == T

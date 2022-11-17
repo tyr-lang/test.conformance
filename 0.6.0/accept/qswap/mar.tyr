@@ -16,17 +16,17 @@ type SwapQ1[A : Type, B : Type] {
     new SwapQ1[int, float](0, 0.0f)
   }
 
-  test "swap" <: noCompile {
+  test "swap" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     var x = new SwapQ1[int, float](0, 0.0f);
     x = x.swap()
   }
 
-  test "swap 2" <: noCompile {
+  test "swap 2" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     var x = new SwapQ1[int, float](0, 0.0f);
     x = x.swap().swap()
   }
 
-  test "swap 3" <: noCompile {
+  test "swap 3" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     var x = new SwapQ1[int, float](0, 0.0f);
     x = x.swap().swap().swap()
   }

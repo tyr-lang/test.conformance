@@ -22,7 +22,7 @@ class T[V : Type] {
     T[T.V].__base__[int] == T[int]
   }
 
-  test "unapplied type function" <: noCompile{
+  test "unapplied type function" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     // note: won't compile because T is no longer a Type but a [Type]Type
     T[T.V][T].V[int] == T[T[T.V]].V.__base__[int]
   }
@@ -37,16 +37,16 @@ class T[V : Type] {
     Iterator[Iterator.T].__base__[byte] == Iterator[byte]
   }
 
-  test "usage old" <: noCompile {
+  test "usage old" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {
     T[V][int] == T[int]
   }
 
-  test "unapplied old" <: noCompile {
+  test "unapplied old" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {
     // note to self: this may not be legal as the argument has a free variable
     T[V][T] == T[T[V]]
   }
 
-  test "ext old" <: noCompile {
+  test "ext old" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     Iterator[Iterator.T][byte] == Iterator[byte]
   }
 }

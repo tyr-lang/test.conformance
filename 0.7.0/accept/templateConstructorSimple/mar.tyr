@@ -20,7 +20,7 @@ type T {
   
   def implicit : int = 0 + 2*z
 
-  test "usage" <: noCompile {
+  test "usage" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     7 == new T[1][1](1)
   }
 
@@ -28,11 +28,11 @@ type T {
     6 == new T[1](1)
   }
 
-  test "usage 2 default" <: noCompile {
+  test "usage 2 default" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     6 == new T[][1](1)
   }
 
-  test "usage 3" <: noCompile {
+  test "usage 3" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     3 == new T[1][1]
   }
 
@@ -48,7 +48,7 @@ type T {
     0 == new T
   }
 
-  test "illegal" <: noCompile {
+  test "illegal" <: noCompile[TYP_] {
     new T[1](1)(1)
   }
 }

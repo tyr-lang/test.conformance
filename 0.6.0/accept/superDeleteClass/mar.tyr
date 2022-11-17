@@ -29,7 +29,7 @@ class T <: S {
     }
   }
 
-  test "invalid" <: noCompile {
+  test "invalid" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
     S.delete
   }
 }

@@ -17,7 +17,7 @@ type T <: S {
     var x = new S(0+1)
     1 == x.x
   }
-  test "T no lit" <: noCompile {
+  test "T no lit" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     var x = new T(0+1)
     1 == x.x
   }

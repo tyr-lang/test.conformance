@@ -12,13 +12,13 @@ type T {
     "" == f(String, "")
   }
 
-  test "int" <: noCompile {
+  test "int" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     // note: this should not be allowed because Type has currently no runtime
     // representation and f is not native
     1 == f(int, 1)
   }
 
-  test "any" <: noCompile {
+  test "any" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     // note: at first glance, this looks identical to "int". However, the nature
     // of any can lead the compiler to do different things here.
 

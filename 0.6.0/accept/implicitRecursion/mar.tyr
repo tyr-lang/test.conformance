@@ -10,7 +10,7 @@ class Box[T : Type] {
 class T <: proxy[int] {
     def implicit : Box[T] = null
 
-    test "die" <: noCompile {
+    test "die" <: noCompile[I_LIMIT_EXCEEDED, NAM_NOT_FOUND_OVERLOAD_SINGLE] {
         (new T).unsign()
     }
 }

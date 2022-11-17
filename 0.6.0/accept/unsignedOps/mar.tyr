@@ -3,7 +3,7 @@
  */
 type MyUnsigned {
 
-  test "type check" <: noCompile {
+  test "type check" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     1u != 1
   }
   
@@ -19,7 +19,7 @@ type MyUnsigned {
     1u32 != (-1).unsign()
   }
   
-  test "unsign neg precedence" <: noCompile {
+  test "unsign neg precedence" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     - 1.unsign()
   }
 

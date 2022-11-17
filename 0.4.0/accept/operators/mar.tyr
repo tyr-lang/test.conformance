@@ -29,7 +29,7 @@ type T {
     true == !t == !t ==
   }
 
-  test "basic stuck" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
+  test "basic stuck" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {
     true -|===> false
   }
 

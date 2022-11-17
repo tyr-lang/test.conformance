@@ -13,15 +13,15 @@ type T {
     f[0]()
   }
 
-  test "check fp" <: noCompile {
+  test "check fp" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     f[0] == 0
   }
 
-  test "check 2a fp" <: noCompile {
+  test "check 2a fp" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {
     f[31337] = 31337
   }
 
-  test "check 2b fp" <: noCompile {
+  test "check 2b fp" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     f[-1] != ~1
   }
 

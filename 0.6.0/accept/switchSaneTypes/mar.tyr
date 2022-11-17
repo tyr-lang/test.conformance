@@ -2,10 +2,10 @@
  * Check switch typing and CT-evaluation conditions
  */
 type T {
-  test "guard void" <: noCompile {
+  test "guard void" <: noCompile[TYP_MISMATCH] {
     (switch {} {else true}):bool
   }
-  test "ct case" <: noCompile {
+  test "ct case" <: noCompile[TYP_CT_REQUIRED] {
     var x = 5
     switch x {
       if x true

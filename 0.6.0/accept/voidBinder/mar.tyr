@@ -27,7 +27,7 @@ type T {
     true
   }
 
-  test "return return" <: noCompile {
+  test "return return" <: noCompile[SYN_TERMINATED] {
     return
     return
   }

@@ -8,7 +8,7 @@ type Array := container.Array[int];
  *       translation of the body of the test.
  */
 type T {
-  test "use" <: noCompile {
+  test "use" <: noCompile[E_OOP_PRIVACY_VIOLATED] {
     val x = new Array(1);
     x.data(0L)
   }

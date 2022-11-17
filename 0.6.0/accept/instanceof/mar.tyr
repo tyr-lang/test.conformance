@@ -24,7 +24,7 @@ type T {
     ! String ? Class
   }
 
-  test "no class" <: noCompile {
+  test "no class" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {
     // note: embraced to get the desired error message
     ! (int ? 0)
   }

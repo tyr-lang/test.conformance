@@ -3,10 +3,10 @@
  * error.
  */
 type T {
-  test "void" <: noCompile {
+  test "void" <: noCompile[TYP_MISMATCH] {
     (return)(3);
   }
-  test "int" <: noCompile {
+  test "int" <: noCompile[TYP_MISMATCH] {
     (return 3)(3);
   }
 }

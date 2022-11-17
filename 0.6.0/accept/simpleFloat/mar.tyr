@@ -11,7 +11,7 @@ type T {
   test "negative" {
     -12f == -12.0f
   }
-  test "odd dot" <: noCompile {
+  test "odd dot" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {
     // note: should not compile, because it is also an access to field f of int
     -12f == -12.f
   }

@@ -55,12 +55,12 @@ type T {
     true
   }
 
-  test "break nothing" <: noCompile {
+  test "break nothing" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
     break
     false
   }
 
-  test "continue nothing" <: noCompile {
+  test "continue nothing" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
     continue
     false
   }

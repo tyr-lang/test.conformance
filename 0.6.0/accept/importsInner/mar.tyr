@@ -22,7 +22,7 @@ type T {
 }
 
 type NotT {
-  test "use" <: noCompile {
+  test "use" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {
     var x : index_t;
     x = 0
     0U == x.unpack

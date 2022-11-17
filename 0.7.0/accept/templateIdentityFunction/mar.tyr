@@ -22,7 +22,7 @@ type T {
   test "regular" {
     v.f[int](7) == 7
   }
-  test "usage this" <: noCompile {
+  test "usage this" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     // v cannot be used as an implicit this because an implicit this is the
     // target of the most recent member access
     v.f[bool].__base__[int](7) == 7

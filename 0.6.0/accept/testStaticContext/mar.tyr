@@ -4,14 +4,14 @@
 type T {
   var x = true;
 
-  test "use" <: noCompile {
+  test "use" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     x
   }
 }
 class C {
   var x = true;
 
-  test "use" <: noCompile {
+  test "use" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     x
   }
 }

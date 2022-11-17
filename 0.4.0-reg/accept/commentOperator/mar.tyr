@@ -34,7 +34,7 @@ type T {
    * because of how operators in Tyr and lexers in general work, this can't
    * compile: counts as one operator named `||//` that does not exist
    */
-  test "comment 2 op nc" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
+  test "comment 2 op nc" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {
     true ||//
     false
   }

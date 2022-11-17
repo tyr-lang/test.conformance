@@ -5,13 +5,13 @@
  *       kind of operator
  */
 type T {
-  test "pre" <: noCompile {
+  test "pre" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     && true
   }
-  test "post" <: noCompile {
+  test "post" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     true &&
   }
-  test "post 2" <: noCompile {
+  test "post 2" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     true !
   }
 }

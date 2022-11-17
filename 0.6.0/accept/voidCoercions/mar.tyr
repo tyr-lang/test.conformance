@@ -2,46 +2,46 @@
  * Some similar tests for cases where an expected type must or must not be void
  */
 class T {
-  test "bool block" <: noCompile {
+  test "bool block" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     {}:bool
   }
-  test "switch condition" <: noCompile {
+  test "switch condition" <: noCompile[TYP_MISMATCH] {
     switch {}{else {}}
   }
-  test "if condition" <: noCompile {
+  test "if condition" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE,TYP_MISMATCH] {
     if {}{}
   }
-  test "bool if single" <: noCompile {
+  test "bool if single" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     (if true{}):bool
   }
-  test "bool while" <: noCompile {
+  test "bool while" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     (while false{}):bool
   }
-  test "while guard" <: noCompile {
+  test "while guard" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE,TYP_MISMATCH] {
     while {}{}
   }
-  test "do while guard" <: noCompile {
+  test "do while guard" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE,TYP_MISMATCH] {
     do {} while {}
   }
-  test "STA" <: noCompile {
+  test "STA" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     T.type : void
   }
-  test "DTA" <: noCompile {
+  test "DTA" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     T.class : void
   }
-  test "DTA void" <: noCompile {
+  test "DTA void" <: noCompile[TYP_NOT_A_CLASS] {
     {}.class : Class
   }
-  test "new void" <: noCompile {
+  test "new void" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     (new T) : void
   }
-  test "delete bool" <: noCompile {
+  test "delete bool" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     (delete new T) : bool
   }
-  test "void var" <: noCompile {
+  test "void var" <: noCompile[TYP_ILLEGAL_EXPRESSION] {
     var x = {}
   }
-  test "any var" <: noCompile {
+  test "any var" <: noCompile[TYP_NOT_REPRESENTABLE,E_OOP_PRIVACY_VIOLATED] {
     var x = mem.raw.`new`(T)
   }
 }
