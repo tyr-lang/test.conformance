@@ -16,7 +16,7 @@ class Test <: WithFun {
     delete new Test
   }
 
-  test "new interface" <: noCompile {
+  test "new interface" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {
     delete new WithFun
   }
 
