@@ -2,7 +2,7 @@
  * Check that a suspicious use of Refs in code results in a warning
  */
 class T {
-  test "STA" {
+  test "STA" <: noCompile[W_OOP_UNLIKELY_REF] {
     var c : Class = null;
     // inspect that this causes a warning
     c.type
@@ -12,7 +12,7 @@ class T {
     true
   }
 
-  test "cast class" {
+  test "cast class" <: noCompile[W_OOP_UNLIKELY_CAST] {
     var c : Class = null;
     // inspect that this causes a warning
     (Class !! c)
