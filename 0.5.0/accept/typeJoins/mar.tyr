@@ -35,10 +35,11 @@ type MyInt {
     // v.type == void
   }
 
-  test "any void" <: noCompile[BUG] {
+  test "any void" <: noCompile[TYP_ILLEGAL_EXPRESSION] {
     var x = 0
     val v = if phi x else {}
-    // v.type == any
+    // note to self: I changed join to discard non-representable results
+    // v.type == void
   }
 
   test "literal string" {
