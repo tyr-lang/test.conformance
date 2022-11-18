@@ -11,12 +11,20 @@ type T {
   test "shrink" {
     0i8 == byte !! 0
   }
-  test "pointer" {
+  // don't do this
+  test "pointer" <: noCompile[W_OOP_UNLIKELY_CAST] {
     null == String !! 0
   }
   test "no repr" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     // note: currently, the issue is that == does not accept any and fails
     // overload resolution; there is no representation check at this point
     0 == any !! 0
+  }
+}
+
+type T2 <: suppressCompilerMessage["W_OOP_UNLIKELY_CAST"] {
+  // don't do this, but it can work
+  test "pointer" {
+    null == String !! 0
   }
 }
