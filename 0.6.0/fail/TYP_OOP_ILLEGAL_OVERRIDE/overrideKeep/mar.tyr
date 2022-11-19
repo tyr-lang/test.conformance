@@ -12,7 +12,7 @@ class S {
   def fun (x : T) : int = 3
 }
 
-class T <: S, I, J {
+class T <: S, I, J, suppressCompilerMessage["E_OOP_TRANSITIVE_SUPER"] {
   override [S.fun]
   def fun(x : T) := S.fun;
   override [I.fun]

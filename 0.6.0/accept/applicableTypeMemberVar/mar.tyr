@@ -25,7 +25,7 @@ public class T <: suppressCompilerMessage["W_OOP_UNLIKELY_REF"] {
     // note to self: maybe, there should be a check to have this fail on var
     7 == f(a, a.x).x
   }
-  test "use r member" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {
+  test "use r member" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     // noCompile: not part of the vtable
     var f = a.r;
     7 == f(a, a.x).x

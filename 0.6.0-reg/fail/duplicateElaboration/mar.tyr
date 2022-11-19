@@ -7,11 +7,11 @@ interface I {
   def fun (x : I) : int = 1
 }
 interface J {
-  def fun (x : TOrd) : int = 2
+  def fun (x : T) : int = 2
 }
 
 class S {
-  def fun (x : TOrd) : int = 3
+  def fun (x : T) : int = 3
 }
 
 // order does not matter
