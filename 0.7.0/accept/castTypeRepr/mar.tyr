@@ -3,6 +3,7 @@
  */
 type T {
   test "no repr" <: noCompile[TYP_NOT_REPRESENTABLE] {
+    // note to self: add a post check on can be stored on all blocks reachable from a variable free body/initializer
     any !! 0
     false
   }
