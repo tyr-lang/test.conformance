@@ -1,0 +1,39 @@
+/**
+ * Test that creating a value that acts like a function can be done without
+ * storing the value in a local variable
+ *
+ * @note var/val worked for years; direct is the regression that should have
+ *   worked with the 0.6 release
+ *
+ * @note it is perfectly fine to create a value that is never captured locally
+ *   as it escapes into the implicit/apply chain and can be managed from there
+ */
+type T <: proxy[int] {
+
+  val z : int;
+  
+  new (z := z : int = 0);
+
+  def apply(x : int) : int = this + x;
+  
+  def implicit : int = z
+
+  test "var" {
+    var t = new T(2)
+    3 == t(1)
+  }
+
+  test "val" {
+    val t = new T(2)
+    3 == t(1)
+  }
+
+  test "direct" {
+    // note to self: damit das funktionieren kann muss apply grundsätzlich wie
+    // eine implicit conversion auf einen Funktionstyp wirken; damit sollten
+    // auch die sonderreglen bei der ast-Übersetzung entfallen
+    // wenn das so ist sollte es reichen im AST-Konstruktor die Prüfung auf
+    // applicable von assignable zu ändern
+    3 == new T(2)(1)
+  }
+}

@@ -1,0 +1,9 @@
+/**
+ * Check casts offered by types; ensure that there is a repr check eventually
+ */
+type T {
+  test "no repr" <: noCompile[TYP_NOT_REPRESENTABLE] {
+    any !! 0
+    false
+  }
+}

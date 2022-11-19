@@ -1,0 +1,6 @@
+/**
+ * This test shows that cyclic type field initialization results in a warning
+ */
+type T {
+  type var f : int = T.f
+}
