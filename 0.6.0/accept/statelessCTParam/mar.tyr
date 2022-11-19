@@ -14,7 +14,7 @@ type T {
     new container.FlatSizedArray[int, x]
   }
 
-  test "CT var" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
+  test "CT var" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     var x = 0U;
     new container.FlatSizedArray[int, x]
   }
