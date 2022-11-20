@@ -1,0 +1,22 @@
+/**
+ * Test that two objects can be deleted in a single statement
+ */
+class A {
+  new;
+
+  def f(x : Ref[B]) = true
+}
+
+type B {
+  new;
+  delete;
+
+  test "use" {
+    var x = new A
+    var y = new B
+    val r = x.f(y)
+    delete x, y
+    
+    r
+  }
+}
