@@ -1,0 +1,37 @@
+/**
+ * This test did trigger a substitution error.
+ */
+
+with container.FlatArray;
+with container.FlatArrayIterator
+with io.CString
+with io.System
+
+/**
+ * Allows printing and retrieving of stack traces.
+ */
+public type stacktrace {
+
+  type def backtrace(traces : FlatArray[observablePointer], size : int) : int extern C.backtrace;
+  type def backtraceSymbols(traces : FlatArray[observablePointer], size : int) : FlatArray[CString] extern C.backtrace;
+
+
+  public type def print(maxDepth : int = 128) {
+    var traces = new FlatArray[observablePointer](maxDepth)
+
+    var count = backtrace(traces, maxDepth);
+    var symbols = backtraceSymbols(traces, count);
+
+    new FlatArrayIterator[symbols.T](symbols, count).foreach c do {
+      System.out.put(c)
+      System.out.put("\n")
+    }
+
+    delete traces
+    delete symbols
+  }
+
+  test "use" {
+    print()
+  }
+}
