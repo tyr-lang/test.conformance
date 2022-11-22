@@ -1,0 +1,24 @@
+/**
+ * Sleipnir can't represent this so there should be an error for this definition
+ *
+ * @todo if this is really turned into an error message, the test must be moved
+ *       to fail
+ */
+
+with container.FlatArray;
+with container.FlatArrayIterator
+with tyr.io.CString
+with tyr.io.System
+
+/**
+ * Allows printing and retrieving of stack traces.
+ */
+public type stacktrace {
+
+  type def backtrace(traces : FlatArray[observablePointer], size : int) : int extern c.backtrace;
+  type def backtraceSymbols(traces : FlatArray[observablePointer], size : int) : FlatArray[CString] extern c.backtrace;
+
+  test "use" {
+    false
+  }
+}
