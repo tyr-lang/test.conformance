@@ -2,11 +2,11 @@
  * @note tests that noCompile accepts category parameters
  */
 type T {
-  test "basic" <: noCompile[naming] {
+  test "basic" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {
     erfundenerWert
   }
 
-  test "typing" <: noCompile[typing] {
+  test "typing" <: noCompile[TYP_MISMATCH] {
     true : int
   }
 }
