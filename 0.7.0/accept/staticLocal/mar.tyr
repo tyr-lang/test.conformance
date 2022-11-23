@@ -1,5 +1,8 @@
 /**
  * This test should show a Tyr equivalent of C's static local variables.
+ *
+ * @todo rework this test to fit into the actual semantics; it should take into
+ *    account that using one's own members is always allowed
  */
 type T {
 
@@ -12,5 +15,9 @@ type T {
 
   test "use" {
     0 == f() && 1 == f()
+  }
+
+  test "no compile" {
+    false
   }
 }
