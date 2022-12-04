@@ -1,0 +1,28 @@
+/**
+ * This test shows switch can bind the value used for switching to a name
+ */
+type T {
+  test "bind literal use" {
+    switch x := 0 {
+      if 0 switch 1 {
+        // here, x should be a literal switch access evaluating to 0
+        if x false
+        else true
+      }
+      else false
+    }
+  }
+
+  test "bind var" {
+    var x = 7
+    x = 0
+    // implicitly x := x
+    switch x {
+      if 0 switch 1 {
+        if x false
+        else true
+      }
+      else false
+    }
+  }
+}
