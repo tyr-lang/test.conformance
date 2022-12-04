@@ -5,8 +5,8 @@ class T {
   test "bool block" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     {}:bool
   }
-  test "switch condition" <: noCompile[TYP_MISMATCH] {
-    switch {}{else {}}
+  test "switch condition" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE,TYP_MISMATCH] {
+    switch {}{if {} {} else {}}
   }
   test "if condition" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE,TYP_MISMATCH] {
     if {}{}

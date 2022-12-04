@@ -17,7 +17,7 @@ type T {
     }
   }
 
-  test "else" {
+  test "else" <: noCompile[SYN_MALFORMED_EXPRESSION] {
     0 == (switch 0 { else 0 })
   }
 
@@ -36,7 +36,7 @@ type T {
     })
   }
 
-  test "min op switch" {
+  test "min op switch" <: noCompile[SYN_MALFORMED_EXPRESSION] {
     !(switch -1 {
       else false
     })
