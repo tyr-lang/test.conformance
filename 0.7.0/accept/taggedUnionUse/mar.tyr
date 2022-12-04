@@ -15,6 +15,7 @@ type unionOne {
 enum union <: mixed {
   if zero unionZero
   if one unionOne
+  else void
 }
 
 type T {
@@ -30,7 +31,8 @@ type T {
     c = mixed.one
     // bind v as Ref[union]
     switch v := c {
-      if one v.x = 0
+      if one { v.x = 0 }
+      else {}
     }
 
     true
