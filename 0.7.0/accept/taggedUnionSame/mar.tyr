@@ -1,0 +1,61 @@
+/**
+ * This test shows tagged unions if the same type is used
+ */
+enum mixed {
+  zero,
+  naught = 0,
+  one
+}
+
+type unionOne {
+  var x : int
+}
+
+enum union <: mixed {
+  if zero unionOne
+  if one unionOne
+  else unionOne
+}
+
+enum unionVoid <: mixed {
+  if zero void
+  if one void
+  else void
+}
+
+type T {
+  test "repr" {
+    // implicit constructor creating an uninitialized stack-allocated union
+    var c = new unionVoid
+    true
+  }
+
+  test "use" {
+    // implicit constructor creating an uninitialized stack-allocated union
+    var c = new unionVoid
+    c = mixed.naught
+
+    switch c {
+      if zero true
+      else false
+    }
+  }
+
+  test "same subtype" {
+    // implicit constructor creating an uninitialized stack-allocated union
+    var c = new union
+    c = mixed.one
+    // bind v as Ref[union]
+    switch v := c {
+      if one { v.x = 7 }
+      else {}
+    }
+
+    c = mixed.zero
+
+    7 == switch c {
+      if zero c.x
+      else    0
+    }
+  }
+}

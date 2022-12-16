@@ -1,22 +1,8 @@
 /**
- * This test shows tagged unions
+ * This test shows ext tagged unions
  */
-public enum mixed {
-  zero,
-  naught = 0,
-  one
-}
-
-public type unionZero;
-public type unionOne {
-  var x : int
-}
-
-public enum union <: mixed {
-  if zero unionZero
-  if one unionOne
-  else void
-}
+with taggedUnion.mixed
+with taggedUnion.union
 
 type T {
   test "repr" {
