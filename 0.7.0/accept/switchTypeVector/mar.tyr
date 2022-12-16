@@ -1,0 +1,59 @@
+/**
+ * tests correctness of switch type expressions
+ *
+ * @note this is something that could work, but it is not cleare if an
+ *   implementation will be chosen that will really allow this
+ *
+ * @note to self: this is essentially a consequence of keeping intersections
+ *   with unevaluated types live, i.e. the type of make would be something like
+ *   Vector2 & Vector3 & Vector[Dim]; if it would get evaluated immediately it
+ *   would be Object because thats what the evaluation results in; the strange
+ *   thing about this is that make would not be usable; also, I do not se how we
+ *   could make the compiler understand that this intersection actually is
+ *   Vector[Dim] if we would have to evaluate it immediately
+ */
+class Vector[Dim : int] {
+  new();
+
+  type def make = switch Dim {
+    if 2 new Vector2
+    if 3 new Vector3
+    else new Vector[Dim]
+  }
+}
+class Vector2 <: Vector[2] {
+  new();
+
+  def ortho() : Vector2 = this;
+}
+
+class Vector3 <: Vector[3] {
+  new();
+
+  def cross(x : Vector3) = this;
+}
+
+type T {
+  test "make 2" {
+    var v = Vector[2].make()
+    var r = Vector2 == v.class
+    delete v
+    r
+  }
+  test "make 3" {
+    var v = Vector[3].make()
+    var r = Vector3 == v.class
+    delete v
+    r
+  }
+  test "ortho" {
+    var v = Vector[2].make()
+    v.ortho()
+    delete v
+  }
+  test "cross" {
+    var v = Vector[3].make()
+    v.cross(v)
+    delete v
+  }
+}
