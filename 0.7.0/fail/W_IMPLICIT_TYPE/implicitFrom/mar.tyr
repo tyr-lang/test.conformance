@@ -1,0 +1,6 @@
+/**
+ * Test for new rules for implicit
+ */
+type T {
+  type def implicit(from : int) : long = 7L
+}

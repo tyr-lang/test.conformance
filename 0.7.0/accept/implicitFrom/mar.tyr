@@ -4,7 +4,7 @@
  * @note in contrast to implicit(this), implicit(from) fundamentally cannot have
  *   object lifetime
  */
-type T {
+type T <: suppressCompilerMessage["W_IMPLICIT_TYPE"] {
   new;
 
   type def implicit(from : int) : T = new T;

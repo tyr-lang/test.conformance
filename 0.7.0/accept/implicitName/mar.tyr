@@ -1,7 +1,7 @@
 /**
  * Test for new rules for implicit(this)
  */
-type T {
+type T <: suppressCompilerMessage["W_IMPLICIT_TYPE"] {
   type def implicit(this : T) : long = 7L
   // not usable, wrong parameter name
   type def implicit(from : T) : int = 7

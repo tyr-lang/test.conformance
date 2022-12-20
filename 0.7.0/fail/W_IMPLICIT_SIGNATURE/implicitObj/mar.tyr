@@ -1,0 +1,6 @@
+/**
+ * Test for new rules for implicit
+ */
+type T {
+  def implicit(from : T) : T = this
+}

@@ -1,0 +1,8 @@
+/**
+ * Test for new rules for implicit
+ */
+type T {
+  new;
+
+  type def implicit(p : T) : T = new T
+}
