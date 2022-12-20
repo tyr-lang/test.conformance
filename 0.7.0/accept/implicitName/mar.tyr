@@ -1,0 +1,39 @@
+/**
+ * Test for new rules for implicit(this)
+ */
+type T {
+  type def implicit(this : T) : long = 7L
+  // not usable, wrong parameter name
+  type def implicit(from : T) : int = 7
+  // should be fine in this case
+  def implicit(this : T) : short = 7i16
+  // should be fine in this case (short form)
+  def implicit : 0U.type = 7U
+  // wrong scope, i.e. no T ⇒ int ⇒ byte
+  type def implicit(this : int) : byte = 7i8
+
+  test "use" {
+    var x : T
+    7L == x
+  }
+
+  test "name" <: noCompile[NAM_NOT_FOUND] {
+    var x : T
+    7 == x
+  }
+
+  test "object" {
+    var x : T
+    7i16 == x
+  }
+
+  test "object short" {
+    var x : T
+    7U == x
+  }
+
+  test "scope" <: noCompile[NAM_NOT_FOUND] {
+    var x : T
+    7i8 == x
+  }
+}

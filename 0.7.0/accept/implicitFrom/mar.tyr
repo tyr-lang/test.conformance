@@ -1,0 +1,37 @@
+/**
+ * Test implicit(from)
+ *
+ * @note in contrast to implicit(this), implicit(from) fundamentally cannot have
+ *   object lifetime
+ */
+type T {
+  new;
+
+  type def implicit(from : int) : T = new T;
+  // not usable, too many parameters
+  def implicit(from : 0U.type) : T = new T;
+  // not usable, wrong parameter name
+  type def implicit(this : long) : T = new T;
+  // not usable, wrong pramater name
+  def implicit(this : short) : T = new T;
+
+  test "use" {
+    val x : T = 7
+    true
+  }
+
+  test "parameter count" <: noCompile[TYP_MISMATCH] {
+    val x : T = 7U
+    false
+  }
+
+  test "name" <: noCompile[TYP_MISMATCH] {
+    val x : T = 7L
+    false
+  }
+
+  test "lifetime" <: noCompile[TYP_MISMATCH] {
+    val x : T = 7i16
+    false
+  }
+}

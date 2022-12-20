@@ -1,0 +1,30 @@
+/**
+ * Test for new rules for implicit(this) and implicit(from)
+ */
+type S {
+  val x : int;
+
+  new(x := x : int);
+
+  def implicit = new P(x)
+}
+
+type P {
+  val x : int;
+
+  new(x := x : int);
+}
+
+type T {
+
+  val x : int;
+  new(x := x : int);
+
+  type def implicit(from : P) = new T(from.x)
+
+  test "use" {
+    var x = new S(5)
+    var y : T = x
+    x.x == y.x && y.x == 5
+  }
+}
