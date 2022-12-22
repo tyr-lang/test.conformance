@@ -5,7 +5,8 @@
 type T {
   type def f : bool {
     var r = false
-    return (r : Ref[bool])
+    val x : Ref[bool] = r
+    return x
   }
 
   test "use var" {
