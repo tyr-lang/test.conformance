@@ -32,7 +32,7 @@ type T {
   }
 
   // note to self: likely another category
-  test "duplicate" <: noCompile[typing] {
+  test "duplicate" <: noCompile[E_SWITCH_CASE] {
     switch naught {
       if zero true
       // twice the same value
@@ -41,7 +41,7 @@ type T {
     }
   }
 
-  test "enum" <: noCompile[typing] {
+  test "enum" <: noCompile[TYP_MISMATCH] {
     switch naught {
       // no, switch expected type is mixed
       if 0 true
@@ -49,7 +49,7 @@ type T {
     }
   }
 
-  test "enum other" <: noCompile[typing] {
+  test "enum other" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     switch naught {
       // no, switch expected type is mixed
       if other.zero true
@@ -58,7 +58,7 @@ type T {
   }
 
   test "int" {
-    val c : int = zero
+    var c : int = zero
     switch c {
       // CT-evaluates to 0
       if other.zero true
@@ -67,7 +67,7 @@ type T {
   }
 
   test "int mixed" {
-    val c : int = zero
+    var c : int = zero
     switch c {
       // CT evaluates to 0
       if other.zero true
@@ -78,7 +78,7 @@ type T {
     }
   }
 
-  test "int duplicate" {
+  test "int duplicate" <: noCompile[E_SWITCH_CASE] {
     switch 7 {
       // CT evaluates to 0
       if other.zero true
@@ -97,7 +97,7 @@ type T {
     0 == (c : IntegerLiteral[32])
   }
 
-  test "enum join enum" <: noCompile[typing] {
+  test "enum join enum" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     var x = 0
     val c : mixed = switch x {
       if 0 other.zero
@@ -105,7 +105,7 @@ type T {
     }
   }
 
-  test "enum join enum 2" <: noCompile[typing] {
+  test "enum join enum 2" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     var x = 0
     val c : other = switch x {
       if 0 other.zero
