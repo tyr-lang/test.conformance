@@ -24,8 +24,9 @@ type T {
     }
   }
 
-  test "type" <: noCompile[typing] {
+  test "type" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     switch x := 0 {
+      // note: this is a name issue, because no x of type long is visible
       if 0 (x : long)
       else (x : int)
     }
