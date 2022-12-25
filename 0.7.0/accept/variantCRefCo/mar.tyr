@@ -18,7 +18,7 @@ type T {
     c == d
   }
 
-  test "wrong" <: noCompile {
+  test "wrong" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     val c = new CRef[int]
     var d : CRef[0.type]
     d = c
