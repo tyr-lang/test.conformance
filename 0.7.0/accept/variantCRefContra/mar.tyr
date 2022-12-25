@@ -1,0 +1,27 @@
+/**
+ * This test shows contravariant types
+ */
+type CRef[-T : Type] <: observablePointer {
+  new;
+}
+
+type T {
+  test "use" {
+    val c = new CRef[int]
+    true
+  }
+
+  test "assign" {
+    val c = new CRef[int]
+    var d : CRef[0.type]
+    d = c
+    c == d
+  }
+
+  test "wrong" <: noCompile {
+    val c = new CRef[0.type]
+    var d : CRef[int]
+    d = c
+    c == d
+  }
+}
