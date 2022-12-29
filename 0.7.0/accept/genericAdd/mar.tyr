@@ -1,0 +1,26 @@
+/**
+ * This test shows repr of generics
+ *
+ * @note any CT parameter can be generic
+ */
+class Add[V : int := 0] {
+  // while this looks as if the generic parameter will be added, in fact, only
+  // 0 will be added
+  type def add(x : int) = x + V
+}
+
+type T {
+  test "use" {
+    7 == Add[0].add(7)
+  }
+
+  test "raw" {
+    7 == Add[3].add(7)
+  }
+
+  test "class" {
+    var a = Add[0]
+    var b = Add[3]
+    a == b
+  }
+}
