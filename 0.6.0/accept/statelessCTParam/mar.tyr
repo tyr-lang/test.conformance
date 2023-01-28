@@ -14,7 +14,9 @@ type T {
     new container.FlatSizedArray[int, x]
   }
 
-  test "CT var" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
+  // note: the second error started to appear after I improved overload
+  // resolution
+  test "CT var" <: noCompile[NAM_NOT_FOUND_OVERLOAD, TYP_CT_REQUIRED] {
     var x = 0U;
     new container.FlatSizedArray[int, x]
   }
