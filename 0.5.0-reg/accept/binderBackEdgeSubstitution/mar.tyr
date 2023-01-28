@@ -2,7 +2,7 @@
  * Ensure that a template substitution of a binder substitution in a loop
  * results in a usable CFG
  */
-type Util[T : Type] {
+type Util[T : Type[any]] {
   type def f(x : bool) : void {
     while(true && x) {}
   }

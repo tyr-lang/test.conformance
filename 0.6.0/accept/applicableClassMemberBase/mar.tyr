@@ -3,7 +3,7 @@
  *
  * @note add a base type to ensure that the correct function is used
  */
-public class Base[T : Type] {
+public class Base[T : Type[any]] {
   type var b : T;
 
   class def f(this : Box[T], y : T) : T = b
@@ -11,7 +11,7 @@ public class Base[T : Type] {
   class def h(this : Box[T], y : T) : Ref[T] = b
 }
 
-public class Box[T : Type] <: Base[T] {
+public class Box[T : Type[any]] <: Base[T] {
   var x : T;
 
   class def f(this : Box[T], y : T) : T = y

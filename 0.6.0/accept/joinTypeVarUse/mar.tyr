@@ -1,7 +1,7 @@
 /**
  * Test absence of a bug that I found in my join implementation
  */
-class Box[T : Class] {
+class Box[T : Class[Object]] {
   var x : T
 
   new (v : T) {

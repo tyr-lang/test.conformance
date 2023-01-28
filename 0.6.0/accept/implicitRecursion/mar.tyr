@@ -3,7 +3,7 @@
  *
  * @note if it would not, your compiler would hang at this test
  */
-class Box[T : Type] {
+class Box[T : Type[any]] {
     def implicit : Box[Box[T]] = null
 }
 

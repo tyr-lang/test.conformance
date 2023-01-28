@@ -1,7 +1,7 @@
 /**
  * Check that a type variable with base type Class can use Object members
  */
-type Box[T : Type] {
+type Box[T : Type[any]] {
   var x : T;
   new (x := x : T);
 

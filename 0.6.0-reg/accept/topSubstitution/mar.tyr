@@ -1,7 +1,7 @@
 /**
  * Ensure that this substitution results in usabel code
  */
-type Utils[T : Type] {
+type Utils[T : Type[any]] {
   type def sumIf(xs   : container.Iterable[T],
                  x    : BlockParameter[T],
                  cond : Block[bool],

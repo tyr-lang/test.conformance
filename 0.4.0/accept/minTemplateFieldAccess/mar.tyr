@@ -1,7 +1,7 @@
 /**
  * minimal test to check correct access to template fields
  */
-type Test [A : Type]{
+type Test [A : Type[any]]{
   val x : A;
 
   new (x := x : A);

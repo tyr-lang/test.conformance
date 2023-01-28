@@ -1,13 +1,13 @@
 /**
  * Test correct elaboration of vtables
  */
-class W [T : Type] <: V[T] {
+class W [T : Type[any]] <: V[T] {
 
   delete { x = 3 }
 
 }
 
-class V [T : Type] <: B {
+class V [T : Type[any]] <: B {
 
   delete { x = 2 }
 

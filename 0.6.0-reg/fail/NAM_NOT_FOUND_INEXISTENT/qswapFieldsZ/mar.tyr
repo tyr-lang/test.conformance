@@ -4,7 +4,7 @@
  * @note the fail test is the equivalent of an example used to illustrate C++'s
  *       behaviour and semantics
  */
-type SwapQ1[A : Type, B : Type] {
+type SwapQ1[A : Type[any], B : Type[any]] {
 
   var x : A;
   var y : B;
@@ -23,7 +23,7 @@ type SwapQ1[A : Type, B : Type] {
   }
 }
 
-type SwapQ2[A : Type, B : Type] {
+type SwapQ2[A : Type[any], B : Type[any]] {
 
   var x : A;
   var y : B;

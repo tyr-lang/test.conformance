@@ -3,13 +3,13 @@
  */
 class T {
   test "assign" {
-    var c : Class = null;
+    var c : Class[Object] = null;
     c = T;
     T == c && c == T
   }
 
   test "new" <: noCompile[TYP_NOT_A_TYPE] {
-    var c : Class = null;
+    var c : Class[Object] = null;
     c = T;
     val r = T == c && c == T
     // cannot prove that a constructor exists

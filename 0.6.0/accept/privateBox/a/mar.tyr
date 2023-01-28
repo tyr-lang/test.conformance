@@ -1,4 +1,4 @@
-public type Box[T : Type] {
+public type Box[T : Type[any]] {
   private [a] var x : T;
 
   public new (x := x : T);

@@ -4,7 +4,7 @@
  * @note use mutable fields over constructors ensuring that the usage in the
  *       body has structural knowledge
  */
-type SwapQ1[A : Type, B : Type] {
+type SwapQ1[A : Type[any], B : Type[any]] {
 
   var x : A;
   var y : B;
@@ -51,7 +51,7 @@ type SwapQ1[A : Type, B : Type] {
   }
 }
 
-type SwapQ2[A : Type, B : Type] {
+type SwapQ2[A : Type[any], B : Type[any]] {
 
   var x : A;
   var y : B;

@@ -1,7 +1,7 @@
 /**
  * Ensure implicits on object member applications are performed as intended
  */
-public class Box[T : Type] {
+public class Box[T : Type[any]] {
   var x : T;
 
   def f(this : Box[T], y : T) : T = y

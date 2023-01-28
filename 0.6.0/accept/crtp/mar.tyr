@@ -1,7 +1,7 @@
 /**
  * Check if CRTP is allowed
  */
-class Box[T : Class] {
+class Box[T : Class[Object]] {
   def get() : T = T ! this
 }
 

@@ -3,7 +3,7 @@
  *
  * @note this variant stores the functions in local variables
  */
-public class Box[T : Type] {
+public class Box[T : Type[any]] {
   var x : T;
 
   def r(this : Ref[Box[T]], y : T) : Box[T] = this

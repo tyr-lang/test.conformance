@@ -1,7 +1,7 @@
 /**
  * Test substyping using templates across package boarders
  */
-type W [T : Type] <: superchain2.V[T] {
+type W [T : Type[any]] <: superchain2.V[T] {
 
   new (x : T){
     superchain2.V[T].new(x)

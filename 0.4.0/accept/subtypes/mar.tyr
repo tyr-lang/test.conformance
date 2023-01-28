@@ -7,4 +7,4 @@ interface I <: G {}
 
 interface J <: any, I {}
 
-interface Generic[T : Type] <: any;
+interface Generic[T : Type[any]] <: any;

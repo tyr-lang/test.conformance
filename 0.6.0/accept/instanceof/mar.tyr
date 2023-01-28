@@ -3,13 +3,13 @@
  */
 type T {
   test "self" {
-    Type ? Type
+    Type[any] ? Type[any]
   }
   test "self direct" {
-    Class ? Type
+    Class[Object] ? Type[Object]
   }
   test "self direct2" {
-    Class ? Class
+    Class[Object] ? Class[Object]
   }
   test "literal" {
     String ? "literal"
@@ -21,7 +21,7 @@ type T {
     String ? null
   }
   test "not a string" {
-    ! String ? Class
+    ! String ? Class[Object]
   }
 
   test "no class" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {

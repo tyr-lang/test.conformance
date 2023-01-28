@@ -1,7 +1,7 @@
 /**
  * Test instantiation of types.
  */
-type Swap[A : Type, B : Type] {
+type Swap[A : Type[any], B : Type[any]] {
 
   val x : A;
   val y : B;

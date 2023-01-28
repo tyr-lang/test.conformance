@@ -3,7 +3,7 @@
  *
  * @note add a base interface to ensure that the correct function is used
  */
-public interface Base[T : Type] {
+public interface Base[T : Type[any]] {
   type var b : T;
 
   def f(this : Base[T], y : T) : T = b
@@ -13,7 +13,7 @@ public interface Base[T : Type] {
   def r(this : Ref[Box[T]], y : T) : Box[T] = this
 }
 
-public class Box[T : Type] <: Base[T] {
+public class Box[T : Type[any]] <: Base[T] {
   var x : T;
 
   override def f(this : Box[T], y : T) : T = y

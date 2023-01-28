@@ -3,7 +3,7 @@
  */
 class T {
   test "STA" <: noCompile[W_OOP_UNLIKELY_REF] {
-    var c : Class = null;
+    var c : Class[Object] = null;
     // inspect that this causes a warning
     c.type
     // note: using the type as a value results in an unpleasant sleipnir error
@@ -13,9 +13,9 @@ class T {
   }
 
   test "cast class" <: noCompile[W_OOP_UNLIKELY_CAST] {
-    var c : Class = null;
+    var c : Class[Object] = null;
     // inspect that this causes a warning
-    (Class !! c)
+    (Class[Object] !! c)
     // note: if the value were used, it would result in a crash, here
     true
   }

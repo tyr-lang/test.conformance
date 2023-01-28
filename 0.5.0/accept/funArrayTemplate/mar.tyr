@@ -1,7 +1,7 @@
 /**
  * Create an array type with < > access operators, just as a proof of concept
  */
-class Array[Base : Type] {
+class Array[Base : Type[any]] {
   var data : container.FlatArray[Base]
   val size : container.size_t
 
@@ -60,7 +60,7 @@ class Array[Base : Type] {
 /**
  * This is the type of "array<index",i.e. without ">"
  */
-type ArrayIndexOp[T : Type] <: noVar {
+type ArrayIndexOp[T : Type[any]] <: noVar {
   val target : Array[T]
   val index : container.size_t;
 
@@ -75,7 +75,7 @@ type ArrayIndexOp[T : Type] <: noVar {
  * This is the type of > in "array<index>"
 
  */
-type ArrayAccessOp[T : Type] <: proxy[T], joinImplicit, noVar {
+type ArrayAccessOp[T : Type[any]] <: proxy[T], joinImplicit, noVar {
   val target : Array[T]
   val index : container.size_t;
 

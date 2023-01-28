@@ -1,7 +1,7 @@
 /**
  * Check correct substitution of new in combination with template classes
  */
-class Box[Base : Type] {
+class Box[Base : Type[any]] {
   var data : Base
   
   new(data := data : Base);

@@ -4,7 +4,7 @@
  */
 type T {
   // note: this : Class would be legal. It might be legal for native functions.
-  type def f(this : Type, v : this) : this = v
+  type def f(this : Type[any], v : this) : this = v
   test "fail" {
     false
   }

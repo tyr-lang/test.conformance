@@ -1,13 +1,13 @@
 /**
  * test order of and dependency between formal parameters
  */
-type Box[T : Type, D : T]{
+type Box[T : Type[any], D : T]{
   val v : T;
 
   new (v := V : T = D){}
 }
 
-type InvBox[D : T, T : Type]{
+type InvBox[D : T, T : Type[any]]{
   val v : T;
 
   new (v := V : T = D){}

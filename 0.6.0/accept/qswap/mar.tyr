@@ -1,7 +1,7 @@
 /**
  * Test instantiation of types in combination with elaboration order.
  */
-type SwapQ1[A : Type, B : Type] {
+type SwapQ1[A : Type[any], B : Type[any]] {
 
   val x : A;
   val y : B;
@@ -43,7 +43,7 @@ type SwapQ1[A : Type, B : Type] {
   }
 }
 
-type SwapQ2[A : Type, B : Type] {
+type SwapQ2[A : Type[any], B : Type[any]] {
 
   val x : A;
   val y : B;

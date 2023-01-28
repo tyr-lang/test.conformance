@@ -1,7 +1,7 @@
 /**
  * minimal test to check correct access to template new
  */
-type Test [A : Type]{
+type Test [A : Type[any]]{
   var x : container.FlatArray[A];
 
   new () {

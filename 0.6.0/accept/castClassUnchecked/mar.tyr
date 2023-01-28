@@ -9,13 +9,13 @@
  */
 type T {
   test "self" {
-    Type == Type ! Type
+    Type[Object] == Type[Object] ! Type[Object]
   }
   test "self direct" {
-    Type == Class ! Type
+    Type[Object] == Class[Object] ! Type[Object]
   }
   test "self direct2" {
-    Class == Class ! Class
+    Class[Object] == Class[Object] ! Class[Object]
   }
   test "literal" {
     "literal" == String ! "literal"

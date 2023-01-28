@@ -1,13 +1,13 @@
 /**
  * test order of and dependency between formal parameters using a default value
  */
-public type Box[T : Type = int, D : T]{
+public type Box[T : Type[any] = int, D : T]{
   public val v : T;
 
   public new (v := V : T = D){}
 }
 
-public type InvBox[D : T, T : Type = int]{
+public type InvBox[D : T, T : Type[any] = int]{
   public val v : T;
 
   public new (v := V : T = D){}

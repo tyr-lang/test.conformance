@@ -2,11 +2,11 @@
  * Ensure an implicit override of a funciton with an explicit this is not
  * allowed.
  */
-public interface Base[T : Type] {
+public interface Base[T : Type[any]] {
   def r(this : Ref[Box[T]], y : T) : Box[T] = this
 }
 
-public class Box[T : Type] <: Base[T] {
+public class Box[T : Type[any]] <: Base[T] {
   var x : T;
 
   // note: r requires an explicit override like:

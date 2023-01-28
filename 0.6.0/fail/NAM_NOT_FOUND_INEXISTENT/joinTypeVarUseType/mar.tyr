@@ -3,7 +3,7 @@
  *
  * @note should not compile because line 16 should result in no operator visible
  */
-class Box[T : Type] {
+class Box[T : Type[any]] {
   var x : T
 
   new (v : T) {
