@@ -30,7 +30,7 @@ class T {
     T.class : void
   }
   test "DTA void" <: noCompile[TYP_NOT_A_CLASS] {
-    {}.class : Class
+    {}.class : Class[Object]
   }
   test "new void" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     (new T) : void

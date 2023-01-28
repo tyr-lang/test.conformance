@@ -6,7 +6,7 @@ type T {
   // note: this should not be allowed; it should be either Class or native
   // note to self: this is basically the type-oriented way of something that can
   // also be expressed using template functions or higher order generic types
-  type def f(this : Class, v : this) : this = v
+  type def f(this : Class[Object], v : this) : this = v
 
   test "string" {
     "" == f(String, "")
