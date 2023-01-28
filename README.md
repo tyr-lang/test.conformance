@@ -34,5 +34,6 @@ A compiler conforms with a version of Tyr iff it passes all tests below that ver
 ## Migration
 
 We will migrate old tests to semantic equivalents if the current release renders them illegal, as long as the major version is 0.
-We will certainly adapt all Tests when generic type parameters are implemented.
+Exact error categories are subject to change for the time being.
+
 This section ought to be deleted on the release of version 1.0.0.
