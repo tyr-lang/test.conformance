@@ -27,7 +27,7 @@ type T {
     null == String ! null
   }
   test "not a string" {
-    null == String ! Class
+    null == String ! Class[Object]
   }
 
   test "no class" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {
