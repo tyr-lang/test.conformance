@@ -11,6 +11,10 @@ public type T {
   }
 
   test "eq" {
+    c1.C == c2.C
+  }
+
+  test "eq class" {
     c1.C.class == c2.C.class
   }
 }
