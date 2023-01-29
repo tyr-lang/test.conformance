@@ -1,7 +1,7 @@
 /**
  * Test ODR-correctness of function templates
  */
-public type T[R : Type] {
+public type T[R : Type[any]] {
   public type def f[x : IntegerLiteral[32]] : R = R !! x
 
   test "use" {

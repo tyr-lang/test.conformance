@@ -5,9 +5,9 @@
  * @note allowing this implies that the result type of f is recalculated on
  *       substitution as the intersection of x and y is any
  */
-type T[x : Type] {
+type T[x : Type[any]] {
 
-  type def f[y : Type = x](cond : bool, a : x, b : y) = if cond a else b
+  type def f[y : Type[any] = x](cond : bool, a : x, b : y) = if cond a else b
 
   test "usage" {
     T[int].f[int](false, 1, 2)
@@ -18,6 +18,6 @@ type T[x : Type] {
   }
 
   test "object" {
-    null != T[String].g[Class](true, "String", String)
+    null != T[String].g[Class[String]](true, "String", String)
   }
 }

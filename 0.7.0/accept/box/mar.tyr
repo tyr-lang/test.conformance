@@ -2,12 +2,12 @@
  * This test should eventually work fine and should not result in infinite type
  * instantiation.
  */
-type Box [T : Type] {
+type Box [T : Type[any]] {
   var content : T;
 
   new (content := content : T) {}
 
-  type def box [T: Type] (t : T) : Box[T] = new Box[T](t);
+  type def box [T: Type[any]] (t : T) : Box[T] = new Box[T](t);
   def unbox : T = content;
 
   test "box unbox" {

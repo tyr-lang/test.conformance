@@ -1,7 +1,7 @@
 /**
  * Test instantiation of template type type functions.
  */
-type T[T : Type, v : Ref[T]] {
+type T[T : Type[any], v : Ref[T]] {
 
   type def make : T = v
 }

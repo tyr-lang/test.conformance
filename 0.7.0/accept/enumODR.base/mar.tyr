@@ -5,7 +5,7 @@ public enum color {
   red, green, blue
 }
 
-public class Box[T : Type] {
+public class Box[T : Type[any]] {
   public val get : T;
   public new (get := v : T);
 
