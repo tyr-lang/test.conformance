@@ -29,13 +29,13 @@ type T {
     box.class == base.Box[base.color].class
   }
   test "class eq base" {
-    box : Class == base.Box[base.color] : Class
+    box : Class[Object] == base.Box[base.color] : Class[Object]
   }
   test "class eq c1" {
-    box : Class == c1.box : Class
+    box : Class[Object] == c1.box : Class[Object]
   }
   test "class eq c2" {
-    box : Class == c2.box : Class
+    box : Class[Object] == c2.box : Class[Object]
   }
 
   test "red eq base" {
