@@ -1,0 +1,18 @@
+/**
+ * This test shows that generics affect templates too. This is essentially
+ * because instances of generics are type literals which are atoms in the
+ * Herbrand universe. In that sense, using a generic type as a CT argument is
+ * the same as using its raw type akin to type aliasing.
+ *
+ * @note we could also choose to create a generic instance of a non-generic
+ *   template; honestly, I think that an adequate examination of this choice is
+ *   worth a PhD. There is a lot of unification that would result from it. On
+ *   the other hand, there is also a lot of cost involved here.
+ */
+class Box[T : Type[any]];
+
+type T {
+  test "eq" {
+    Box[Class[Object]] == Box[Class[String]]
+  }
+}
