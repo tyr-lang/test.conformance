@@ -1,7 +1,7 @@
 /**
  * This test shows covariant types
  */
-type CRef[+T : Type] <: observablePointer {
+type CRef[+T : Type[any]] <: observablePointer {
   new;
 }
 
