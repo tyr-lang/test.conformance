@@ -2,5 +2,5 @@
  * Test for new rules for implicit
  */
 type T {
-  def implicit[RT : Type] : RT = RT !! this
+  def implicit[RT : Type[any]] : RT = RT !! this
 }
