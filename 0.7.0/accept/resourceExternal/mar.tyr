@@ -17,4 +17,10 @@ type T {
     // not visible
     r.inner.text
   }
+
+  // ensure that the keepAlive function actually kept the resources alive and
+  // can still access them
+  test "keepAlive" {
+    r.T.keepAlive()
+  }
 }

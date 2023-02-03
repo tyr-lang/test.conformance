@@ -1,7 +1,12 @@
 /**
  * Test usage of resources.
  */
-type T {
+public type T {
+  public type def keepAlive {
+    "user".bytes().sameElements[byte.`==`](data.iterator()) &&
+    "weak password".bytes().sameElements[byte.`==`](paswd.iterator()) &&
+    "text".bytes().sameElements[byte.`==`](inner.text.iterator())
+  }
 
   test "use data" {
     "user".bytes().sameElements[byte.`==`](data.iterator())
