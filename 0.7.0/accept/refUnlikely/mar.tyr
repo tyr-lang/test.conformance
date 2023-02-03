@@ -5,7 +5,7 @@
  */
 class T {
 
-  test "to crash" {
+  test "to crash" <: noCompile[W_OOP_UNLIKELY_CAST] {
     if(false) {
       // this would result in a certain crash
       ++(Ref[int] !! 7)
@@ -13,7 +13,7 @@ class T {
   }
 
   // note: a future version can decide that casting will behave differently here
-  test "from crash" {
+  test "from crash" <: noCompile[W_OOP_UNLIKELY_CAST] {
     var x = 0
 
     0 != (int !! x)
