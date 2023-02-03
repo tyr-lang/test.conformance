@@ -2,9 +2,11 @@
  * Test use Ref[T] to check correct evaluation of CT type parameters.
  */
 type T {
-  test "usage type block" {
+  test "advanced type block" {
     var i : int = 0
-    val p : Ref[{int}] = i
+    val p : Ref[{
+      Seq(any, int, Integer[32]).reduce(any) l,r do (Type.join(l,r))
+    }] = i
     i = 1
     p == 1
   }
