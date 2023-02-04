@@ -1,0 +1,22 @@
+/**
+ * Test unelaborated union.
+ */
+type T {
+  type var x : (int | String)
+
+  test "usage int" {
+    T.x = 0
+    0 == T.x
+  }
+
+  test "usage string" {
+    T.x = "foo"
+    "foo".bytes().sameElements(T.x.bytes())
+  }
+
+  test "abuse int" {
+    T.x = null
+    // note: this is not defined in general, it is just what will happen here
+    0 == T.x
+  }
+}
