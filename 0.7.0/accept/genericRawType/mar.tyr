@@ -1,0 +1,14 @@
+/**
+ * This test shows the usage of _ as generic CT parameter
+ */
+type T {
+  test "eq" {
+    Class[Object] == Class[_]
+  }
+  test "eq 2" {
+    Object.class == Class[_]
+  }
+  test "eq 3" {
+    Object.class.type == Class[_]
+  }
+}
