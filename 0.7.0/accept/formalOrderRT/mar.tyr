@@ -7,7 +7,7 @@ class T {
   // note to self: I do not see any issue with this code; there is a type check
   // at any call-site, so it should be safe. It is, however, useless in 0.6 as
   // the only way that this code compiles will also make it return true
-  type def f(x : C = null, C : Class = String) = C ? x;
+  type def f(x : C = null, C : Class[_] = String) = C ? x;
 
   test "use f" {
     f("use", String);
@@ -21,7 +21,10 @@ class T {
   test "f default" {
     f();
   }
-  test "use f nc" {
+  test "use T" {
+    f(C := T);
+  }
+  test "use f nc" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     // should not compile
     f("use", T);
   }
