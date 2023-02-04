@@ -2,7 +2,7 @@
  * Check if CRTP is allowed with super types; this only from the compiler's
  * perspective related to the original form of CRTP
  */
-class Box[T : Class] <: T {
+class Box[T : Class[_]] <: T {
   def get() : T = this
 }
 

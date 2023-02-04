@@ -6,7 +6,7 @@
  *
  * Currently, I'm really not sure what is to be preferred.
  */
-class Box[T : Class] {
+class Box[T : Class[_]] {
   def get() : T = T ! this
 }
 
