@@ -2,13 +2,13 @@
  * Test usability of factory interface
  */
 interface Factory {
-  class def make (this : Factory) : this;
+  class def make (this : Class[Factory]) : this;
   // TODO add a second test with a final implementation containing a call to new
 }
 
-class T : Factory {
+class T <: Factory {
   override
-  class def make(this : T) = new T
+  class def make(this : Class[T]) : this = new T
 
   test "use" {
     var f : Class[Factory] = T;
