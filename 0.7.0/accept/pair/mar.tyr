@@ -12,8 +12,8 @@ type Pair [A : Type[any], B : Type[any]] {
 
   def swap : Pair[B, A] = new Pair[B,A](b,a);
 
-  def == (p : Pair[A,B]) = eq.equals(this, p)
-  def != (p : Pair[A,B]) = !eq.equals(this, p)
+  def == (p : Pair[A,B]) = eq.type.equals(this, p)
+  def != (p : Pair[A,B]) = !eq.type.equals(this, p)
 
   test "swap swap" {
     var p = new Pair[int, int](2,3)
