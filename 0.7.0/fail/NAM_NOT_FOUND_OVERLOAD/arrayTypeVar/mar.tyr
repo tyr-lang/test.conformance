@@ -1,0 +1,16 @@
+/**
+ * Ensure that flat arrays can be used as type vars with inferred types
+ *
+ * @note this issue was introduced by the canonical types change; the compiler
+ *   behaved more grafefully in 0.6
+ */
+with container.FlatSizedArray
+
+type Main {
+  // the compiler should provide a proper error message hinting that the issue
+  // is the wrong type of the literal
+  type var CS = new FlatSizedArray[long, 1];
+  test "use"{
+    false
+  }
+}
