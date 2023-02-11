@@ -1,0 +1,20 @@
+/**
+ * Ensure that a series of casts results in correct code generation
+ */
+
+with container.FlatSizedArray
+with container.Array
+with container.range
+
+interface I {
+  test "use" {
+    var xs = new Array[Object](0);
+    var c = 0L;
+    range(0, 10).foreach i do {
+      xs.foreach x do {
+        if(I ? x) { ++c } else { ++c }
+      }
+    }
+    true
+  }
+}
