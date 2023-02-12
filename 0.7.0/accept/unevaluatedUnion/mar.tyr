@@ -1,5 +1,5 @@
 /**
- * Test unelaborated union.
+ * Test unevaluated union.
  */
 type T {
   type var x : (int | String)
