@@ -1,0 +1,16 @@
+with container.FlatSizedArray
+with container.Seq
+with container.size_t
+
+/**
+ * Test cast on CT parameters.
+ */
+public class Vector[T : Class[_] := Object, Size : int] <: Seq[T] {
+  private var data : FlatSizedArray[T, size_t !! Size]
+}
+
+type T {
+  test "use" {
+    null != Vector[String, 2]
+  }
+}
