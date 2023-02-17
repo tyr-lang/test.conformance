@@ -1,0 +1,61 @@
+with container.FlatArrayIterator
+with container.FlatSizedArray
+with container.Seq
+with container.index_t
+with container.size_t
+
+/**
+ * Test mixed usage of generics.
+ */
+public class Vector[T : Class[_] := Object, Size : size_t] <: Seq[T] {
+  private var data : FlatSizedArray[T, Size]
+
+  override def iterator = data.iterator()
+
+  override def size = Size
+
+  public def apply(index : index_t) : T = data(index);
+  public def update(index : index_t, v : T) : T = data.update(index, v);
+}
+
+type T {
+  test "same repr" {
+    Vector[String, 2U] == Vector[Object, 2U]
+  }
+  test "different repr" {
+    Vector[String, 1U] != Vector[String, 2U] &&
+     Vector[Object, 1U] != Vector[Object, 2U]
+  }
+  test "raw repr" {
+    Vector[_, 1U] != Vector[_, 2U] &&
+     Vector[_, 2U] == Vector[Object, 2U]
+  }
+  test "raw second" <: noCompile[TYP_ILLEGAL_EXPRESSION] {
+    // you can't use a raw projection if the type is not generic
+    Vector[Object, _]
+  }
+}
+
+type V {
+  test "same repr, different promise, val" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
+    val x : Vector[String, 2U] = null
+    // no because not compatible
+    val y : Vector[Object, 2U] = x
+  }
+  test "same repr, different promise" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
+    var x : Vector[String, 2U] = null
+    // no because not compatible
+    var y : Vector[Object, 2U] = x
+  }
+  test "same repr, different promise, raw" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
+    var x : Vector[String, 2U] = null
+    // no because not compatible
+    // this is actually different from Java's raw type concept and existentials
+    var y : Vector[_, 2U] = x
+  }
+  test "same repr, same promise, raw" {
+    var x : Vector[_, 2U] = null
+    // the _ is just a shorthand for what's behind :=
+    var y : Vector[Object, 2U] = x
+  }
+}
