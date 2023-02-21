@@ -11,7 +11,7 @@ type S {
   }
 }
 
-type T <: proxy[S] {
+type T <: reflection.proxy[S] {
   new;
 
   def implicit : S = new S
@@ -25,7 +25,7 @@ type T <: proxy[S] {
   }
 }
 
-type U <: proxy[T] {
+type U <: reflection.proxy[T] {
   new;
 
   def implicit : T = new T
@@ -41,7 +41,7 @@ type U <: proxy[T] {
   }
 }
 
-type V <: U, proxy[T] {
+type V <: U, reflection.proxy[T] {
   new;
 
   test "f" {

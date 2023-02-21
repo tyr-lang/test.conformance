@@ -60,7 +60,7 @@ class Array {
 /**
  * This is the type of "array<index",i.e. without ">"
  */
-type ArrayIndexOp <: noVar {
+type ArrayIndexOp <: reflection.noVar {
   val target : Array
   val index : container.size_t;
 
@@ -75,7 +75,8 @@ type ArrayIndexOp <: noVar {
  * This is the type of > in "array<index>"
 
  */
-type ArrayAccessOp <: proxy[int], joinImplicit, noVar {
+type ArrayAccessOp
+      <: reflection.proxy[int], reflection.joinImplicit, reflection.noVar {
   val target : Array
   val index : container.size_t;
 

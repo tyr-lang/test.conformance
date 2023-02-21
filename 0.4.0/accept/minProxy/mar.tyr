@@ -1,7 +1,7 @@
 /**
  * minimal test to check correct template instantiation for proxy
  */
-type Test[v : int] <: proxy[int] {
+type Test[v : int] <: reflection.proxy[int] {
   new;
 
   def implicit : int = v
