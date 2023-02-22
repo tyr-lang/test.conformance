@@ -7,7 +7,7 @@ class Box[T : Type[any]] {
     def implicit : Box[Box[T]] = null
 }
 
-class T <: proxy[int] {
+class T <: reflection.proxy[int] {
     def implicit : Box[T] = null
 
     test "die" <: noCompile[I_LIMIT_EXCEEDED, NAM_NOT_FOUND_OVERLOAD_SINGLE] {

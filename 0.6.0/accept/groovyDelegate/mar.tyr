@@ -4,7 +4,7 @@
  *
  * @note I consider this bad style and massive abuse. But, it should still work.
  */
-type T <: proxy[int] {
+type T <: reflection.proxy[int] {
   val x : int;
   new (x := x : int = 0){}
 

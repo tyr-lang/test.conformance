@@ -5,7 +5,7 @@ with container.index_t
 /**
  * Ensure that a type with a default type parameter can be constructed without passing parameters
  */
-type Cursor[T : Type[any] = StringLiteral] <: proxy[T] {
+type Cursor[T : Type[any] = StringLiteral] <: reflection.proxy[T] {
 
   val target : ArrayBuffer[T := T]
   var position : size_t
