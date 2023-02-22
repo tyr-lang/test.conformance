@@ -1,0 +1,18 @@
+/**
+ * Test that DFG joins on literals upcast the type to a non-literal type.
+ */
+type T {
+  test "literal" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
+    // note: if this test breaks, tweak the condition to something that cannot
+    // be proven
+    val r = if ("" == " ") true else false
+    val x : boolLiteral = r
+  }
+  test "upcast" {
+    // note: if this test breaks, tweak the condition to something that cannot
+    // be proven
+    val r = if ("" == " ") true else false
+    val x : bool = r
+    !r
+  }
+}
