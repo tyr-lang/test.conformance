@@ -1,0 +1,17 @@
+/**
+ * Test that property target types can be actually used
+ */
+property PT <: reflection.TypeProperty;
+property PD <: reflection.FunctionProperty;
+property PV <: reflection.FieldProperty;
+property PC <: reflection.CTParameterProperty;
+property PR <: reflection.RTParameterProperty;
+
+type T[X : int <: PC] <: PT{
+    type def f (x : int <: PR) <: PD = X
+    type val v <: PV = X
+
+    test "use" {
+        T[5].v == T[5].f(3)
+    }
+}

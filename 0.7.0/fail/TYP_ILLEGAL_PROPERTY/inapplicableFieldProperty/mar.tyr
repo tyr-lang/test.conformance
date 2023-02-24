@@ -1,0 +1,8 @@
+/**
+ * Not a field property
+ */
+property P <: reflection.TypeProperty;
+
+type T {
+  val f <: P = 0
+}

@@ -1,0 +1,6 @@
+/**
+ * Not a type property
+ */
+property P <: reflection.FunctionProperty;
+
+type T <: P;

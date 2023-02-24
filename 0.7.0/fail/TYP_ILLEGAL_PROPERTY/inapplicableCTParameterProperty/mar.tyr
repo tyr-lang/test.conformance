@@ -1,0 +1,6 @@
+/**
+ * Not a CT param property
+ */
+property P <: reflection.FunctionProperty;
+
+type T[X : int <: P];

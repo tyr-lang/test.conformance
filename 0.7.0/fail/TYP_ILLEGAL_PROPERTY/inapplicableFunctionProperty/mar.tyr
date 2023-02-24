@@ -1,0 +1,8 @@
+/**
+ * Not a function property
+ */
+property P <: reflection.TypeProperty;
+
+type T {
+  def f <: P = 0
+}

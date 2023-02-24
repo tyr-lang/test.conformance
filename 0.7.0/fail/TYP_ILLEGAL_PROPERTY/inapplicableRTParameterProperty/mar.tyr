@@ -1,0 +1,8 @@
+/**
+ * Not an RT param property
+ */
+property P <: reflection.FunctionProperty;
+
+type T{
+    def (x : int <: P) = 0
+}
