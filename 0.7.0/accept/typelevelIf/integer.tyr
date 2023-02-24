@@ -1,5 +1,10 @@
 /**
  * @note this test will eventually stop working!
+ *
+ * @note this is kind of a question to myself on dependent types; if I have them
+ *   implemented, I should check if they allow for such expressions and extend
+ *   the current toType rules to allow any expression that is then constant
+ *   folded if it is a block that does not yield a literal type
  */
 type T {
   new;
