@@ -1,0 +1,15 @@
+/**
+ * Test that deleting an eternal entity has no effect
+ */
+type T {
+  test "use" {
+    var x = "a"
+    x = "b"
+    // it is not null, but it cannot be deleted
+    delete x
+    delete x
+
+    // and it is not changed
+    "b" == x
+  }
+}

@@ -1,0 +1,30 @@
+/**
+ * Test that deleting an eternal entity has no effect
+ */
+class Box[T : Type[_]] <: mem.eternal {
+  var x : T
+  new (x := x : T);
+}
+
+type T {
+  test "use" {
+    var x = new Box[String]("a")
+    x.x = "b"
+    // it is not null, but it cannot be deleted
+    delete x
+    delete x
+
+    // and it is not changed
+    "b" == x.x
+  }
+
+  test "null" {
+    var x = new Box[String](null)
+    // it is not null, but it cannot be deleted
+    delete x
+    delete x
+
+    // and it is not changed
+    null == x.x
+  }
+}
