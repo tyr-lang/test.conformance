@@ -4,5 +4,5 @@
 property P <: reflection.FunctionProperty;
 
 type T{
-    def (x : int <: P) = 0
+    def f(x : int <: P) = 0
 }
