@@ -8,7 +8,7 @@
  * @note it is perfectly fine to create a value that is never captured locally
  *   as it escapes into the implicit/apply chain and can be managed from there
  */
-type T <: proxy[int] {
+type T <: reflection.proxy[int] {
 
   val z : int;
   
