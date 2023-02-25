@@ -16,7 +16,7 @@ with container.Iterator
  *   cacheng in any version without further notice. This test relies on this
  *   behaviour.
  */
-class T[V : Type] {
+class T[V : Type[_]] {
 
   test "usage" {
     T[T.V].__base__[int] == T[int]

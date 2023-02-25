@@ -13,7 +13,7 @@ type T {
 
   type val v : T = new T
 
-  def f[V : Type](x : V) = x
+  def f[V : Type[_]](x : V) = x
 
   test "usage explicit" {
     f[bool].__base__[int](v, 7) == 7
