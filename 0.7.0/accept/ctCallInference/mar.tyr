@@ -1,0 +1,14 @@
+/**
+ * Test that CT parameters can be inferred in obvious cases from an outer RT
+ * call.
+ *
+ * @note to self: this test does not exist yet as it is not fully clear how this
+ *   can be done and how it fits into my single level inference approach.
+ +   Nonetheless, it is required to get something like toString(7) to work with
+ *   reasonable implementation.
+ */
+type T {
+  test "use" {
+    false
+  }
+}
