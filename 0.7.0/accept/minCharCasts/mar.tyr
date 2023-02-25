@@ -1,0 +1,12 @@
+/**
+ * Another fabolous crash caused by doing something non-trivial the intuitive
+ * way that turned out to be an obscure bug in sleipnir related to llvm data
+ * layouting.
+ */
+with container.UTF8Iterator
+
+type charConversions {
+  test "some text intended" {
+    var bs = new UTF8Iterator("some text".chars())
+  }
+}
