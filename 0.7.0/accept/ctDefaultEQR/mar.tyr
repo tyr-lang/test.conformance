@@ -1,0 +1,18 @@
+/**
+ * Test that CT parameters can be inferred in obvious cases from an outer RT
+ * call.
+ */
+with container.CharacterIterator
+with container.UTF8Iterator
+
+type charConversions {
+  test "some text intended" {
+    val t = "some text"
+    var it = t.chars()
+    var bs = new UTF8Iterator(it)
+    var cs = new CharacterIterator(bs)
+
+    // should use MinEQR[character]
+    cs.sameElements(t.chars())
+  }
+}
