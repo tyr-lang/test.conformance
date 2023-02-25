@@ -1,0 +1,32 @@
+/**
+ * For some reason compilation of switch with terminated non-trivial blocks was
+ * broken.
+ *
+ * @note using class uncovered a second obskure bug related to the field access
+ */
+class T {
+  private var idx = 0U
+  new;
+
+  def use : byte {
+    val c = 0xff
+    switch idx {
+      if 1U {
+        return (byte !! c) | 0xc0i8
+      }
+      if 2U {
+        return (byte !! c) | 0xe0i8
+      }
+      else {
+        return (byte !! c) | 0xf0i8
+      }
+    }
+  }
+
+  test "use" {
+    var v = new T
+    val r = 0xffi8 == v.use()
+    delete v
+    r
+  }
+}
