@@ -1,0 +1,21 @@
+/**
+ * Ensure that abstract member checks also apply to canonical template instances
+ */
+with container.ArrayBuffer
+with container.Set
+
+public
+class NoSet[T : Type[_], EQ : def(T, T) : bool = MinEQR[T].equals]
+      <: Set[T, EQ] {
+
+  val data : ArrayBuffer[T];
+
+  public new {
+    data = new ArrayBuffer[T](4)
+  }
+  public delete {
+    delete data
+  }
+
+  // no overrides, because we want to get a warning here
+}
