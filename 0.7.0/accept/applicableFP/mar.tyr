@@ -1,0 +1,23 @@
+/**
+ * Check that implicit conversions are correctly applied on CT function
+ * parameters.
+ */
+public
+class C[T : Type[_], FP : def(T, T) : bool = MinEQR[T].equals] {
+
+  var x : T
+
+  new(x := x : T);
+  delete;
+
+  def eq(y : T) = FP(x, y)
+}
+
+type T {
+  test "use" {
+    val c = new C[int, int.`==`](3)
+    val r = c.eq(3) && !c.eq(4)
+    delete c
+    r
+  }
+}
