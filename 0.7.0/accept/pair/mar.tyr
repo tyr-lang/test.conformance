@@ -3,7 +3,7 @@
  * instantiation.
  */
 type Pair [A : Type[any], B : Type[any]] {
-  type val eq : MinEQR[Pair[A,B]];
+  type val eq : MinEQR[Pair[A,B]] <: suppressCompilerMessage["E_INIT_GLOBAL_UNDEF"];
 
   var a : A;
   var b : B;
