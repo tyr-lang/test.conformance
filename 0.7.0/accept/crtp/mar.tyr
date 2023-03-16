@@ -7,7 +7,7 @@
  * Currently, I'm really not sure what is to be preferred.
  */
 class Box[T : Class[_]] {
-  def get() : T = T ! this
+  def get() : T = T !! this
 }
 
 class Base <: Box[Base] {
@@ -15,7 +15,7 @@ class Base <: Box[Base] {
   test "use" {
     var b = (new Base).get();
     {
-      b.type == b.implicit().class
+      b.implicit().type == b.implicit().class
     } && {
       delete b
       true
