@@ -1,0 +1,6 @@
+/**
+ * Ensure that a misstyped this type does not result in an elaboration error
+ */
+type A {
+  type def f (this: B) : void;
+}
