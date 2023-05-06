@@ -5,8 +5,8 @@ type T {
   test "use" {
     var y = 0
     switch x := y {
-      if 0 x = 7
-      else x = 3
+      if 0 {x = 7}
+      else {x = 3}
     }
     7 == y
   }
