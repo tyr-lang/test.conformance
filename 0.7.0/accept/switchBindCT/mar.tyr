@@ -14,9 +14,17 @@ type T[v : int] {
     }
   }
 
-  // note to self: or another category maybe
-  test "bind type else" <: noCompile[typing] {
+  test "bind type else" /* compiles now */ {
     0 == switch x := 0 {
+      if 0 x
+      // x is an RT value here, but we can prove that it is 0
+      else T[x].v
+    }
+  }
+
+  test "bind type else var" <: noCompile[TYP_CT_REQUIRED] {
+    var x = 0
+    0 == switch x {
       if 0 x
       // x is an RT value here; cannot be allowed
       else T[x].v
@@ -71,9 +79,20 @@ type T[v : int] {
     }
   }
 
-  // note to self: or another category maybe
-  test "bind switch else" <: noCompile[typing] {
+  test "bind switch else" /* compiles now */ {
     0 == switch x := 0 {
+      if 0 x
+      else switch y := x {
+        // x is an RT value here; cannot be allowed
+        if x y
+        else y
+      }
+    }
+  }
+
+  test "bind switch else var" <: noCompile[TYP_CT_REQUIRED] {
+    var x = 0
+    0 == switch x {
       if 0 x
       else switch y := x {
         // x is an RT value here; cannot be allowed
