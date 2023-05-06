@@ -9,7 +9,7 @@ type Switch {
   type def f(x : int) : bool = switch x {
       if 0 {return false}
       if 2, 3 false
-      if 7, else true
+      else true
     }
 
   test "seven" {
