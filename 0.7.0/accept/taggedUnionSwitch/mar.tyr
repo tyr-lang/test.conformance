@@ -42,7 +42,7 @@ type T {
     true
   }
 
-  test "use explicit other" <: noCompile[typing] {
+  test "use explicit other" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     var c = new union
 
     switch v := c {
@@ -54,7 +54,7 @@ type T {
     true
   }
 
-  test "use union" <: noCompile[typing] {
+  test "use union" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     var c = new union
 
     switch v := c {
@@ -66,7 +66,7 @@ type T {
     true
   }
 
-  test "use base" <: noCompile[typing] {
+  test "use base" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     var c = new union
 
     switch v := c {
@@ -99,7 +99,7 @@ type T {
     true
   }
 
-  test "update nonexhaustive" <: noCompile[naming] {
+  test "update nonexhaustive" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     var c = new union
 
     switch v := c {
@@ -121,7 +121,7 @@ type T {
     true
   }
 
-  test "update val" <: noCompile[naming] {
+  test "update val" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     val c = new union
 
     switch v := c {
@@ -133,7 +133,7 @@ type T {
     true
   }
 
-  test "update" <: noCompile[typing] {
+  test "update" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     var c = new union
 
     switch v := c {
