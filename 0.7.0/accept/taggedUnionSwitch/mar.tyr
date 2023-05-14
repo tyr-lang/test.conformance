@@ -121,7 +121,7 @@ type T {
     true
   }
 
-  test "update val" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
+  test "update val" <: noCompile[NAM_NOT_FOUND] {
     val c = new union
 
     switch v := c {
@@ -133,7 +133,7 @@ type T {
     true
   }
 
-  test "update" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
+  test "update literals" <: noCompile[TYP_MISMATCH] {
     var c = new union
 
     switch v := c {
