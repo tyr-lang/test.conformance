@@ -5,6 +5,10 @@
  *   implemented, I should check if they allow for such expressions and extend
  *   the current toType rules to allow any expression that is then constant
  *   folded if it is a block that does not yield a literal type
+ *
+ * @note to self: the constant substitution to evaluate this requires that all
+ *   substitutions have valid dominance information in all situations; it also
+ *   needs a deletedBlock, but this is rather trivial
  */
 type T {
   new;
