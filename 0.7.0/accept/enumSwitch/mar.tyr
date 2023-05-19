@@ -88,9 +88,23 @@ type T {
     }
   }
 
-  test "enum join" {
+  test "enum join" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     var x = 0
     val c = switch x {
+      if 0 other.zero
+      else zero
+    }
+    // at this point, we already decided that c isn't a literal
+    0 == (c : IntegerLiteral[32])
+  }
+
+  test "enum join explicit" {
+    var x = 0
+    // note: an explicit expected integer literal forces matched enums to their
+    // parent literal type
+    // note: this example shouldn't break in future versions as both enums are
+    // IntegerLiteral[32, 0]
+    val c : IntegerLiteral[32] = switch x {
       if 0 other.zero
       else zero
     }
