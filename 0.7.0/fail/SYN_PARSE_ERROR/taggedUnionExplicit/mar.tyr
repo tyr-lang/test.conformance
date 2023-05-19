@@ -14,6 +14,7 @@ type unionOne {
 
 enum union <: mixed {
   if zero unionZero
-  // not allowed, both have the same RT representation
-  if naught unionOne
+  // not allowed, only identifiers are allowed to prevent misuse
+  if mixed.one unionOne
+  else void
 }
