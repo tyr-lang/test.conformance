@@ -1,0 +1,26 @@
+/**
+ * tests correctness of switch class expressions
+ *
+ * note to self: for switch class, *all* implicit conversions on the target are
+ *  performed
+ */
+type T {
+  test "basic class" {
+    var r = ""
+    switch class r {
+      if String false
+      if StringLiteral true
+      else false
+    }
+  }
+  test "basic class inferred" {
+    var r = ""
+    switch r {
+      if String false
+      if StringLiteral true
+      else false
+    }
+  }
+  // note to self: for switch type, no implicit conversions on the object are performed
+  // note to self: for switch class, *all* implicit conversions on the target are performed
+}

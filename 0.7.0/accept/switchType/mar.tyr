@@ -1,20 +1,53 @@
 /**
  * tests correctness of switch type expressions
+ *
+ * note to self: for switch type, no implicit conversions on the object are
+ * performed
  */
 type T {
+  test "distinct" {
+    var r = ""
+    switch type r {
+      if String true
+      if int false
+      else false
+    }
+  }
+
   test "basic type" {
     var r = ""
-    switch(r.type) {
+    switch type r {
       if String true
       if StringLiteral false
       else false
     }
   }
-  test "basic class" {
+
+  test "basic type ref" {
     var r = ""
-    switch(r.type) {
+    switch type r {
       if String false
-      if StringLiteral true
+      if StringLiteral false
+      if Ref[String] true
+      else false
+    }
+  }
+
+  test "best" {
+    var r = ""
+    switch type r {
+      if String false
+      if CRef[String] false
+      if Ref[String] true
+      else false
+    }
+  }
+
+  test "dup" <: noCompile[E_SWITCH_CASE] {
+    var r = ""
+    switch type r {
+      if String false
+      if String false
       else false
     }
   }
