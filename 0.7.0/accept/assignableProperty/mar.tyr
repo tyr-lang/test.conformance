@@ -1,48 +1,57 @@
 /**
  * Check that assignable checks against properties result in useful errors.
  *
- * @note Apparently, properties count as Types. This should be reviewed.
+ * @note Apparently, properties count as Types. This is ok for the moment.
  *
- * @todo check that errors are useful; also, there should be no RT representation of properties
+ * @note Allowing properties to be used as runtime values is actually debatable.
+ *   If we allow this, we also need to introduce a subtype below Type and add
+ *   A reprFlat variant to ClassRepresentation.
+ *
+ * @note There are still unchecked ways left that would allow you to crash the
+ *   backend by forcing a property into a block.
+ *
+ * @note to self: It is actually easier to allow this than getting all the
+ *   checks preventing the usage right.
  */
 type T {
+  with reflection.proxy
 
-  test "val proxy" {
+  test "val proxy" <: noCompile[TYP_NOT_REPRESENTABLE] {
     val s = proxy;
     s == 1
   }
 
-  test "val proxy null" {
+  test "val proxy null" <: noCompile[TYP_NOT_REPRESENTABLE] {
     val s = proxy;
     s == null
   }
 
-  test "var proxy" {
+  test "var proxy" <: noCompile[TYP_NOT_REPRESENTABLE] {
     var s = proxy;
     s == 1
   }
 
-  test "val proxy proxy" {
+  test "val proxy proxy" <: noCompile[TYP_NOT_REPRESENTABLE] {
     val s = proxy[byte];
     s == proxy[int]
   }
 
-  test "var proxy proxy" {
+  test "var proxy proxy" <: noCompile[TYP_NOT_REPRESENTABLE] {
     var s = proxy[byte];
     s == proxy[int]
   }
 
-  test "var proxy reverse" {
+  test "var proxy reverse" <: noCompile[TYP_NOT_REPRESENTABLE] {
     var s = proxy;
     1 == s
   }
 
-  test "assignable proxy" {
+  test "assignable proxy" <: noCompile[NAM_NOT_FOUND_OVERLOAD, TYP_NOT_REPRESENTABLE] {
     var s : T = proxy;
     1 == s.g
   }
 
-  test "assignable proxy reverse" {
+  test "assignable proxy reverse" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     var s = 7
     s == proxy
   }
