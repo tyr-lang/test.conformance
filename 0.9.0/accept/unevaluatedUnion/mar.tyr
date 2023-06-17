@@ -9,8 +9,15 @@ type T {
     0 == T.x
   }
 
+  test "usage int union" {
+    T.x = 0
+    T.x == 0
+  }
+
+  type def set = x = "foo"
+
   test "usage string" {
-    T.x = "foo"
+    set()
     "foo".bytes().sameElements(T.x.bytes())
   }
 

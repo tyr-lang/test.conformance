@@ -1,0 +1,19 @@
+with Arr := container.ArrayBuffer
+
+/**
+ * Test interface calls with abstract prototype
+ */
+type direct {
+  test "double apply" {
+    val buffer = new Arr[Arr[int]]
+
+    buffer += new Arr[int]
+    buffer(0) += 4
+
+    var r = buffer(0)(0)
+
+    delete buffer(0), buffer
+
+    4 == r
+  }
+}

@@ -23,4 +23,6 @@ type T {
   }
   // note to self: for switch type, no implicit conversions on the object are performed
   // note to self: for switch class, *all* implicit conversions on the target are performed
+  // TODO switch null {if Null true}
+  // note to self: null get's a special rule stating it is only an instance of Null and will pick else otherwise
 }

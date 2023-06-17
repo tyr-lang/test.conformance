@@ -1,0 +1,16 @@
+/**
+ * Test Ref[T] variance
+ *
+ * @note to self: the obvious way to get this to work requires correct detection
+ *   of the parametres type being a free variable. It might be that this still
+ *   requires a parameter property or a special rule allowing return types to
+ *   bind actual parameter's types.
+ */
+type T {
+  test "variant" {
+    var i : String = ""
+    // i = "x" should result in an application of type StringLiteral
+    val p : StringLiteral = i = "x"
+    StringLiteral == p.type
+  }
+}

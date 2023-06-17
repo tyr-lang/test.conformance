@@ -4,6 +4,9 @@
  * @note to self: it could be that the example below is in fact not allowed. But
  *      in that case, it should work for something like proxy or similar. I have
  *      to check if there is such a property for functions.
+ *
+ * @note this is not allowed; add a GroundTerm property to create an adequate
+ *   error message and provide a test that works using a different property
  */
 class T[P : int] {
 

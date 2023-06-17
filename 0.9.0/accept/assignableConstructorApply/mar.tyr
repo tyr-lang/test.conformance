@@ -2,8 +2,7 @@
  * Test that creating a value that acts like a function can be done without
  * storing the value in a local variable
  *
- * @note var/val worked for years; direct is the regression that should have
- *   worked with the 0.6 release
+ * @note var/val worked for years
  *
  * @note it is perfectly fine to create a value that is never captured locally
  *   as it escapes into the implicit/apply chain and can be managed from there
@@ -36,4 +35,11 @@ type T <: reflection.proxy[int] {
     // applicable von assignable zu ändern
     3 == new T(2)(1)
   }
+
+  test "explicit" {
+    // just to make sure that it is not affected by implicit rebracing rules
+    3 == (new T(2))(1)
+  }
+
+  // TODO add a test with update in the sense of: new T(2)(1) = 3; 4 == T.mem
 }

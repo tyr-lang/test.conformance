@@ -7,7 +7,7 @@ type T {
     0 == new (3+2).type
   }
   
-  test "usage" <: noCompile{
+  test "usage" <: noCompile {
     0 == new (2L+2L).type
   }
 }
