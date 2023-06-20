@@ -14,6 +14,8 @@ type T {
   // compiler tries to elaborate f before the imports of T
   with T_f_GlobalState.x
 
+  type def f = ++x
+
   // not allowed:
   type def g = ++x
 
