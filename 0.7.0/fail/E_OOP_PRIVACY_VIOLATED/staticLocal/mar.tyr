@@ -14,10 +14,10 @@ type T {
   // compiler tries to elaborate f before the imports of T
   with T_f_GlobalState.x
 
-  type def f = ++x
+  // not allowed:
+  type def g = ++x
 
-  test "use" {
-    // as always, tests can access anything as if it had default visibility
-    0 == x && 1 == f() && 2 == f()
+  test "no compile" {
+    false
   }
 }
