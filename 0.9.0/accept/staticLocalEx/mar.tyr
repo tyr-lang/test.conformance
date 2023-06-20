@@ -1,0 +1,29 @@
+/**
+ * An extension of the member inference, privacy, import elaboration cycle issue
+ * found in the original staticLocal test. To fix this test, the privacy checks
+ * and imports need to be fixed so that the resulting elaboration cycles result
+ * in proper error messages or are avoided altogehter. Hopefully both.
+ *
+ * @note to self: test will likely require rework
+ */
+type T_f_GlobalState {
+  private[T.f : def()int] type var x = 0
+  private[T.f : def()long] type var x = 0L
+}
+
+type T {
+  // note: it turns out that this is in fact also something that could go wrong
+  // because the order of evaluation is important here and it could be that the
+  // compiler tries to elaborate f before the imports of T
+  with GlobalState.x : int
+  with GlobalState.y : long
+
+  type def f = ++x
+  // note to self: check if such overloads are actually allowed or add a
+  // parameter; ultimately, using a var instead of a def should equally do
+  type def f = ++y
+
+  test "no compile" {
+    false
+  }
+}
