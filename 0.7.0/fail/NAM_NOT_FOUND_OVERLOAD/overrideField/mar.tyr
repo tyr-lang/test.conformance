@@ -1,0 +1,34 @@
+/**
+ * Define that using only the name of the field for an override specifier is
+ * ambiguous and not allowed.
+ *
+ * @note It wouldn't make sense to change the way the specifier expression is
+ *   evaluated just to make something work that would be equivalent to not
+ *   providing a specifier.
+ */
+class S {
+  def f = 0
+  var g = 1
+
+  new (g := x : int);
+}
+
+type A := S;
+
+class T <: A {
+  override[f]
+  def f = 2
+
+  override[g]
+  var g : int;
+
+  new (g := x : int);
+
+  new {
+    A.new(4)
+  }
+
+  test "no compile" {
+    false
+  }
+}
