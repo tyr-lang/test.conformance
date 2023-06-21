@@ -3,11 +3,25 @@
  */
 type T {
 
+  type def f(x : int) = new mem.HeapPointer[x.type]()
+  type def f(x : long) = new mem.HeapPointer[x.type]()
+
   test "usage" {
-    0 == new (3+2).type
+    // note: the statement requires braces because f will be bound as type
+    // otherwise
+    0 == new (f(3+2).type)
+    // note: the comparison itself is undefined; it's all about types, here
+    true
+  }
+
+  test "new long" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {
+    // long has no constructor
+    new (2L+2L).type
   }
   
-  test "usage" <: noCompile {
-    0 == new (2L+2L).type
+  test "usage long" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
+    // fail on ==
+    0 == new (f(3L+2L).type)
+    true
   }
 }
