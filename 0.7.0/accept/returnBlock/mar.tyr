@@ -3,9 +3,9 @@
  */
 type T {
 
-  def i(b : bool) : int <: inline = return {if b 2 else 3}
+  type def i(b : bool) : int <: inline = return {if b 3 else 2}
   
-  def f(b : bool) : int = return {if b 2 else 3}
+  type def f(b : bool) : int = return {if b 3 else 2}
 
   test "f false" {
     2 == f(false)
