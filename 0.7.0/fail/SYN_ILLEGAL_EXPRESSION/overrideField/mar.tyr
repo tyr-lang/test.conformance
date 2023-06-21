@@ -15,7 +15,7 @@ class S {
 
 type A := S;
 
-class T <: A {
+class T <: A, suppressCompilerMessage["E_OOP_TRANSITIVE_SUPER"] {
   override[f]
   def f = 2
 
