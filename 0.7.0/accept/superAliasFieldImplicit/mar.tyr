@@ -11,9 +11,10 @@ type A := S;
 
 class T <: A {
 
-  override
-  var g;
+  // note: the definition of g can only be implicit and the compiler will do
+  // what's needed here
 
+  // we can still use g as if it were defined here
   new (g := x : int);
 
   test "use S" {

@@ -1,0 +1,21 @@
+/**
+ * It does not make sense to infer the type of a field from an override because
+ * the result can be achieved by simply declaring nothing.
+ */
+class S {
+  var g = 1
+}
+
+type A := S;
+
+class T <: A {
+
+  override
+  var g;
+
+  new (g := x : int);
+
+  test "no compile" {
+    false
+  }
+}
