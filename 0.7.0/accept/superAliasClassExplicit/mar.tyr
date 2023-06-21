@@ -14,7 +14,7 @@ class T <: A {
   override[A.f]
   def f = 2
 
-  override[A.g]
+  override /* field cannot take an explicit target */
   var g : int;
 
   new (g := x : int);

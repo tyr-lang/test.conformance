@@ -1,0 +1,25 @@
+/**
+ * Using explicit override targets for fields is no longer allowed and did
+ * likely never work.
+ *
+ * @note: If for some strange reason some day the compiler would require extra
+ *   code to prevent this but would otherwise treat the expression correctly,
+ *   the decision can be reviewed.
+ */
+class S {
+  var g = 1
+
+  new (g := x : int);
+}
+
+class T <: S {
+
+  override[S.g]
+  var g : int;
+
+  new (g := x : int);
+
+  test "no compile" {
+    false
+  }
+}
