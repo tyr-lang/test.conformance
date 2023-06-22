@@ -1,8 +1,8 @@
 /**
  * This test shows ext tagged unions
  */
-with taggedUnion.mixed
-with taggedUnion.union
+with taggedUnionUse.mixed
+with taggedUnionUse.union
 
 type T {
   test "repr" {

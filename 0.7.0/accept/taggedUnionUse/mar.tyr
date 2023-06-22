@@ -9,7 +9,7 @@ public enum mixed {
 
 public type unionZero;
 public type unionOne {
-  var x : int
+  public var x : int
 }
 
 public enum union <: mixed {
