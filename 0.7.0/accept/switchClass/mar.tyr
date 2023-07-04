@@ -21,8 +21,52 @@ type T {
       else false
     }
   }
-  // note to self: for switch type, no implicit conversions on the object are performed
-  // note to self: for switch class, *all* implicit conversions on the target are performed
-  // TODO switch null {if Null true}
-  // note to self: null get's a special rule stating it is only an instance of Null and will pick else otherwise
+
+  test "null" {
+    var r : String = null
+    switch class r {
+      if String false
+      if StringLiteral false
+      if Null true
+      else false
+    }
+  }
+  // note to self: null get's a special rule stating it is only an instance of
+  // Null and will pick else otherwise
+  test "null implicit" {
+    var r : String = null
+    switch class r {
+      if String false
+      if StringLiteral false
+      else true
+    }
+  }
+
+  // note: order does not matter
+  test "null order" {
+    var r : String = null
+    switch class r {
+      if Null true
+      if String false
+      if StringLiteral false
+      else false
+    }
+  }
+  test "not null" {
+    var r : String = null
+    r = ""
+    switch class r {
+      if String false
+      if StringLiteral true
+      if Null false
+      else false
+    }
+  }
+  test "just null" {
+    var r : String = null
+    switch class r {
+      if Null {return true}
+      else false
+    }
+  }
 }
