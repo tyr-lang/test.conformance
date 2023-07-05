@@ -1,0 +1,19 @@
+/**
+ * Inline functions that only apply CT functions should automatically result in
+ * a CT application even if they do not have a CT property.
+ *
+ * @note it is also ok to add a special inferred CT property here, but I think
+ *   that inline calls without free variables will not work the way they did in
+ *   Tyr 0.7, i.e. they will be flat-inlined anyway.
+ */
+public enum SDLK <: int
+{
+    UNKNOWN = 0,
+    PERCENT = '%'.toInt()
+}
+
+type T {
+  test "use" {
+    SDLK.UNKNOWN != SDLK.PERCENT
+  }
+}
