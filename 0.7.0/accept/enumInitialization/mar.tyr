@@ -1,0 +1,23 @@
+/**
+ * Test that an int-based enum can be initialized with values from character literals.
+ */
+public enum SDLK <: int
+{
+    UNKNOWN = 0,
+
+    RETURN = '\r'.sign().resize[32](),
+    ESCAPE = '\x1b'.sign().resize[32](),
+    BACKSPACE = '\b'.sign().resize[32](),
+    TAB = '\t'.sign().resize[32](),
+    SPACE = ' '.sign().resize[32](),
+    EXCLAIM = '!'.sign().resize[32](),
+    QUOTEDBL = '"'.sign().resize[32](),
+    HASH = '#'.sign().resize[32](),
+    PERCENT = '%'.sign().resize[32]()
+}
+
+type T {
+  test "use" {
+    SDLK.UNKNOWN != SDLK.RETURN
+  }
+}
