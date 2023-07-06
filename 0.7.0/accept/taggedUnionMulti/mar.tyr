@@ -1,0 +1,42 @@
+/**
+ * This test shows using multiple labels in tagged unions
+ */
+public enum mixed {
+  zero,
+  naught = 0,
+  one,
+  two
+}
+
+public type unionZero;
+public type unionOne {
+  public var x : int
+}
+
+public enum union <: mixed {
+  if zero unionZero
+  if one, two unionOne
+  else void
+}
+
+type T {
+  test "repr" {
+    // implicit constructor creating an uninitialized stack-allocated union
+    var c = new union
+    true
+  }
+
+  test "update" {
+    // implicit constructor creating an uninitialized stack-allocated union
+    var c = new union
+    c = mixed.one
+    // bind v as Ref[union]
+    switch v := c {
+      if one { v.x = 0 }
+      if two { v.x = 0 }
+      else {}
+    }
+
+    true
+  }
+}
