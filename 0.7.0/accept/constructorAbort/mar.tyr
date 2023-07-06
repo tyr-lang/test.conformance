@@ -1,0 +1,34 @@
+/**
+ * Test that constructor can be aborted
+ */
+class T {
+  type var exists = false
+  type var existed = false
+
+  new (abort : bool) {
+    exists = existed = true
+
+    if (abort) {
+      delete this
+      return
+    }
+
+    // just create some more code to ensure that the CFG is not compressed
+    exists = true
+  }
+  delete {
+    exists = false
+  }
+
+  test "use" {
+    new T(true)
+
+    existed && !exists
+  }
+
+  test "regular" {
+    new T(false)
+
+    existed && exists
+  }
+}
