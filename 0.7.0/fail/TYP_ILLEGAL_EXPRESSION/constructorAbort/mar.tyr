@@ -1,0 +1,15 @@
+/**
+ * Test that constructor can be aborted, but not by returning a value
+ */
+class T {
+  new {
+    delete this
+    return null
+  }
+
+  test "no compile" {
+    new T
+
+    false
+  }
+}
