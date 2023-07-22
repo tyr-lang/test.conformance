@@ -9,7 +9,7 @@ type T {
     delete x
     delete x
 
-    // and it is not changed
-    "b" == x
+    // but it gets set to null
+    null == x
   }
 }
