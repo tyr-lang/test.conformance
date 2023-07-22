@@ -10,7 +10,7 @@ class Base <: Box[Base] {
   test "use" {
     val b = (new Base).get();
     {
-      b.type == b.class
+      b.implicit().type == b.implicit().class
     } && {
       delete b
       true
