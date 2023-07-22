@@ -115,12 +115,20 @@ type MyInt {
     // v.type == String
   }
 
+  test "multi object origin" {
+    (switch phiX {
+      if 0 "".type
+      if 7 null
+      else ""
+    }).type == Object
+  }
+
   test "multi object" {
     val v = switch phiX {
       if 0 "".type
       if 7 null
       else ""
     }
-    v.type == Object
+    v.type == CRef[Object]
   }
 }
