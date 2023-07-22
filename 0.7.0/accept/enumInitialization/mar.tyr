@@ -1,5 +1,6 @@
 /**
- * Test that an int-based enum can be initialized with values from character literals.
+ * Test that an int-based enum can be initialized with values from character
+ * literals.
  */
 public enum SDLK <: int
 {
