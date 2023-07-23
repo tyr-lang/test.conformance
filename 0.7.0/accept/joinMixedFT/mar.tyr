@@ -1,0 +1,25 @@
+/**
+ * The switch creates an intersection between a function type and a type use.
+ * This should create some valid result.
+ */
+type T {
+  type def f : void {
+    var op : int
+    switch op {
+      if 1 {
+        plus
+      }
+      if 2 {
+        minus
+      }
+      else {"Oo\n"!!;}
+    }
+  }
+
+  type def plus : int = 1
+  type def minus : int = 2
+
+  test "compile" {
+    true
+  }
+}
