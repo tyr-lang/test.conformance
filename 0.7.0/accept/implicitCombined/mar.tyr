@@ -1,7 +1,7 @@
 /**
  * Test for new rules for implicit(this) and implicit(from)
  */
-type S {
+type S <: suppressCompilerMessage["W_ELABORATION"] {
   val x : int;
 
   new(x := x : int);
