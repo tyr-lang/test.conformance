@@ -25,6 +25,9 @@ type T {
   }
 
   test "print" {
-    tyr.io.System.out.put(String ! f(0))
+    val s = String !! f(89)
+    var c = new tyr.io.CString(s)
+    tyr.io.System.out.put(c)
+    delete c
   }
 }
