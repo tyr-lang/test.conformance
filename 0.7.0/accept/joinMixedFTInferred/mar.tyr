@@ -1,0 +1,30 @@
+/**
+ * The switch creates an intersection between a function type and a type use.
+ * This should create some valid result.
+ */
+type T {
+  type def f(op : int) = switch op {
+    if 1 plus
+    if 2 minus
+    else "Oo\n"
+  }
+
+  type def plus : int = 1
+  type def minus : int = 2
+
+  test "use" {
+    null != f(1)
+  }
+
+  test "call" {
+    1 == ((def () : int) !! f(1))()
+  }
+
+  test "cmp" {
+    f(1) != f(2)
+  }
+
+  test "print" {
+    tyr.io.System.out.put(String ! f(0))
+  }
+}
