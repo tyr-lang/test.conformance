@@ -3,7 +3,7 @@
  * in the super type is performed.
  */
 private type T {
-  test "use" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
+  test "use" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     // once, this resulted in trying to use Seq[int].new
     // now, an error is created that shows available constructors
     var p = new container.Array[int]
