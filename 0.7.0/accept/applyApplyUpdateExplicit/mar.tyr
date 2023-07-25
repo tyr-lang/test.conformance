@@ -1,0 +1,23 @@
+/**
+ * It should be possible to chain () resulting in multiple applies or a last
+ * update call.
+ */
+with container.Array
+
+class T {
+  var size : int
+  var map : Array[Array[byte]]
+
+  new (size := size : int) {
+    map = new Array[Array[byte]](size, new Array[byte](size, 0i8))
+  }
+
+  def adjust (posX : int, posY : int, v : byte) {
+        map(posX).apply(posY) = map(posX).apply(posY) + v
+  }
+
+  test "use" {
+    val m = new T(5)
+    m.adjust(1,2,5i8)
+  }
+}
