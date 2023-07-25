@@ -1,0 +1,15 @@
+/**
+ * Test that cycles of generic parameters can be typed.
+ *
+ * @note to self: while this should work eventually, I might still move it to a
+ *   future release. This might require a special rule checking for raw
+ *   parameter fixed points.
+ */
+class B[+TT : Class[B[TT]]] := B[_]] <: abstract {
+  type def make : B[TT] = null
+
+  test "compile" {
+    // the test is fine if we reach this point
+    null == B[_].make()
+  }
+}
