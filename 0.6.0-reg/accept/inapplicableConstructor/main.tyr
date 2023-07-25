@@ -4,8 +4,8 @@
  */
 private type T {
   test "use" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
-    // currently, this results in trying to use Seq[int].new which is outright idiotic
-    // instead, an error should be created that shows available constructors
+    // once, this resulted in trying to use Seq[int].new
+    // now, an error is created that shows available constructors
     var p = new container.Array[int]
   }
 }
