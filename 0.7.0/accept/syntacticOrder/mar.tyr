@@ -1,0 +1,59 @@
+/**
+ * Function Parameters should be evaluated in syntactic order, not the order of
+ * the declared parameters. This is different if parameters are passed by name.
+ *
+ * Operators should be evaluated in order of the operator evaluation and left to
+ * right as they are binary or unary functions with positional parameter passing
+ * and there is no real alternative to this rule that would also be
+ * deterministic and obvious.
+ */
+type T {
+  type var x = 0
+  type def f = ++x
+
+  type def g(x : int, y : int) = x - y
+
+  test "positional" {
+    -1 == g(f(), f())
+  }
+
+  test "by name forward" {
+    -1 == g(x := f(), y := f())
+  }
+
+  test "by name backward" {
+    1 == g(y := f(), x := f())
+  }
+
+  test "mixed backward" {
+    1 == g(y := f(), f())
+  }
+
+  test "mixed backward 2" {
+    1 == g(f(), x := f())
+  }
+
+  test "op2" {
+    // 1 - 2
+    val r = f() - f()
+    -1 == r
+  }
+
+  test "op3" {
+    // 3 + 1 * 2
+    val r = f() + f() * f()
+    5 == r
+  }
+
+  test "op4" {
+    // 1 * 2 - 3 * 4
+    val r = f() * f() - f() * f()
+    -10 == r
+  }
+
+  test "op4b" {
+    // 2 * 3 - 4 * -1
+    val r = f() * f() - f() * -f()
+    10 == r
+  }
+}
