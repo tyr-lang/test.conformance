@@ -1,7 +1,7 @@
 /**
  * test wrong nested returns
  */
-type T {
+type T <: suppressCompilerMessage["TYP"] {
 
   type def f : void {
     if true return else return 2

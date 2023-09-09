@@ -1,7 +1,7 @@
 /**
  * test wrong return type detection
  */
-type T {
+type T <: suppressCompilerMessage["TYP"] {
   
   type def f : void {
     return true
