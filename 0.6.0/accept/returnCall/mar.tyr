@@ -3,10 +3,10 @@
  * error.
  */
 type T {
-  test "void" <: noCompile[TYP_MISMATCH] {
+  test "void" <: noCompile[I_UNLIKELY_SHAPE, SYN_ILLEGAL_EXPRESSION] {
     (return)(3);
   }
-  test "int" <: noCompile[TYP_MISMATCH] {
+  test "int" <: noCompile[I_UNLIKELY_SHAPE, SYN_ILLEGAL_EXPRESSION, TYP_MISMATCH] {
     (return 3)(3);
   }
 }
