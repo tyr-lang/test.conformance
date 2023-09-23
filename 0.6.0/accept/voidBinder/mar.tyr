@@ -28,8 +28,8 @@ type T {
   }
 
   test "return return" <: noCompile[SYN_TERMINATED] {
-    return
-    return
+    return true
+    return true
   }
 
   test "single" {
