@@ -29,7 +29,7 @@ class T {
   test "DTA" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     T.class : void
   }
-  test "DTA void" <: noCompile[TYP_NOT_A_CLASS] {
+  test "DTA void" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     {}.class : Class[Object]
   }
   test "new void" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
