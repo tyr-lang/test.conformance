@@ -1,0 +1,13 @@
+with container.Array
+/**
+ * Test that constructors may take Block parameters.
+ */
+
+type T {
+  test "usage" {
+    var i = 0
+    val arr = new Array(3, ++i)
+
+    6 == arr.fold(0) l,r do (l+r)
+  }
+}
