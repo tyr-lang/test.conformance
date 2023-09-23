@@ -49,10 +49,16 @@ type MyInt {
     // v.type == String
   }
 
-  test "null" {
+  test "null string" {
+    val v = if phi null else ""
+    v : String
+    // v.type == String
+  }
+
+  test "null literal" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
     val v = if phi null else ""
     v : StringLiteral
-    // v.type == StringLiteral
+    // v.type == String
   }
 
   test "same Null" {
