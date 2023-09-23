@@ -534,6 +534,11 @@ Lastly, all features have a short rationale and an example.
 
 
 # Planned Features
+
+- Highlevel planning
+  * 0.8 exceptions
+  * 0.9 dependent types & ptr depth
+  * 0.10 ct eval
  
 - [continuous] extended CT evaluation
   * likely an unlimited endevour
@@ -544,17 +549,17 @@ Lastly, all features have a short rationale and an example.
 - [0.7] Forall-polymorphic generic template parameters at least for Object subtypes
   * the last research question exected to be answered in the forseeable future
 
-- [0.7] Variant template arguments at least for Object subtypes
+- [0.11] Variant template arguments at least for Object subtypes
   * required by some special types
 
-- [likely 0.7] Java-style varargs or CT HLists argument types; any varargs
+- [0.10] Java-style varargs or CT HLists argument types; any varargs
   * required to build some APIs
   * any varargs should reflect C varargs
 
-- [likely 0.7] enum
+- [0.7] enum
   * required for good C APIs
 
-- [likely soon] tagged union
+- [0.7] tagged union
   * required for good C APIs
 
 - [likely soon] inline enum, inline type val (no RT representation)
@@ -674,3 +679,4 @@ Lastly, all features have a short rationale and an example.
 - Easy-to-use cheap reflection
   * Allows code styles that harm scalability and performance
   * Class members are a good alternative
+  * Invalidates results of program analysis tools
