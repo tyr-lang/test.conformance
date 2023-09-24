@@ -1,11 +1,12 @@
 /**
  * Test switch return without an explicit type. Honestly, this has nothing to do
- * with switch.
+ * with switch. This is about mixing different types during return type
+ * inference.
  */
 type Switch[default : bool] {
   type def f(x : int) = switch x {
-      if 0 {return false}
-      if 7 true
+      if 0 {return 7}
+      if 7 "true"
       else {return default}
     }
 
