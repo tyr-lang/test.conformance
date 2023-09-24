@@ -1,0 +1,27 @@
+/**
+ * Test switch return without an explicit type. Honestly, this has nothing to do
+ * with switch.
+ */
+type Switch[default : bool] {
+  type def f(x : int) = switch x {
+      if 0 {return false}
+      if 7 true
+      else {return default}
+    }
+
+  test "use false" {
+    false == Switch[false].f(3)
+  }
+
+  test "use true" {
+    Switch[true].f(3)
+  }
+
+  test "implicit return" {
+    Switch[true].f(7)
+  }
+
+  test "explicit return" {
+    false == Switch[true].f(0)
+  }
+}
