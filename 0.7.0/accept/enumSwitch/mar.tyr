@@ -92,9 +92,20 @@ type T {
     var x = 0
     val c = switch x {
       if 0 other.zero
-      else zero
+      else one
     }
     // at this point, we already decided that c isn't a literal
+    0 == (c : IntegerLiteral[32])
+  }
+
+  test "enum join 0" {
+    var x = 0
+    val c = switch x {
+      if 0 other.zero
+      else zero
+    }
+    // join logic got improved to project enum instance uses to their base
+    //  literals automatically
     0 == (c : IntegerLiteral[32])
   }
 
