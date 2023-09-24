@@ -3,7 +3,8 @@
  * checked. Both are void.
  */
 class T {
-  new {
+  new;
+  delete {
     return true;
   }
 
