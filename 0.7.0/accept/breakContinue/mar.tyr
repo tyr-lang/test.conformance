@@ -58,14 +58,14 @@ type T {
     true
   }
 
-  test "break true terminated" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
+  test "break true terminated" <: noCompile[SYN_TERMINATED] {
     while(true){
       break
     }
     true
   }
 
-  test "continue true terminated" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
+  test "continue true terminated" <: noCompile[SYN_TERMINATED] {
     var i = 0
     while(true){
       ++i
@@ -80,7 +80,7 @@ type T {
     true
   }
 
-  test "nested terminated" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
+  test "nested terminated" <: noCompile[SYN_TERMINATED] {
     var i = 0
     var done = false
     while true {
@@ -109,14 +109,14 @@ type T {
   }
 
 
-  test "break true - unreachable loop" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
+  test "break true - unreachable loop" <: noCompile[SYN_TERMINATED] {
     while(true){
       break
     }
     true
   }
 
-  test "continue true - unreachable loop" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
+  test "continue true - unreachable loop" <: noCompile[SYN_TERMINATED] {
     var i = 0
     while(true){
       ++i
@@ -131,7 +131,7 @@ type T {
     true
   }
 
-  test "nested - unreachable loop" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
+  test "nested - unreachable loop" <: noCompile[SYN_TERMINATED] {
     var i = 0
     var done = false
     while true {
