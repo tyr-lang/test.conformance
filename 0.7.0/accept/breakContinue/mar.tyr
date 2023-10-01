@@ -7,12 +7,65 @@ type T {
 
   test "break true" {
     while(true){
-      break
+      if true
+        break
     }
     true
   }
 
   test "continue true" {
+    var i = 0
+    while (10 != i) {
+      ++i
+      if(i < 10)
+        continue
+
+      if(10 == i)
+        true
+      else
+        return false
+    }
+    true
+  }
+
+  test "nested" {
+    var i = 0
+    var done = false
+    while true {
+      while true {
+        ++i
+        if(i < 10)
+          continue
+
+        if(10 == i)
+          break
+
+        if true
+          return false
+      }
+      if(!done) {
+        done = true
+        i = 0
+        continue
+
+      } else if(10 == i){
+        break
+      }
+
+      if true
+        return false
+    }
+    true
+  }
+
+  test "break true terminated" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
+    while(true){
+      break
+    }
+    true
+  }
+
+  test "continue true terminated" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
     var i = 0
     while(true){
       ++i
@@ -27,7 +80,58 @@ type T {
     true
   }
 
-  test "nested" {
+  test "nested terminated" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
+    var i = 0
+    var done = false
+    while true {
+      while true {
+        ++i
+        if(i < 10)
+          continue
+
+        if(10 == i)
+          break
+
+        return false
+      }
+      if(!done) {
+        done = true
+        i = 0
+        continue
+
+      } else if(10 == i){
+        break
+      }
+
+      return false
+    }
+    true
+  }
+
+
+  test "break true - unreachable loop" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
+    while(true){
+      break
+    }
+    true
+  }
+
+  test "continue true - unreachable loop" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
+    var i = 0
+    while(true){
+      ++i
+      if(i < 10)
+        continue
+
+      if(10 == i)
+        return true
+
+      return false
+    }
+    true
+  }
+
+  test "nested - unreachable loop" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
     var i = 0
     var done = false
     while true {
