@@ -1,0 +1,96 @@
+/**
+ * Test translation of break and continue results.
+ */
+type T {
+
+  test "break true" {
+    do {
+      if true
+        break true
+      false
+    } while true
+  }
+
+  test "break join" {
+    do {
+      if true
+        break true
+      else if true
+        break false
+      false
+    } while true
+  }
+
+  test "continue true" {
+    do {
+      if true
+        continue true
+      false
+    } while false
+  }
+
+  test "continue join" {
+    do {
+      if true
+        continue true
+      else if true
+        continue false
+      false
+    } while false
+  }
+
+  test "continue cond" {
+    if {
+      do {
+        if true
+          continue true
+        else if true
+          continue false
+        false
+      } while false
+    } true
+    else false
+  }
+
+
+  test "mixed results" <: noCompile[SYN_MALFORMED_EXPRESSION] {
+    do {
+      if true
+        break
+      else if true
+        break false
+      false
+    } while true
+  }
+
+  test "no results" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
+    if {
+      do {
+        if true
+          break;
+        false
+      } while true
+    } true
+    else false
+  }
+
+  test "break void body plain" <: noCompile[SYN_MALFORMED_EXPRESSION] {
+    do {
+      if false break true
+      {}
+    } while false
+  }
+
+  test "break void body bool" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
+    if {
+      do {
+        if false break true
+        // this will abort compilation of the body because we cannot know that
+        // we could continue processing it and also produce inconsistent break
+        // errors which would not be helpful anyway
+        {}
+      } while false
+    } true
+    else false
+  }
+}
