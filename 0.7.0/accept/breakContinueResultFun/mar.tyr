@@ -1,0 +1,96 @@
+/**
+ * Test translation of break and continue results with implicits and function
+ * calls.
+ */
+type T {
+
+  test "var val" {
+    var x = 0
+    val y = 7
+    val r = do {
+      ++x
+      if (x > 3)
+        break ++x
+
+      y
+    } while (x < 10)
+
+    5 == x
+  }
+
+  type def f(x : int, y : int) = x - y
+  type def g(x : int, y : int) = x * y
+  type def h(x : int, y : int) = x / y
+
+  test "call f" {
+    var x = 7
+    val r = (do {
+      if (7 == x)
+        break f
+
+      if (-7 == x)
+        continue g
+
+      --x
+      h
+    } while (0 < x))(9, 3)
+
+    6 == r
+  }
+
+  // do a little inference testing
+  type def loop (x : Ref[int]) = do {
+      if (7 == x)
+        break f
+
+      if (-7 == x)
+        continue g
+
+      --x
+      h
+    } while (0 < x)
+
+  test "call loop f" {
+    var x = 7
+    val r = loop(x)(9, 3)
+
+    6 == r
+  }
+
+  test "call loop g" {
+    var x = -7
+    val r = loop(x)(9, 3)
+
+    27 == r
+  }
+
+  test "call loop h" {
+    var x = 3
+    val r = loop(x)(9, 3)
+
+    3 == r
+  }
+
+  test "call by name" {
+    var x = 7
+    val r = loop(x)(y := 3, 9)
+
+    6 == r
+  }
+
+  test "call by name direct" {
+    var x = 7
+    val r = (do {
+      if (7 == x)
+        break f
+
+      if (-7 == x)
+        continue g
+
+      --x
+      h
+    } while (0 < x))(y := 3, 9)
+
+    6 == r
+  }
+}
