@@ -78,6 +78,13 @@ type T {
     6 == r
   }
 
+  test "call by name implicit" {
+    var x = 7
+    val r = loop(x)(y := x, x := x + 1)
+
+    1 == r
+  }
+
   test "call by name direct" {
     var x = 7
     val r = (do {
