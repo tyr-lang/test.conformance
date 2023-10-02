@@ -21,6 +21,17 @@ type T {
     } while true
   }
 
+  test "continue int compare side effects" {
+    var x = 5
+    val r = do {
+      if (x < 0)
+        continue 0
+
+      x
+    } while (++x < 7)
+    6 == r && 7 == x
+  }
+
   test "continue true" {
     do {
       if true
