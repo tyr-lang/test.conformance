@@ -13,11 +13,19 @@ class T {
   }
 
   def adjust (posX : int, posY : int, v : byte) {
-        map(posX)(posY) = map(posX)(posY) + v
+    map(posX)(posY) = map(posX)(posY) + v
   }
 
   test "use" {
     val m = new T(5)
     m.adjust(1,2,5i8)
+  }
+
+  test "check" {
+    val m = new T(5)
+    m.adjust(1,2,5i8)
+    m.adjust(1,2,7i8)
+
+    12i8 == m.map(1)(2)
   }
 }
