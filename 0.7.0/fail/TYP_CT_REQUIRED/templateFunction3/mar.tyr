@@ -1,0 +1,39 @@
+/**
+ * Test instantiation of template type type functions.
+ *
+ * @note this is temporarily not allowed until we have a sane concept of type
+ *   dependencies and scopes where they can be used. There is currently no
+ *   mechanism to prevent a variable to be passed to a type parameter and ensure
+ *   that the resulting type cannot escape the lifetime of that variable. In
+ *   this test, the lifetime is infinite, but the language has currently no
+ *   means to distinguish this case.
+ */
+type T[T : Type[any], v : Ref[T]] {
+
+  type def make : T = v
+}
+
+type A <: suppressCompilerMessage["W_INIT_GLOBAL_UNDEF"] {
+  type var mx : int;
+  type val x : Ref[int] = mx;
+  test "usage" {
+    x = 0;
+    T[int, x].make();
+  }
+
+  type var my : int;
+  type val y : Ref[int] = my;
+  test "check" {
+    y = 0;
+    T[int, y].make() == 0;
+  }
+
+  type var mz : int;
+  type val z : Ref[int] = mz;
+  test "check mut" {
+    z = 0;
+    T[int, z].make() == 0;
+    ++z;
+    T[int, z].make() == 1;
+  }
+}
