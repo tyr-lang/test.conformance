@@ -2,7 +2,7 @@
  * Test that an int-based enum can be initialized with values from character
  * literals.
  */
-public enum SDLK <: int
+public enum SDLK <: int, suppressCompilerMessage["W_INIT_GLOBAL_UNDEF"]
 {
     UNKNOWN = 0,
 
