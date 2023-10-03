@@ -6,7 +6,7 @@ with container.Array
 type T {
   test "usage" {
     var i = 0
-    val arr = new Array(3, ++i)
+    val arr = new Array[int](3, ++i)
 
     6 == arr.fold(0) l,r do (l+r)
   }
