@@ -5,7 +5,7 @@
  *   future release. This might require a special rule checking for raw
  *   parameter fixed points.
  */
-class B[+TT : Class[B[TT]]] := B[_]] <: abstract {
+class B[+TT : Class[B[TT]] := B[_]] <: abstract {
   type def make : B[TT] = null
 
   test "compile" {

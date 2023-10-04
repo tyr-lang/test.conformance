@@ -2,7 +2,7 @@
  * Test that forgetting the args in Class[B] does not crash the compiler and
  * results in a useful error message at the correct location.
  */
-class B[+TT : Class[B]] := B[_]] <: abstract {
+class B[+TT : Class[B] := B[_]] <: abstract {
   test "no compile" {
     false
   }
