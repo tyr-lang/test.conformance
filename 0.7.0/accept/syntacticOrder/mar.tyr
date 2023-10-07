@@ -52,8 +52,18 @@ type T {
   }
 
   test "op4b" {
-    // 2 * 3 - 4 * -1
+    // 1 * 2 - 4 * -3
+    // note: the reason for this order is that all side effects of an operand
+    // happen in a block. If we have sideeffects a-d, we get
+    // a * b - c * -d
+    // which is grouped to (a*b) - (c*-d) and the left block is evaluated before
+    // the right block irrespective of -d having the highest precedence.
+    // The only alternative that can be chosen in general is evaluating c and d
+    // before a and b by propagating the precedence. To me, this looks even more
+    // confusing than the current approach.
+    // Interleaving the side effects isn't possible as the resulting blocks
+    // might be passed as Block parameters.
     val r = f() * f() - f() * -f()
-    10 == r
+    14 == r
   }
 }
