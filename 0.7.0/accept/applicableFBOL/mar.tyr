@@ -1,0 +1,20 @@
+/**
+ * Check that implicit conversions on FBOLs are performed correctly
+ */
+type T {
+
+  val x : int
+
+  new {
+    var z : int
+    init(z)
+    x = z
+  }
+
+  type def init(x : Ref[int]) : void = x = 3
+
+  test "use" {
+    val c = new T
+    3 == c.x
+  }
+}
