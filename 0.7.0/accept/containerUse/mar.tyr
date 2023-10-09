@@ -1,0 +1,13 @@
+with tyr.container.ArrayDeque
+
+/**
+ * Check that using ext template types from tyr.container results in valid code
+ * generation. This is in essence three involved states getting mixed together.
+ *
+ * The test was taken from the tyr.test suite and simplified.
+ */
+type T {
+  test "use" {
+    delete new ArrayDeque[String]
+  }
+}
