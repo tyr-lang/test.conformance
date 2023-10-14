@@ -1,0 +1,10 @@
+/**
+ * Reproduces a bug in container substitution preventing regressions
+ */
+class C {
+  type val all = new container.SmallSet[C]
+
+  test "use" {
+    !all.contains(null)
+  }
+}
