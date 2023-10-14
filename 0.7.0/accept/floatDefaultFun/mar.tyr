@@ -1,0 +1,28 @@
+/**
+ * Allow Float literals in CT arguments
+ */
+type C {
+  type def call [W : IntegerLiteral[32], D : Float[W]](x : Float[W]) = x * D
+
+  test "2.0" {
+    // we need to do something where precision will not be an issue
+    4.0 == call[64, 2.0](2.0)
+  }
+
+  test "-1f" {
+    // we need to do something where precision will not be an issue
+    -3f == call[32, -1f](3f)
+  }
+
+  test "fp" {
+    var fp = call[32, -1f]
+
+    var r = -3f == fp(3f)
+
+    fp = call[32, 4f]
+
+    r &= 12f == fp(3f)
+
+    r
+  }
+}
