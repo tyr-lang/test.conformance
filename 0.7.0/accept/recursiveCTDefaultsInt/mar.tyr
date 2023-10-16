@@ -1,0 +1,55 @@
+/**
+ * Ensure that recursive CT defaults result in correct applications
+ */
+type T[X : int = 1, Y : int = Z, Z : int = X] {
+  type var r = X + Y + Z
+
+  test "use" {
+    3 == T[].r
+  }
+
+  test "use Z" {
+    1 == T[Z := 0].r
+  }
+}
+
+type Comp[X : int = 1, Y : int = X + Z, Z : int = X] {
+  type var r = X + Y + Z
+
+  test "use" {
+    4 == Comp[].r
+  }
+
+  test "use Z" {
+    2 == Comp[Z := 0].r
+  }
+}
+
+/**
+ * All default values have Block[_] semantics. Using them in other
+ * defaults behaves like an implicit call to eval().
+ * The surprising cause for this is that default evaluation should always behave
+ * in the same way, no matter if used on CT or RT parameters. For CT parameters,
+ * we fundamentally have no CFG that we could insert values into. As such a
+ * concept like default evaluation order makes no sense in this context.
+ * Therefore, using another parameter like a value cannot be a value use.
+ *
+ * For all common cases of defaults, nobody should ever notice a difference.
+ */
+type Comp2[X : int = 1, Y : int = X + Z, Z : int = X, A : int = Y,
+  B : int = Y] {
+
+  type var r = X + Y + Z + A + B
+
+  test "use" {
+    8 == Comp2[].r
+  }
+
+  test "use Y" {
+    2 == Comp2[Y := 0].r
+  }
+
+  test "use Z" {
+    4 == Comp2[Z := 0].r
+  }
+}

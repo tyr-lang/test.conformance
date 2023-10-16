@@ -1,0 +1,10 @@
+/**
+ * Ensure that recursive CT default cycles result in an error
+ */
+type T[X : int = Y, Y : int = Z, Z : int = X] {
+
+  test "use" {
+    // should not compile
+    false
+  }
+}

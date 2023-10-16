@@ -1,0 +1,10 @@
+/**
+ * Ensure that recursive CT defaults result in correct applications
+ */
+type T[X : int = 1, Y : int = X] {
+  type var r = X + Y
+
+  test "use" {
+    2 == T[].r
+  }
+}
