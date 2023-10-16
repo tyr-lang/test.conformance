@@ -5,6 +5,8 @@ type T[X : int = Y, Y : int = Z, Z : int = X] {
 
   test "use" {
     // should not compile
-    false
+    // note: apparently just having the definition of T and never using it might
+    // not be sufficient to detect the cycle under current rules
+    T[]
   }
 }
