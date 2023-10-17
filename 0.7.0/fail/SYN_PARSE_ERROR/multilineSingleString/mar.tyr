@@ -1,0 +1,11 @@
+/**
+ * Check that strings with single quotes are not multiline.
+ */
+type T {
+  def f = "stuff\n
+   this is not allowed"!!
+
+  test "fail" {
+    false
+  }
+}
