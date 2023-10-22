@@ -1,0 +1,15 @@
+/**
+ * Ensure that inferred has type void and has a retun void at the end.
+ */
+type T {
+  type def f : void {}
+
+  type def inferred {
+    "call"!!;
+    f();
+  }
+
+  test "use" {
+    inferred() : void
+  }
+}
