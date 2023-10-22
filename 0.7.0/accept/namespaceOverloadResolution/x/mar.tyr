@@ -21,6 +21,14 @@ type T {
   }
 
   test "namespace" {
+    val x = new test.x.T
+    3 == x.x
+  }
+
+  test "namespace fun" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {
+    // what happens here is that x binds to the function, which is fine because
+    // it is an accessible global entity; that function does not expose T,
+    // obviously
     val x = new x.T
     3 == x.x
   }
