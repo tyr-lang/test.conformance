@@ -1,0 +1,37 @@
+/**
+ * Test that package names do interact with shadowing and overload resolution in
+ * expected ways
+ */
+type T {
+
+  var x = 3
+
+  new (x := x : int = 3);
+
+  def x : int = x
+
+  test "static" <: noCompile[NAM_NOT_FOUND] {
+    // nope, binds namespace
+    3 == x
+  }
+
+  test "root" {
+    val x = new _root_.test.x.T
+    3 == x.x
+  }
+
+  test "namespace" {
+    val x = new x.T
+    3 == x.x
+  }
+
+  test "use" {
+    val x = new T
+    3 == x.x
+  }
+
+  test "call" {
+    val x = new T
+    3 == x.x()
+  }
+}
