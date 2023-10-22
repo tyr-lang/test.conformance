@@ -1,0 +1,28 @@
+/**
+ * Ensure that recursive RT defaults result in correct applications
+ */
+type T {
+
+  type def f(x : int = y, y : int = x) = x + y
+
+  test "use" {
+    // nope
+    f()
+    false
+  }
+  test "use fp" {
+    f == f
+  }
+  test "pos" {
+    2 == f(1)
+  }
+  test "x" {
+    2 == f(x := 1)
+  }
+  test "y" {
+    2 == f(y := 1)
+  }
+  test "both" {
+    3 == f(y := 2, x := 1)
+  }
+}
