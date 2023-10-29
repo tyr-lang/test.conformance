@@ -1,0 +1,39 @@
+/**
+ * Ensure that recursive RT defaults result in correct applications
+ */
+type T {
+
+  type def f(x : Ref[int], y : int = x, z : Block[int] = y) : int {
+    x += y + z.eval()
+  }
+
+  test "default" {
+    var x = 2
+    6 == f(x)
+  }
+
+  test "default z" {
+    var x = 2
+    6 == f(x, x)
+  }
+
+  test "default z2" {
+    var x = 2
+    6 == f(x, 2)
+  }
+
+  test "default y" {
+    var x = 2
+    6 == f(x, z := x)
+  }
+
+  test "explicit" {
+    var x = 2
+    6 == f(x, x, x)
+  }
+
+  test "explicit val" {
+    var x = 2
+    6 == f(x, 2, 2)
+  }
+}

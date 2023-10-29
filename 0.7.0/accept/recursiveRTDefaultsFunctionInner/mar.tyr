@@ -1,0 +1,15 @@
+/**
+ * Ensure that recursive RT defaults result in correct applications
+ */
+type T {
+
+  type def f(con : def (int, int) : int = int.`+`) : def (int, int) : int = con
+
+  test "use" {
+    -1 == f(int.`-`)(1,2)
+  }
+
+  test "default" {
+    3 == f()(1,2)
+  }
+}

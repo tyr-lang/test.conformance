@@ -1,0 +1,14 @@
+/**
+ * Ensure that recursive RT defaults for value types cannot depend on Block
+ * parameters.
+ */
+type T {
+
+  // this variant should work type-wise but does not work in practice as this
+  // simply isn't how substitutions work
+  type def f(x : Block[int], y : int = x.eval()) = x.eval() + y
+
+  test "use" {
+    false
+  }
+}

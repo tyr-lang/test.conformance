@@ -1,0 +1,12 @@
+/**
+ * Ensure that recursive CT defaults result in correct applications
+ */
+type T {
+
+  type def f[B : Type[_], X : B, Y : B = Z, Z : B = X, con : def (B, B) : B] : B
+    = con(con(X, Y), Z)
+
+  test "use" {
+    3 == T.f[int, 1, con := int.`+`]()
+  }
+}
