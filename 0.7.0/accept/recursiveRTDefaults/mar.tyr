@@ -5,7 +5,7 @@ type T {
 
   type def f(x : int = y, y : int = x) = x + y
 
-  test "use" {
+  test "use" <: noCompile[NAM_NOT_FOUND] {
     // nope
     f()
     false
