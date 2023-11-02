@@ -1,0 +1,9 @@
+/**
+ * Ensure that recursive RT defaults against ext implicits result in correct
+ * code generation
+ */
+type T {
+  test "use" {
+    delete new tyr.container.Array2[int](3)
+  }
+}
