@@ -12,11 +12,6 @@ type T {
     6 == f(x)
   }
 
-  test "binder default" {
-    var x = 2
-    6 == f(x) do (2)
-  }
-
   test "default z" {
     var x = 2
     6 == f(x, x)

@@ -1,0 +1,35 @@
+/**
+ * Ensure that binders play along with RT defaults and explain interactions
+ * with current overload resolution rules.
+ *
+ * @note  It is currently not possible to perform a binder call without a block.
+ *   This will likely not change in the future.
+ *
+ * @note  It is currently not possible to pass a block in a binder call by name.
+ *   This might change in the future.
+ */
+type T {
+
+  type def f(x : Ref[int], y : int = x, z : Block[int] = y) : int {
+    x += y + z.eval()
+  }
+  type def ext(x : Ref[int], y : Block[int] = x, z : Block[int] = y.eval()) : int {
+    x += y.eval() + z.eval()
+  }
+
+  test "default value" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
+    var x = 2
+    // this is currently not possible, as block parameters are passed by
+    // position resulting in a shape (Ref[int], Block[int]) that cannot be
+    // mached because the block kind of be passed to y which does not take
+    // blocks
+    // note: this code might become valid in the future
+    6 == f(x) do (2)
+  }
+
+  test "default block" {
+    var x = 2
+    // ext takes two blocks, we can leave one as default
+    6 == ext(x) do (2)
+  }
+}
