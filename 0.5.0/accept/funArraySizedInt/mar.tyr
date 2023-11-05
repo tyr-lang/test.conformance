@@ -36,7 +36,9 @@ class Array {
 
   test "compare" {
     val arr = new Array
-    arr<0L> != arr<1L> && {
+    arr<0L> = 0
+    arr<1L> = 0
+    arr<0L> == arr<1L> && {
       arr<0L> = -1
       arr<1L> = 2
       arr<0L> != arr<1L>
