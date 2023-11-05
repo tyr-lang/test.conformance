@@ -6,7 +6,7 @@ type T {
   type def f(con : def (int, int) : int = int.`+`) : def (int, int) : int = con
 
   test "use" {
-    -1 == f(int.`-`)(1,2)
+    -1 == f(int.`-` : def (int, int) : int)(1,2)
   }
 
   test "default" {
