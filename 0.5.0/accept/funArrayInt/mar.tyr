@@ -15,10 +15,12 @@ class Array {
 
   def get(index : container.index_t) : int = data.apply(index.unpack);
 
-  def set(v : int, index : container.index_t) : void = data.update(index.unpack, v);
+  def set(v : int, index : container.index_t) : void
+      = data.update(index.unpack, v);
 
 
-  // prefer this operator over container.size_t <, because it would yield a bool and get stuck
+  // prefer this operator over container.size_t <, because it would yield a bool
+  // and get stuck
   def < (index : container.index_t) : ArrayIndexOp <: operator.precedence[91] {
     new ArrayIndexOp(this, index.unpack);
   }
@@ -40,7 +42,9 @@ class Array {
 
   test "compare" {
     val arr = new Array(2L)
-    arr<0L> != arr<1L> && {
+    arr<0L> = 0
+    arr<1L> = 0
+    arr<0L> == arr<1L> && {
       arr<0L> = -1
       arr<1L> = 2
       arr<0L> != arr<1L>
@@ -66,14 +70,14 @@ type ArrayIndexOp <: reflection.noVar {
 
   new (target := target : Array, index := index : container.size_t);
 
-  // prefer this operator over container.size_t <, because it would yield a bool and get stuck
+  // prefer this operator over container.size_t <, because it would yield a bool
+  // and get stuck
   def > : ArrayAccessOp <: operator.precedence[91], operator.postfix
         = new ArrayAccessOp(target, index)
 }
 
 /**
  * This is the type of > in "array<index>"
-
  */
 type ArrayAccessOp
       <: reflection.proxy[int], reflection.joinImplicit, reflection.noVar {
