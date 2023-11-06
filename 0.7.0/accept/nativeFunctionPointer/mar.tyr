@@ -1,0 +1,22 @@
+/**
+ * Ensure that native functions cannot be used like pointers
+ */
+type T {
+
+  type def m(x:int,y:int) = x - y
+
+  type def f(con : def (int, int) : int) : def (int, int) : int = con
+
+  test "pass" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
+    f(int.`+`)
+  }
+
+  test "use" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
+    val fp = int.`+`
+    f(fp)
+  }
+
+  test "default" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
+    null != int.`+`
+  }
+}
