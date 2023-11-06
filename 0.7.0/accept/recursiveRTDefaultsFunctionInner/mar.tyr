@@ -3,10 +3,17 @@
  */
 type T {
 
-  type def f(con : def (int, int) : int = int.`+`) : def (int, int) : int = con
+  type def p(x:int,y:int) = x + y
+  type def m(x:int,y:int) = x - y
+
+  type def f(con : def (int, int) : int = p) : def (int, int) : int = con
+
+  test "pass" {
+    m == f(m)
+  }
 
   test "use" {
-    -1 == f(int.`-` : def (int, int) : int)(1,2)
+    -1 == f(m)(1,2)
   }
 
   test "default" {
