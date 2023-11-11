@@ -1,0 +1,22 @@
+with iterator.EmptyIterator
+/**
+ * If the dependent set of a member body is larger than the dependent set of the
+ * member can be, an error muts be created. This can happen, if a user manages
+ * to access an unbound entity.
+ */
+
+class None[+T : Type[_]] <: Iterable[T], mem.eternal {
+  public type val get = new None[T]
+
+  private new;
+
+  override def size = 0U
+  // This must not be allowed
+  override def iterator = EmptyIterator.get
+
+  test "fail" {
+    // the test should be simplified and turned into a fail test for an adequate
+    // category
+    false
+  }
+}
