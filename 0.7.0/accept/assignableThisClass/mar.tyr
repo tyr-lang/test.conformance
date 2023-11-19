@@ -1,0 +1,17 @@
+/**
+ * Check that this is assignable to this.class
+ */
+class T {
+  def f : this.type = this
+
+  test "use" {
+    val x = new T
+    x == x.f()
+  }
+
+  test "update" {
+    var x = new T
+    x = x.f()
+    x == x.f()
+  }
+}
