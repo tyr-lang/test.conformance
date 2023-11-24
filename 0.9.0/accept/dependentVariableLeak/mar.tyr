@@ -4,7 +4,6 @@ with iterator.EmptyIterator
  * member can be, an error muts be created. This can happen, if a user manages
  * to access an unbound entity.
  */
-
 class None[+T : Type[_]] <: Iterable[T], mem.eternal {
   public type val get = new None[T]
 
