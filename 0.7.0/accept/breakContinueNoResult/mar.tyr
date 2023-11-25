@@ -1,0 +1,38 @@
+/**
+ * Test translation of break without result
+ */
+type T {
+
+  test "original" {
+    var x = 0
+    val r = do {
+      ++x
+      if (x > 3)
+        // ++x is no simple expression leading this to bind as
+        // if (x>3) { (break) ++ x }
+        break ++x
+
+      7
+    } while (x < 10)
+
+    5 == x
+  }
+
+  test "no result" {
+    var x = 0
+    val r = do {
+      ++x
+      if (x > 3)
+        // if break were a simple expression it would bind as
+        // if (x>3) { (break) ++ x }
+        // note: even if we bind it that way, we would expect the compiler to
+        // provide a proper error message
+        (break) ++x
+      
+
+      7
+    } while (x < 10)
+
+    5 == x
+  }
+}
