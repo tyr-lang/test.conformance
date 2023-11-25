@@ -18,7 +18,7 @@ type T {
     5 == x
   }
 
-  test "no result" {
+  test "no result" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {
     var x = 0
     val r = do {
       ++x
@@ -28,11 +28,39 @@ type T {
         // note: even if we bind it that way, we would expect the compiler to
         // provide a proper error message
         (break) ++x
-      
 
       7
     } while (x < 10)
 
-    5 == x
+    false
+  }
+
+  test "inline" {
+    var x = 0
+    val r = do {
+      ++x
+      if (x > 3)
+        true || (break ++x)
+
+      7
+    } while (x < 10)
+
+    7 == x
+  }
+
+  test "unreachable" <: noCompile[TYP_ILLEGAL_EXPRESSION, S_UNLIKELY_JOIN] {
+    var x = 0
+    val r = do {
+      ++x
+      if (x > 3)
+        // the error here should be that r cannot be initialized form void
+        // the reason is that (true || Unreachable) should bind to bool
+        // which should be able to bind against an || false
+        true || (break) || false
+
+      7
+    } while (x < 10)
+
+    false
   }
 }
