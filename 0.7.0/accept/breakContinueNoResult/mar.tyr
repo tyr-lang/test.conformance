@@ -48,6 +48,19 @@ type T {
     7 == x
   }
 
+  test "double inline" {
+    var x = 0
+    val r = false || 7 == (do {
+      ++x
+      if (x > 3)
+        true || (break ++x)
+
+      7
+    } while (x < 10))
+
+    r
+  }
+
   test "unreachable" <: noCompile[TYP_ILLEGAL_EXPRESSION, S_UNLIKELY_JOIN] {
     var x = 0
     val r = do {
