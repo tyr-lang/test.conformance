@@ -3,6 +3,12 @@
  */
 type T {
 
+  test "simple" {
+    do {
+      true || (break false)
+    } while false
+  }
+
   test "original" {
     var x = 0
     val r = do {
