@@ -51,7 +51,7 @@ type T {
       7
     } while (x < 10)
 
-    7 == x
+    7 == r
   }
 
   test "double inline" {
