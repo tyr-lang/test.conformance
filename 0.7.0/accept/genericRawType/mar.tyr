@@ -8,7 +8,13 @@ type T {
   test "eq 2" {
     Object.class == Class[_]
   }
+  test "eq 2t" {
+    Object.type == Class[_]
+  }
   test "eq 3" {
-    Object.class.type == Class[_]
+    Object.class.type : Class[_] == Class[_]
+  }
+  test "eq 3c" {
+    Object.class.type == CRef[Class[_]]
   }
 }
