@@ -1,0 +1,24 @@
+/**
+ * Test that passing blocks like values is possible now.
+ */
+public type T {
+
+  public def consume (result : Block[bool]) = false || result.eval()
+  public def pass (result : Block[bool]) = consume(result)
+  public def pass2 (result : Block[bool]) = pass(result)
+  public def single = pass(true)
+  public def double = pass2(single())
+
+  test "simple" {
+    consume(true)
+  }
+  test "pass" {
+    pass(true)
+  }
+  test "single" {
+    single()
+  }
+  test "double" {
+    double()
+  }
+}
