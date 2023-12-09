@@ -1,0 +1,33 @@
+with test.breakContinue.noResult.T.single
+with test.breakContinue.noResult.T.double
+with test.breakContinue.noResult.T.doubleBlock
+
+/**
+ * Test translation of break cross edge against external functions
+ */
+type T {
+
+  test "single call" {
+    7 == single()
+  }
+
+  test "double call" {
+    double()
+  }
+
+  test "double block" {
+    var x = 0
+    false || 7 == (do {
+      ++x
+      if (x > 3)
+        doubleBlock(break ++x)
+
+      7
+    } while (x < 10))
+  }
+
+  test "double double call" {
+    // this should be the only one that is somewhat complex
+    doubleBlock(double())
+  }
+}
