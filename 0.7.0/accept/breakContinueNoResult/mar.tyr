@@ -1,7 +1,40 @@
 /**
  * Test translation of break without result
  */
-type T {
+public type T {
+
+  public type def singleBlock (or : Block[bool]) = true || or.eval()
+  public type def single : int {
+    var x = 0
+    do {
+      ++x
+      if (x > 3)
+        singleBlock(break ++x)
+
+      7
+    } while (x < 10)
+  }
+
+  public type def doubleBlock (or : Block[bool]) : bool {
+    var x = 0
+    false || 7 == (do {
+      ++x
+      if (x > 3)
+        singleBlock(or.eval())
+
+      7
+    } while (x < 10))
+  }
+  public type def double : bool {
+    var x = 0
+    false || 7 == (do {
+      ++x
+      if (x > 3)
+        singleBlock(break ++x)
+
+      7
+    } while (x < 10))
+  }
 
   test "simple" {
     do {
@@ -65,6 +98,18 @@ type T {
     } while (x < 10))
 
     r
+  }
+
+  test "single call" {
+    7 == single()
+  }
+
+  test "double call" {
+    double()
+  }
+
+  test "double double call" {
+    doubleBlock(double())
   }
 
   test "unreachable" <: noCompile[TYP_ILLEGAL_EXPRESSION, S_UNLIKELY_JOIN] {
