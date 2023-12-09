@@ -15,6 +15,19 @@ type T {
     Object.class.type : Class[_] == Class[_]
   }
   test "eq 3c" {
-    Object.class.type == CRef[Class[_]]
+    // note: this is the correct type as Object : Class[Object]
+    Object.class.type == CRef[Class[Class[_]]]
+  }
+
+  test "keep generics" {
+    // The following equation could change in future versions.
+    // As of today, it is not really clear how reflection.keepGenerics should
+    // affect Type representatives. Today's approach is to create full template
+    // instances. Therefore, the resulting Type[_] instances are different
+    // despite both types having the same mangled Tyr name because the arguments
+    // have the same raw type.
+    // Note: one implication could be that keepGenerics must also affect Tyr
+    // names.
+    Object.class.type != CRef[Class[_]]
   }
 }
