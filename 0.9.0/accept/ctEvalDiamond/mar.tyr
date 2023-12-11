@@ -1,0 +1,28 @@
+/**
+ * Test that CT parameters can be evaluated and checked for having a CT property
+ * while being evaluatable terms over CT parameters.
+ *
+ * TODO if these tests pass, remove the size argument from FlatSizedArray2 again
+ */
+type S[X : int] {
+  val y = new D[X, X]
+}
+
+type D[X : int, Y : int] {
+  val y = new B[X*Y]
+}
+
+type B[X : int] {
+  val y : int = X
+}
+
+type T {
+  test "use" {
+    val x = new S[3]
+  }
+
+  test "eval" {
+    val x = new S[3]
+    9 = x.y.y.y
+  }
+}
