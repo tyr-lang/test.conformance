@@ -1,0 +1,18 @@
+/**
+ * Ensure that the workaround for performing constant comptutation from CT
+ * parameters works.
+ */
+with tyr.container.FlatSizedArray2
+
+type Main {
+  type var CS : FlatSizedArray2[long, 2U, 3U];
+
+  test "use" {
+    CS(0,0) = 7L
+    7L == CS(0,0)
+  }
+
+  test "defined" {
+    CS.isDefined(0,0) && CS.isDefined(1,2) && !CS.isDefined(2,1)
+  }
+}
