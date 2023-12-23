@@ -1,0 +1,32 @@
+/**
+ * Test that binder calls can be by name.
+ */
+type T {
+  test "all" {
+    bool.`||`(x := false, this := true)
+  }
+
+  test "mixed" {
+    bool.`||`(x := false, true)
+  }
+
+  test "mixed break" {
+    do {
+      bool.`||`(x := break false, true)
+    } while false
+  }
+
+  test "mixed break2" {
+    do {
+      bool.`||`(x := break true, false)
+    } while false
+  }
+
+  test "mixed do" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
+    // should not work because x is provided already and nothing remains to be
+    // passed as a block
+    bool.`||`(x := false) do {
+      false
+    }
+  }
+}
