@@ -1,0 +1,12 @@
+/**
+ * Ensure that it is an error to define a binory operator with a postfix
+ * property.
+ */
+type T {
+  // this line should create an error
+  type def + (b : bool, c : bool) : bool <: operator.postfix = b |! c
+
+  test "use" {
+    false
+  }
+}

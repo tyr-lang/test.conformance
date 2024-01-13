@@ -1,0 +1,11 @@
+/**
+ * Ensure that operators are unarry or binary.
+ */
+type T {
+  // this line should create an error
+  type def ?? () : bool = true
+
+  test "use" {
+    false
+  }
+}
