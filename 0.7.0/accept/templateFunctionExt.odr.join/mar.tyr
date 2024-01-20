@@ -11,11 +11,11 @@ public type T {
   }
 
   test "use c1 g" {
-    7i8 == c1.T.g()
+    7u8 == c1.T.g()
   }
 
   test "use c2 g" {
-    7i8 == c2.T.g()
+    7u8 == c2.T.g()
   }
 
   test "eq f" {

@@ -12,20 +12,20 @@ class T {
     val c = 0xff
     switch idx {
       if 1U {
-        return (byte !! c) | 0xc0i8
+        return (byte !! c) | 0xc0u8
       }
       if 2U {
-        return (byte !! c) | 0xe0i8
+        return (byte !! c) | 0xe0u8
       }
       else {
-        return (byte !! c) | 0xf0i8
+        return (byte !! c) | 0xf0u8
       }
     }
   }
 
   test "use" {
     var v = new T
-    val r = 0xffi8 == v.use()
+    val r = 0xffu8 == v.use()
     delete v
     r
   }
