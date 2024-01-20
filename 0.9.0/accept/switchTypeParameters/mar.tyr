@@ -1,0 +1,22 @@
+/**
+ * Test semantics of switch with template parameters
+ *
+ * @note to self  I do not really know what should happen in this case; the same
+ *   should happen for two int literals; if we do SFINAE or something theirlike,
+ *   we should still have a set of rules that explains what happens. Likely the
+ *   first case in the code should win.
+ */
+type T [L : Class[_], R : Class[_]]
+
+  type def check(x : Object) = switch class x {
+    if L 1
+    if R 2
+    else 3
+  }
+
+  test "use" {
+    false
+    // figure out what should happen;
+    // T[Object, Object]; T[Object, String]; T[String, StringLiteral]; T[String, Null]
+  }
+}
