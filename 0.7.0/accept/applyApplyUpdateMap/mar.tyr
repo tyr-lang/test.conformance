@@ -1,0 +1,17 @@
+/**
+ * It should be possible to exchange a map apply by an update call.
+ */
+with container.SmallMap
+
+public type T {
+  new;
+
+  public def setLogLevel(s : int, t : StringLiteral) : void
+   = if (levels.getOrElse(t, 0) != s) levels(t) = s
+
+  val levels : SmallMap[StringLiteral, int] = new SmallMap[StringLiteral, int]
+
+  test "use" {
+    (new T).setLogLevel(5, "all")
+  }
+}
