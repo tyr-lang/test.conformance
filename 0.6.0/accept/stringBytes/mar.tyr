@@ -6,61 +6,61 @@ type T {
   /* a bit fun with logic */
   test "escapes empty" {
     "".bytes().forall c : byte do (
-      c == 42i8
+      c == 42u8
     ) && 
     "".bytes().forall c : byte do (
-      c == 23i8
+      c == 23u8
     ) && 
     ! "".bytes().exists c : byte do (
-      c == 0i8
+      c == 0u8
     )
   }
 
   test "escapes r" {
     "\r".bytes().forall c : byte do {
-      c == 13i8
+      c == 13u8
     }
   }
 
   test "escapes n" {
     "\n".bytes().forall c : byte do {
-      c == 10i8
+      c == 10u8
     }
   }
 
   test "escapes t" {
     "\t".bytes().forall c : byte do {
-      c == 9i8
+      c == 9u8
     }
   }
 
   test "escapes null" {
     "\0".bytes().forall c : byte do {
-      c == 0i8
+      c == 0u8
     }
   }
 
   test "escapes quote" {
     "\"".bytes().forall c : byte do {
-      c == 34i8
+      c == 34u8
     }
   }
 
   test "escapes tick" {
     "\'".bytes().forall c : byte do {
-      c == 39i8
+      c == 39u8
     }
   }
 
   test "escapes slash" {
     "\\".bytes().forall c : byte do {
-      c == 92i8
+      c == 92u8
     }
   }
 
   test "multi line no escape" {
     """\""".bytes().forall c : byte do {
-      c == 92i8
+      c == 92u8
     }
   }
 }

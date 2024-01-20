@@ -9,7 +9,7 @@ type T {
     0L == long !! 0
   }
   test "shrink" {
-    0i8 == byte !! 0
+    0u8 == byte !! 0
   }
   // don't do this
   test "pointer" <: noCompile[W_OOP_UNLIKELY_CAST] {

@@ -2,10 +2,10 @@
  * Check that inline char conversion does not crash the backend
  */
 type T {
-  type def char(v : byte) <: inline = character !! v.unsign().resize[21]()
+  type def char(v : byte) <: inline = character !! v.resize[21]()
 
   test "use" {
-    var b = 0i8
-    0u21 == char(b&0x7fi8)
+    var b = 0u8
+    0u21 == char(b&0x7fu8)
   }
 }

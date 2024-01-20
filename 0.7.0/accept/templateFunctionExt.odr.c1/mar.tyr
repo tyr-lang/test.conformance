@@ -9,6 +9,6 @@ public type T {
     7 == f()
   }
   test "use g" {
-    7i8 == g()
+    7u8 == g()
   }
 }

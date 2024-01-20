@@ -5,7 +5,7 @@ type T {
 
   test "infered c" {
     "\n".bytes().forall c do {
-      c == 10i8
+      c == 10u8
     }
   }
 }

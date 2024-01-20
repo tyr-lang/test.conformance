@@ -9,7 +9,7 @@ class T {
   var map : Array[Array[byte]]
 
   new (size := size : int) {
-    map = new Array[Array[byte]](size, new Array[byte](size, 0i8))
+    map = new Array[Array[byte]](size, new Array[byte](size, 0u8))
   }
 
   def adjust (posX : int, posY : int, v : byte) {
@@ -18,6 +18,6 @@ class T {
 
   test "use" {
     val m = new T(5)
-    m.adjust(1,2,5i8)
+    m.adjust(1,2,5u8)
   }
 }

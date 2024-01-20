@@ -14,22 +14,22 @@ class T {
 
   test "chain count" {
     val it = x.bytes() ++ y.bytes()
-    4 == it.count i do (i != 0i8)
+    4 == it.count i do (i != 0u8)
   }
 
   test "chain sum" {
     val it = x.bytes() ++ y.bytes()
-    10i8 == it.fold(0i8) l,r do (l+r)
+    10u8 == it.fold(0u8) l,r do (l+r)
   }
 
   test "chain sum 2" {
     val it = y.bytes() ++ x.bytes()
-    10i8 == it.fold(0i8) l,r do (l+r)
+    10u8 == it.fold(0u8) l,r do (l+r)
   }
 
   test "empty left" {
     val it = x.bytes() ++ e.bytes()
-    3i8 == it.fold(0i8) l,r do (l+r)
+    3u8 == it.fold(0u8) l,r do (l+r)
   }
 
   test "empty left identity" {
@@ -42,7 +42,7 @@ class T {
 
   test "empty right" {
     val it = e.bytes() ++ x.bytes()
-    3i8 == it.fold(0i8) l,r do (l+r)
+    3u8 == it.fold(0u8) l,r do (l+r)
   }
 
   test "empty right identity" {

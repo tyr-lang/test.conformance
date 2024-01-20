@@ -17,13 +17,13 @@ type T {
     
     var r = (
       b.forall c do (
-        c == 10i8
+        c == 10u8
       ) &&
       b.forall c do (
-        c == 10i8
+        c == 10u8
       ) && 
       b.exists c do (
-        c == 10i8
+        c == 10u8
       )
     )
 
@@ -36,13 +36,13 @@ type T {
     
     !(
       b.forall c do (
-        c == 10i8
+        c == 10u8
       ) &&
       b.forall c do (
-        c == 10i8
+        c == 10u8
       ) && 
       b.exists c do (
-        c == 10i8
+        c == 10u8
       )
     )
   }

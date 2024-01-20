@@ -29,7 +29,7 @@ type Utils[T : Type[any]] {
     xs += "three"
 
     Utils[String].sumIf(xs) x do {
-      null != x && x.bytes().exists c do (111i8!=c)
+      null != x && x.bytes().exists c do (111u8!=c)
     } {
       int !! x.size()
     }

@@ -5,14 +5,14 @@ type T {
 
   test "count" {
     2 == "two white spaces".bytes().count c do (
-      c == 0x20i8
+      c == 0x20u8
     )
   }
 
   // strings are not 0-terminated
   test "termination" {
     0 == "two white spaces".bytes().count c do (
-      c == 0i8
+      c == 0u8
     )
   }
 }

@@ -10,7 +10,7 @@ type T <: suppressCompilerMessage["W_IMPLICIT_TYPE"] {
   // should be fine in this case (short form)
   def implicit : 0U.type = 7U
   // wrong scope, i.e. no T ⇒ int ⇒ byte
-  type def implicit(this : int) : byte = 7i8
+  type def implicit(this : int) : byte = 7u8
 
   test "use" {
     var x : T
@@ -34,6 +34,6 @@ type T <: suppressCompilerMessage["W_IMPLICIT_TYPE"] {
 
   test "scope" <: noCompile[NAM_NOT_FOUND] {
     var x : T
-    7i8 == x
+    7u8 == x
   }
 }
