@@ -1,0 +1,18 @@
+/**
+ * Inline apply might be replaced before an update. As such, the apply-update
+ * combination will not work as expected and update cann never be used in the
+ * `this(x) = y` form
+ */
+with container.SmallMap
+
+public type T {
+  new;
+
+  // this should result in a warning
+  public def apply(x : int) <: inline = x
+  public def update(x : int, y : int) : void {}
+
+  test "use" {
+    false
+  }
+}
