@@ -1,0 +1,150 @@
+/**
+ * tests correctness of switch class code generation
+ */
+class S;
+class L1 <: S;
+class L11 <: L1;
+class R1 <: S;
+class R11 <: R1;
+class R21 <: R1;
+class R121 <: R21;
+
+type T {
+  test "L1" {
+    val x : Object = new L1
+    // have switch in alphabetical order; code should be order-independant
+    switch class x {
+      if L1   true
+      if L11  false
+      if Null false
+      if R1   false
+      if R11  false
+      if R121 false
+      if R21  false
+      if S    false
+      else    false
+    }
+  }
+  test "L11" {
+    val x : Object = new L11
+    // have switch in alphabetical order; code should be order-independant
+    switch class x {
+      if L1   false
+      if L11  true
+      if Null false
+      if R1   false
+      if R11  false
+      if R121 false
+      if R21  false
+      if S    false
+      else    false
+    }
+  }
+  test "null" {
+    val x : Object = null
+    // have switch in alphabetical order; code should be order-independant
+    switch class x {
+      if L1   false
+      if L11  false
+      if Null true
+      if R1   false
+      if R11  false
+      if R121 false
+      if R21  false
+      if S    false
+      else    false
+    }
+  }
+  test "R1" {
+    val x : Object = new R1
+    // have switch in alphabetical order; code should be order-independant
+    switch class x {
+      if L1   false
+      if L11  false
+      if Null false
+      if R1   true
+      if R11  false
+      if R121 false
+      if R21  false
+      if S    false
+      else    false
+    }
+  }
+  test "R11" {
+    val x : Object = new R11
+    // have switch in alphabetical order; code should be order-independant
+    switch class x {
+      if L1   false
+      if L11  false
+      if Null false
+      if R1   false
+      if R11  true
+      if R121 false
+      if R21  false
+      if S    false
+      else    false
+    }
+  }
+  test "R121" {
+    val x : Object = new R121
+    // have switch in alphabetical order; code should be order-independant
+    switch class x {
+      if L1   false
+      if L11  false
+      if Null false
+      if R1   false
+      if R11  false
+      if R121 true
+      if R21  false
+      if S    false
+      else    false
+    }
+  }
+  test "R21" {
+    val x : Object = new R21
+    // have switch in alphabetical order; code should be order-independant
+    switch class x {
+      if L1   false
+      if L11  false
+      if Null false
+      if R1   false
+      if R11  false
+      if R121 false
+      if R21  true
+      if S    false
+      else    false
+    }
+  }
+  test "S" {
+    val x : Object = new S
+    // have switch in alphabetical order; code should be order-independant
+    switch class x {
+      if L1   false
+      if L11  false
+      if Null false
+      if R1   false
+      if R11  false
+      if R121 false
+      if R21  false
+      if S    true
+      else    false
+    }
+  }
+  test "String" {
+    // note: the compiler won't let you use a val here, because it can prove
+    // that the switch does not make sense in that case
+    var x : Object = String
+    // have switch in alphabetical order; code should be order-independant
+    switch class x {
+      if L1   false
+      if L11  false
+      if Null false
+      if R1   false
+      if R11  false
+      if R121 false
+      if R21  false
+      if S    false
+      else    true
+    }
+  }
+}
