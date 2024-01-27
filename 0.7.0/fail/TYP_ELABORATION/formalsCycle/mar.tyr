@@ -1,0 +1,6 @@
+/**
+ * Check that formal parameter elaboration cycles are orderly reported.
+ */
+type T[U : Type[V] := V, V : Type[U] := u]{
+
+}

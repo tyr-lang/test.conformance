@@ -1,0 +1,6 @@
+/**
+ * Check that property elaboration cycles are orderly reported.
+ */
+property P <: Q;
+
+property Q <: P;
