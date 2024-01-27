@@ -1,0 +1,10 @@
+/**
+ * Check that delete definitions are unique
+ */
+class T {
+  delete{}
+  delete{}
+  test "use"{
+    false
+  }
+}

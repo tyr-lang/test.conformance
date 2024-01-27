@@ -1,0 +1,8 @@
+/**
+ * Check that type parameter names are unique
+ */
+type T[self : long, self : long] {
+  test "use"{
+    false
+  }
+}

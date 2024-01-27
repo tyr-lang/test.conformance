@@ -1,0 +1,8 @@
+/**
+ * Check that this isn't a valid type parameter name
+ */
+type T[this : long] {
+  test "use"{
+    false
+  }
+}

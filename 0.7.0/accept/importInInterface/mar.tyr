@@ -1,0 +1,12 @@
+/**
+ * Check that type imports can be used in interfaces.
+ */
+interface T {
+  with container.size_t
+
+  type val x : size_t = 7U
+
+  test "use"{
+    7U == T.x
+  }
+}
