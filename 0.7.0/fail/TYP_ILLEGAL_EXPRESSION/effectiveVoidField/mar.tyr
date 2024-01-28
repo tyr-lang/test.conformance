@@ -1,0 +1,10 @@
+/**
+ * Check that field types are storable
+ */
+type T {
+  val f = if true "" else 7
+
+  test "use" {
+    false
+  }
+}
