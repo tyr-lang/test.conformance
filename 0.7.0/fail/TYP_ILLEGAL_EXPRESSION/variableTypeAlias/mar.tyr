@@ -1,0 +1,10 @@
+/**
+ * Check that type variables cannot be used in alias definitions
+ */
+type L := Type.T
+
+class T {
+  test "use"{
+    false
+  }
+}

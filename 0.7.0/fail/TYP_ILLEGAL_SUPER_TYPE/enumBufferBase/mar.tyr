@@ -1,0 +1,12 @@
+/**
+ * Check that enums have a valid super type
+ */
+enum E <: container.ArrayBuffer {
+  x
+}
+
+class T {
+  test "use"{
+    false
+  }
+}

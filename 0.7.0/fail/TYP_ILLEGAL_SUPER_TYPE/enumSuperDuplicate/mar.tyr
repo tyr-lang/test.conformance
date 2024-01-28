@@ -1,0 +1,12 @@
+/**
+ * Check that enums have only one super type
+ */
+enum E <: int, long {
+  x
+}
+
+class T {
+  test "use"{
+    false
+  }
+}

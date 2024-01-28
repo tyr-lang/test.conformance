@@ -1,0 +1,13 @@
+/**
+ * Check that enum unions have a valid super type
+ */
+enum E <: container.ArrayBuffer {
+  if Null T
+  else String
+}
+
+class T {
+  test "use"{
+    false
+  }
+}
