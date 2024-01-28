@@ -1,0 +1,10 @@
+/**
+ * Check that types have valid super types
+ */
+property P;
+
+type T {
+  test "use"{
+    false
+  }
+}

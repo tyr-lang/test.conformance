@@ -1,0 +1,10 @@
+/**
+ * Check that types have valid super types
+ */
+interface I;
+
+type T <: I {
+  test "use"{
+    false
+  }
+}
