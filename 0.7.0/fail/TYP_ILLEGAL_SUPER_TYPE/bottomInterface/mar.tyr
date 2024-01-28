@@ -1,0 +1,18 @@
+/**
+ * Check that types have valid super types
+ */
+
+// note: this is perfectly fine
+interface I <: Object.`delete`.type;
+
+// debatable
+interface J <: void;
+
+// utter nonsense
+interface Err <: I, J;
+
+type T {
+  test "use"{
+    false
+  }
+}

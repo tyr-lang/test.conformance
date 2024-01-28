@@ -1,0 +1,11 @@
+/**
+ * Check that types have valid super types
+ */
+class S;
+type U;
+
+type T <: S {
+  test "use"{
+    false
+  }
+}
