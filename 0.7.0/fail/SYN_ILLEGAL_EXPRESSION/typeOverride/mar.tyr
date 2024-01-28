@@ -1,0 +1,11 @@
+/**
+ * Check that field types are storable
+ */
+type T {
+  override[T]
+  val f = 7
+
+  test "use" {
+    false
+  }
+}
