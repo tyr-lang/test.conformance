@@ -1,0 +1,10 @@
+/**
+ * Check that passing a block to any does not crash the compiler
+ */
+type T {
+  test "use" {
+    mem.raw.`new` do {
+    }
+    false
+  }
+}
