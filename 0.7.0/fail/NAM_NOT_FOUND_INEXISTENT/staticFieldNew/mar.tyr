@@ -1,0 +1,12 @@
+/**
+ * Check that malformed externs result in useful errors
+ */
+type T {
+  type var x : int
+
+  new (x := x : int);
+
+  test "use" {
+    false
+  }
+}

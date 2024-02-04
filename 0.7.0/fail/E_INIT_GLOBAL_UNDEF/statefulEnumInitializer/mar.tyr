@@ -1,0 +1,14 @@
+/**
+ * Check that malformed enum initializers result in useful errors
+ */
+type T {
+  type var x : int
+
+  test "use" {
+    false
+  }
+}
+
+enum E {
+  y = T.x
+}

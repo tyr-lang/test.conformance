@@ -1,0 +1,14 @@
+/**
+ * Check that enums can be initialized using self's constants via global scope
+ */
+type T {
+  test "use" {
+    E.y == E.x && E.y == E.z
+  }
+}
+
+enum E {
+  y = 0,
+  x = y,
+  z = E.y
+}

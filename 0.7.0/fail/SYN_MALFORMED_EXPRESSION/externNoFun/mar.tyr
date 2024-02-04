@@ -1,0 +1,10 @@
+/**
+ * Check that malformed externs result in useful errors
+ */
+type T {
+  type var f : NoReturn extern c
+
+  test "use" {
+    false
+  }
+}
