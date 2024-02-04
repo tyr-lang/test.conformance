@@ -1,0 +1,11 @@
+/**
+ * Check uninitialized globals behaviour
+ */
+type T {
+  type var s : String
+
+  test "use" {
+    s = ""
+    "" == s
+  }
+}
