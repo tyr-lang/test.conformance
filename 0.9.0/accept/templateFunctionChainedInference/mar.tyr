@@ -1,0 +1,19 @@
+/**
+ * Check a corner case of chained template instantiation
+ *
+ * @note to self: the only remaining issue is return type inference for g and h.
+ *   I should try to fix this with dendent set and name-based elaboration.
+ *   However, the current issue is member rebind which might also be required to
+ *   Switch to name-based granularity. I need to check if I can do that.
+ *   Otherwise, both implicit generic projections require all members to be
+ *   typed before evaluating the body.
+ */
+type T[V : int := 0] {
+  type def f[U : int] = U
+  type def g[U : int] = f[U]()
+  type def h = g[V]()
+
+  test "use" {
+    0 == T[7].h()
+  }
+}

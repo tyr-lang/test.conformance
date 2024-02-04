@@ -1,0 +1,12 @@
+/**
+ * Check a corner case of chained template instantiation
+ */
+type T[V : int := 0] {
+  type def f[U : int] = U
+  type def g[U : int] : int = f[U]()
+  type def h : int = g[V]()
+
+  test "use" {
+    0 == T[7].h()
+  }
+}
