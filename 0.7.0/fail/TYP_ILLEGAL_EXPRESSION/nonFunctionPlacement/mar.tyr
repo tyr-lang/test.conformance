@@ -1,0 +1,13 @@
+/**
+ * Check that malformed placements result in useful errors
+ *
+ * @note it is not completely clear if this will stay forbidden
+ */
+type T[x : def () : void] {
+
+  type def f := x
+
+  test "use" {
+    false
+  }
+}

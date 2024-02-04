@@ -1,0 +1,12 @@
+/**
+ * Check that malformed constructors result in useful errors
+ */
+type T {
+  var x = ""
+
+  new (x := x : int);
+
+  test "use" {
+    false
+  }
+}
