@@ -1,0 +1,16 @@
+/**
+ * Check that lifetime mismatches result in useful errors
+ */
+class T {
+
+  class def f(self : S) {}
+
+  test "use" {
+    false
+  }
+}
+
+class S <: T {
+  override[T.f]
+  def f {}
+}
