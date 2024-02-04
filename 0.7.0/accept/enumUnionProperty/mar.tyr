@@ -2,9 +2,13 @@
  * Enum unions can have properties, even if they do not make sense
  */
 type T {
-
   test "use" {
-    false
+    var x = new U
+    x = E.v
+    switch x {
+      if v true
+      else false
+    }
   }
 }
 
