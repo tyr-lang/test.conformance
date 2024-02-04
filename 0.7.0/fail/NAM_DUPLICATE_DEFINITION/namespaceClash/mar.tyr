@@ -1,0 +1,14 @@
+/**
+ * Check that malformed placements result in useful errors
+ *
+ * @note it is not completely clear if this will stay forbidden
+ */
+type T {
+
+  type def f extern c.puts
+  type def g := f
+
+  test "use" {
+    false
+  }
+}
