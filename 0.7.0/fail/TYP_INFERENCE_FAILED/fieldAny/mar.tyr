@@ -1,0 +1,11 @@
+/**
+ * Let type inference fail for a field
+ */
+type T {
+  type def f[U : Type[_]](x : U) = x
+  type val g = f[any](7)
+
+  test "use" {
+    false
+  }
+}

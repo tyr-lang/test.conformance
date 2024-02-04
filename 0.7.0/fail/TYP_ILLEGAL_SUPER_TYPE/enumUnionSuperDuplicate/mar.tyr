@@ -1,0 +1,18 @@
+/**
+ * Defining two super types in an enum union is an error
+ */
+type T {
+
+  test "use" {
+    false
+  }
+}
+
+enum E {
+  v
+}
+
+enum U <: E, E {
+  if v T
+  else void
+}

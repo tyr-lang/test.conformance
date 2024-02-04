@@ -1,0 +1,11 @@
+/**
+ * Let type inference fail for a template function
+ */
+type T {
+  type def f[U : Type[_]](x : U) = x
+  type def g[U : int] = f[any](7)
+
+  test "use" {
+    false
+  }
+}

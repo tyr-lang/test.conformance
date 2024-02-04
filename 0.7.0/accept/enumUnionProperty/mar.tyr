@@ -1,0 +1,18 @@
+/**
+ * Enum unions can have properties, even if they do not make sense
+ */
+type T {
+
+  test "use" {
+    false
+  }
+}
+
+enum E {
+  v
+}
+
+enum U <: E, final {
+  if v T
+  else void
+}
