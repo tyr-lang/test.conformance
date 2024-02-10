@@ -1,0 +1,11 @@
+/**
+ * Check that else is provided in switch
+ */
+interface T {
+  test "use" <: noCompile[SYN_MALFORMED_EXPRESSION] {
+    switch true {
+      if true false
+    }
+    false
+  }
+}
