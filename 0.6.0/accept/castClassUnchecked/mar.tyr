@@ -1,13 +1,7 @@
 /**
  * Check unchecked casts offered by classes
- *
- * TODO test execution should offer to notify wrong unchecked casts during test
- *      execution
- *
- * TODO furthermore, there should be a test ensuring that using !! on Classes
- *      creates a warning
  */
-type T {
+type T <: suppressCompilerMessage["W_OOP_UNLIKELY_CAST"] {
   test "self" {
     Type[Object] == Type[Object] ! Type[Object]
   }
