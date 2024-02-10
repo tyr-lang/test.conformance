@@ -1,0 +1,13 @@
+/**
+ * Check that inline is used consistently
+ */
+interface T {
+  def f = ""
+  test "use" {
+    false
+  }
+}
+
+class S <: T {
+  def f <: inline = "stuff"
+}
