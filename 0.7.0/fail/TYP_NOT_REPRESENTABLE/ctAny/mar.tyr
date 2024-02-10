@@ -1,0 +1,8 @@
+/**
+ * Check that invalid CT parameter types are warned about
+ */
+interface T[V : any] {
+  test "use" {
+    false
+  }
+}
