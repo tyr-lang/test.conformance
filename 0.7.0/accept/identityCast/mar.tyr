@@ -1,0 +1,11 @@
+/**
+ * Check nonsense casts result in warnings
+ */
+type T {
+  test "type" <: noCompile[W_OOP_UNLIKELY_CAST] {
+    null != StringLiteral !! ""
+  }
+  test "class" <: noCompile[W_OOP_UNLIKELY_CAST] {
+    null != StringLiteral ! ""
+  }
+}
