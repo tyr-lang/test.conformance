@@ -1,0 +1,11 @@
+/**
+ * Check that defining delete for an eternal type creates a warning
+ */
+class T <: mem.eternal {
+  delete {
+    // nope, this can't happen
+  }
+  test "use" {
+    false
+  }
+}
