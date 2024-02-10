@@ -1,0 +1,26 @@
+/**
+ * Check that switch guards cannot be terminated
+ */
+interface T {
+  test "object" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
+    switch {return false} {
+      if true false
+      else false
+    }
+    false
+  }
+  test "class" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
+    switch class {return false} {
+      if true false
+      else false
+    }
+    false
+  }
+  test "type" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
+    switch type {return false} {
+      if true false
+      else false
+    }
+    false
+  }
+}
