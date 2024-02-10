@@ -41,7 +41,7 @@ type T {
     }
   }
 
-  test "enum" <: noCompile[TYP_MISMATCH] {
+  test "enum" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     switch naught {
       // no, switch expected type is mixed
       if 0 true

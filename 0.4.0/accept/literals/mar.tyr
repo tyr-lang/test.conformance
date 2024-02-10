@@ -15,7 +15,7 @@ type literals {
     0 : Integer[32]
   }
 
-  test "integer type fail" <: noCompile[TYP_MISMATCH] {
+  test "integer type fail" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     0 : Integer[64]
   }
 

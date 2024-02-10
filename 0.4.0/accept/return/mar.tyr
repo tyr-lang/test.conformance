@@ -57,7 +57,7 @@ type T {
    * not allowed, because it is not bool
    * we do not care that the result would be binary compatible to bool
    */
-  test "int return test" <: noCompile[TYP_MISMATCH] {
+  test "int return test" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     return 1i1;
   }
 
@@ -65,7 +65,7 @@ type T {
    * not allowed, because it is not bool
    * we do not care that the result would be binary compatible to bool
    */
-  test "int inline return test" <: noCompile[TYP_MISMATCH]{
+  test "int inline return test" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE]{
     true && ({ return 1i1 } : bool)
   }
 
@@ -73,7 +73,7 @@ type T {
    * not allowed, because it is not bool
    * we do not care that the result would be binary compatible to bool
    */
-  test "int dead inline return test" <: noCompile[TYP_MISMATCH] {
+  test "int dead inline return test" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     true || ({ return 1i1 } : bool)
   }
 }

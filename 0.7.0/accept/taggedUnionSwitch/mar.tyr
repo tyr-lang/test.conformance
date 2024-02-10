@@ -133,7 +133,7 @@ type T {
     true
   }
 
-  test "update literals" <: noCompile[TYP_MISMATCH] {
+  test "update literals" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     var c = new union
 
     switch v := c {

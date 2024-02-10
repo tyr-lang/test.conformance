@@ -6,7 +6,7 @@ type T {
   test "void" <: noCompile[I_UNLIKELY_SHAPE, SYN_ILLEGAL_EXPRESSION] {
     (return)(3);
   }
-  test "int" <: noCompile[I_UNLIKELY_SHAPE, SYN_ILLEGAL_EXPRESSION, TYP_MISMATCH] {
+  test "int" <: noCompile[I_UNLIKELY_SHAPE, SYN_ILLEGAL_EXPRESSION, TYP_ILLEGAL_EXPECTED_TYPE] {
     (return 3)(3);
   }
 }

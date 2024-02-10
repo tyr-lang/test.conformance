@@ -20,17 +20,17 @@ type T <: suppressCompilerMessage["W_IMPLICIT_"] {
     true
   }
 
-  test "parameter count" <: noCompile[TYP_MISMATCH] {
+  test "parameter count" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     val x : T = 7U
     false
   }
 
-  test "name" <: noCompile[TYP_MISMATCH] {
+  test "name" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     val x : T = 7L
     false
   }
 
-  test "lifetime" <: noCompile[TYP_MISMATCH] {
+  test "lifetime" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     val x : T = 7i16
     false
   }

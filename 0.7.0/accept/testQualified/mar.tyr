@@ -6,7 +6,7 @@ type T {
     erfundenerWert
   }
 
-  test "typing" <: noCompile[TYP_MISMATCH] {
+  test "typing" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     true : int
   }
 }

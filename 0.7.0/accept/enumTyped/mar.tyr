@@ -45,7 +45,7 @@ type T {
     true
   }
 
-  test "coerce enum" <: noCompile[TYP_MISMATCH] {
+  test "coerce enum" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     // not safe, not allowed
     val c = 0 : color
     false
