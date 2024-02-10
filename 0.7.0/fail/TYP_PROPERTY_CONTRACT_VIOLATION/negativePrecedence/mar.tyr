@@ -1,0 +1,10 @@
+/**
+ * Check that lifetime mismatches result in useful errors
+ */
+interface T {
+  def + <: operator.precedence[-1] {}
+
+  test "use" {
+    false
+  }
+}

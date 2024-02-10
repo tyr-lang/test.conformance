@@ -1,0 +1,10 @@
+/**
+ * Check property validation
+ */
+interface T {
+  def f <: operator.precedence[-1] {}
+
+  test "use" {
+    false
+  }
+}
