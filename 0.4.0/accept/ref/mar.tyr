@@ -7,7 +7,7 @@ type T {
     val p : Ref[int]
   }
 
-  test "ref zero/null" <: noCompile[TYP_MISMATCH] {
+  test "ref zero/null" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
     val p : Ref[int] = 0
   }
 
