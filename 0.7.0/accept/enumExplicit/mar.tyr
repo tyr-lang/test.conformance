@@ -66,7 +66,7 @@ type T {
     1 == (c : IntegerLiteral[32])
   }
 
-  test "Literal value from int" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
+  test "Literal value from int" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE, W_OOP_TRIVIAL_CAST] {
     // forget about the enum type
     var c = IntegerLiteral[32] !! one
     // won't work, behaves like a regular integer

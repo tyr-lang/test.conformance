@@ -2,10 +2,16 @@
  * Check nonsense casts result in warnings
  */
 type T {
-  test "type" <: noCompile[W_OOP_UNLIKELY_CAST] {
+  test "type" <: noCompile[W_OOP_TRIVIAL_CAST] {
     null != StringLiteral !! ""
   }
-  test "class" <: noCompile[W_OOP_UNLIKELY_CAST] {
+  test "class" <: noCompile[W_OOP_TRIVIAL_CAST] {
     null != StringLiteral ! ""
+  }
+  test "poly1" <: noCompile[W_OOP_TRIVIAL_CAST] {
+    null != String ! ""
+  }
+  test "poly2" <: noCompile[W_OOP_TRIVIAL_CAST] {
+    null != String !! ""
   }
 }

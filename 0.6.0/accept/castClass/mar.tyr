@@ -1,7 +1,7 @@
 /**
  * Check casts offered by classes
  */
-type T <: suppressCompilerMessage["W_OOP_UNLIKELY_CAST"] {
+type T <: suppressCompilerMessage["W_OOP_TRIVIAL_CAST"] {
   test "identity" {
     "s" == StringLiteral ! "s"
   }
