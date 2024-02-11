@@ -1,7 +1,7 @@
 with Arr := container.ArrayBuffer
 
 /**
- * Test interface calls with abstract prototype
+ * Test ensure that apply can be chained
  */
 type direct {
   test "double apply" {

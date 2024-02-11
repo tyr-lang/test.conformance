@@ -4,7 +4,6 @@
 type T {
 
   test "access contrete type type parameter" {
-    // this test may require a funny change in my substitution theory; we will see
     32 == int.Size
   }
 }
