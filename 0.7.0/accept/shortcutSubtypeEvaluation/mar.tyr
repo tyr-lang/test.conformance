@@ -1,0 +1,20 @@
+/**
+ * Check that generics and shortcuts do not create wrong results
+ */
+type T {
+  test "use" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
+    val x : Object = ""
+    val y : Class[Class[Object]] = x
+    false
+  }
+  test "single" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
+    val x : Class[Object] = Object
+    val y : Class[Class[Object]] = x
+    false
+  }
+  test "type" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
+    val x : Object = Object
+    val y : Class[Class[Object]] = x
+    false
+  }
+}
