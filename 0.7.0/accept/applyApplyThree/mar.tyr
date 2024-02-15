@@ -1,0 +1,26 @@
+/**
+ * It should be possible to chain () resulting in multiple applies even if apply
+ * has multiple parameters.
+ */
+with container.Array
+
+class T {
+  var size : int
+
+  new (size := size : int);
+
+  def apply(x : int, y : int, z : int) : T {
+    size += x + y + z
+    this
+  }
+
+  test "use" {
+    val m = new T(5)
+    10 == m(1,2,2).size
+  }
+
+  test "thrice" {
+    val m = new T(5)
+    20 == m(1,2,2)(1,2,2)(1,2,2).size
+  }
+}
