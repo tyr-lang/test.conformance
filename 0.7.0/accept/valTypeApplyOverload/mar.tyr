@@ -1,0 +1,23 @@
+/**
+ * It should be possible to use apply on types and to store them locally
+ */
+public type T {
+  type def apply(x : String) = "s"
+  type def apply(x : int) = "i"
+
+  test "apply string" {
+    "s" == T("x")
+  }
+  test "apply int" {
+    "i" == T(7)
+  }
+
+  test "indirect string" {
+    val x = T
+    "s" == x("x")
+  }
+  test "indirect int" {
+    val x = T
+    "i" == x(7)
+  }
+}
