@@ -1,0 +1,23 @@
+/**
+ * It should be possible to chain () resulting in multiple applies even if apply
+ * has multiple parameters.
+ */
+with container.Array
+
+type T[V : int] {
+  type var size : int = V
+
+  type def apply(x : int, y : int, z : int) : Type[T[V]] {
+    size += x + y + z
+    T[V]
+  }
+
+  test "use" {
+    10 == T[5](1,2,2).size
+  }
+
+  test "thrice" {
+    // the absurd reality is that this is really what should happen
+    20 == T[5](1,2,2)(1,2,2)(1,2,2).size
+  }
+}
