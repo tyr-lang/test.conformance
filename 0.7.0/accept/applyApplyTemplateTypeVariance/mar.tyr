@@ -1,0 +1,19 @@
+/**
+ * It should be possible to chain () resulting in multiple applies even if apply
+ * has multiple parameters.
+ */
+with tyr.algorithm.Heapsort
+with tyr.container.ArrayBuffer
+
+type T {
+  type def shorter (a : String, b : String) = a.size() < b.size()
+
+  test "string" {
+    var buff = new ArrayBuffer[String]
+    Heapsort[String, shorter](buff)
+
+    val r = buff.empty()
+    delete buff
+    r
+  }
+}
