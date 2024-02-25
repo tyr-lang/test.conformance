@@ -1,0 +1,34 @@
+/**
+ * It should be possible to ignore binder parameters
+ */
+type T {
+  test "single" {
+    var xs = new Buffer[String]
+    var r = xs.empty()
+
+    range(0, 100).foreach i do {
+      xs += ""
+    }
+
+    r &= 100U == xs.size()
+    r &= (100U == xs.count _ do (true))
+
+    range(0, 100).foreach i do {
+      r &= "" == xs.removeLast()
+    }
+
+    r &= xs.empty()
+    r &= 0U == xs.count _ do (true)
+
+    delete xs
+    r
+  }
+
+  test "double" {
+    false
+  }
+
+  test "mixed" {
+    false
+  }
+}
