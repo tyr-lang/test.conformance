@@ -30,7 +30,7 @@ type direct {
 
     delete buffer
 
-    2 == result
+    2U == result
   }
 
   test "forall" {
@@ -109,7 +109,7 @@ type iterable {
 
     delete buffer
 
-    2 == result
+    2U == result
   }
 
   test "forall" {

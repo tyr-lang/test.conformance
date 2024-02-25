@@ -51,10 +51,10 @@ type T {
 
   test "multi chars" {
     val str = "cᚠc"
-    1 == str.chars().count c do (
+    1U == str.chars().count c do (
       c == 'ᚠ'
     ) && 
-    2 == str.chars().count c do (
+    2U == str.chars().count c do (
       c == 'c'
     )
   }

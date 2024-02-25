@@ -17,19 +17,19 @@ class T {
 
   test "buffer count" {
     val it = x.bytes().buffered()
-    2 == it.count i do (i != 0u8)
+    2U == it.count i do (i != 0u8)
   }
 
   test "buffer count empty" {
     val it = e.bytes().buffered()
-    0 == it.count i do (i != 0u8)
+    0U == it.count i do (i != 0u8)
   }
 
   test "buffer peek count" {
     val it = x.bytes().buffered()
     1u8 == it.peek() &&
     1u8 == it.peek() &&
-    2 == it.count i do (i != 0u8)
+    2U == it.count i do (i != 0u8)
   }
 
   test "buffer peek interact count" {
@@ -39,6 +39,6 @@ class T {
     // advance the inner buffer, which is, strictly speaking, not allowed
     2u8 == xs.next() &&
     1u8 == it.peek() &&
-    1 == it.count i do (i != 0u8)
+    1U == it.count i do (i != 0u8)
   }
 }

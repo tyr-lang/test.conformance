@@ -14,7 +14,7 @@ class T {
 
   test "chain count" {
     val it = x.bytes() ++ y.bytes()
-    4 == it.count i do (i != 0u8)
+    4U == it.count i do (i != 0u8)
   }
 
   test "chain sum" {
