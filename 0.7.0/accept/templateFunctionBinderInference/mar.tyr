@@ -1,0 +1,38 @@
+/**
+ * Test instantiation of template functions with inferred binder parameters.
+ */
+type Utils {
+  // for all elements of an iterable that fulfill cond sum the results of the
+  // evaluation of map on them
+  type def sumIf[T : Type[_]](
+    xs   : container.Iterable[T],
+    x    : BlockParameter[T],
+    cond : Block[bool],
+    map  : Block[int]) {
+
+    var r = 0
+    xs.foreach(x, {
+      if(cond.eval()) {
+        r += map.eval()
+      }
+    })
+    r
+  }
+
+  test "sum even" {
+    var xs = new container.ArrayBuffer[int]
+
+    xs += 3
+    xs += 4
+    xs += 5
+    xs += 6
+
+    // if we want to use the result we can embrace the blocks
+    10 == Utils.sumIf[int](xs) x do ({
+      // if x is even
+      0 == x % 2
+    } {
+      x
+    })
+  }
+}
