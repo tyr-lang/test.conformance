@@ -1,0 +1,20 @@
+/**
+ * Check that Sleipnir generates code for this pair implementation
+ */
+type Pair {
+  var left : int = 0;
+  var right : int = 0;
+
+  new;
+
+  def apply(this : Ref[Pair], index : int) = switch index {
+    if 0 left
+    else right
+  }
+
+  test "apply var" {
+    var p = new Pair
+    
+    0 == p(0)
+  }
+}
