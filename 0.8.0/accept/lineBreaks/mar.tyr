@@ -1,0 +1,17 @@
+/**
+ * various cases of line breaks and comments
+ */
+type T <: Exception {
+  test "implicit throw" {
+    1 + /* */ 2
+
+    1 + /* */
+    2
+
+    1 + // this might not work?
+    2
+
+    1 /* */ + /* // */
+    2
+  }
+}
