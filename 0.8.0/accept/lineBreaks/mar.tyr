@@ -1,17 +1,31 @@
 /**
  * various cases of line breaks and comments
  */
-type T <: Exception {
-  test "implicit throw" {
-    1 + /* */ 2
+type T {
+  test "block" {
+    3 == {
+      1 + /* */ 2
+    }
+  }
 
-    1 + /* */
-    2
+  test "block line" {
+    3 == {
+      1 + /* */
+      2
+    }
+  }
 
-    1 + // this might not work?
-    2
+  test "single line" {
+    3 == {
+      1 + // this might not work?
+      2
+    }
+  }
 
-    1 /* */ + /* // */
-    2
+  test "double block" {
+    3 == {
+      1 /* */ + /* // */
+      2
+    }
   }
 }
