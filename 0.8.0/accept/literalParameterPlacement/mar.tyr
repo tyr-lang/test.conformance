@@ -1,0 +1,15 @@
+/**
+ * Placement should also work with literal parameters
+ */
+type T {
+  def f (`+` : int) = `+`
+  def + (`+` : int, p : int) = `+` + p
+
+  test "use" {
+    2 == f(`+` := 2)
+  }
+
+  test "both" {
+    4 == `+`(2, `+` := 2)
+  }
+}
