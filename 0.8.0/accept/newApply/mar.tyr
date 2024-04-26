@@ -1,0 +1,21 @@
+/**
+ * Check apply on constructors
+ */
+class T {
+  new;
+  delete;
+
+  def apply = 5
+
+  test "single" <: noCompile[NAM_NOT_FOUND] {
+    5 == new T()
+  }
+
+  test "double" <: noCompile[NAM_NOT_FOUND] {
+    5 == new T()()
+  }
+
+  test "braced" {
+    5 == (new T())()
+  }
+}
