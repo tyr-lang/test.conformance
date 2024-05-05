@@ -23,12 +23,12 @@ type T {
   }
 
   test "while no param" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
-    while (g) f();
+    while(g) f();
     true
   }
 
   test "while" {
-    while (g()) f();
+    while(g()) f();
     true
   }
 
@@ -37,25 +37,25 @@ type T {
   }
 
   test "while short" {
-    while (g()) f
+    while g() f
   }
 
   test "while call" {
-    while (g()) f();
+    while(g()) f();
     true
   }
 
   test "do while" <: noCompile[NAM_NOT_FOUND_OVERLOAD] {
     do {
       f()
-    } while (g);
+    } while(g);
     true
   }
 
   test "do while call" {
     do {
       f()
-    } while (g());
+    } while(g());
     true
   }
 }
