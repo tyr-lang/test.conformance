@@ -2,8 +2,8 @@
  * Placement should also work with literal parameters
  */
 type T {
-  def f (`+` : int) = `+`
-  def + (`+` : int, p : int) = `+` + p
+  type def f (`+` : int) = `+`
+  type def + (`+` : int, p : int) = `+` + p
 
   test "use" {
     2 == f(`+` := 2)
