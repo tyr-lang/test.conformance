@@ -1,0 +1,13 @@
+/**
+ * tests correctness of try catch
+ */
+type T {
+  test "explicit throw" {
+    try (new Exception).throw()
+    finally {
+      return true
+    }
+
+    false
+  }
+}

@@ -1,0 +1,16 @@
+/**
+ * tests correctness of try catch
+ */
+type T {
+  test "explicit throw" {
+    try (new Exception).throw()
+    catch e {
+      if Exception {
+        // TODO 0.8 there should be a call to delete e before the return; have a test
+        return true
+      }
+    }
+
+    false
+  }
+}

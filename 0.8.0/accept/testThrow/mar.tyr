@@ -1,0 +1,14 @@
+/**
+ * count test as skipped if it throws an exception
+ */
+type T {
+  test "may" <: mayThrow[Exception], expectSkip {
+    new Exception().throw()
+    false
+  }
+
+  test "must" <: mustThrow[Exception], expectSkip {
+    new Exception().throw()
+    false
+  }
+}

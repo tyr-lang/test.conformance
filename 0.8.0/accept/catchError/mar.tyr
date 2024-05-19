@@ -1,0 +1,27 @@
+/**
+ * catching an error does not prevent it from continuing
+ */
+type T {
+  test "must" <: mustThrow[Error], expectSkip {
+    try {
+      new Error().throw()
+    } catch e {
+      if Error {
+        // do nothing and it will continue anyway
+      }
+    }
+    false
+  }
+
+  test "must" <: mustThrow[Error], expectSkip {
+    try {
+      new Error().throw()
+    } catch e {
+      if Error {
+        // throwing an exception will still continue the error
+        new Exception().throw()
+      }
+    }
+    false
+  }
+}

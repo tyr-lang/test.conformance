@@ -1,0 +1,26 @@
+/**
+ * tests correctness of try catch
+ */
+type T {
+  // TODO 0.8 should be a fail test as the last false is not reachable
+  test "no join" {
+    try (new Exception).throw
+    catch e {
+      if Exception {
+        return false // TODO should be true and the test should be rejected
+      }
+      else return false
+    }
+    false
+  }
+
+  test "CFG join" {
+    try (new Exception).throw
+    catch e {
+      if Exception {
+        true
+      }
+      else false
+    }
+  }
+}
