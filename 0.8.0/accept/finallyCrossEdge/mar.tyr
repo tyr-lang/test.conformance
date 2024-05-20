@@ -1,0 +1,21 @@
+/**
+ * tests correctness of break/continue cross edges with finally blocks
+ *
+ * @note to self: I don't see why catch would be an issue, but finally is
+ */
+type T {
+  test "simple" {
+    // something like
+    // 7 == do { try { break 7 } finally { 3 } } while true
+    // TODO: there should be an effect that checks that finally is really
+    // executed.
+
+    // note to self: if we have a cross edge with a value, having a finally in
+    // the middle cannot influence the result as it is, generally speaking, not
+    // known. The explanation should be that break/continue force do while to
+    // return the argument value like a return statement which is also not
+    // influenced by finally. Finally only influences the result value of try.
+
+    false
+  }
+}
