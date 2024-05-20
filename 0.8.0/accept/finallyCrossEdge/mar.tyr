@@ -16,6 +16,9 @@ type T {
     // return the argument value like a return statement which is also not
     // influenced by finally. Finally only influences the result value of try.
 
+    // note to self: I'd expect that I need the cross edges in finally and a
+    // finally stack in the CFGs; maybe the bodies aren't really just jumps
+
     false
   }
 }

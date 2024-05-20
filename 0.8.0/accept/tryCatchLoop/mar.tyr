@@ -1,0 +1,21 @@
+/**
+ * try catch should leave the exception stack balanced or empty
+ */
+type T <: Exception {
+  test "loop" {
+    // check if we can have a loop with a million try/catch calls; we'll see how expensive that is;
+    
+    false
+  }
+
+  test "nested loop" {
+    
+    false
+  }
+
+  test "release nested" {
+    // have it run for an hour and ensure that the overall memory footprint is constant
+    // delete the test afterwards
+    false
+  }
+}
