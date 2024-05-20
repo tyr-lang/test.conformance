@@ -1,0 +1,42 @@
+/**
+ * tests correctness of try catch in the absence of exceptions
+ */
+type T {
+  test "catch nothing" {
+    try {
+      true
+    } catch e {
+      if Exception false
+      else false
+    }
+  }
+
+  test "nothing finally" {
+    try {
+      false
+    } finally {
+      true
+    }
+  }
+
+  test "statements finally" {
+    var x = 0
+    try {
+      x &= 1
+    } finally {
+      x &= 2
+    }
+    3 == x
+  }
+
+  test "catch finally" {
+    try {
+      false
+    } catch e {
+      if Exception false
+      else false
+    } finally {
+      true
+    }
+  }
+}
