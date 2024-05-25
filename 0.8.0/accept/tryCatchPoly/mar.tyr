@@ -20,11 +20,20 @@ class T <: Exception {
       else false
     }
   }
-  test "other" {
+  test "sub" {
     try {
       throw new T
     } catch e {
-      if Exception false
+      if Exception true
+      if exceptions.NullAccess false
+      else false
+    }
+  }
+  test "other" {
+    try {
+      throw new Exception
+    } catch e {
+      if T false
       if exceptions.NullAccess false
       else true
     }
