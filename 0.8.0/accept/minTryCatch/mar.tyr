@@ -4,10 +4,9 @@
 type T {
   test "explicit throw" {
     try {
-      (new Exception).throw()
+      throw new Exception
     } catch e {
       if Exception {
-        // TODO 0.8 there should be an implicit call to delete e before the return; have a test
         return true
       }
     }

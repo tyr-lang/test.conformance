@@ -1,0 +1,27 @@
+/**
+ * tests correctness of implicitly deleting caught exceptions
+ */
+class T <: Exception {
+  type var seen = false
+  new {
+    seen = false
+  }
+  delete {
+    seen = true
+  }
+
+  type def f {
+    try {
+      throw new Exception
+    } catch e {
+      if Exception {
+        return true
+      }
+    }
+  }
+
+  test "deleted" {
+    T.f()
+    seen
+  }
+}
