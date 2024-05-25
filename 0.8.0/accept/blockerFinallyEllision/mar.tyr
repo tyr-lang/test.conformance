@@ -1,0 +1,22 @@
+/**
+ * This is kind of an "am I right or is the rest of the world?" test.
+ * If I cannot get it to work, it does not make sense to continue the project.
+ * If I can, I can safely assume that ultimately the performance will be
+ * slightly better than that of C++. And software development will eventually be
+ * a lot cheaper than in any competing language.
+ *
+ * @note to self: if it doesn't I should check if running opt twice does the
+ *   job; it could be that cross edge encoding is removed too late
+ */
+type T {
+  test "fold four Array elements" {
+    // have an array with for elements, add a try finally for auto deletion
+    // check that clang is able to optimize out the entire stuff
+    false
+  }
+
+  test "fold four ArrayBuffer elements" {
+    // do the exact same thing with ArrayBuffer
+    false
+  }
+}
