@@ -11,16 +11,7 @@ type T {
       }
       else return false
     }
-  }
-
-  test "CFG join" {
-    try {
-      throw new Exception
-    } catch e {
-      if Exception {
-        true
-      }
-      else false
-    }
+    // no you can't get here
+    false
   }
 }
