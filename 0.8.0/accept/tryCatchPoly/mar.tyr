@@ -1,0 +1,32 @@
+/**
+ * tests correctness of try catch
+ */
+class T <: Exception {
+  test "ex" {
+    try {
+      throw new Exception
+    } catch e {
+      if Exception true
+      if exceptions.NullAccess false
+      else false
+    }
+  }
+  test "null" {
+    try {
+      throw null
+    } catch e {
+      if Exception false
+      if exceptions.NullAccess true
+      else false
+    }
+  }
+  test "other" {
+    try {
+      throw new T
+    } catch e {
+      if Exception false
+      if exceptions.NullAccess false
+      else true
+    }
+  }
+}
