@@ -1,0 +1,45 @@
+/**
+ * test flagset property that assigns each value implicitly the next bit instead
+ * of the next integer value
+ */
+enum S <: enums.flagsSet {
+  a, b, c, d, e
+}
+enum E <: enums.flagsSet {
+  a, b, c = 4, d, e
+}
+enum E2 <: enums.flagsSet {
+  a, b, c = 9, d, e
+}
+
+type T {
+  test "use" {
+    S.a != S.b
+  }
+
+  test "set" {
+    var x = S.a & S.c & S.e
+    (x & S.a) && (x & S.c) && (x & S.e)
+  }
+
+  test "set not" {
+    var x = S.a & S.c & S.e
+    !(x & S.b) && !(x & S.d)
+  }
+
+  test "first" {
+    1 == S.a
+  }
+
+  test "implicit" {
+    8 == S.d
+  }
+
+  test "explicit" {
+    8 == E.d
+  }
+
+  test "explicit 2" {
+    16 == E2.d
+  }
+}
