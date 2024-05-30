@@ -17,6 +17,16 @@ type T {
     S.a != S.b
   }
 
+  test "read" {
+    val x = S.a
+    x & S.a
+  }
+
+  test "read b" {
+    val x = S.a
+    !x & S.b
+  }
+
   test "set" {
     var x = S.a & S.c & S.e
     (x & S.a) && (x & S.c) && (x & S.e)
@@ -28,18 +38,18 @@ type T {
   }
 
   test "first" {
-    1 == S.a
+    1 == int !! S.a
   }
 
   test "implicit" {
-    8 == S.d
+    8 == int !! S.d
   }
 
   test "explicit" {
-    8 == E.d
+    8 == int !!  E.d
   }
 
   test "explicit 2" {
-    16 == E2.d
+    16 == int !! E2.d
   }
 }
