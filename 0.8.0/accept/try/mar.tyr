@@ -1,4 +1,5 @@
 with exceptions.NullAccess
+with tyr.io.System.out
 
 /**
  * @note tests correctness of try catch
@@ -9,7 +10,7 @@ class T <: Exception {
       (null : StringLiteral) !!
     } catch e {
       if NullAccess {
-        "success!"!!
+        out.put("success!\n")
         true
       }
       else false
