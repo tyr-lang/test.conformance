@@ -7,7 +7,8 @@ with tyr.io.System.out
 class T <: Exception {
   test "implicit throw" {
     try {
-      (null : StringLiteral) !!
+      out.put(null : StringLiteral)
+      false
     } catch e {
       if NullAccess {
         out.put("success!\n")
@@ -15,7 +16,6 @@ class T <: Exception {
       }
       else false
     }
-    false
   }
 
   test "explicit throw no handler" {
@@ -27,7 +27,6 @@ class T <: Exception {
       }
       else true
     }
-    false
   }
 
   test "explicit throw" {
@@ -42,12 +41,12 @@ class T <: Exception {
       }
       else false
     }
-    false
   }
 
   test "no throw" {
     try {
       new T
+      true
     } catch e {
       if NullAccess {
         false
@@ -57,6 +56,5 @@ class T <: Exception {
       }
       else false
     }
-    true
   }
 }
