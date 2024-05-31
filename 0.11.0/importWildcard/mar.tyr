@@ -1,0 +1,23 @@
+with tyr.io.System.out._
+
+/**
+ * allow wild card imports importing multiple members including overloads
+ */
+type T:
+
+test "literal" {
+  put("fine\n")
+}
+
+test "CString" {
+  // TODO
+  false
+}
+
+test "eof" {
+  !eof()
+}
+
+test "function" {
+  close != eof
+}

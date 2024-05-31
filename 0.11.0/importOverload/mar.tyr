@@ -1,0 +1,15 @@
+with tyr.io.System.out.put
+
+/**
+ * test that all puts get imported and can be used
+ */
+type T:
+
+test "literal" {
+  put("fine\n")
+}
+
+test "CString" {
+  // TODO
+  false
+}
