@@ -1,0 +1,33 @@
+/**
+ * Remove the call site types again, revert .class to its Tyr 0.6 semantics.
+ *
+ * @note  the this.class pattern should still result in inherited copies to have
+ *   an effective covariant type.
+ *
+ * @note to self: getting this.class types correct makes copying the stubs a
+ *   lot more attractive. It could be that it requires me to add another
+ *   substitution category.
+ */
+type T {
+  type def id[T : Type[_]](x : T) = x
+
+  test "int" {
+    7 == id(7)
+  }
+
+  test "string" {
+    "x" == id("x")
+  }
+
+  test "string y" {
+    "y" != id("x")
+  }
+
+  test "null" {
+    null == id(null)
+  }
+
+  test "fun" {
+    id == id(id)
+  }
+}

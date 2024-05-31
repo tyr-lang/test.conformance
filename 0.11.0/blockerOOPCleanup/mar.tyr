@@ -1,0 +1,29 @@
+/**
+ * This release should finally cleanup the entire type interface and others
+ * logic. Also, it should bring name-based member and body elaboration.
+ * The elaboration grouping logic should be reviewed and documented.
+ *
+ * Closed lookups need to be performed like C++-style overload resolution.
+ *
+ * Also, operator overloading must result in shadowing alternatives in closed
+ * lookups as a first filter rule on multiple matches.
+ *
+ * Note to self: I need to review shadowing rules. It could be that I need to
+ *  maintain shadow maps.
+ */
+type T {
+  test "use" {
+    false
+  }
+
+  test "accessible type defs" {
+    // There must be a test ensuring that a closed lookup will not shadow
+    // suitable type defs from type interfaces.
+    // This is currently the case and it is an error as it is highly unexpected.
+    // The current way of evoking the issue is defining a higher precedence
+    // operator as a type def in an interface.
+    // Representational transparency demands that this works as if it were an
+    // object def.
+    false
+  }
+}
