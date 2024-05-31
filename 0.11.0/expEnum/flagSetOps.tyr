@@ -1,0 +1,64 @@
+/**
+ * Provides shorthand operations to set, unset, read and toggle values in flag
+ * set enums.
+ */
+public
+interface FlagSetOps[E : Type[Unsigned[Size]], Size : IntegerLiteral[32]]
+    <: any {
+
+  /**
+   * set flag v
+   */
+  public
+  type def | (this : E, v : E) : E <: operator.precedence[99]
+    = E !! (this | v);
+
+  /**
+   * set flag v
+   */
+  public
+  type def |= (this : Ref[E], v : E) : E
+           <: operator.precedence[21], operator.rightAssociative {
+    this = FlagSetOps.`|`(this, v);
+    this
+  }
+
+  /**
+   * unset flag v
+   */
+  public
+  type def ~ (this : E, v : E) : E <: operator.precedence[99]
+    = E !! (this & (this ^ v));
+
+  // /**
+  //  * unset flag v
+  //  */
+  // public
+  // type def ~= (this : Ref[E], v : E) : E
+  //          <: operator.precedence[21], operator.rightAssociative {
+  //   this = this ~ v;
+  // }
+
+  /**
+   * toggle flag v
+   */
+  public
+  type def ^ (this : E, v : E) : E <: operator.precedence[99]
+    = E !! (this ^ v);
+
+  // /**
+  //  * toggle flag v
+  //  */
+  // public
+  // type def ^= (this : Ref[E], v : E) : E
+  //          <: operator.precedence[21], operator.rightAssociative {
+  //   this = this ^ v;
+  // }
+
+  /**
+   * read flag v
+   */
+  public
+  def & (this : E, v : E) : bool <: operator.precedence[98]
+    = 0u.resize[Size]() != (this & v);
+}
