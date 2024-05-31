@@ -1,55 +1,60 @@
+with exceptions.NullAccess
+
 /**
  * @note tests correctness of try catch
  */
-type T <: Exception {
+class T <: Exception {
   test "implicit throw" {
     try {
       (null : StringLiteral) !!
-    } catch {
-      if e : NullAccess {
+    } catch e {
+      if NullAccess {
         "success!"!!
         true
       }
-      else _ false
+      else false
     }
     false
   }
 
   test "explicit throw no handler" {
-    try (new T).throw
-    catch {
-      if e : NullAccess {
+    try {
+      throw new T
+    } catch e {
+      if NullAccess {
         false
       }
-      else _ true
+      else true
     }
     false
   }
 
   test "explicit throw" {
-    try (new T).throw
-    catch {
-      if e : NullAccess {
+    try {
+      throw new T
+    } catch e {
+      if NullAccess {
         false
       }
-      if e : T {
+      if T {
         true
       }
-      else _ false
+      else false
     }
     false
   }
 
   test "no throw" {
-    try new T
-    catch {
-      if e : NullAccess {
+    try {
+      new T
+    } catch e {
+      if NullAccess {
         false
       }
-      if e : T {
+      if T {
         false
       }
-      else _ false
+      else false
     }
     true
   }
