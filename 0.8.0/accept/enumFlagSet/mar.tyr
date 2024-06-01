@@ -2,13 +2,13 @@
  * test flagSet property that assigns each value implicitly the next bit instead
  * of the next integer value
  */
-enum S <: enums.flagsSet {
+enum S <: enums.flagSet {
   a, b, c, d, e
 }
-enum E <: enums.flagsSet {
+enum E <: enums.flagSet {
   a, b, c = 4, d, e
 }
-enum E2 <: enums.flagsSet {
+enum E2 <: enums.flagSet {
   a, b, c = 9, d, e
 }
 
