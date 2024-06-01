@@ -1,0 +1,44 @@
+/**
+ * ensure that the TIR optimizer does not crash when compressing effective-empty
+ * try finally blocks
+ *
+ * @note  It is not defined if TIR will contain any finally or catch for the
+ *   tests below.
+ */
+class T <: Exception {
+  test "finally compression" {
+    try {
+      false
+    } finally {
+      true
+    }
+    try {
+      false
+    } finally {
+      true
+    }
+    true
+    try {
+      try {
+        false
+      } finally {
+        true
+      }
+    } finally {
+      true
+    }
+  }
+
+  test "throw empty" {
+    try {
+      try {
+        false
+      } finally {
+        throw new T
+      }
+    } catch e {
+      if T true
+      else false
+    }
+  }
+}
