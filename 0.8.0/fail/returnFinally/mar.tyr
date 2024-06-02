@@ -1,0 +1,15 @@
+/**
+ * tests correctness of try catch
+ */
+type T {
+  test "explicit throw" {
+    try {
+      true
+    } finally {
+      // not allowed, does not what one would expect it to
+      return true
+    }
+
+    false
+  }
+}

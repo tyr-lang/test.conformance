@@ -1,0 +1,14 @@
+/**
+ * tests correctness of try catch
+ */
+type T {
+  test "explicit throw" {
+    try {
+      throw new Exception
+    } finally {
+      return true
+    }
+
+    false
+  }
+}

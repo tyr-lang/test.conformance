@@ -3,11 +3,16 @@
  */
 type T {
   test "explicit throw" {
-    try (new Exception).throw()
-    finally {
-      return true
+    var seen = false
+    try {
+      try {
+        throw new Exception
+      } finally {
+        seen = true
+      }
+    } catch e {
+      else {}
     }
-
-    false
+    seen
   }
 }

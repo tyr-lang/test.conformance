@@ -1,0 +1,23 @@
+/**
+ * tests correctness of try catch with explicit delete and rethrow
+ *
+ * @todo 0.8  check if valgrind can be used to check correct memory management
+ */
+type T {
+  test "rethrow deleted" {
+    try {   
+      try {
+        throw new Exception
+      } catch e {
+        if Exception {
+          delete e
+          throw e
+        }
+      }
+      false
+    } catch e {
+      if exceptions.NullAccess true
+      else false
+    }
+  }
+}
