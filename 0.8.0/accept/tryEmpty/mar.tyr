@@ -12,6 +12,13 @@ class T {
     }
   }
 
+  test "catch else" {
+    try {
+    } catch e {
+      else {}
+    }
+  }
+
   test "finally" {
     try {
     } finally {
