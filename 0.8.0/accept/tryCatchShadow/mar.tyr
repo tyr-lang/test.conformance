@@ -1,0 +1,68 @@
+with enums.flagSet
+with tyr.io.System
+
+/**
+ * tests correctness of try catch with nested try catch
+ *
+ * @note  requires manual inspection ensuring that there is at most one call
+ *   to throw in `f`
+ *
+ * @todo 0.8  add a test ensuring that gotos into surrounding handlers respect
+ *   polymorphism
+ */
+enum S <: flagSet {
+  Ex, NA, others, none, HEx, HNA, HOthers, HNone, fb, be
+}
+
+class T <: Exception, suppressCompilerMessage["E_OOP_PRIVACY_VIOLATED"] {
+  type var state : S = S !! 0
+
+  type def set(v : S) = state = S !! (state | v)
+
+  type def f(ex : exceptions.Throwable) : void {
+    set(S.fb)
+
+    try {
+      try {
+        throw ex
+        set(S.none)
+      } catch e {
+        // throws in this handlers should all get represented as gotos
+        if Exception { set(S.Ex); throw e }
+        if exceptions.NullAccess { set(S.NA); throw e }
+        else { set(S.others); throw e }
+      }
+      set(S.HNone)
+    } catch e {
+      if Exception { set(S.HEx) }
+      if exceptions.NullAccess { set(S.HNA) }
+      else { set(S.HOthers) }
+    }
+
+    set(S.fe)
+  }
+
+  test "ex" {
+    c(new Exception)
+    state == S.Ex | S.f | S.gb | S.cb | S.ce
+  }
+  test "null" {
+    c(null)
+    state == S.NA | S.f | S.gb | S.cb | S.ce
+  }
+  test "sub" {
+    c(new T)
+    state == S.Ex | S.f | S.gb | S.cb | S.ce
+  }
+  test "other" {
+    try {
+      c(new exceptions.FatalSegFault)
+    } catch e {
+      if exceptions.FatalSegFault {
+        if (state == S.others | S.f | S.gb | S.cb)
+          System.exit(0)
+      }
+    }
+    false
+  }
+}
