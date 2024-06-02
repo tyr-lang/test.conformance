@@ -1,0 +1,20 @@
+/**
+ * try should work well with empty blocks
+ *
+ * @note  it would be fine if these tests would create warnings
+ */
+class T {
+  test "catch" {
+    try {
+    } catch e {
+      if exception {}
+      else {}
+    }
+  }
+
+  test "finally" {
+    try {
+    } finally {
+    }
+  }
+}
