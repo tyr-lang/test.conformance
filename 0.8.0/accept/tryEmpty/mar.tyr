@@ -7,7 +7,7 @@ class T {
   test "catch" {
     try {
     } catch e {
-      if exception {}
+      if Exception {}
       else {}
     }
   }
