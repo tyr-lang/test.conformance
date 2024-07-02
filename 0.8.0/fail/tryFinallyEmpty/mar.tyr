@@ -1,0 +1,11 @@
+/**
+ * a syntactic empty finally block should result in a warning
+ */
+class T {
+
+  test "finally" {
+    try {
+    } finally {
+    }
+  }
+}
