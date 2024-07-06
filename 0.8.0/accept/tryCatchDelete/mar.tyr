@@ -1,5 +1,13 @@
 /**
  * tests correctness of implicitly deleting caught exceptions
+ *
+ * @note  while I first thought that it might be a good idea to have a special
+ *  rule for exceptions, it turned out to be some 95% solution that would be
+ *  replaced by may ownership memory management anyway. Hence, we rule that
+ *  for now, the user must handle exceptions completely. This should, overall,
+ *  result in a much better solution as it reduces confusion and we wouldn't be
+ *  able to produce useful warnings in case the special rule would do something
+ *  weird.
  */
 class T <: Exception {
   type var seen = false
@@ -10,11 +18,22 @@ class T <: Exception {
     seen = true
   }
 
-  type def f {
+  type def leak <: suppressCompilerMessage["E_MEM_LEAK"] {
     try {
-      throw new Exception
+      throw new T
     } catch e {
       if Exception {
+        return true
+      }
+    }
+  }
+
+  type def f {
+    try {
+      throw new T
+    } catch e {
+      if Exception {
+        delete e
         return true
       }
     }
