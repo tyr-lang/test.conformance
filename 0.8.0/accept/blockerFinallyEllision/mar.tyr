@@ -1,3 +1,6 @@
+with container.Array
+with container.ArrayBuffer
+
 /**
  * This is kind of an "am I right or is the rest of the world?" test.
  * If I cannot get it to work, it does not make sense to continue the project.
@@ -7,11 +10,26 @@
  *
  * @note to self: if it doesn't I should check if running opt twice does the
  *   job; it could be that cross edge encoding is removed too late
+ *
+ * @note to self: actually, I'd assume that the catch in the finally cannot be
+ *   optimized out as it could be triggered by an out of bounds throw or similar
+ *   I doubt that it is provable that no throw will happen no matter how much
+ *   we invest into no throw annotations and detection
  */
 type T {
   test "fold four Array elements" {
     // have an array with for elements, add a try finally for auto deletion
     // check that clang is able to optimize out the entire stuff
+    val x = new Array[int, 4]
+    x(0) = 7
+    x(1) = 3
+    x(2) = 5
+    x(3) = 12
+
+    val r = 27 == x.fold(0) l,r do(l + r)
+    delete x
+    r
+    // note: this can only be meaningful once there is a try finally in the fold implementation deleting the iterator
     false
   }
 
