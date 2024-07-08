@@ -3,7 +3,7 @@
  *
  * @note  it would be fine if these tests would create warnings
  */
-class T {
+class T <: suppressCompilerMessage["E_MEM_LEAK"] {
   test "catch" {
     try {
     } catch e {
@@ -19,9 +19,10 @@ class T {
     }
   }
 
-  test "finally" {
+  test "finally" <: noCompile[SYN_MALFORMED_EXPRESSION] {
     try {
     } finally {
+      // an empty finally block cannot make sense and is, hence, forbidden
     }
   }
 }

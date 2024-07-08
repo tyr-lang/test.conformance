@@ -7,9 +7,13 @@ type T {
       throw new Exception
     } catch e {
       if Exception {
+        delete e
         return true
       }
-      else return false
+      else {
+        delete e
+        return false
+      }
     }
   }
 
@@ -18,9 +22,13 @@ type T {
       throw new Exception
     } catch e {
       if Exception {
+        delete e
         true
       }
-      else false
+      else {
+        delete e
+        false
+      }
     }
   }
 }

@@ -12,9 +12,13 @@ class T <: Exception {
     } catch e {
       if NullAccess {
         out.put("success!\n")
+        delete e
         true
       }
-      else false
+      else {
+        delete e
+        false
+      }
     }
   }
 
@@ -23,9 +27,13 @@ class T <: Exception {
       throw new T
     } catch e {
       if NullAccess {
+        delete e
         false
       }
-      else true
+      else {
+        delete e
+        true
+      }
     }
   }
 
@@ -34,12 +42,17 @@ class T <: Exception {
       throw new T
     } catch e {
       if NullAccess {
+        delete e
         false
       }
       if T {
+        delete e
         true
       }
-      else false
+      else {
+        delete e
+        false
+      }
     }
   }
 
@@ -49,12 +62,17 @@ class T <: Exception {
       true
     } catch e {
       if NullAccess {
+        delete e
         false
       }
       if T {
+        delete e
         false
       }
-      else false
+      else {
+        delete e
+        false
+      }
     }
   }
 }

@@ -6,36 +6,72 @@ class T <: Exception {
     try {
       throw new Exception
     } catch e {
-      if Exception true
-      if exceptions.NullAccess false
-      else false
+      if Exception {
+        delete e
+        true
+      }
+      if exceptions.NullAccess {
+        delete e
+        false
+      }
+      else {
+        delete e
+        false
+      }
     }
   }
   test "null" {
     try {
       throw null
     } catch e {
-      if Exception false
-      if exceptions.NullAccess true
-      else false
+      if Exception {
+        delete e
+        false
+      }
+      if exceptions.NullAccess {
+        delete e
+        true
+      }
+      else {
+        delete e
+        false
+      }
     }
   }
   test "sub" {
     try {
       throw new T
     } catch e {
-      if Exception true
-      if exceptions.NullAccess false
-      else false
+      if Exception {
+        delete e
+        true
+      }
+      if exceptions.NullAccess {
+        delete e
+        false
+      }
+      else {
+        delete e
+        false
+      }
     }
   }
   test "other" {
     try {
       throw new Exception
     } catch e {
-      if T false
-      if exceptions.NullAccess false
-      else true
+      if Exception {
+        delete e
+        false
+      }
+      if exceptions.NullAccess {
+        delete e
+        false
+      }
+      else {
+        delete e
+        true
+      }
     }
   }
 }

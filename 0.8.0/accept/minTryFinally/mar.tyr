@@ -11,7 +11,7 @@ type T {
         seen = true
       }
     } catch e {
-      else {}
+      else { delete e }
     }
     seen
   }
