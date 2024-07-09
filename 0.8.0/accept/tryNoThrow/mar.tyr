@@ -6,16 +6,25 @@ type T {
     try {
       true
     } catch e {
-      if Exception false
-      else false
+      if Exception {
+        delete e
+        false
+      }
+      else {
+        delete e
+        false
+      }
     }
   }
 
   test "nothing finally" {
+    var x = false
     try {
       false
     } finally {
-      true
+      // note: the finally block must not be effective empty
+      x = true
+      x
     }
   }
 
@@ -30,13 +39,21 @@ type T {
   }
 
   test "catch finally" {
+    var x = false
     try {
       false
     } catch e {
-      if Exception false
-      else false
+      if Exception {
+        delete e
+        false
+      }
+      else {
+        delete e
+        false
+      }
     } finally {
-      true
+      x = true
+      x
     }
   }
 }
