@@ -60,7 +60,7 @@ class T <: Exception {
     try {
       throw new Exception
     } catch e {
-      if Exception {
+      if T {
         delete e
         false
       }
