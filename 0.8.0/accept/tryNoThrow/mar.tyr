@@ -31,9 +31,9 @@ type T {
   test "statements finally" {
     var x = 0
     try {
-      x &= 1
+      x |= 1
     } finally {
-      x &= 2
+      x |= 2
     }
     3 == x
   }
