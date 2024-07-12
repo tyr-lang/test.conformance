@@ -6,7 +6,7 @@
  *   tests below.
  */
 class T <: Exception {
-  test "finally compression" {
+  test "finally compression" <: noCompile[SYN_MALFORMED_EXPRESSION] {
     try {
       false
     } finally {
@@ -29,7 +29,35 @@ class T <: Exception {
     }
   }
 
-  test "throw empty" {
+  /**
+   * @note  eventually, this test should be optimized out completely
+   */
+  test "var finally compression" {
+    var x = false
+    try {
+      x = false
+    } finally {
+      x = true
+    }
+    try {
+      x = false
+    } finally {
+      x = true
+    }
+    x = true
+    try {
+      try {
+        x = false
+      } finally {
+        x = true
+      }
+    } finally {
+      x = true
+    }
+    x
+  }
+
+  test "throw empty" <: noCompile[SYN_TERMINATED] {
     try {
       try {
         false
@@ -40,5 +68,21 @@ class T <: Exception {
       if T true
       else false
     }
+  }
+
+  test "var throw empty" {
+    var x = false
+    var y = false
+    try {
+      try {
+        throw new T
+      } finally {
+        x = true
+      }
+    } catch e {
+      if T { y = true; delete e }
+      else { y = false; delete e }
+    }
+    x &! y
   }
 }
