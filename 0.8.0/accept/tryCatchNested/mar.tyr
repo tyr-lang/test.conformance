@@ -11,31 +11,31 @@ enum S <: flagSet {
 class T <: Exception, suppressCompilerMessage["E_OOP_PRIVACY_VIOLATED"] {
   type var state : S = S !! 0
 
-  type def set(v : S) = state = S !! (state | v)
+  type def seen(v : S) = state = S !! (state | v)
 
   type def c(ex : exceptions.Throwable) : void {
-    set(S.cb)
+    seen(S.cb)
 
     try {
       g(ex)
-      set(S.none)
+      seen(S.none)
     } catch e {
-      if Exception { set(S.Ex) }
-      if exceptions.NullAccess { set(S.NA) }
-      else { set(S.others) }
+      if Exception { seen(S.Ex); delete e }
+      if exceptions.NullAccess { seen(S.NA); delete e }
+      else { seen(S.others); delete e }
     }
 
-    set(S.ce)
+    seen(S.ce)
   }
 
   type def g(ex : exceptions.Throwable) : void {
-    set(S.gb)
+    seen(S.gb)
     f(ex)
-    set(S.ge)
+    seen(S.ge)
   }
 
   type def f(ex : exceptions.Throwable) : void {
-    set(S.f)
+    seen(S.f)
     throw ex
   }
 
