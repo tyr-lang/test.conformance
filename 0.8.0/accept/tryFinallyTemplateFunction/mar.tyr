@@ -6,7 +6,7 @@ type T {
     var seen = false
     try {
       try {
-        throw new Exception
+        throw new E
       } finally {
         seen = true
       }
