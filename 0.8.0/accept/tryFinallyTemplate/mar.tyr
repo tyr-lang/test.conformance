@@ -1,0 +1,25 @@
+/**
+ * tests correctness of try catch
+ */
+type T[E : Type[Exception]] {
+  type def check : bool {
+    var seen = false
+    try {
+      try {
+        throw new Exception
+      } finally {
+        seen = true
+      }
+    } catch e {
+      else { delete e }
+    }
+    seen
+  }
+
+  test "Exception" {
+    T[Exception].check()
+  }
+  test "NA" {
+    T[exceptions.NullAccess].check()
+  }
+}
