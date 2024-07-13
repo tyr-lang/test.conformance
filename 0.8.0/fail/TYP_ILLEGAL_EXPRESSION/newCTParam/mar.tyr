@@ -1,0 +1,13 @@
+/**
+ * tests constructor calls on type arguments
+ *
+ * @note  atm, this isn't possible because there is no way to state or prove
+ *   that the actual type will have a compatible and accessible constructor
+ */
+type T {
+  type def make[E : Type[Exception]] : E = new E
+
+  test "use" {
+    Exception ? T.make[Exception]()
+  }
+}
