@@ -6,17 +6,15 @@ type T[E : Class[Exception]] {
     var seen = false
     var same = false
     try {
-      try {
-        throw ex
-      } finally {
-        seen = true
-      }
+      throw ex
     } catch e {
       if E {
         same = (ex == e)
         delete e
       }
       else { delete e }
+    } finally {
+      seen = true
     }
     same &! seen
   }
