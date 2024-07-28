@@ -22,9 +22,11 @@ type T[E : Class[Exception]] {
   }
 
   test "Exception" {
-    T[Exception].check(new Exception)
+    val ex = new Exception
+    T[ex.type.T].check(ex)
   }
   test "NA" {
-    T[exceptions.NullAccess].check(new exceptions.NullAccess)
+    val ex = new exceptions.NullAccess
+    T[ex.type.T].check(ex)
   }
 }
