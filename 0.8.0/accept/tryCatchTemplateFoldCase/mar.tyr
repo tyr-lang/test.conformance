@@ -1,0 +1,60 @@
+/**
+ * tests correctness of try catch template case folding
+ */
+type T {
+  type def check[E : Class[Exception]](ex : Exception) : bool {
+    var seen = false
+    var same = false
+    try {
+      try {
+        throw ex
+      } finally {
+        seen = true
+      }
+    } catch e {
+      if E {
+        same = (ex == e)
+        delete e
+      }
+      if Exception {
+        // this case should win if E == Exception
+        delete e
+      }
+      else { delete e }
+    }
+    same &! seen
+  }
+
+  type def check2[E : Class[Exception]](ex : Exception) : bool {
+    var seen = false
+    var same = false
+    try {
+      try {
+        throw ex
+      } finally {
+        seen = true
+      }
+    } catch e {
+      if Exception {
+        // this case should win if E == Exception
+        delete e
+      }
+      if E {
+        same = (ex == e)
+        delete e
+      }
+      else { delete e }
+    }
+    same &! seen
+  }
+
+  test "Exception" {
+    !T[Exception].check(new Exception)
+  }
+  test "Exception reordered" {
+    !T[Exception].check2(new Exception)
+  }
+  test "NA" {
+    T[exceptions.NullAccess].check(new exceptions.NullAccess)
+  }
+}
