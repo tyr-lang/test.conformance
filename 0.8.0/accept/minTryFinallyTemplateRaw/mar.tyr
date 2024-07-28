@@ -1,0 +1,23 @@
+/**
+ * tests correctness of try catch
+ */
+type T {
+  type def check(ex : Exception, seen : Ref[bool]) : bool {
+    try {
+      throw ex
+    } finally {
+      seen = true
+    }
+  }
+
+  test "Exception" {
+    val ex = new Exception
+    var r = false
+    try {
+      check(ex, r)
+    } catch e {
+      else delete e
+    }
+    r
+  }
+}

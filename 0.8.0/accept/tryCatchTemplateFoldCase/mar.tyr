@@ -1,5 +1,7 @@
 /**
  * tests correctness of try catch template case folding
+ *
+ * @note  it might make sense to move this to a future release
  */
 type T {
   type def check[E : Class[Exception]](ex : Exception) : bool {
