@@ -1,0 +1,48 @@
+/**
+ * tests correctness of try catch
+ */
+type T[E : Class[Exception]] {
+  type def check(ex : E) : bool {
+    var seen = false
+    var same = false
+    try {
+      try {
+        throw ex
+      } finally {
+        seen = true
+      }
+    } catch e {
+      if E {
+        same = (ex == e)
+        throw e
+      }
+      else { throw e }
+    }
+    same &! seen
+  }
+
+  test "Exception" {
+    val ex = new Exception
+    var pass = false
+    try {
+      T[ex.type.T].check(ex)
+    } catch e {
+      else {
+        pass = e == ex
+      }
+    }
+    pass
+  }
+  test "NA" {
+    val ex = new exceptions.NullAccess
+    var pass = false
+    try {
+      T[ex.type.T].check(ex)
+    } catch e {
+      else {
+        pass = e == ex
+      }
+    }
+    pass
+  }
+}
