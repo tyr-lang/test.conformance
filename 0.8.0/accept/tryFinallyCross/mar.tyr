@@ -1,0 +1,37 @@
+/**
+ * ensure cross edge translation is done correctly
+ */
+class T {
+  test "full" {
+    var seen = false
+    val r = try {
+      while true {
+        try {
+          if true
+            break
+        } finally {
+          seen = true
+        }
+      }
+    } finally {
+      seen
+    }
+    r
+  }
+
+  test "direct" <: noCompile[SYN_TERMINATED] {
+    var seen = false
+    val r = try {
+      while true {
+        try {
+          break
+        } finally {
+          seen = true
+        }
+      }
+    } finally {
+      seen
+    }
+    r
+  }
+}
