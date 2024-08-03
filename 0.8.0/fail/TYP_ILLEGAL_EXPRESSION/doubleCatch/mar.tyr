@@ -1,0 +1,16 @@
+with exceptions.Throwable
+
+/**
+ * tests correctness of try catch
+ */
+type T <: suppressCompilerMessage["E_OOP_PRIVACY_VIOLATED"] {
+  test "Throwable is else" {
+    try {
+      throw new Exception
+    } catch e {
+      if Throwable {delete e}
+      else {delete e}
+    }
+    false
+  }
+}
