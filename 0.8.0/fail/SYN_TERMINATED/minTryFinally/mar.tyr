@@ -6,7 +6,7 @@ type T {
     try {
       throw new Exception
     } finally {
-      return true
+      throw null
     }
 
     false
