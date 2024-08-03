@@ -18,7 +18,6 @@ type T[E : Class[Exception]] {
       }
       else { throw e }
     }
-    same &! seen
   }
 
   test "Exception" {
@@ -29,6 +28,7 @@ type T[E : Class[Exception]] {
     } catch e {
       else {
         pass = e == ex
+        delete e
       }
     }
     pass
@@ -41,6 +41,20 @@ type T[E : Class[Exception]] {
     } catch e {
       else {
         pass = e == ex
+        delete e
+      }
+    }
+    pass
+  }
+  test "Null" {
+    val ex = null
+    var pass = false
+    try {
+      T[exceptions.NullAccess].check(ex)
+    } catch e {
+      else {
+        pass = e != ex && exceptions.NullAccess ? e
+        delete e
       }
     }
     pass

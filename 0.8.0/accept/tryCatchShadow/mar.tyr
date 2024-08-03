@@ -11,7 +11,7 @@ with tyr.io.System
  *   polymorphism
  */
 enum S <: flagSet {
-  Ex, NA, others, none, HEx, HNA, HOthers, HNone, fb, be
+  Ex, NA, others, none, HEx, HNA, HOthers, HNone, fb, fe
 }
 
 class T <: Exception, suppressCompilerMessage["E_OOP_PRIVACY_VIOLATED"] {
@@ -25,41 +25,39 @@ class T <: Exception, suppressCompilerMessage["E_OOP_PRIVACY_VIOLATED"] {
     try {
       try {
         throw ex
-        set(S.none)
       } catch e {
         // throws in this handlers should all get represented as gotos
         if Exception { set(S.Ex); throw e }
         if exceptions.NullAccess { set(S.NA); throw e }
         else { set(S.others); throw e }
       }
-      set(S.HNone)
     } catch e {
-      if Exception { set(S.HEx) }
-      if exceptions.NullAccess { set(S.HNA) }
-      else { set(S.HOthers) }
+      if Exception { set(S.HEx); delete e }
+      if exceptions.NullAccess { set(S.HNA); delete e }
+      else { set(S.HOthers); delete e }
     }
 
     set(S.fe)
   }
 
   test "ex" {
-    c(new Exception)
-    state == S.Ex | S.f | S.gb | S.cb | S.ce
+    f(new Exception)
+    state == S.Ex | S.HEx | S.fb | S.fe
   }
   test "null" {
-    c(null)
-    state == S.NA | S.f | S.gb | S.cb | S.ce
+    f(null)
+    state == S.NA | S.HNA | S.fb | S.fe
   }
   test "sub" {
-    c(new T)
-    state == S.Ex | S.f | S.gb | S.cb | S.ce
+    f(new T)
+    state == S.Ex | S.HEx | S.fb | S.fe
   }
   test "other" {
     try {
-      c(new exceptions.FatalSegFault)
+      f(new exceptions.FatalSegFault)
     } catch e {
       if exceptions.FatalSegFault {
-        if (state == S.others | S.f | S.gb | S.cb)
+        if (state == S.others | S.HOthers | S.fb)
           System.exit(0)
       }
     }
