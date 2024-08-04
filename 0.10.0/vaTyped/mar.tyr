@@ -1,0 +1,30 @@
+/**
+ * any... should have the semantics of roughly container.Array
+ */
+type T {
+  type def sum(int... va)
+    = va.fold(0) l,r do (l+r)
+
+  type def sum(String... va)
+    = va.fold(0) l,r do (l.size() + r.size())
+
+  test "use" {
+    // fail
+    f(7, 8, "stuff")
+    false
+  }
+
+  test "empty" {
+    // fail, can be both
+    f()
+    false
+  }
+
+  test "int" {
+    20 == f(7, 8, 5)
+  }
+
+  test "String" {
+    3 == f("7", "8", "5")
+  }
+}
