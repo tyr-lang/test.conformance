@@ -2,7 +2,7 @@
  * any... should have the semantics of C-style var args
  */
 type T {
-  type def f(any... va){
+  type def f(va... : any){
     var it = va.iterator()
     while(it.hasNext()) {
       var e = it.next[byte]()

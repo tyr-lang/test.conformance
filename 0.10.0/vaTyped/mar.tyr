@@ -2,10 +2,10 @@
  * any... should have the semantics of roughly container.Array
  */
 type T {
-  type def sum(int... va)
+  type def sum(va... : int)
     = va.fold(0) l,r do (l+r)
 
-  type def sum(String... va)
+  type def sum(va... : String)
     = va.fold(0) l,r do (l.size() + r.size())
 
   test "use" {
