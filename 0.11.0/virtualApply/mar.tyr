@@ -1,0 +1,23 @@
+/**
+ * apply is part of implicits, but should also be virtual where required
+ */
+class S {
+  def apply : int = 7
+}
+
+class T <: S {
+  override def apply = 8
+
+  test "S" {
+    var x = new S
+    7 == x()
+  }
+  test "T" {
+    var x = new T
+    8 == x()
+  }
+  test "virtual" {
+    var x : S = new T
+    8 == x()
+  }
+}

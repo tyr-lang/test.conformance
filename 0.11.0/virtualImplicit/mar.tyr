@@ -1,0 +1,24 @@
+/**
+ * it should be possible to have virtual implicits; as of up to Tyr 0.8 there
+ * were only static calls
+ */
+class S {
+  def implicit : int = 7
+}
+
+class T <: S {
+  override def implicit = 8
+
+  test "S" {
+    var x = new S
+    7 == x
+  }
+  test "T" {
+    var x = new T
+    8 == x
+  }
+  test "virtual" {
+    var x : S = new T
+    8 == x
+  }
+}
