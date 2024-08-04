@@ -1,0 +1,10 @@
+/**
+ * allow top level entities to use the entire file without indentation and
+ * braces
+ */
+type mar:
+
+// only define a test, nothing else
+test "use" {
+  true
+}

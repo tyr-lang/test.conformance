@@ -2,7 +2,7 @@
  * allow top level entities to use the entire file without indentation and
  * braces
  */
-type T <: suppressCompilerMessage["W_UNLIKELY_NAME"]:
+type T:
 
 type def f = true
 
