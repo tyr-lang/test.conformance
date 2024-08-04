@@ -1,0 +1,5 @@
+/**
+ * Flat file syntax requires at least one member-like definition. ';' should be
+ * to express an empty definition.
+ */
+type T:

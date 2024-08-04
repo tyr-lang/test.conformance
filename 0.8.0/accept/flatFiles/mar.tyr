@@ -4,12 +4,10 @@
  */
 type T:
 
-test "explicit throw" {
-  try (new Exception).throw()
-  finally {
-    return true
-  }
-  false
+type def f = true
+
+test "call" {
+  f()
 }
 
 test "warn naming" {
