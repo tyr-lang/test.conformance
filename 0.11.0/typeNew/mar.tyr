@@ -1,0 +1,14 @@
+/**
+ * check effects of type new
+ */
+type T:
+
+type var init : int
+
+type new {
+  init = 37
+}
+
+test "use" {
+  37 == init
+}
