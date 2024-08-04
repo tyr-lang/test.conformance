@@ -1,0 +1,11 @@
+/**
+ * Flat file syntax requires at least one member-like definition. And no other
+ * top level definition is allowed in that file.
+ */
+type other;
+
+type T:
+
+test "use" {
+  true
+}
