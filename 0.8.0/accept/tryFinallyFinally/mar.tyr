@@ -1,0 +1,35 @@
+/**
+ * tests correctness of nested finally
+ */
+type T {
+  test "return" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
+    var x = 1
+    try {
+      ++x
+    } finally {
+      try {
+        ++x
+        // not allowed
+        return true
+      } finally {
+        ++x
+      }
+    }
+    false
+  }
+
+  test "nested no throw" {
+    var x = 1
+    try {
+      ++x
+    } finally {
+      try {
+        ++x
+      } finally {
+        ++x
+      }
+      ++x
+    }
+    5 == x
+  }
+}
