@@ -1,0 +1,31 @@
+/**
+ * tests global let constants
+ *
+ * @todo 0.8  there should be test ensuring that let is currently limited to type
+ */
+type T:
+
+type let x = 7
+
+test "CT transparency" {
+  let v = x
+  switch v {
+    // x should be transparent and qualify as literal in this context
+    if x true
+    else false
+  }
+}
+
+test "type" {
+  IntegerLiteral[32] == x.type
+}
+
+test "type indirect" {
+  let v = x
+  IntegerLiteral[32] == v.type
+}
+
+test "val indirect" {
+  val v = x
+  CRef[IntegerLiteral[32]] == v.type
+}

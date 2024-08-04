@@ -1,0 +1,16 @@
+/**
+ * tests local let constants
+ */
+type T:
+
+type val x = 7
+
+test "let" {
+  let v = x
+  v.type == x.type
+}
+
+test "val" {
+  val v = x
+  v.type != x.type
+}
