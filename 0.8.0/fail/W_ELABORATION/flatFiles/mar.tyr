@@ -1,0 +1,13 @@
+/**
+ * allow top level entities to use the entire file without indentation and
+ * braces; warn about type imports in that form
+ */
+type mar:
+
+// should result in a warning; usually unintended
+with int := int
+
+test "warn naming" {
+  // the file name should be the name of the single type defined herein
+  false
+}
