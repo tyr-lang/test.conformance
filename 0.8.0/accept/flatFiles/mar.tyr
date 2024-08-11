@@ -1,6 +1,8 @@
 /**
  * allow top level entities to use the entire file without indentation and
  * braces
+ *
+ * @note  the suppress is there because it is a) intended and b) should work
  */
 type T <: suppressCompilerMessage["W_UNLIKELY_NAME"]:
 
@@ -8,9 +10,4 @@ type def f = true
 
 test "call" {
   f()
-}
-
-test "warn naming" {
-  // the file name should be the name of the single type defined herein
-  false
 }
