@@ -7,7 +7,7 @@ with container.UTF8Iterator
 
 type charConversions {
   test "some text intended" {
-    val t = "some text"
+    let t = "some text"
     var it = t.chars()
     var bs = new UTF8Iterator(it)
     var cs = new CharacterIterator(bs)

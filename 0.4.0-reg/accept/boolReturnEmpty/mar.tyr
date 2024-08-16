@@ -8,7 +8,7 @@
  */
 type T {
   test "last block" <: noCompile[SYN_TERMINATED] {
-    val r = true
+    let r = true
     {
     return r
     }
@@ -16,7 +16,7 @@ type T {
   }
 
   test "double block" <: noCompile[SYN_TERMINATED] {
-    val r = true
+    let r = true
     {
     return r
     }

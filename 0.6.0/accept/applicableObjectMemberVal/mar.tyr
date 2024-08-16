@@ -19,7 +19,7 @@ public class T {
     7 == f(a, a.x).x
   }
   test "use r static" {
-    val f = Box[int].r;
+    let f = Box[int].r;
     7 == f(a, a.x).x
   }
 }

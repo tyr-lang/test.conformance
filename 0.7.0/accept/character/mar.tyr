@@ -50,7 +50,7 @@ type T {
   }
 
   test "multi chars" {
-    val str = "cᚠc"
+    let str = "cᚠc"
     1U == str.chars().count c do (
       c == 'ᚠ'
     ) && 

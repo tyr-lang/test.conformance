@@ -18,7 +18,7 @@ class T {
   }
 
   test "new val" {
-    val c = T;
+    let c = T;
     val r = T == c && c == T
     // type vals are CT-evaluated
     delete new c;

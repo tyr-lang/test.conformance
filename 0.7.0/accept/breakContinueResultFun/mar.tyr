@@ -6,7 +6,7 @@ type T {
 
   test "var val" {
     var x = 0
-    val y = 7
+    let y = 7
     val r = do {
       ++x
       if (x > 3)

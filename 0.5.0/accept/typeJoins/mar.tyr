@@ -8,7 +8,7 @@ type MyInt {
   type var phiX = 7;
 
   test "same" {
-    val v = if phi 7 else 7
+    let v = if phi 7 else 7
     v : IntegerLiteral[32]
     // v.type == IntegerLiteral[32]
   }
@@ -24,7 +24,7 @@ type MyInt {
   }
 
   test "literal" {
-    val v = if phi 7 else (7 : int)
+    let v = if phi 7 else (7 : int)
     v : int
     // v.type == int
   }
@@ -62,7 +62,7 @@ type MyInt {
   }
 
   test "same Null" {
-    val v = if phi null else null
+    let v = if phi null else null
     v : Null
     // v.type == Null
   }
@@ -86,7 +86,7 @@ type MyInt {
 
   test "var string val string" {
     var x = ""
-    val y = ""
+    let y = ""
     val v = if phi y else x
     v : String
     // v.type == String

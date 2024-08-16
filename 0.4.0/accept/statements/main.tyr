@@ -9,7 +9,7 @@ type T {
   }
 
   test "val" {
-    val x = true
+    let x = true
     x
   }
 

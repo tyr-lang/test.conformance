@@ -10,7 +10,7 @@
  */
 type T {
   test "CT value" {
-    val x = 0U;
+    let x = 0U;
     new container.FlatSizedArray[int, x]
   }
 
