@@ -4,7 +4,7 @@
 type T[B : Type[_], X : B, Y : B = Z, Z : B = X] {
 
   test "use" {
-    val x = T[int, 1]
+    let x = T[int, 1]
     3 == x.X + x.Y + x.Z
   }
 }

@@ -9,7 +9,7 @@ type T {
   }
 
   test "val" <: provable {
-    val r = 0;
+    let r = 0;
     0 == r && r != 1
   }
 

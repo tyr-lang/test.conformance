@@ -3,18 +3,18 @@
  */
 type T {
   test "use" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
-    val x : Object = ""
-    val y : Class[Class[Object]] = x
+    let x : Object = ""
+    let y : Class[Class[Object]] = x
     false
   }
   test "single" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
-    val x : Class[Object] = Object
-    val y : Class[Class[Object]] = x
+    let x : Class[Object] = Object
+    let y : Class[Class[Object]] = x
     false
   }
   test "type" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
-    val x : Object = Object
-    val y : Class[Class[Object]] = x
+    let x : Object = Object
+    let y : Class[Class[Object]] = x
     false
   }
 }

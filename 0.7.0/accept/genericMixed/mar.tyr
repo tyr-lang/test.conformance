@@ -38,7 +38,7 @@ type T {
 
 type V {
   test "same repr, different promise, val" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
-    val x : Vector[String, 2U] = null
+    let x : Vector[String, 2U] = null
     // no because not compatible
     val y : Vector[Object, 2U] = x
   }

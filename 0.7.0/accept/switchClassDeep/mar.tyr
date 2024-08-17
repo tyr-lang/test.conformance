@@ -41,7 +41,7 @@ type T {
     }
   }
   test "null" {
-    val x : Object = null
+    let x : Object = null
     // have switch in alphabetical order; code should be order-independant
     switch class x {
       if L1   false

@@ -13,11 +13,11 @@ public type T {
   }
 
   test "indirect string" {
-    val x = T
+    let x = T
     "s" == x("x")
   }
   test "indirect int" {
-    val x = T
+    let x = T
     "i" == x(7)
   }
 }

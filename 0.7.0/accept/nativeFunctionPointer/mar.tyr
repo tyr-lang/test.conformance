@@ -12,7 +12,7 @@ type T {
   }
 
   test "use" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
-    val fp = int.`+`
+    let fp = int.`+`
     f(fp)
   }
 

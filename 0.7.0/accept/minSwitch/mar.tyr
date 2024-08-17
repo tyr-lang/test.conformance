@@ -9,7 +9,7 @@ class T {
   new;
 
   def use : byte {
-    val c = 0xff
+    let c = 0xff
     switch idx {
       if 1U {
         return (byte !! c) | 0xc0u8
