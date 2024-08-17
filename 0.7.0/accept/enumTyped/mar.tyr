@@ -41,7 +41,7 @@ type T {
   }
 
   test "coerce base" {
-    val c = red : int
+    let c = red : int
     true
   }
 
@@ -53,7 +53,7 @@ type T {
 
   test "coerce enum identity" {
     // allowed
-    val c = red : color
+    let c = red : color
     true
   }
 

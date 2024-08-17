@@ -45,7 +45,7 @@ type T {
   with mixed.three
 
   test "decompose color" {
-    val c = 0xab00cdi
+    let c = 0xab00cdi
     0 != c & red && 0 == c & green && 0 != c & blue
   }
 
@@ -62,7 +62,7 @@ type T {
   }
 
   test "Literal value" {
-    val c = one
+    let c = one
     1 == (c : IntegerLiteral[32])
   }
 

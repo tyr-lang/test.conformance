@@ -18,12 +18,12 @@ type T {
   }
 
   test "read" {
-    val x = S.a
+    let x = S.a
     0 != x & S.a
   }
 
   test "read b" {
-    val x = S.a
+    let x = S.a
     0 == x & S.b
   }
 
