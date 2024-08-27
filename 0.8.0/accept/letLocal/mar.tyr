@@ -1,7 +1,7 @@
 /**
  * tests local let constants
  */
-type T:
+type mar <: suppressCompilerMessage["W_NO_SIDE_EFFECT"]:
 
 type val x = 7
 
