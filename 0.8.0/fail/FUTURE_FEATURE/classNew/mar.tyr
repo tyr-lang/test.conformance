@@ -1,0 +1,35 @@
+/**
+ * check effects of class new
+ */
+class T {
+  class var init : int
+
+  class new {
+    init = 37
+  }
+
+  test "use" {
+    37 == T.init
+  }
+  test "sub" {
+    24 == S.init
+  }
+}
+
+class S <: T {
+  class new {
+    init = 24
+  }
+}
+
+class I <: T {
+  test "implicit"{
+    // note: the mechanics for this should be implicit inheritance of class new
+    37 == I.init
+  }
+
+  test "more"{
+    // there should be a test ensuring that class new can exist only once per type and is inherited
+    false
+  }
+}
