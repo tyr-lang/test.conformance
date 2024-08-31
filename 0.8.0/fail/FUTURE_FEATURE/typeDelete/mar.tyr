@@ -1,0 +1,19 @@
+/**
+ * check that type delete is detected; TBH, I do not see an easy way to test
+ * that it works as intended; maybe something with Sytsem.exit can be done
+ *
+ * @note to self  the order should be inverse to the calculated order for
+ *   respective news and use type order for types that do not define respective
+ *   global initializers.
+ */
+type T:
+
+type var init : int
+
+type delete {
+  System.exit(0)
+}
+
+test "use" {
+  false
+}
