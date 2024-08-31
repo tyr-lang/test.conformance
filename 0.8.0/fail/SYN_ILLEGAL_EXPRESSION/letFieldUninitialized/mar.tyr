@@ -1,0 +1,11 @@
+/**
+ * tests global let constants requiring initializer
+ */
+type mar:
+
+type let x : int
+
+test "CT transparency" {
+  let v = x
+  false
+}

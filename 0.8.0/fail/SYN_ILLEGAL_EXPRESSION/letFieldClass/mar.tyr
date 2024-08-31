@@ -1,0 +1,16 @@
+/**
+ * tests global let constants requiring initializer
+ *
+ * @note  this test might get revoked in the future; revoking might require
+ *   having this as this type in the initializer; it requires a plausible use
+ *   case. Type names could be one. We need to check if type interfaces can be
+ *   used to introduce a contract here without setting a value.
+ */
+type mar:
+
+class let x = 7
+
+test "CT transparency" {
+  let v = x
+  false
+}

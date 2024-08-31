@@ -1,9 +1,7 @@
 /**
  * tests global let constants
- *
- * @todo 0.8  there should be test ensuring that let is currently limited to type
  */
-type T:
+type mar <: suppressCompilerMessage["W_NO_SIDE_EFFECT"]:
 
 type let x = 7
 

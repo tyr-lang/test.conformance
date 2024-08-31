@@ -1,0 +1,11 @@
+/**
+ * tests global let constants
+ */
+type mar:
+
+type let x = 7
+
+test "val indirect" <: noCompile[W_NO_SIDE_EFFECT] {
+  val v = x
+  CRef[IntegerLiteral[32]] == v.type
+}
