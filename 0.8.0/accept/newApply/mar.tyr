@@ -11,7 +11,7 @@ class T {
     5 == new T()
   }
 
-  test "double" <: noCompile[NAM_NOT_FOUND] {
+  test "double" {
     5 == new T()()
   }
 
