@@ -4,7 +4,12 @@
  */
 class T {
   type val x = 0;
-  type var y : int;
+
+  // note: such an error cannot be detected atm:
+  // this error category will be addressed once we have global initializer
+  // ordering, as it should be a straight-forward extension of the code required
+  // to calculate the ordering
+  // type var y : int;
 
   test "no error" <: mempass {
     0 == x
@@ -16,6 +21,8 @@ class T {
   // }
 
   test "uninit" <: memfail {
+    var y : int
+
     0 == y || 0 == x
   }
 
