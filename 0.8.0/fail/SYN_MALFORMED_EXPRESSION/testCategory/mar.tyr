@@ -1,0 +1,8 @@
+/**
+ * validate test category to be known
+ */
+type mar:
+
+test "no error" <: yesNo {
+  false
+}
