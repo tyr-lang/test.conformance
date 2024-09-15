@@ -2,20 +2,32 @@
  * @note check that tests can be checked with memcheck ensuring that they won't
  *       use memory the wrong way
  */
-type T {
+class T {
   type val x = 0;
   type var y : int;
 
-  test "no error" <: memcheck {
+  test "no error" <: mempass {
     0 == x
   }
 
-  test "uninit" <: noMemcheck {
+  // note: a test must pass memcheck and the test itself to pass
+  // test "should fail" <: mempass {
+  //   false
+  // }
+
+  test "uninit" <: memfail {
     0 == y || 0 == x
   }
 
-  test "leak" <: noMemcheck {
+  test "leak" <: memfail {
     new T
+    true
+  }
+
+  test "double free" <: memfail {
+    let x = new T
+    delete x
+    delete x
     true
   }
 }
