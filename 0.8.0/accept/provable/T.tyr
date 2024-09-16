@@ -1,0 +1,52 @@
+/**
+ * Check translation of provable tests
+ *
+ * TODO there should be a notProvable failing if the test body can be compressed to a BoolLiteral
+ */
+class T:
+
+test "trivial" <: provable {
+  0 != 1
+}
+
+test "val" <: provable {
+  let r = 0;
+  0 == r && r != 1
+}
+
+test "null" <: provable {
+  val r = if (null == "") 1 else 0;
+  0 == r && r != 1
+}
+
+test "complex" <: provable {
+  while true {
+    let x = new T
+    let r = Object ? x
+    delete x
+    if r return true
+  }
+}
+
+// Negative checks:
+// public type def getPID : int extern c.getpid;
+// public type def getParentPID : int extern c.getppid;
+
+// test "side effects" <: provable {
+//   getPID() != getParentPID()
+// }
+
+// test "fail" <: provable {
+//   var r : int
+
+//   0 == r && r != 1
+// }
+
+// test "fail2" <: provable {
+//   let x = new T
+//   delete x
+//   delete x
+
+//   // should reduce to true, but is still not correct
+//   true
+// }
