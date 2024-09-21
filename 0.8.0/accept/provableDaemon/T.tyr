@@ -1,0 +1,51 @@
+with tyr.io.System
+
+/**
+ * Provable should also work in the presence of the log daemon getting started
+ * during global initialization. If that would case an issue, we can safely
+ * assume that it should be covered by other tests.
+ */
+class T:
+
+test "trivial" <: provable {
+  0 != 1
+}
+
+test "val" <: provable {
+  let r = 0;
+  0 == r && r != 1
+}
+
+test "null" <: provable {
+  val r = if (null == "") 1 else 0;
+  0 == r && r != 1
+}
+
+test "complex" <: provable {
+  while true {
+    let x = new T
+    let r = Object ? x
+    delete x
+    if r return true
+  }
+}
+
+// Negative checks:
+// test "side effects" <: provable {
+//   System.getPID() != System.getParentPID()
+// }
+
+// test "fail" <: provable {
+//   var r : int
+
+//   0 == r && r != 1
+// }
+
+// test "fail2" <: provable {
+//   let x = new T
+//   delete x
+//   delete x
+
+//   // should reduce to true, but is still not correct
+//   true
+// }
