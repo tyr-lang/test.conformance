@@ -7,3 +7,6 @@ out.*.sg
 *.ll
 *.bc
 *.tests
+
+# memcheck logs
+*.mem.log
