@@ -1,0 +1,38 @@
+with container.ArrayBuffer
+
+/**
+ * Basic array-based container operations should be provable
+ */
+type mar:
+
+test "int" <: provable {
+  var xs = new ArrayBuffer[int]
+  var r = xs.empty()
+
+  xs += 3
+  xs += 4
+
+  r &= 2U == xs.size()
+
+  r &= 3 == xs(0)
+  r &= 4 == xs(1)
+
+  delete xs
+  r
+}
+
+test "string" <: provable {
+  var xs = new ArrayBuffer[String]
+  var r = xs.empty()
+
+  xs += "3"
+  xs += "4"
+
+  r &= 2U == xs.size()
+
+  r &= "3" == xs(0)
+  r &= "4" == xs(1)
+
+  delete xs
+  r
+}

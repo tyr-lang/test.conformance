@@ -1,0 +1,58 @@
+with tyr.container.ArrayDeque
+with tyr.lang.container.range
+
+/**
+ * Basic array-based container operations should be provable
+ *
+ * @note  this proof requires either bifröst tracking types and removing
+ *  dispatching calls or sleipnir doing CHA/final analysis removing dispatching
+ *  calls. The latter would require changing the IR accordingly. Both analyses
+ *  can be implemented and provide improvements independently.
+ */
+type mar:
+
+test "stack" <: provable {
+  var xs = new ArrayDeque[String]
+  var r = xs.empty()
+
+  xs.push("")
+  xs.push("-")
+
+  r &= 2U == xs.size()
+
+  r &= "-" == xs.peek()
+  r &= "-" == xs.peek()
+  r &= "-" == xs.peek()
+  r &= 2U == xs.size()
+
+  r &= "-" == xs.pop()
+
+  r &= "" == xs.pop()
+
+  r &= xs.empty()
+
+  delete xs
+  r
+}
+
+test "stack reverse" <: provable {
+  var xs = new ArrayDeque[String]
+  var r = xs.empty()
+
+  xs.pushFront("")
+  xs.pushFront("-")
+
+  r &= 2U == xs.size()
+
+  r &= "-" == xs.peekFront()
+  r &= "-" == xs.peekFront()
+  r &= "-" == xs.peekFront()
+  r &= 2U == xs.size()
+
+  r &= "-" == xs.popFront()
+  r &= "" == xs.popFront()
+
+  r &= xs.empty()
+  delete xs
+  r
+}
