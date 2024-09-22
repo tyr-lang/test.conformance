@@ -64,3 +64,13 @@ test "method slot analysis" {
   // elided
   false
 }
+
+test "unused vmember/imember analysis" {
+  // TODO irrespective of the other optimizations, there should be an
+  // optimization on uses of imembers and vmembers (in that order)
+  // note to self: requires manual inspection
+  // note to self: this optimization should be implemented in sleipnir and
+  //  draupnir and it should be accompanied with a warning in draupnir where the
+  //  member is not accessible
+  false
+}
