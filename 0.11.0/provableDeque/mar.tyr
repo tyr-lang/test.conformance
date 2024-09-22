@@ -56,3 +56,11 @@ test "stack reverse" <: provable {
   delete xs
   r
 }
+
+test "method slot analysis" {
+  // TODO irrespective of the other optimizations, there should be an
+  // optimization on dispatching calls in sleipnir where only one instance is
+  // ever put into a method slot; in that case, the entire method slot should be
+  // elided
+  false
+}
