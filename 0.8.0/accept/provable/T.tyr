@@ -29,13 +29,14 @@ test "complex" <: provable {
 }
 
 // Negative checks:
-// public type def getPID : int extern c.getpid;
-// public type def getParentPID : int extern c.getppid;
+public type def getPID : int extern c.getpid;
+public type def getParentPID : int extern c.getppid;
 
-// test "side effects" <: provable {
-//   getPID() != getParentPID()
-// }
+test "side effects" <: provable {
+  getPID() != getParentPID()
+}
 
+// Negative checks not passing memcheck:
 // test "fail" <: provable {
 //   var r : int
 

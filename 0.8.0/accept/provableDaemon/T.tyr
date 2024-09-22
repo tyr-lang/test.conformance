@@ -31,10 +31,15 @@ test "complex" <: provable {
 }
 
 // Negative checks:
-// test "side effects" <: provable {
-//   System.getPID() != System.getParentPID()
-// }
+test "side effects" <: unprovable {
+  System.getPID() != System.getParentPID()
+}
 
+test "stable pid" <: unprovable {
+  System.getPID() == System.getPID()
+}
+
+// Negative checks not passing memcheck:
 // test "fail" <: provable {
 //   var r : int
 
