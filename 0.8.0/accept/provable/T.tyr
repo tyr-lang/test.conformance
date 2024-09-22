@@ -32,7 +32,7 @@ test "complex" <: provable {
 public type def getPID : int extern c.getpid;
 public type def getParentPID : int extern c.getppid;
 
-test "side effects" <: provable {
+test "side effects" <: unprovable {
   getPID() != getParentPID()
 }
 
