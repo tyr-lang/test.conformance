@@ -1,0 +1,25 @@
+exceptions.DeadCode
+
+/**
+ * Ensure that Quality of Life Fatal Exceptions exist.
+ *
+ * @note  DeadCode is an exception because life shows that architecture changes
+ *   can turn former dead code life. Debugging this with an exception is a lot
+ *   easier than going after whatever happens if the backend simply assumes that
+ *   nothing is there resulting in random code execution.
+ */
+type mar:
+
+test "TODO" <: mustThrow[TODO] {
+  TODO - "with argument: explain what should be done here"
+}
+test "TODO without argument" <: mustThrow[TODO] {
+  TODO!
+}
+
+test "Dead" <: mustThrow[DeadCode] {
+  DeadCode - "with argument: that's why we cant't get here"
+}
+test "dead code without argument" <: mustThrow[DeadCode] {
+  DeadCode!
+}
