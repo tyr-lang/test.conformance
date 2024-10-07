@@ -1,0 +1,38 @@
+/**
+ * tests correctness of try finally with eval
+ *
+ * @note  there are other tests that might be affected by getting this one right
+ *
+ * @see  https://langdev.stackexchange.com/questions/4079/what-should-the-semantics-from-branching-from-finally-be
+ */
+type mar :
+
+type def f(x : Block[int], y : Block[void]) {
+  var r : int;
+  try {
+    r = x.eval()
+  } finally {
+    // y can be return
+    y.eval()
+  }
+  // r can be uninitialized here
+  return r
+}
+
+test "use" {
+  7 == f(3, {return true})
+}
+
+test "simple" {
+  3 == f(3, {})
+}
+
+test "explicit throw" {
+  7 == f({throw null}, {return true})
+}
+
+test "SO example" {
+  // I should add a copy of my own example if I have something similar to
+  // try with resource which I should have when reaching this point
+  false
+}
