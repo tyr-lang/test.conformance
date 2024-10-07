@@ -1,5 +1,9 @@
 /**
  * tests correctness of try catch
+ *
+ * @note  future revisions might turn this into a warning; a requirement for
+ *  rendering this legal is that the implicit exception is implicitly deleted
+ *  when leaving the finally block abnormally
  */
 type T {
   test "explicit throw" {
