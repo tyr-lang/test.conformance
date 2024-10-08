@@ -1,0 +1,44 @@
+with reflection.stackManaged
+
+/**
+ * check that stack-managed local variables can be created using the respective
+ * property
+ *
+ * @note to self  the should also be a similar type property that results in all
+ *   local variables getting stackManaged properties
+ */
+class mar:
+
+type var x = 0;
+new {
+  x = 1
+}
+delete {
+  x = 2
+}
+
+test "explicit" {
+  var v = new mar
+  1 == x && {delete v} && 2 == x
+}
+
+type def use() : void {
+  val v <: stackManaged = new mar
+}
+
+test "use" {
+  0 == x && {
+    use()
+    2 == x
+  }
+}
+
+test "var" <: noCompile[We_will_see]{
+  // only valid for vals
+  var v <: stackManaged = new mar
+}
+
+test "let" <: noCompile[We_will_see]{
+  // only valid for vals
+  let v <: stackManaged = new mar
+}
