@@ -1,0 +1,16 @@
+/**
+ * Tests, now, can have multiple categories influencing test execution
+ */
+type mar:
+
+test "trivial throw" <: mustThrow[Exception], provable {
+  throw new Exception
+}
+
+test "invalid combination" <: mustThrow[Exception], noCompile[WhateverCategory] {
+  false
+}
+
+test "invalid combination2" <: provable, noCompile[WhateverCategory] {
+  false
+}
