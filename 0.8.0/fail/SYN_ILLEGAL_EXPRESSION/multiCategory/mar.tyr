@@ -3,6 +3,6 @@
  */
 type mar:
 
-test "trivial throw" <: mustThrow[Exception], provable {
-  throw new Exception
+test "invalid combination" <: mustThrow[Exception], noCompile[TYP] {
+  false
 }
