@@ -1,0 +1,10 @@
+/**
+ * Making test utils private resulted in GC deleting it. This should be fixed
+ * and it should be accessible with the respective error.
+ */
+type T:
+
+test "access test utils" <: provable {
+  // todo there should also be a warning if an entity starting with __ is accessed (ast static/member access)
+  false
+}
