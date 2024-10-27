@@ -1,14 +1,76 @@
+with exceptions.NullAccess
+
 /**
- * count test as skipped if it throws an exception
+ * mayThrow = count test as skipped if it throws an exception
+ * mustThrow = pass iff thrown
  */
 type T {
-  test "may" <: mayThrow[Exception], expectSkip {
-    new Exception().throw()
-    false
+  // note: this is a special name for the conformance test
+  test "may good" <: mayThrow[Exception] {
+    true
   }
 
-  test "must" <: mustThrow[Exception], expectSkip {
-    new Exception().throw()
+  test "must" <: mustThrow[Exception] {
+    throw new Exception
+  }
+}
+
+type conformance {
+  test "expect skip" <: mayThrow[Exception] {
+    throw new Exception
+  }
+
+  test "expect fail" <: mayThrow[Exception] {
     false
+  }
+}
+
+/**
+ * expect implicit & specific type
+ */
+type mayReturns1 {
+  test "expect skip" <: mayThrow[NullAccess] {
+    throw null
+  }
+}
+
+/**
+ * expect wrong type
+ */
+type mayReturns2 {
+  test "expect crash" <: mayThrow[NullAccess] {
+    throw new Exception
+  }
+}
+
+/**
+ * implicit return must be replaced in this context
+ */
+type mustReturns1 {
+  test "expect fail" <: mayThrow[Exception] {
+    true
+  }
+}
+
+/**
+ * explicit return must be replaced in this context
+ */
+type mustReturns2 {
+  test "expect fail" <: mayThrow[Exception] {
+    return true
+  }
+
+  test "todo" {
+    // also create some basic inlining tests since the replacement is restricted to the body
+    false
+  }
+}
+
+/**
+ * expect wrong type
+ */
+type mustReturns3 {
+  test "expect crash" <: mustThrow[NullAccess] {
+    throw new Exception
   }
 }
