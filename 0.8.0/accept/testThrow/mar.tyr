@@ -59,10 +59,13 @@ type mustReturns2 {
   test "expect fail" <: mustThrow[Exception] {
     return true
   }
+}
 
-  test "todo" {
-    // also create some basic inlining tests since the replacement is restricted to the body
-    false
+type mustReturnsInline {
+  type def id (p : Block[void]) = p.eval()
+
+  test "expect fail" <: mustThrow[Exception] {
+    id({return true})
   }
 }
 
