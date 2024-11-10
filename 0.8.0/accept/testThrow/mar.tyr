@@ -47,7 +47,7 @@ type mayReturns2 {
  * implicit return must be replaced in this context
  */
 type mustReturns1 {
-  test "expect fail" <: mayThrow[Exception] {
+  test "expect fail" <: mustThrow[Exception] {
     true
   }
 }
@@ -56,7 +56,7 @@ type mustReturns1 {
  * explicit return must be replaced in this context
  */
 type mustReturns2 {
-  test "expect fail" <: mayThrow[Exception] {
+  test "expect fail" <: mustThrow[Exception] {
     return true
   }
 
