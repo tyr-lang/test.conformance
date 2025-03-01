@@ -1,0 +1,20 @@
+/**
+ * Perform several identity substitutions to ensure that changes to the
+ *  substitution theory result in correct CFGs.
+ */
+type T:
+
+type def id (p : Block[void]) = p.eval()
+
+type def twice(p : Block[void]) = id(p)
+
+type def q1(p : Block[void]) = twice(p)
+
+type def q2(p : Block[void]) = id(id(id(id(p))))
+
+type def qm(p : Block[void]) = id(twice(id(p)))
+
+test "qm identity" {
+  // create a test that duplicates blocks and block param uses into a tree
+  false
+}

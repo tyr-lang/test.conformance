@@ -1,0 +1,15 @@
+/**
+ * once I start working on void correctness, I must also ensure that passing a
+ *  parameter of an empty type is an error when done explicitly and elided on
+ *  substitution
+ *
+ * @note to self: this affects all types with an effective void representation
+ *   including bottem types throwable and noreturn
+ *
+ * @see https://counterexamples.org/eventually-nothing.html
+ */
+type T:
+
+test "empty param" {
+  false
+}

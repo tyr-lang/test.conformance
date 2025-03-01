@@ -1,0 +1,29 @@
+/**
+ * covariant obj & cls fields require that:
+ *  a) the field is not accessible from the outside in super definitions
+ *  b) all uses of the field are overridden
+ *
+ * @note  in practice, it is sufficient to issue a configurable warning here
+ *
+ * @see  https://counterexamples.org/subtyping-vs-inheritance.html
+ */
+class S {
+  public var p : pointer = null;
+}
+
+class T <: S {
+  override var p : Object = ""
+
+  type def f() = "not an Object"
+
+  test "assign" {
+    var x = new T
+    var y = x
+    y.p = f
+
+    // should crash
+    x.p ? String
+
+    false
+  }
+}

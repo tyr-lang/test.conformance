@@ -1,0 +1,14 @@
+/**
+ * Catching exceptions from implicits happens inside the handler of the last
+ * explicit expression.
+ */
+type mar:
+
+test "catch handler" {
+  // todo: create an implicit conversion, produce the value inside a handler
+  // surrounded by another handler
+  // let x : expected = try { try { v } catch return true catch return false}
+  // note to self: check coverage !!! (avoid perfect match optimization)
+
+  false
+}
