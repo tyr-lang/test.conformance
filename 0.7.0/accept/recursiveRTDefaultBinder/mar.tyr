@@ -21,7 +21,7 @@ type T {
     var x = 2
     // this is currently not possible, as block parameters are passed by
     // position resulting in a shape (Ref[int], Block[int]) that cannot be
-    // mached because the block kind of be passed to y which does not take
+    // matched because the block kind of is passed to y which does not take
     // blocks
     // note: this code might become valid in the future
     6 == f(x) do (2)
