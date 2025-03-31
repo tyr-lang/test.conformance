@@ -1,0 +1,22 @@
+/**
+ * Ensure that swapping updates swap correctly using two pairs.
+ *
+ * @note  requires two classes; one realizing the pair and the other one
+ *   providing the two type variables that get swap. The providing type requires
+ *   more variables because it would also fold into the realization otherwise.
+ *
+ * @note  cannot be set active before implementing update realizations
+ */
+type Pair [A : Type[any], B : Type[any]] <: EQOps[Pair[A,B], MinEQR[Pair[A,B]]] {
+
+  var a : A;
+  var b : B;
+
+  new (a := a : A, b := b : B) {}
+
+  def swap : Pair[B, A] = new Pair[B,A](b,a);
+
+  test "swap swap herbrand" {
+    false
+  }
+}
