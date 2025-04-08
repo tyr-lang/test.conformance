@@ -1,0 +1,48 @@
+/**
+ * tests that new substitution theory handles nested binder results correctly
+ */
+type mar:
+
+test "two" {
+  let arr = new container.ArrayBuffer[int]
+  arr += 1
+  arr += 2
+
+  let x = if true {
+    arr.fold(0) i, j do {
+      if false {
+        8
+      } else {
+        arr.fold(0) i, j do {
+          if false {
+            9
+          } else {
+            i + j
+          }
+        }
+      }
+    }
+  } else {
+    7
+  }
+
+  6 == x
+}
+
+test "phi" {
+  let left = "stuff"
+  let right = "suffer"
+
+  let r = left == right || (
+    left.size() == right.size() && {
+      var rs = right.bytes()
+      var ls = left.bytes()
+      val r = ls.forall c : byte do (c == rs.next())
+      delete rs
+      delete ls
+      r
+    }
+  )
+
+  !r
+}
