@@ -20,7 +20,7 @@ test "two" {
             i + j
           }
         }
-      }
+      } + i
     }
   } else {
     7
