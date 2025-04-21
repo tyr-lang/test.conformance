@@ -74,7 +74,7 @@ type T {
     } while true
   }
 
-  test "no results" <: noCompile[SYN_ILLEGAL_EXPRESSION] {
+  test "no results" <: noCompile[SYN_ILLEGAL_EXPRESSION, SYN_MALFORMED_EXPRESSION] {
     if {
       do {
         if true
