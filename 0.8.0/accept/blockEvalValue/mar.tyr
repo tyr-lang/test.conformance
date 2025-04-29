@@ -1,0 +1,18 @@
+/**
+ * Tests that new substitution theory doesn't result in values getting
+ * transformed into Blocks allowing eval calls on them. This should only be
+ * possible for parameter likes.
+ *
+ * @note  in fact, this could also be a 0.4.0 test, but I usually do not extend
+ *   released test suites
+ */
+type mar:
+
+test "direct" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
+  2 == (2 : Block[2.type]).eval()
+}
+
+test "let" <: noCompile[TYP_ILLEGAL_EXPECTED_TYPE] {
+  let x : Block[2.type] = 2
+  2 == x.eval()
+}
