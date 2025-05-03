@@ -1,10 +1,10 @@
 /**
  * Perform several identity substitutions to ensure that changes to the
- *  substitution theory result in correct CFGs.
+ * substitution theory result in correct CFGs.
  */
 type T:
 
-type def id (p : Block[void]) = p.eval()
+type def id(p : Block[void]) = p.eval()
 
 type def twice(p : Block[void]) = id(p.eval())
 
