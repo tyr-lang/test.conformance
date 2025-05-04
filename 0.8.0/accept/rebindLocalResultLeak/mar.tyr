@@ -1,0 +1,18 @@
+/**
+ * ensure that parameter rebind works as expected
+ */
+type mar:
+
+type def fold(initial : int, step : Block[int]) : int {
+  var r = initial
+  r = step.eval()
+  r
+}
+
+test "reapply" {
+  var x : int = 0
+  var y : int
+
+  x == 0 &&
+  x != (y=(fold(0) do {++x}))
+}
