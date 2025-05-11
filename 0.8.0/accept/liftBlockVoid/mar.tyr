@@ -1,0 +1,47 @@
+/**
+ * Arbitrary expressions do not get converted implicitly to Block[void]. Same as
+ * not converting Block[T] to Block[void] implicitly. While it would just mean
+ * implicitly dropping the result, not having a result is exactly what
+ * distinguishes Block[void] from Block[any].
+ *
+ * @note  Block[any] is a valid parameter type (always has been)
+ *
+ * @note  This test is not a change wrt. previous releases. But, it is blocking
+ *   future decisions that could try to introduce the implicit conversion.
+ */
+type mar:
+
+type def id (p : Block[void]) = p.eval()
+
+// an identity that accepts all inputs and explicitly discards results
+type def all (p : Block[any]) : void = p.eval()
+
+test "return" {
+  // bottom
+  id({return true})
+}
+
+test "empty" {
+  // really void
+  id({})
+}
+
+test "count" <: noCompile[NAM_NOT_FOUND_OVERLOAD_SINGLE] {
+  var x = 0
+  id(++x)
+  1 == x
+}
+
+test "return all" {
+  all({return true})
+}
+
+test "empty all" {
+  all({})
+}
+
+test "count all" {
+  var x = 0
+  all(++x)
+  1 == x
+}
