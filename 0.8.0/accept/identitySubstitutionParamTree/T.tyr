@@ -4,17 +4,57 @@
  */
 type T:
 
-type def id (p : Block[void]) = p.eval()
+type def id (p : Block[any]) : void = p.eval()
 
-type def twice(p : Block[void]) = id(p)
+type def twice(p : Block[any]) {
+  id(p)
+  id(p)
+}
 
-type def q1(p : Block[void]) = twice(p)
+type def q1(p : Block[any]) {
+  twice(p)
+  p.eval()
+  twice(p)
+}
 
-type def q2(p : Block[void]) = id(id(id(id(p))))
+type def q2(p : Block[any]) {
+  id(id(id(id(p))))
+  p.eval()
+  id(id(id(id(p))))
+}
 
-type def qm(p : Block[void]) = id(twice(id(p)))
+type def qm(p : Block[any]) {
+  id(twice(id(p)))
+  p.eval()
+  id(twice(id(p)))
+}
 
-test "qm identity" {
-  // create a test that duplicates blocks and block param uses into a tree
-  false
+test "q1 return" {
+  q1({return true})
+}
+
+test "q2 return" {
+  q2({return true})
+}
+
+test "qm return" {
+  qm({return true})
+}
+
+test "q1 count" <: provable {
+  var x = 0
+  q1({++x; {}})
+  5 == x
+}
+
+test "q2 count" <: provable {
+  var x = 0
+  q2(++x)
+  3 == x
+}
+
+test "qm count" <: provable {
+  var x = 0
+  qm(++x)
+  5 == x
 }
