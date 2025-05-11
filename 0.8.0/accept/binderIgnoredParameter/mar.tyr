@@ -1,34 +1,60 @@
+with Buffer := container.ArrayBuffer
+with container.range
+
 /**
- * It should be possible to ignore binder parameters
+ * It should be possible to ignore binder parameters by passing a _ instead not
+ *  introducing _ as a valid name.
  */
-type T {
-  test "single" {
-    var xs = new Buffer[String]
-    var r = xs.empty()
+type mar:
 
-    range(0, 100).foreach i do {
-      xs += ""
-    }
+test "single" {
+  var xs = new Buffer[String]
+  var r = xs.empty()
 
-    r &= 100U == xs.size()
-    r &= (100U == xs.count _ do (true))
-
-    range(0, 100).foreach i do {
-      r &= "" == xs.removeLast()
-    }
-
-    r &= xs.empty()
-    r &= 0U == xs.count _ do (true)
-
-    delete xs
-    r
+  range(0, 100).foreach i do {
+    xs += ""
   }
 
-  test "double" {
-    false
+  r &= 100U == xs.size()
+  r &= (100U == xs.count _ do (true))
+
+  range(0, 100).foreach i do {
+    r &= "" == xs.removeLast()
   }
 
-  test "mixed" {
-    false
+  r &= xs.empty()
+  r &= 0U == xs.count _ do (true)
+
+  delete xs
+  r
+}
+
+test "double" {
+  5 == (range(0, 10).fold(0) _, _ do {
+    5
+  })
+}
+
+test "mixed" {
+  0 == (range(0, 10).fold(0) i, _ do {
+    i
+  })
+}
+
+test "mixed 2" {
+  9 == (range(0, 10).fold(0) _, i do {
+    i
+  })
+}
+
+test "literal" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {
+  range(0, 10).forall `_` do {
+    1 != `_`
+  }
+}
+
+test "blank" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {
+  range(0, 10).forall _ do {
+    1 != `_`
   }
 }

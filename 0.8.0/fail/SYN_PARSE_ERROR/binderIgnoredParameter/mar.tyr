@@ -1,0 +1,14 @@
+with container.range
+
+/**
+ * It should be possible to ignore binder parameters by passing a _ instead not
+ *  introducing _ as a valid name.
+ */
+type mar:
+
+test "blank" {
+  range(0, 10).forall _ do {
+    // unrecoverable syntax error
+    1 != _
+  }
+}
