@@ -9,7 +9,7 @@ type mar:
 test "use" {
   var xs = 0
 
-  range(0, 3).foreach `i` do {
+  range(0, 4).foreach `i` do {
     xs += i
   }
 
