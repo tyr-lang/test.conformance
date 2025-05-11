@@ -15,3 +15,13 @@ test "use" {
 
   6 == xs
 }
+
+test "dup" <: noCompile[NAM_DUPLICATE_PARAMETER] {
+  var xs = 0
+
+  range(0, 4).fold(0) i, `i` do {
+    xs += i
+  }
+
+  6 == xs
+}
