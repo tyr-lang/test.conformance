@@ -25,3 +25,15 @@ test "q2 identity" {
 test "qm identity" {
   qm({return true})
 }
+
+test "q1 identity re" {
+  true && q1({return true})
+}
+
+test "q2 identity re" {
+  true && q2({return true})
+}
+
+test "qm identity re" {
+  true && qm({return true})
+}
