@@ -1,0 +1,17 @@
+with container.range
+
+/**
+ * Binders created by identifier literals should be usable with plain
+ * identifiers where possible.
+ */
+type mar:
+
+test "use" {
+  var xs = 0
+
+  range(0, 3).foreach `i` do {
+    xs += i
+  }
+
+  6 == xs
+}
