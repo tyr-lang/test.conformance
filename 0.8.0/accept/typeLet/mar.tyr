@@ -1,5 +1,11 @@
 /**
  * let should allow local definitions of non-trivial types
+ *
+ * @note  Unions should allow assignments but should implpcitly convert to one
+ *  of the parameter types. As such, all equals checks without casts below must
+ *  not compile. The only exception here is let since let is like a coercion
+ *  and is transparent locally, i.e. the overload resolution is done against the
+ *  assigned value and, there, it has the specific type of one side of sigval
  */
 type mar:
 
@@ -15,12 +21,12 @@ test "ptr" {
   null == observablePointer !! x
 }
 
-test "int val" {
+test "int val" <: noCompile[overload_single] {
   val x : sigval = 3
   3 == x
 }
 
-test "ptr val" {
+test "ptr val" <: noCompile[overload_single] {
   val x : sigval = null
   null == observablePointer !! x
 }
