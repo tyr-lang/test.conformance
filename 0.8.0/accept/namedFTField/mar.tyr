@@ -1,0 +1,10 @@
+/**
+ * Check that named function types can be used to define field types.
+ */
+type mar:
+
+type var simple : (def (id : int) : void)
+
+test "use" {
+  false
+}
