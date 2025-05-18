@@ -1,0 +1,42 @@
+/**
+ * let should allow local definitions of non-trivial types
+ */
+type mar:
+
+type let sigval = int | observablePointer
+
+test "int" {
+  let x : sigval = 3
+  3 == x
+}
+
+test "ptr" {
+  let x : sigval = null
+  null == observablePointer !! x
+}
+
+test "int val" {
+  val x : sigval = 3
+  3 == x
+}
+
+test "ptr val" {
+  val x : sigval = null
+  null == observablePointer !! x
+}
+
+test "symmetry" {
+  // ensure that tests for int and ptr are symmetric or move to 0.9 and fix it
+  // there
+  false
+}
+
+test "both" {
+  var r = true
+  var x : sigval = 3
+  r &= 3 == x
+
+  x = null
+  r &= null == x
+  r
+}
