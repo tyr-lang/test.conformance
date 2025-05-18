@@ -1,0 +1,8 @@
+/**
+ * allow top level entities to use the entire file without indentation and
+ * braces
+ *
+ * @note to self: this should work
+ */
+type mar <: exceptions.Exception:
+override def message = "just a flat override"

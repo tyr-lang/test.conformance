@@ -1,0 +1,13 @@
+/**
+ * allow top level entities to use the entire file without indentation and
+ * braces
+ *
+ * @note  the suppress is there because it is a) intended and b) should work
+ */
+type T <: int:
+
+type def f = true
+
+test "call" {
+  f()
+}
