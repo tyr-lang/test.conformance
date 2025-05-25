@@ -42,3 +42,55 @@ test "implicit throw" {
     }
   }
 }
+
+type def fail2 : void <: reflection.avoidOptimization {
+  (null : StringLiteral)!!;
+}
+
+// the purpose of this nop is to illustrate that simply adding nop intrinsics
+// would not fix the situation
+type def nop : void <: reflection.avoidOptimization {
+}
+
+test "test native" <: mayThrow[NullAccess] {
+  try {
+    nop()
+    fail2()
+    // manually inlining apparently does not work atm.
+    // (null : StringLiteral)!!;
+    nop()
+    false
+  } catch e {
+    if NullAccess {
+      delete e
+      true
+    }
+    else {
+      delete e
+      false
+    }
+  }
+}
+
+type def fail3 : bool = (Ref[bool] !! null)
+
+// note: the different paths can be seen when looking at valgrind diagnosis
+// which contains an error if the exception is thrown and caught
+test "test load" <: mayThrow[NullAccess] {
+  try {
+    fail3()
+    // even with -Og and the optnone flags, it can happen that no exception is
+    // thrown
+    true
+  } catch e {
+    if NullAccess {
+      delete e
+      // without any optimizations this flag is taken
+      true
+    }
+    else {
+      delete e
+      false
+    }
+  }
+}
