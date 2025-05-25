@@ -1,0 +1,46 @@
+with exceptions.NullAccess
+
+/**
+ * @note tests correctness of try catch
+ */
+type mar:
+
+type def fail : void {
+  var ex : String = null
+  ex.bytes()
+
+  throw null
+}
+
+type def run : bool {
+  try {
+    fail()
+    false
+  } catch e {
+    if NullAccess {
+      delete e
+      "inner\n"!!;
+      true
+    }
+    else {
+      delete e
+      false
+    }
+  }
+}
+
+test "implicit throw" {
+  try {
+    run()
+  } catch e {
+    if NullAccess {
+      delete e
+      "outer\n"!!;
+      false
+    }
+    else {
+      delete e
+      false
+    }
+  }
+}
