@@ -5,11 +5,9 @@ with exceptions.NullAccess
  */
 type mar:
 
-type def fail : void {
+type def fail : void <: reflection.avoidOptimization {
   var ex : String = null
   ex.bytes()
-
-  throw null
 }
 
 type def run : bool {
