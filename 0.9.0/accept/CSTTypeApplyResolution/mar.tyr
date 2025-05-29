@@ -1,0 +1,20 @@
+/**
+ * overload resolution fails due to call site type semantics but it should not
+ *
+ * @note  remove call site types and fix places that caused introducing them in
+ *  the first place
+ *
+ * @note  the intention of this test is to ensure that call site types do not
+ *  survive this release
+ */
+type mar:
+
+type def f(n : int, b : Block[int]) {
+  var i = 0
+  container.range(0, n).foreach _ do (i += b.eval())
+  i
+}
+
+test "call" {
+  7 == f(7,1)
+}
