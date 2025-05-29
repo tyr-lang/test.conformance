@@ -1,0 +1,76 @@
+with enums.flagSet
+with tyr.io.System
+
+/**
+ * tests correctness of try catch with nested functions
+ */
+enum S <: flagSet {
+  Ex, NA, others, none, f, gb, ge, cb, ce
+}
+
+class T <: Exception, suppressCompilerMessage["E_OOP_PRIVACY_VIOLATED"] {
+  type var state : S = S !! 0
+
+  type def seen(v : S) = state = S !! (state | v)
+
+  type def c(ex : exceptions.Throwable) : void <: inline {
+    seen(S.cb)
+
+    try {
+      g(ex)
+      seen(S.none)
+    } catch e {
+      if Exception { seen(S.Ex); delete e }
+      if exceptions.NullAccess { seen(S.NA); delete e }
+      else { seen(S.others); delete e }
+    }
+
+    seen(S.ce)
+  }
+
+  type def g(ex : exceptions.Throwable) : void <: inline {
+    seen(S.gb)
+    f(ex)
+    seen(S.ge)
+  }
+
+  type def f(ex : exceptions.Throwable) : void <: inline {
+    seen(S.f)
+    throw ex
+  }
+
+  test "ex" {
+    true && {
+      c(new Exception)
+      true
+    } &&
+    state == S.Ex | S.f | S.gb | S.cb | S.ce
+  }
+  test "null" {
+    true && {
+      c(null)
+      true
+    } &&
+    state == S.NA | S.f | S.gb | S.cb | S.ce
+  }
+  test "sub" {
+    true && {
+      c(new T)
+      true
+    } &&
+    state == S.Ex | S.f | S.gb | S.cb | S.ce
+  }
+  test "other" {
+    true && try {
+      c(new exceptions.FatalSegFault)
+      false
+    } catch e {
+      if exceptions.FatalSegFault {
+        if (state == S.others | S.f | S.gb | S.cb)
+          System.exit(0)
+       false
+      }
+      else false
+    }
+  }
+}
