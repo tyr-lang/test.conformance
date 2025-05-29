@@ -16,25 +16,36 @@ with container.ArrayBuffer
  *   I doubt that it is provable that no throw will happen no matter how much
  *   we invest into no throw annotations and detection
  */
-type T {
-  test "fold four Array elements" {
-    // have an array with for elements, add a try finally for auto deletion
-    // check that clang is able to optimize out the entire stuff
-    val x = new Array[int, 4]
-    x(0) = 7
-    x(1) = 3
-    x(2) = 5
-    x(3) = 12
+type mar:
 
-    val r = 27 == x.fold(0) l,r do(l + r)
+test "fold four Array elements" <: provable {
+  // have an array with for elements, add a try finally for auto deletion
+  // check that clang is able to optimize out the entire stuff
+  val x = new Array[int, 4]
+  x(0) = 7
+  x(1) = 3
+  x(2) = 5
+  x(3) = 12
+
+  try {
+    27 == x.fold(0) l,r do(l + r)
+  } finally {
     delete x
-    r
-    // note: this can only be meaningful once there is a try finally in the fold implementation deleting the iterator
-    false
   }
+}
 
-  test "fold four ArrayBuffer elements" {
-    // do the exact same thing with ArrayBuffer
-    false
+test "fold four ArrayBuffer elements" <: provable {
+  // have an array with for elements, add a try finally for auto deletion
+  // check that clang is able to optimize out the entire stuff
+  val x = new ArrayBuffer[int]
+  x(0) = 7
+  x(1) = 3
+  x(2) = 5
+  x(3) = 12
+
+  try {
+    27 == x.fold(0) l,r do(l + r)
+  } finally {
+    delete x
   }
 }
