@@ -1,0 +1,56 @@
+/**
+ * Tests that rebind / throw / finally works together.
+ */
+class T {
+  def outer(b : Block[int], e : Block[void]) = f(b, e)
+  def f(b : Block[int], e : Block[void]) = b.eval()
+}
+
+class S <: T {
+  // other effect, and introduces a catch handler
+  override
+  def f(b : Block[int], e : Block[void]) = try {
+    b.eval()
+  } finally {
+    e.eval()
+  }
+}
+
+type regular {
+  test "call S" {
+    val x = new S
+    try {
+      7 == x.outer(7, 1)
+    } finally {
+      delete x
+    }
+  }
+  test "call T" {
+    val x = new T
+    try {
+      7 == x.outer(7, 1)
+    } finally {
+      delete x
+    }
+  }
+}
+
+type ex {
+  test "call S" {
+    // TODO something with throw System.exit
+    // TODO also duplicate the test into an Out form where the finally block vanishes
+    false
+  }
+  test "call T" {
+    false
+  }
+}
+
+type rebind {
+  test "call S" {
+    false
+  }
+  test "call T" {
+    false
+  }
+}
