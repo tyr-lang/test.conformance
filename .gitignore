@@ -1,6 +1,7 @@
 *~
 
 # binary libraries and debug asts
+a.out
 out.*.sg
 *.dot
 **/*.tl
