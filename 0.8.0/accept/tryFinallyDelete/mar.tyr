@@ -19,7 +19,7 @@
  *  for memory and flags for resources where double close is an issue. This will
  *  not work here.
  */
-type mar:
+type mar <: suppressCompilerMessage["W_NO_SIDE_EFFECT"]:
 
 test "verbose" {
   var bs = "abc".bytes()
