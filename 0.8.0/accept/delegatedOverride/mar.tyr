@@ -1,0 +1,32 @@
+with container.ArrayBuffer
+
+/**
+ * ensure that delegating override implementation to an abstract class is
+ * possible and type inference works as expected
+ */
+class Iterator[T : Type[_]] <: container.Iterator[T]:
+
+private var proxy : container.Iterator;
+
+new (proxy := proxy : container.Iterator);
+delete {delete proxy}
+override def next = proxy.next()
+override def hasNext = proxy.hasNext()
+
+override
+def toBuffer : ArrayBuffer[T] <: mem.consumed = try {
+  var r = new ArrayBuffer[T]
+  while(hasNext()) {
+    r += next()
+  }
+  r
+} finally delete this
+
+test "use" {
+  var bs = new Iterator("0".bytes())
+  var buf = bs.toBuffer()
+
+  try {
+    null == bs && 1U == buf.size()
+  } finally delete buf
+}
