@@ -64,3 +64,14 @@ test "side effects" {
 
   null == bs
 }
+
+test "expected type" {
+  var bs = "abc".bytes()
+
+  // delete is void; make sure that this can be compiled
+  val x : int = try {
+    5
+  } finally delete bs
+
+  5 == x
+}
