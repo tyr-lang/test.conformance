@@ -1,0 +1,66 @@
+/**
+ * finally delete clause should act as a shorthand for finalizers that are just
+ * deleting local entities because that's a common use case
+ *
+ * @note  we do not use Java's try with resource approach since we also want to
+ *  manage parameters like this if they have mem.consumed properties
+ *
+ * @note  If we ever learn that capturing, autodereference and Tyr-style
+ *  automatic memory management can be integrated with a try with resource style
+ *  delete, we should deprecate and delete try finally in favor for it since
+ *  throwing exceptions from constructurs would be easier and cheaper to be done
+ *  correctly with such a concept; the parameter argument above could be simply
+ *  fixed with syntax, e.g. ```
+ *  repsep(';', capture=(<ID>)|resource(<ID> := <expression>))
+ *  ```
+ *  The issue here is that the kind of the captured entity or resource is not
+ *  fully clear atm. Getting this right is a lot more complex with explicit
+ *  resource management because in Java, the trick is essentially to use GC
+ *  for memory and flags for resources where double close is an issue. This will
+ *  not work here.
+ */
+type mar:
+
+test "verbose" {
+  var bs = "abc".bytes()
+
+  // the inner variable holding the result needs to be hoisted since it isn't
+  // accessible in the finally block anymore
+  var r = 0
+  2 == try {
+    while(bs.hasNext()) {
+      let x = bs.next()
+      if((byte !! 'a') < x)
+        ++r;
+    }
+  } finally {
+    delete bs
+    r
+  }
+}
+
+test "finally delete" {
+  var bs = "abc".bytes()
+
+  // scoping is now correct and code is cleaner and easier to read
+  2 == try {
+    var r = 0
+    while(bs.hasNext()) {
+      let x = bs.next()
+      if((byte !! 'a') < x)
+        ++r;
+    }
+    r
+  } finally delete bs
+}
+
+test "side effects" {
+  var bs = "abc".bytes()
+
+  // finally delete should have the same side effects as a regular delete and
+  // cannot be optimized out
+  try {
+  } finally delete bs
+
+  null == bs
+}
