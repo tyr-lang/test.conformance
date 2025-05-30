@@ -1,0 +1,22 @@
+/**
+ * ensure that try catch finally blocks correctly propagate expected types
+ */
+type mar <: suppressCompilerMessage["W_NO_SIDE_EFFECT"]:
+
+test "bool" {
+  if try {
+    7
+  } finally {
+    "a side effect"!!;
+    true
+  } {
+    true
+  } else {
+    false
+  }
+}
+
+test "systematic" {
+  // TODO continue with systematic tests with and without catch and finally delete
+  false
+}
