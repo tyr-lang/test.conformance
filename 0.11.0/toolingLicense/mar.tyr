@@ -1,0 +1,12 @@
+/**
+ * test that draupnir understands licenses and reacts accordingly
+ */
+type T:
+
+test "no license" {
+  // draupnir should reject operations on projects that do not have a license
+  // note: there should also be a bulk change operation that fixes licenses
+  // note: for apache, some check should be done to see if a remote repository
+  // exists; for now, simply checking for git should be fine
+  false
+}
