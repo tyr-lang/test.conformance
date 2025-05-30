@@ -13,3 +13,8 @@ test "empty param" {
   // TODO once I have that working write about what it does and how it works
   false
 }
+
+test "others" {
+  // if this works as expected, also include checkTypes and checkBounds flags
+  false
+}
