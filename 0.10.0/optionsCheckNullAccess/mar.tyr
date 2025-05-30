@@ -1,0 +1,15 @@
+/**
+ * Once we have proper dependent types, we can introduce an options framework
+ * and have some standard options in tyr.* libraries. CheckNullAccess should be
+ * one of them with the intention of adding explicit checks to bodies that would
+ * not allow null pointers.
+ */
+type T:
+
+test "empty param" {
+  // TODO setting options for tests should be allowed via the draupnir file
+  // note to self: only literals can work here anyway
+
+  // TODO once I have that working write about what it does and how it works
+  false
+}
