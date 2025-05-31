@@ -6,6 +6,10 @@ with container.ArrayBuffer
  */
 class Iterator[T : Type[_]] <: container.Iterator[T]:
 
+// TODO note to self: I think the best option here is to detect that there is
+// an undbound free variable here and create a suppressable error for let
+// and an unsuppressible error for other field kinds since the template itself
+// is not representable
 private var proxy : container.Iterator;
 
 new (proxy := proxy : container.Iterator);
@@ -23,6 +27,9 @@ def toBuffer : ArrayBuffer[T] <: mem.consumed = try {
 } finally delete this
 
 test "use" {
+  // the issue here is that proxy is in fact not an iterator but the base template
+  false
+
   var bs = new Iterator("0".bytes())
   var buf = bs.toBuffer()
 

@@ -5,11 +5,11 @@ with container.ArrayBuffer
  */
 class Iterator[T : Type[_]] <: container.Iterator[T]:
 
-private var proxy : container.Iterator;
+private val proxy : container.Iterator[T];
 
-new (proxy := proxy : container.Iterator);
+new (proxy := proxy : container.Iterator[T]);
 delete {delete proxy}
-override def next : T = proxy.next()
+override def next = proxy.next()
 override def hasNext = proxy.hasNext()
 
 override
