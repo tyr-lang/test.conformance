@@ -22,7 +22,7 @@ def toBuffer : ArrayBuffer[T] <: mem.consumed = try {
 } finally delete this
 
 test "use" {
-  var bs = new Iterator("0".bytes())
+  var bs = new Iterator[byte]("0".bytes())
   var buf = bs.toBuffer()
 
   try {
