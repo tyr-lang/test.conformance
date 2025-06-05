@@ -1,0 +1,66 @@
+with exceptions.NullAccess
+with exceptions.SegFault
+
+/**
+ * ensure that local control flow is created correctly for combinations of
+ * finally, catch and throw
+ *
+ * @todo create a copy where throw is passed as Block
+ */
+enum S <: int, enums.flagSet {
+  regular, inner, outer, other, finalizer
+}
+
+type T {
+  type var r = 0
+  type def f(ex : Exception) void {
+    do {
+      try {
+        try {
+          try {
+            if(null != ex)
+              throw ex
+
+            r |= S.regular
+
+            if(null == ex)
+              break
+
+          } catch e {
+            if NullAccess {
+              delete e
+              r |= S.inner
+            }
+          }
+        } finally {
+          r |= S.finalizer
+        }
+      } catch e {
+        if NullAccess {
+          delete e
+          r |= S.outer
+        }
+        else {
+          delete e
+          r |= S.other
+        }
+      }
+    } while false
+  }
+
+  test "regular" {
+    f(null)
+
+    r == S.regular | S.finalizer
+  }
+
+  test "inner" {
+    f(new NullAccess)
+    false
+  }
+
+  test "outer" {
+    f(new SegFault)
+    false
+  }
+}
