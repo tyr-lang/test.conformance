@@ -14,6 +14,8 @@ test "break" {
   // TODO: check both direct and indirect reapply, i.e. have the whole thing
   // itself in a binder and pass the effect of one or both finallys as block
 
+  // TODO check that reapplied finallys are performed exactly once (not never and not twice)
+
   false
 }
 
