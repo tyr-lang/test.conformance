@@ -1,0 +1,24 @@
+/**
+ * tests correctness of return/break/continue cross edges with finally blocks
+ *
+ * @note to self: I don't see why catch would be an issue, but finally is
+ */
+type mar:
+
+test "break" {
+  // try finally cutting through binder reapplications is a bit tricky;
+  // we need a function that evaluates a block within try/finally
+  // and that is called within try/finally
+  // and that causes a bound path crossing both finallys
+  // where the inner finally is reapplied
+  // TODO: check both direct and indirect reapply, i.e. have the whole thing
+  // itself in a binder and pass the effect of one or both finallys as block
+
+  false
+}
+
+test "return" {
+  // again with return
+
+  false
+}
