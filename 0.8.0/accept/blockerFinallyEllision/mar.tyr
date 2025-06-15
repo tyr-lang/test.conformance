@@ -11,6 +11,10 @@ with container.ArrayBuffer
  * @note to self: if it doesn't I should check if running opt twice does the
  *   job; it could be that cross edge encoding is removed too late
  *
+ * @note to self: I found out that running opt twice or more can in fact work
+ *  towards a proof but is also dangerous in that it can elide poison values;
+ *  this can be avoided by keeping debug symbols
+ *
  * @note to self: actually, I'd assume that the catch in the finally cannot be
  *   optimized out as it could be triggered by an out of bounds throw or similar
  *   I doubt that it is provable that no throw will happen no matter how much
@@ -21,7 +25,7 @@ type mar:
 test "fold four Array elements" <: provable {
   // have an array with for elements, add a try finally for auto deletion
   // check that clang is able to optimize out the entire stuff
-  val x = new Array[int, 4]
+  val x = new Array[int](4)
   x(0) = 7
   x(1) = 3
   x(2) = 5
@@ -29,23 +33,52 @@ test "fold four Array elements" <: provable {
 
   try {
     27 == x.fold(0) l,r do(l + r)
-  } finally {
-    delete x
-  }
+  } finally delete x
+}
+
+test "fold four ArrayBuffer elements iterator" <: provable {
+  // have an array with for elements, add a try finally for auto deletion
+  // check that clang is able to optimize out the entire stuff
+  val x = new ArrayBuffer[int]
+  x += 7
+  x += 3
+  x += 5
+  x += 12
+
+  try {
+    27 == x.iterator().fold(0) l,r do(l + r)
+  } finally delete x
 }
 
 test "fold four ArrayBuffer elements" <: provable {
   // have an array with for elements, add a try finally for auto deletion
   // check that clang is able to optimize out the entire stuff
   val x = new ArrayBuffer[int]
-  x(0) = 7
-  x(1) = 3
-  x(2) = 5
-  x(3) = 12
+  x += 7
+  x += 3
+  x += 5
+  x += 12
 
   try {
     27 == x.fold(0) l,r do(l + r)
-  } finally {
-    delete x
-  }
+  } finally delete x
 }
+
+// note: test below just for reference explainin comments above; this is not
+// uncommented code per se; it serves as documentation of what would happen
+// when calling opt with strip debug
+// test "ArrayBuffer poison" <: unprovable {
+//   // have an array with for elements, add a try finally for auto deletion
+//   // check that clang is able to optimize out the entire stuff
+//   val x = new ArrayBuffer[int]
+//   // this results in an empty array buffer with dead space accidentally
+//   // containing the right values
+//   x(0) = 7
+//   x(1) = 3
+//   x(2) = 5
+//   x(3) = 12
+
+//   try {
+//     27 == x.fold(0) l,r do(l + r)
+//   } finally delete x
+// }
