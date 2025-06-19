@@ -9,10 +9,10 @@
  * lookups as a first filter rule on multiple matches.
  *
  * Note to self: I need to review shadowing rules. It could be that I need to
- *  maintain shadow maps.
+ *  maintain shadow maps. (and likely explicit method slots and inhabitants)
  *
  * Note to self: I should be able to provide type interfaces with
- *   implementations. It is not completely cleare if the implicit this type
+ *   implementations. It is not completely clear if the implicit this type
  *   providing the realization is a hidden type variable or if we can use a
  *   straight-forward substitution that solves this using subtsitution member
  *   rebind specification.

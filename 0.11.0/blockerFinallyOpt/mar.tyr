@@ -1,0 +1,19 @@
+/**
+ * This release should cleanup the entire icall/vcall/scall/pcall logic and
+ * ensure that finally is used as expected. It should introduce several
+ * optimizations based on finally ensuring that the final implementations are
+ * ensured to be optimized wrt. call types allowing further optimizations by the
+ * backend.
+ */
+type T:
+test "use" {
+  // note: this test requires to undo all the copying of implementations in
+  // tyr.lang for performance reasons and provability. The 0.8 blocker finally
+  // test should work just by declaring the iterator() function and the iterator
+  // itself final.
+  // note: in effect, the iterator tests should arrive as scalls in sleipnir,
+  // the iterable tests however, should arrive as vcalls and sleipnir cha data
+  // should be used to demote them to scalls; this should be done directly since
+  // the dispatch target would not have any subtypes, right?
+  false
+}
