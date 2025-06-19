@@ -1,0 +1,13 @@
+/**
+ * an effective empty finally block should result in a warning
+ */
+type mar:
+
+test "finally" {
+  var x = ""
+  try {
+    false
+  } finally {
+    delete x
+  }
+}

@@ -1,5 +1,5 @@
 /**
- * a syntactic empty finally block should result in a warning
+ * an effective empty finally block should result in a warning
  */
 type mar:
 
@@ -8,5 +8,6 @@ test "finally" {
   try {
     x = false
   } finally {
+    false
   }
 }

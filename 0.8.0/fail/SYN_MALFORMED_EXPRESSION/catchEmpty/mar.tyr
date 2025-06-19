@@ -1,0 +1,12 @@
+/**
+ * a syntactic empty body should result in a warning
+ */
+type mar:
+
+test "catch" {
+  var x = ""
+  try {
+  } catch e {
+    else delete x
+  }
+}

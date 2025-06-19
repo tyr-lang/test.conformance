@@ -4,9 +4,9 @@
 type mar:
 
 test "finally" {
-  var x = true
+  var x = ""
   try {
-    x = false
   } finally {
+    delete x
   }
 }
