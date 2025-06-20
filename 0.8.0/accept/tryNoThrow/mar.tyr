@@ -4,6 +4,7 @@
 type T {
   test "catch nothing" {
     try {
+      delete "abc".bytes()
       true
     } catch e {
       if Exception {
@@ -20,6 +21,7 @@ type T {
   test "nothing finally" {
     var x = false
     try {
+      delete "abc".bytes()
       false
     } finally {
       // note: the finally block must not be effective empty
@@ -41,6 +43,7 @@ type T {
   test "catch finally" {
     var x = false
     try {
+      delete "abc".bytes()
       false
     } catch e {
       if Exception {

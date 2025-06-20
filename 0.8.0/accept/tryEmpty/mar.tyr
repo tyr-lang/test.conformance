@@ -12,8 +12,9 @@ class T <: suppressCompilerMessage["E_MEM_LEAK"] {
     }
   }
 
-  test "catch else" {
+  test "catch else" <: noCompile[SYN_MALFORMED_EXPRESSION] {
     try {
+      // an empty try body cannot make sense and is, hence, forbidden
     } catch e {
       else {}
     }
@@ -21,6 +22,7 @@ class T <: suppressCompilerMessage["E_MEM_LEAK"] {
 
   test "finally" <: noCompile[SYN_MALFORMED_EXPRESSION] {
     try {
+      // an empty try body cannot make sense and is, hence, forbidden
     } finally {
       // an empty finally block cannot make sense and is, hence, forbidden
     }

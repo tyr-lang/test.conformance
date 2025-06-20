@@ -60,6 +60,7 @@ test "side effects" {
   // finally delete should have the same side effects as a regular delete and
   // cannot be optimized out
   try {
+    delete "abc".bytes()
   } finally delete bs
 
   null == bs
@@ -70,6 +71,7 @@ test "expected type" {
 
   // delete is void; make sure that this can be compiled
   val x : int = try {
+    delete "abc".bytes()
     5
   } finally delete bs
 

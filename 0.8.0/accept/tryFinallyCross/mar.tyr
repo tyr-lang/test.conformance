@@ -19,7 +19,7 @@ class T {
     r
   }
 
-  test "direct" <: noCompile[SYN_TERMINATED] {
+  test "direct" <: noCompile[SYN_TERMINATED, SYN_MALFORMED_EXPRESSION] {
     var seen = false
     val r = try {
       while true {
