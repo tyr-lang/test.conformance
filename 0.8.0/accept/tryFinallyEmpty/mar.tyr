@@ -29,10 +29,7 @@ class T <: Exception {
     }
   }
 
-  /**
-   * @note  eventually, this test should be optimized out completely
-   */
-  test "var finally compression" {
+  test "var finally compression" <: provable {
     var x = false
     try {
       x = false
@@ -70,7 +67,7 @@ class T <: Exception {
     }
   }
 
-  test "var throw empty" {
+  test "var throw empty" <: provable[2] {
     var x = false
     var y = false
     try {
