@@ -1,0 +1,37 @@
+/**
+ * maybe do a quality of life change and allow brief syntax for if else cascades
+ *
+ * rationale is that most languages have something like this; often as match or
+ * switch; I do not want introduce a keyword and using switch is nonsense since
+ * it simply isn't a switch
+ */
+test mar:
+
+test "cascade" {
+  if else {
+    if abc {
+      some effect
+    }
+    if efg {
+      another effect
+    }
+    if efg2 {
+      another effect
+    }
+    if efg3 {
+      another effect
+    }
+    if efg4 {
+      another effect
+    }
+    else {
+
+    }
+  }
+  
+  body should parse as if + else ?;
+  syn if there is only one if (and yes even code generators can get that right)
+
+  it is easy to implement, but you only get some elses reduced
+  so, warning if less than 4 ifs
+}
