@@ -1,37 +1,87 @@
 /**
  * ensure cross edge translation is done correctly
  */
-class T {
-  test "full" {
-    var seen = false
-    val r = try {
-      while true {
-        try {
-          if true
-            break
-        } finally {
-          seen = true
-        }
-      }
-    } finally {
-      seen
-    }
-    r
-  }
+type mar <: suppressCompilerMessage["W_FINALLY_TERMINATED"]:
 
-  test "direct" <: noCompile[SYN_TERMINATED, SYN_MALFORMED_EXPRESSION] {
-    var seen = false
-    val r = try {
-      while true {
-        try {
+test "full" {
+  var seen = false
+  val r = try {
+    while true {
+      try {
+        if true
           break
-        } finally {
-          seen = true
-        }
+      } finally {
+        seen = true
+      }
+    }
+  } finally {
+    seen
+  }
+  r
+}
+
+test "direct" <: noCompile[SYN_TERMINATED, SYN_MALFORMED_EXPRESSION] {
+  var seen = false
+  val r = try {
+    while true {
+      try {
+        break
+      } finally {
+        seen = true
+      }
+    }
+  } finally {
+    seen
+  }
+  r
+}
+
+test "top" {
+  var seen = false
+  while true {
+    try {
+      if true
+        break
+    } finally {
+      seen = true
+    }
+  }
+  seen
+}
+
+// we need a little helper since break from finally is not allowed otherwise
+type def h(seen : Ref[bool], b : Block[void], f : Block[void]) : bool {
+  try {
+    while true {
+      try {
+        if true
+          break
+      } finally {
+        seen = true
+      }
+    }
+    b.eval()
+    // this return should not be reachable in the actual test below
+    return false
+  } finally {
+    f.eval()
+  }
+}
+
+test "inner mixed" {
+  var seen = false
+  val r = do {
+    try {
+      if (!seen) {
+        // note: we need to coerce seen to bool, because the implicit would be
+        // inserted after finally otherwise
+        // note: be careful with finallys that have side effects and implicits
+        // that rely on ordering; here, it is kind of intended
+        h(seen, {break (seen : bool)}, {break false})
       }
     } finally {
-      seen
+      seen = false
     }
-    r
-  }
+  } while true
+  r && !seen
 }
