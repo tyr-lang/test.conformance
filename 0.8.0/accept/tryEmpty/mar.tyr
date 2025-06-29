@@ -1,11 +1,15 @@
 /**
- * try should work well with empty blocks
+ * try should work well with empty blocks; it is still not allowed and it would
+ * not even make sense to allow suppressing the check since writing code like
+ * that is hard to read and understand
  *
  * @note  it would be fine if these tests would create warnings
  */
 class T <: suppressCompilerMessage["E_MEM_LEAK"] {
-  test "catch" {
+  test "catch" <: noCompile[SYN_MALFORMED_EXPRESSION] {
     try {
+      // an empty try body cannot make sense and is, hence, forbidden
+      // even if the catch handler would do something
     } catch e {
       if Exception {}
       else {}
