@@ -1,0 +1,38 @@
+/**
+ * a version of the nested finally break i test that is provable, because it
+ * avoids global side effects
+ */
+type mar:
+new;
+
+var x = 0
+def f(this : Ref[mar], i : Block[any], j : Block[any], k : Block[any]) : int {
+  try {
+    i.eval()
+  } finally {
+    try {
+      j.eval()
+    } finally {
+      try {
+        k.eval()
+      } finally {
+        ++x
+      }
+      ++x
+    }
+    ++x
+  }
+  x
+}
+
+test "break i" <: provable {
+  var ref = new mar
+  let r = do {
+    if (0 == ref.x)
+      ref.f({break (ref.x:int)}, {++ref.x}, {++ref.x})
+    else
+      ref.x
+  } while true;
+
+  0 == r && 5 == ref.x
+}

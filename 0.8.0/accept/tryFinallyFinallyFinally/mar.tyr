@@ -1,0 +1,78 @@
+with exceptions.NullAccess
+
+/**
+ * tests correctness of nested finally
+ */
+type mar:
+
+test "nested no throw" <: provable {
+  var x = 1
+  try {
+    ++x
+  } finally {
+    try {
+      ++x
+    } finally {
+      try {
+        ++x
+      } finally {
+        ++x
+      }
+    }
+    ++x
+  }
+  6 == x
+}
+
+type var x = 0
+type def f(i : Block[any], j : Block[any], k : Block[any]) : int {
+  try {
+    i.eval()
+  } finally {
+    try {
+      j.eval()
+    } finally {
+      try {
+        k.eval()
+      } finally {
+        ++x
+      }
+      ++x
+    }
+    ++x
+  }
+  x
+}
+
+// note to self: currently not provable since the side effect on x will not
+// vanish
+test "break i" {
+  let r = do { if (0 == x) f({break (x:int)}, {++x}, {++x}) else x } while true;
+  0 == r && 5 == x
+}
+
+test "break i order" {
+  // this test is about implicits vs. finallys order and implicits should be
+  // applied first because a) sometimes they cannot be applied later and b) the
+  // intuitive expectation is that they apply immediately
+  let r = do { if (0 == x) f({break x}, {++x}, {++x}) else x } while true;
+  0 == r && 5 == x
+}
+
+test "break i throw j" {
+  let r = try {
+    do {
+      if (0 == x)
+        f({break x}, {throw new NullAccess()}, {++x})
+      else
+        x
+    } while true;
+  } catch e {
+    else {
+      delete e
+      // we would still have executed all increments
+      return 4 == x
+    }
+  }
+  false
+}
