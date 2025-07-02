@@ -1,0 +1,33 @@
+/**
+ * ensure that return executes surrounding finallys
+ */
+type mar:
+
+test "side effects" <: mempass {
+  var bs = "abc".bytes()
+  try {
+    if bs.hasNext()
+      return true
+  } finally delete bs
+  false
+}
+
+test "order" <: mempass {
+  var bs = "abc".bytes()
+  try {
+    if bs.hasNext()
+      return null != bs
+  } finally delete bs
+  false
+}
+
+test "order var" {
+  var r = true
+  try {
+    if r
+      return r
+  } finally {
+    r = false
+  }
+  return r
+}
