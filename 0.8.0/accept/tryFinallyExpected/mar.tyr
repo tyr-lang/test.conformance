@@ -1,11 +1,11 @@
 /**
  * ensure that try catch finally blocks correctly propagate expected types
  */
-type mar <: suppressCompilerMessage["W_NO_SIDE_EFFECT"]:
+type mar:
 
 test "bool" {
   if try {
-    7
+    "a side effect"!!;
   } finally {
     "a side effect"!!;
     true
