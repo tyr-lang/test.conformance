@@ -1,0 +1,22 @@
+/**
+ * tests correctness of exception handler rebinding
+ */
+type mar:
+
+type def check(ex : Exception) : bool {
+  var seen = false
+  try {
+    try {
+      throw ex
+    } finally {
+      seen = true
+    }
+  } catch e {
+    else { delete e }
+  }
+  seen
+}
+
+test "use" <: provable {
+  check(new Exception)
+}
