@@ -37,6 +37,7 @@ type def f(i : Block[any], j : Block[any], k : Block[any]) : int {
       } finally {
         ++x
       }
+      // this one isn't executed if k.eval throws
       ++x
     }
     ++x
@@ -70,8 +71,8 @@ test "break i throw j" {
   } catch e {
     else {
       delete e
-      // we would still have executed all increments
-      return 4 == x
+      // we would still have executed three increments
+      return 3 == x
     }
   }
   false
