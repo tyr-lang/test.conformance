@@ -43,5 +43,7 @@ test "escape" {
   // TODO once the other test works, make a concious decision on how escaping
   // can work here; the interesting part is actually throw because of all the
   // rebind implications it has (I would expect it to work, however)
+  // note to self: this should be the path to turn bound throw into a throw and
+  // actually, that way, into a bound throw bound in another binder tree
   false
 }
