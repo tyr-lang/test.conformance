@@ -49,10 +49,12 @@ type cross {
   test "call S" {
     val x = new S
     try {
-      1 == do {
-        x.outer(7, break 1)
-        5
-      } while false
+      1 == {
+        do {
+          x.outer(7, break 1)
+          5
+        } while false
+      }
     } finally {
       delete x
     }
@@ -60,10 +62,12 @@ type cross {
   test "call T" {
     val x = new T
     try {
-      1 == do {
-        x.outer(7, break 1)
-        5
-      } while false
+      1 == {
+        do {
+          x.outer(7, break 1)
+          5
+        } while false
+      }
     } finally {
       delete x
     }
@@ -74,10 +78,12 @@ type rebind {
   test "call S" {
     val x = new S
     try {
-      true && 1 == do {
-        x.outer(7, break 1)
-        5
-      } while false
+      true && 1 == {
+        do {
+          x.outer(7, break 1)
+          5
+        } while false
+      }
     } finally {
       delete x
     }
@@ -85,10 +91,12 @@ type rebind {
   test "call T" {
     val x = new T
     try {
-      true && 1 == do {
-        x.outer(7, break 1)
-        5
-      } while false
+      true && 1 == {
+        do {
+          x.outer(7, break 1)
+          5
+        } while false
+      }
     } finally {
       delete x
     }
