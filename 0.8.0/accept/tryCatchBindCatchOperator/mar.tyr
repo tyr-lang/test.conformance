@@ -1,0 +1,39 @@
+/**
+ * tests catch exceptions from exceptions from operator block parameters
+ */
+type mar:
+new;
+
+def <- (b : Block[bool]) : bool = try {
+    b.eval()
+  } catch e {
+    else {
+      delete e
+      false
+    }
+  }
+
+test "use" <: provable {
+  val x = new mar
+
+  x <- true
+}
+
+test "throw" <: provable {
+  val x = new mar
+
+  !x <- (throw new Exception)
+}
+
+test "embraced" <: provable {
+  val x = new mar
+
+  try {
+    !x <- (throw new Exception)
+  } catch e {
+    else {
+      delete e
+      false
+    }
+  }
+}
