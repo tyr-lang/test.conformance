@@ -19,13 +19,13 @@ test "use" <: provable {
   x <- true
 }
 
-test "throw" <: provable {
+test "throw" <: provable[2] {
   val x = new mar
 
   !x <- (throw new Exception)
 }
 
-test "embraced" <: provable {
+test "embraced" <: provable[2] {
   val x = new mar
 
   try {
