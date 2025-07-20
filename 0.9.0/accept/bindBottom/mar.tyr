@@ -1,0 +1,29 @@
+/**
+ * A binder call that cannot return must be retyped to Bottom to ensure that
+ * functions calling it
+ */
+type mar:
+
+type def exit(v : Block[int]) : int {
+  System.exit(v.eval())
+}
+
+test "use type" {
+  NoReturn == (exit(0)).type
+}
+
+test "type side effects" {
+  // TODO I think that I just learned that () and {} need to survive in the AST
+  // to ensure that they can be translated in their individual context
+  // once I get here, move that train of thought to another test
+  false
+}
+
+test "π rebind" {
+  // TODO es muss eine regel und tests geben, die sicherstellen, dass ein binder/inline function ohne ein return im
+  // body einen bottom type hat, egal was der deklarierte typ ist, weil das π-rebind sonst nicht funktionieren kann,
+  // weil der call den nichterreichbaren teil dahinter löschen würde; das ist keine große änderung, weil man bei
+  // syntaktischen calls ohnehin ein terminated error bekommen würde, wenn man versucht das hypothetische resultat zu
+  // verwenden
+  false
+}
