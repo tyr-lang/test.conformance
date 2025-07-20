@@ -1,0 +1,47 @@
+/**
+ * Allow local Block variables and track their scope. This can be done either
+ * by checking dominating BAs or by turning the CFG into a hierarchy.
+ *
+ * @note to self: the initial idea was the hierarchy but I also have a
+ *   contradictory requirement in favor of BAs; BAs should be overall faster
+ *   since I do not expect this check to happen frequently as it would only
+ *   affect local blocks
+ */
+type mar:
+
+test "use" <: provable {
+  var x = 0
+  // let should be the only valid local Block kind
+  let b : Block[int] = ++x
+
+  var r = true
+
+  val arr = conaiter.ArrayBuffer[int]
+  try {
+    // why not?
+    arr += b.eval()
+    arr += b.eval()
+    r &= 2 == x
+
+    // use binder application syntax to create types
+    // would be sick if I could get that line to work and I should actually
+    // think about writing a paper
+    // note to self: due to my hatred for closures, it is actually very complex
+    // to get this to work since I would need a type interface iterator to
+    // allow next / hasNext to be fully elided here; I wouldn't be too surprised
+    // if that means moving this test in that for for one or two releases; using
+    // a local block with global memory, however, should work right away
+    val i = new (container.BlockValueIterator v do (b, {v < 4}));
+    r &= !arr.iterator().sameElements(i)
+    r &= 4 == x
+  } finally delete f
+
+  r
+}
+
+test "escape" {
+  // TODO once the other test works, make a concious decision on how escaping
+  // can work here; the interesting part is actually throw because of all the
+  // rebind implications it has (I would expect it to work, however)
+  false
+}
