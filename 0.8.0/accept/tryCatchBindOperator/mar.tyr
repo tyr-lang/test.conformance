@@ -1,0 +1,114 @@
+/**
+ * tests try catch, rebind and operators
+ */
+type mar:
+
+test "simple" <: provable {
+  val r = try {
+    true && (throw new Exception)
+  } catch e {
+    if Exception {
+      delete e
+      true
+    }
+    else {
+      delete e
+      false
+    }
+  }
+
+  r
+}
+
+test "nested" <: provable {
+  val r = false || try {
+    true && (throw new Exception)
+  } catch e {
+    if Exception {
+      delete e
+      true
+    }
+    else {
+      delete e
+      false
+    }
+  }
+
+  r
+}
+
+test "double" <: provable {
+  val r = try {
+    false || try {
+      true && (throw new Exception)
+    } catch e {
+      if Exception {
+        throw e
+      }
+      else {
+        delete e
+        false
+      }
+    }
+  } catch e {
+    if Exception {
+      delete e
+      true
+    }
+    else {
+      delete e
+      false
+    }
+  }
+
+  r
+}
+
+test "double all" <: provable {
+  val r = try {
+    try {
+      true && (throw new Exception)
+    } catch e {
+      if Exception {
+        delete e
+        true
+      }
+      else {
+        delete e
+        false
+      }
+    } && try {
+      try {
+        true && (throw new Exception)
+      } catch e {
+        if Exception {
+          delete e
+          true
+        }
+        else {
+          delete e
+          false
+        }
+      } && (throw new Exception)
+    } catch e {
+      if Exception {
+        throw e
+      }
+      else {
+        delete e
+        false
+      }
+    }
+  } catch e {
+    if Exception {
+      delete e
+      true
+    }
+    else {
+      delete e
+      false
+    }
+  }
+
+  r
+}
