@@ -16,6 +16,9 @@ test "type side effects" {
   // TODO I think that I just learned that () and {} need to survive in the AST
   // to ensure that they can be translated in their individual context
   // once I get here, move that train of thought to another test
+  // note to self: this idea could also be complete bullshit because I already
+  // organized the AST correctly and all I need to do is create new childs when
+  // translating type which should be the case already
   false
 }
 
