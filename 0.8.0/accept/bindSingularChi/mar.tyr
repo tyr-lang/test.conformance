@@ -55,9 +55,7 @@ type cross {
           5
         } while false
       }
-    } finally {
-      delete x
-    }
+    } finally delete x
   }
   test "call T" {
     val x = new T
@@ -68,9 +66,7 @@ type cross {
           5
         } while false
       }
-    } finally {
-      delete x
-    }
+    } finally delete x
   }
 }
 
@@ -84,9 +80,7 @@ type rebind {
           5
         } while false
       }
-    } finally {
-      delete x
-    }
+    } finally delete x
   }
   test "call T" {
     val x = new T
@@ -97,8 +91,6 @@ type rebind {
           5
         } while false
       }
-    } finally {
-      delete x
-    }
+    } finally delete x
   }
 }
