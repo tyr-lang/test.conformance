@@ -1,0 +1,20 @@
+with container.Iterator
+
+/**
+ * tests correctness of bound value parameters; minimal version for substitution
+ * debugging
+ */
+type mar:
+
+type def hasAA(cs : Iterator[character]) <: inline {
+  let r = inner(cs)
+  delete cs
+  r
+}
+
+type def inner(cs : Iterator[character]) <: inline
+  = cs.exists c do {'a' == c}
+
+test "use" {
+  hasAA("hallo".chars())
+}
