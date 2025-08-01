@@ -1,0 +1,87 @@
+with container.Iterator
+
+/**
+ * tests correctness of bound value parameters
+ */
+type mar:
+
+type def hasAA(cs : Iterator[character]) <: inline
+  = try {
+    if (cs.exists c do {'a' == c})
+      if (cs.exists c do {'a' == c})
+        2
+      else
+        1
+    else
+      0
+  } finally delete cs
+
+type def hasAAO(cs : Iterator[character]) <: inline
+  = try {
+    if (cs.exists c do {'a' == c})
+      if (cs.exists c do {'a' == c})
+        if (cs.exists c do {'o' == c})
+          3
+        else
+          2
+      else
+        1
+    else
+      0
+  } finally delete cs
+
+type def countAA(cs : Iterator[character]) <: inline
+  = try {
+    var r = 0
+    if (cs.exists c do {'a' == c})
+      ++r
+    if (cs.exists c do {'a' == c})
+      ++r
+    r
+  } finally delete cs
+
+type def countAAO(cs : Iterator[character]) <: inline
+  = try {
+    var r = 0
+    if (cs.exists c do {'a' == c})
+      ++r
+    if (cs.exists c do {'a' == c})
+      ++r
+    if (cs.exists c do {'0' == c})
+      ++r
+    r
+  } finally delete cs
+
+test "direct aa aa" {
+  2 == hasAA("aa".chars())
+}
+
+test "direct aa aa count" {
+  2 == countAA("aa".chars())
+}
+
+test "direct hallo aa" {
+  1 == hasAA("hallo".chars())
+}
+
+test "direct hallo aa count" {
+  1 == countAA("hallo".chars())
+}
+
+test "direct aao aao" {
+  3 == hasAA("aao".chars())
+}
+
+test "direct aao aao count" {
+  3 == countAA("aao".chars())
+}
+
+test "direct hallo aao" {
+  // 1 is the point here; buggy implementations might yield 2 or 3
+  1 == hasAA("hallo".chars())
+}
+
+test "direct hallo aao count" {
+  // 1 is the point here; buggy implementations might yield 2 or 3
+  1 == countAA("hallo".chars())
+}
