@@ -52,6 +52,48 @@ type def countAAO(cs : Iterator[character]) <: inline
     r
   } finally delete cs
 
+test "local aa aa" {
+  val cs = "aa".chars()
+  2 == hasAA(cs)
+}
+
+test "local aa aa count" {
+  val cs = "aa".chars()
+  2 == countAA(cs)
+}
+
+test "local hallo aa" {
+  val cs = "hallo".chars()
+  1 == hasAA(cs)
+}
+
+test "local hallo aa count" {
+  val cs = "hallo".chars()
+  1 == countAA(cs)
+}
+
+test "local aao aao" {
+  val cs = "aao".chars()
+  3 == hasAA(cs)
+}
+
+test "local aao aao count" {
+  val cs = "aao".chars()
+  3 == countAA(cs)
+}
+
+test "local hallo aao" {
+  val cs = "hallo".chars()
+  // 1 is the point here; buggy implementations might yield 2 or 3
+  1 == hasAA(cs)
+}
+
+test "local hallo aao count" {
+  val cs = "hallo".chars()
+  // 1 is the point here; buggy implementations might yield 2 or 3
+  1 == countAA(cs)
+}
+
 test "direct aa aa" {
   2 == hasAA("aa".chars())
 }
