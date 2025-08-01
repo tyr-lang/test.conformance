@@ -1,4 +1,5 @@
 with container.Iterator
+with tyr.io.System.out
 
 /**
  * tests correctness of bound value parameters
@@ -37,6 +38,7 @@ type def countAA(cs : Iterator[character]) <: inline
       ++r
     if (cs.exists c do {'a' == c})
       ++r
+    out -- r.show() -- "\n"
     r
   } finally delete cs
 
@@ -49,6 +51,7 @@ type def countAAO(cs : Iterator[character]) <: inline
       ++r
     if (cs.exists c do {'o' == c})
       ++r
+    out -- r.show() -- "\n"
     r
   } finally delete cs
 
@@ -116,6 +119,22 @@ test "direct aao aao" {
 
 test "direct aao aao count" {
   3 == countAA("aao".chars())
+}
+
+test "direct long aao" {
+  3 == hasAA("a,a,o".chars())
+}
+
+test "direct long aao count" {
+  3 == countAA("a,a,o".chars())
+}
+
+test "direct double aao" {
+  3 == hasAA("aaaaoo".chars())
+}
+
+test "direct double aao count" {
+  3 == countAA("aaaaoo".chars())
 }
 
 test "direct hallo aao" {
