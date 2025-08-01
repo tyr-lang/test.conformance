@@ -6,6 +6,16 @@ with tyr.io.System.out
  */
 type mar:
 
+type var first = true
+
+type def chars(s : String) : Iterator[character] {
+  if (!first)
+    throw new Exception
+
+  first = false
+  s.chars()
+}
+
 type def hasAA(cs : Iterator[character]) <: inline
   = try {
     if (cs.exists c do {'a' == c})
@@ -56,93 +66,93 @@ type def countAAO(cs : Iterator[character]) <: inline
   } finally delete cs
 
 test "local aa aa" {
-  val cs = "aa".chars()
+  val cs = chars("aa")
   2 == hasAA(cs)
 }
 
 test "local aa aa count" {
-  val cs = "aa".chars()
+  val cs = chars("aa")
   2 == countAA(cs)
 }
 
 test "local hallo aa" {
-  val cs = "hallo".chars()
+  val cs = chars("hallo")
   1 == hasAA(cs)
 }
 
 test "local hallo aa count" {
-  val cs = "hallo".chars()
+  val cs = chars("hallo")
   1 == countAA(cs)
 }
 
 test "local aao aao" {
-  val cs = "aao".chars()
+  val cs = chars("aao")
   3 == hasAA(cs)
 }
 
 test "local aao aao count" {
-  val cs = "aao".chars()
+  val cs = chars("aao")
   3 == countAA(cs)
 }
 
 test "local hallo aao" {
-  val cs = "hallo".chars()
+  val cs = chars("hallo")
   // 1 is the point here; buggy implementations might yield 2 or 3
   1 == hasAA(cs)
 }
 
 test "local hallo aao count" {
-  val cs = "hallo".chars()
+  val cs = chars("hallo")
   // 1 is the point here; buggy implementations might yield 2 or 3
   1 == countAA(cs)
 }
 
 test "direct aa aa" {
-  2 == hasAA("aa".chars())
+  2 == hasAA(chars("aa"))
 }
 
 test "direct aa aa count" {
-  2 == countAA("aa".chars())
+  2 == countAA(chars("aa"))
 }
 
 test "direct hallo aa" {
-  1 == hasAA("hallo".chars())
+  1 == hasAA(chars("hallo"))
 }
 
 test "direct hallo aa count" {
-  1 == countAA("hallo".chars())
+  1 == countAA(chars("hallo"))
 }
 
 test "direct aao aao" {
-  3 == hasAA("aao".chars())
+  3 == hasAA(chars("aao"))
 }
 
 test "direct aao aao count" {
-  3 == countAA("aao".chars())
+  3 == countAA(chars("aao"))
 }
 
 test "direct long aao" {
-  3 == hasAA("a,a,o".chars())
+  3 == hasAA(chars("a,a,o"))
 }
 
 test "direct long aao count" {
-  3 == countAA("a,a,o".chars())
+  3 == countAA(chars("a,a,o"))
 }
 
 test "direct double aao" {
-  3 == hasAA("aaaaoo".chars())
+  3 == hasAA(chars("aaaaoo"))
 }
 
 test "direct double aao count" {
-  3 == countAA("aaaaoo".chars())
+  3 == countAA(chars("aaaaoo"))
 }
 
 test "direct hallo aao" {
   // 1 is the point here; buggy implementations might yield 2 or 3
-  1 == hasAA("hallo".chars())
+  1 == hasAA(chars("hallo"))
 }
 
 test "direct hallo aao count" {
   // 1 is the point here; buggy implementations might yield 2 or 3
-  1 == countAA("hallo".chars())
+  1 == countAA(chars("hallo"))
 }
