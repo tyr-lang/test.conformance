@@ -47,7 +47,7 @@ type def countAAO(cs : Iterator[character]) <: inline
       ++r
     if (cs.exists c do {'a' == c})
       ++r
-    if (cs.exists c do {'0' == c})
+    if (cs.exists c do {'o' == c})
       ++r
     r
   } finally delete cs
