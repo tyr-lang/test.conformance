@@ -1,0 +1,94 @@
+/**
+ * ensure cross edge translation is done correctly; this is specifically about
+ * resubstitutions of throwing exits in the presence of cross edges
+ *
+ * @note  one might think that there is no interaction at all, but it exists
+ */
+type mar <: suppressCompilerMessage["W_FINALLY_TERMINATED"]:
+
+// we need a little helper since break from finally is not allowed otherwise
+type def h(seen : Ref[bool], b : Block[void], f : Block[void]) : bool {
+  try {
+    while true {
+      try {
+        if true
+          break
+      } finally {
+        seen = true
+      }
+    }
+    b.eval()
+    // this return should not be reachable in the actual test below
+    return false
+  } finally {
+    f.eval()
+  }
+}
+
+type def call {
+  var seen = false
+  val r = do {
+    try {
+      if (!seen) {
+        // note: we need to coerce seen to bool, because the implicit would be
+        // inserted after finally otherwise
+        // note: be careful with finallys that have side effects and implicits
+        // that rely on ordering; here, it is kind of intended
+        h(seen, {break (seen : bool)}, {break false})
+      }
+    } finally {
+      seen = false
+    }
+  } while true
+  r && !seen
+}
+
+type def inner <: inline {
+  var seen = false
+  val r = do {
+    try {
+      if (!seen) {
+        // note: we need to coerce seen to bool, because the implicit would be
+        // inserted after finally otherwise
+        // note: be careful with finallys that have side effects and implicits
+        // that rely on ordering; here, it is kind of intended
+        h(seen, {break (seen : bool)}, {break false})
+      }
+    } finally {
+      seen = false
+    }
+  } while true
+  r && !seen
+}
+
+test "call" {
+  call()
+}
+
+test "use" {
+  inner()
+}
+
+test "reapply" {
+  true && inner()
+}
+
+test "direct reapply" {
+  true && {
+    var seen = false
+    val r = do {
+      try {
+        if (!seen) {
+          // note: we need to coerce seen to bool, because the implicit would be
+          // inserted after finally otherwise
+          // note: be careful with finallys that have side effects and implicits
+          // that rely on ordering; here, it is kind of intended
+          h(seen, {break (seen : bool)}, {break false})
+        }
+      } finally {
+        seen = false
+      }
+    } while true
+    r && !seen
+  }
+}
