@@ -1,0 +1,106 @@
+with exceptions.NullAccess
+with exceptions.SegFault
+
+/**
+ * tests local throw optimization with bind and rebind
+ */
+type mar:
+new;
+
+type def base(b : Block[any], i : Block[any], a : Block[any]) : void {
+  b.eval()
+  try {
+    i.eval()
+  } catch e {
+    // use NA to signal skip a
+    if NullAccess {
+      delete e
+      return
+    }
+    else {
+      delete e
+    }
+  }
+  a.eval()
+}
+
+test "use" <: provable {
+  base({}, {}, {})
+}
+
+test "both" <: provable {
+  try {
+    base({}, {throw new SegFault}, {throw new NullAccess})
+  } catch e {
+    // use NA to signal skip a
+    if NullAccess {
+      delete e
+      return true
+    }
+    else {
+      delete e
+    }
+  }
+  false
+}
+
+test "reverse" <: provable {
+  base({}, {throw new NullAccess}, {throw new SegFault})
+}
+
+test "immediate" <: provable {
+  try {
+    base({throw new NullAccess}, {return false}, {return false})
+  } catch e {
+    // use NA to signal skip a
+    if NullAccess {
+      delete e
+      return true
+    }
+    else {
+      delete e
+    }
+  }
+  false
+}
+
+test "reverse rebind" <: provable {
+  true && {
+    base({}, {throw new NullAccess}, {throw new SegFault})
+    true
+  }
+}
+
+test "both rebind" <: provable {
+  true && {try {
+      base({}, {throw new SegFault}, {throw new NullAccess})
+    } catch e {
+      // use NA to signal skip a
+      if NullAccess {
+        delete e
+        return true
+      }
+      else {
+        delete e
+      }
+    }
+    false
+  }
+}
+
+test "immediate rebind" <: provable {
+  true && {try {
+      base({throw new NullAccess}, {return false}, {return false})
+    } catch e {
+      // use NA to signal skip a
+      if NullAccess {
+        delete e
+        return true
+      }
+      else {
+        delete e
+      }
+    }
+    false
+  }
+}
