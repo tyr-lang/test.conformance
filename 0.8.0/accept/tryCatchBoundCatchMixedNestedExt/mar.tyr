@@ -1,36 +1,18 @@
 with exceptions.NullAccess
 with exceptions.SegFault
+with ext := test.tryCatchBoundCatchMixedNested.mar
+with ext.base
 
 /**
  * tests local throw optimization with bind and rebind
  */
 public type mar:
 
-public type def base(b : Block[any], i : Block[any], a : Block[any]) : void {
-  b.eval()
-  true && {
-    try {
-      i.eval()
-    } catch e {
-      // use NA to signal skip a
-      if NullAccess {
-        delete e
-        return
-      }
-      else {
-        delete e
-      }
-    }
-    true
-  }
-  a.eval()
-}
-
 test "use" <: provable {
   base({}, {}, {})
 }
 
-public type def both(b : Block[bool]) : bool {
+type def both(b : Block[bool]) : bool {
   b.eval() && {try {
       base({}, {throw new SegFault}, {throw new NullAccess})
     } catch e {
@@ -47,14 +29,14 @@ public type def both(b : Block[bool]) : bool {
   }
 }
 
-public type def reverse(b : Block[bool]) : bool {
+type def reverse(b : Block[bool]) : bool {
   b.eval() && {
     base({}, {throw new NullAccess}, {throw new SegFault})
     true
   }
 }
 
-public type def immediate(b : Block[bool]) : bool {
+type def immediate(b : Block[bool]) : bool {
   b.eval() && {try {
       base({throw new NullAccess}, {return false}, {return false})
     } catch e {
@@ -105,4 +87,40 @@ test "reverse drop" <: provable {
 
 test "immediate drop" <: provable {
   !immediate(false)
+}
+
+test "ext both" <: provable {
+  ext.both(true)
+}
+
+test "ext reverse" <: provable {
+  ext.reverse(true)
+}
+
+test "ext immediate" <: provable {
+  ext.immediate(true)
+}
+
+test "ext both rebind" <: provable {
+  true && ext.both(true)
+}
+
+test "ext reverse rebind" <: provable {
+  true && ext.reverse(true)
+}
+
+test "ext immediate rebind" <: provable {
+  true && ext.immediate(true)
+}
+
+test "ext both drop" <: provable {
+  !ext.both(false)
+}
+
+test "ext reverse drop" <: provable {
+  !ext.reverse(false)
+}
+
+test "ext immediate drop" <: provable {
+  !ext.immediate(false)
 }
