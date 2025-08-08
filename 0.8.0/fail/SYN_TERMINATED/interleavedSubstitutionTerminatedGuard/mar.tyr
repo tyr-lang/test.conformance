@@ -1,0 +1,34 @@
+/**
+ * Passing a cross return into an if guard cannot be allowed since there is no
+ * guarantee that it keeps that shape on override.
+ *
+ * @note  I do not think that it makes sense to discuss this rule since it
+ *   almost never happen in practice and is essentially a bug in the design of
+ *   the called function. Or a lack of contract documentation.
+ */
+public type mar:
+
+public type def ite(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = if g.eval() tb.eval() else eb.eval()
+
+public type def n(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = ite(g.eval(), ite(g, tb, {return false}), ite(g, {return false}, eb))
+
+public type def pt(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = ite(g.eval(), ite(g, tb, {return false}), eb.eval())
+
+public type def pe(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = ite(g.eval(), tb.eval(), ite(g, {return false}, eb))
+
+public type def et(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = ite(g.eval(), ite(g, tb, eb.eval()), eb.eval())
+
+public type def ee(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = ite(g.eval(), tb.eval(), ite(g, tb.eval(), eb))
+
+type def nested(g : Block[bool])
+  = n(pt({return true}, g, g), pe(g,g,g), ee(g,g,g))
+
+test "nested t" {
+  nested(true)
+}

@@ -8,19 +8,19 @@ public type def ite(g : Block[bool], tb : Block[bool], eb : Block[bool])
   = if g.eval() tb.eval() else eb.eval()
 
 public type def n(g : Block[bool], tb : Block[bool], eb : Block[bool])
-  = if g.eval() ite(g, tb, {return false}) else ite(g, {return false}, eb)
+  = ite(g.eval(), ite(g, tb, {return false}), ite(g, {return false}, eb))
 
 public type def pt(g : Block[bool], tb : Block[bool], eb : Block[bool])
-  = if g.eval() ite(g, tb, {return false}) else eb.eval()
+  = ite(g.eval(), ite(g, tb, {return false}), eb.eval())
 
 public type def pe(g : Block[bool], tb : Block[bool], eb : Block[bool])
-  = if g.eval() tb.eval() else ite(g, {return false}, eb)
+  = ite(g.eval(), tb.eval(), ite(g, {return false}, eb))
 
 public type def et(g : Block[bool], tb : Block[bool], eb : Block[bool])
-  = if g.eval() ite(g, tb, eb.eval()) else eb.eval()
+  = ite(g.eval(), ite(g, tb, eb.eval()), eb.eval())
 
 public type def ee(g : Block[bool], tb : Block[bool], eb : Block[bool])
-  = if g.eval() tb.eval() else ite(g, tb.eval(), eb)
+  = ite(g.eval(), tb.eval(), ite(g, tb.eval(), eb))
 
 test "use" {
   ite(true, true, false)
@@ -31,6 +31,10 @@ test "use2" {
 
 test "n" {
   n(true, true, false)
+}
+
+test "n2" {
+  n(n(true, true, false), n(false, false, true), n(false, false, false))
 }
 
 test "pt" {
@@ -48,6 +52,26 @@ test "et" {
 test "ee" {
   ee(true, true, false)
 }
+
+type def nested(g : Block[bool])
+  = n(pe(g, true, g), pt({return true}, g, g), ee(g, true, g))
+
+test "nested t" {
+  nested(true)
+}
+
+test "nested f" {
+  !nested(false)
+}
+
+test "nested t re" {
+  true && nested(true)
+}
+
+test "nested f re" {
+  true && !nested(false)
+}
+
 
 test "nesting" {
   // the idea of this test was to check translation with deeper nesting but I
