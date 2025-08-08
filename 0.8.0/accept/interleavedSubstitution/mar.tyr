@@ -1,0 +1,66 @@
+/**
+ * Let substitutions intearleave their returns to ensure that they are tracked
+ * correctly.
+ */
+public type mar:
+
+public type def ite(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = if g.eval() tb.eval() else eb.eval()
+
+public type def n(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = if g.eval() ite(g, tb, {return false}) else ite(g, {return false}, eb)
+
+public type def pt(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = if g.eval() ite(g, tb, {return false}) else eb.eval()
+
+public type def pe(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = if g.eval() tb.eval() else ite(g, {return false}, eb)
+
+public type def et(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = if g.eval() ite(g, tb, eb.eval()) else eb.eval()
+
+public type def ee(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = if g.eval() tb.eval() else ite(g, tb.eval(), eb)
+
+test "use" {
+  ite(true, true, false)
+}
+test "use2" {
+  !ite(false, true, false)
+}
+
+test "n" {
+  n(true, true, false)
+}
+
+test "pt" {
+  pt(true, true, false)
+}
+
+test "pe" {
+  pe(true, true, false)
+}
+
+test "et" {
+  et(true, true, false)
+}
+
+test "ee" {
+  ee(true, true, false)
+}
+
+test "nesting" {
+  // the idea of this test was to check translation with deeper nesting but I
+  // didn't get there yet
+  // note: a very impartant test would be local/ext nested ite reapply, i.e.
+  // packaging essentially all the helper functions above into a single test
+  // expression by manually inlining until ite calls
+  false
+}
+
+test "todo" {
+  // obviously, only ite should use if
+  // since I found some issues with this version, keep it and add the intended
+  // variant in another test (check for ext variants)
+  false
+}
