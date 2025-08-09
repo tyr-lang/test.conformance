@@ -5,6 +5,16 @@
  * @note  as of Tyr 0.8, it is not clear if this is even possible while
  *   maintaining the intended semantics; an option could be flattening inner BAs
  *   because they contribute a lot of unoptimizable empty blocks
+ *
+ * @note  another option could be to eliminate inner BAs on compress already;
+ *   this should also significantly reduce the number of temporary blocks since
+ *   they are essentially copies of unmodifyable graphs
+ *
+ * @note  a third option is to determine non-rebindable root BAs; this should
+ *   apply to all of them here; a sad effect is that it would kind of defeat the
+ *   purpose of the tests, so at least some of them should be copied into
+ *   versions that have e.g. type dependencies to keep inner BAs alive in bound
+ *   blocks
  */
 public type mar:
 
@@ -55,4 +65,12 @@ test "deep t re" {
 
 test "deep f re" {
   true && !deep(false)
+}
+
+test "check memory consumption" {
+  // as of today, all tests pass, but consume ~16GB RAM; the purpose of
+  // reviewing this is to reduce the consumption below 1 GB hopefully
+  // with that setting, the test creates ~540k Blocks and ~200k CFGs surviving
+  // the OGSS GC
+  false
 }
