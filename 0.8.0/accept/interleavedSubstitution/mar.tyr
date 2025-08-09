@@ -54,7 +54,7 @@ test "ee" {
 }
 
 type def nested(g : Block[bool])
-  = n(pe(g, true, g), pt({return true}, g, g), ee(g, true, g))
+  = n(pe(g, true, g), pt(g, {return true}, {return true}), ee(g, {return g.eval()}, g))
 
 test "nested t" {
   nested(true)
