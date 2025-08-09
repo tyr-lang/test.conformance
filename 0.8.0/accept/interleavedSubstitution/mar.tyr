@@ -53,7 +53,7 @@ test "ee" {
   ee(true, true, false)
 }
 
-type def nested(g : Block[bool])
+public type def nested(g : Block[bool])
   = n(pe(g, true, g), pt(g, {return true}, {return true}), ee(g, {return g.eval()}, g))
 
 test "nested t" {
@@ -72,19 +72,36 @@ test "nested f re" {
   true && !nested(false)
 }
 
+// note: even at this depth, the code creates ~70k blocks with the current rules
+public type def deep(g : Block[bool])
+  = n(pe(g, true, !g.eval()),
+      pt(g,
+        et(!g.eval(),
+            pt(g, {return true}, {return false}),
+            g
+          ),
+        false),
+    {return g.eval()})
 
-test "nesting" {
-  // the idea of this test was to check translation with deeper nesting but I
-  // didn't get there yet
-  // note: a very impartant test would be local/ext nested ite reapply, i.e.
-  // packaging essentially all the helper functions above into a single test
-  // expression by manually inlining until ite calls
-  false
+test "deep t" {
+  deep(true)
 }
 
-test "todo" {
-  // obviously, only ite should use if
-  // since I found some issues with this version, keep it and add the intended
-  // variant in another test (check for ext variants)
-  false
+test "deep f" {
+  !deep(false)
+}
+
+test "deep t re" {
+  true && deep(true)
+}
+
+test "deep f re" {
+  true && !deep(false)
+}
+
+// note: this test creates ~80k blocks, but it is imortant wrt. ordering and
+// implicits
+test "deep mut" {
+  var r = true
+  r && deep(r) && {!(r = false)} && !deep(r) && !r
 }

@@ -1,0 +1,58 @@
+/**
+ * Ensure that deep nesting of binder applications can be translated without
+ * excessive resource consumption.
+ *
+ * @note  as of Tyr 0.8, it is not clear if this is even possible while
+ *   maintaining the intended semantics; an option could be flattening inner BAs
+ *   because they contribute a lot of unoptimizable empty blocks
+ */
+public type mar:
+
+public type def ite(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = if g.eval() tb.eval() else eb.eval()
+
+public type def n(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = ite(g.eval(), ite(g, tb, {return false}), ite(g, {return false}, eb))
+
+public type def pt(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = ite(g.eval(), ite(g, tb, {return false}), eb.eval())
+
+public type def pe(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = ite(g.eval(), tb.eval(), ite(g, {return false}, eb))
+
+public type def et(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = ite(g.eval(), ite(g, tb, eb.eval()), eb.eval())
+
+public type def ee(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = ite(g.eval(), tb.eval(), ite(g, tb.eval(), eb))
+
+type def deep(g : Block[bool])
+  = n(pe(g, true, !g.eval()),
+      n(g,
+        pt(g,
+          pe(g,
+            et(!g.eval(), {return false},
+              ee(g,
+                pt(g, {return true}, {return false}),
+                false)
+              ),
+            false),
+          false),
+        false),
+    {return g.eval()})
+
+test "deep t" {
+  deep(true)
+}
+
+test "deep f" {
+  !deep(false)
+}
+
+test "deep t re" {
+  true && deep(true)
+}
+
+test "deep f re" {
+  true && !deep(false)
+}
