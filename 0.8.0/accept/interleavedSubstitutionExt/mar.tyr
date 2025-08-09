@@ -1,0 +1,143 @@
+with ext := test.interleavedSubstitution.mar
+with ext.ite
+
+/**
+ * Let substitutions intearleave their returns to ensure that they are tracked
+ * correctly.
+ *
+ * @note  this test creates an insane amount of temporary blocks; if BAs are
+ *   eliminated correctly, almost all of these blocks can be deleted again
+ */
+type mar:
+
+type def n(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = ite(g.eval(), ite(g, tb, {return false}), ite(g, {return false}, eb))
+
+type def pt(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = ite(g.eval(), ite(g, tb, {return false}), eb.eval())
+
+type def pe(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = ite(g.eval(), tb.eval(), ite(g, {return false}, eb))
+
+type def et(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = ite(g.eval(), ite(g, tb, eb.eval()), eb.eval())
+
+type def ee(g : Block[bool], tb : Block[bool], eb : Block[bool])
+  = ite(g.eval(), tb.eval(), ite(g, tb.eval(), eb))
+
+test "use" {
+  ext.ite(true, true, false)
+}
+test "use2" {
+  !ext.ite(false, true, false)
+}
+
+test "n" {
+  n(true, true, false)
+}
+
+test "n2" {
+  n(n(true, true, false), n(false, false, true), n(false, false, false))
+}
+
+test "pt" {
+  pt(true, true, false)
+}
+
+test "pe" {
+  pe(true, true, false)
+}
+
+test "et" {
+  et(true, true, false)
+}
+
+test "ee" {
+  ee(true, true, false)
+}
+
+test "n ext" {
+  ext.n(true, true, false)
+}
+
+test "n2 ext" {
+  ext.n(ext.n(true, true, false), ext.n(false, false, true), ext.n(false, false, false))
+}
+
+test "n2 mixed" {
+  ext.n(n(true, true, false), ext.n(false, false, true), n(false, false, false))
+}
+
+test "pt ext" {
+  ext.pt(true, true, false)
+}
+
+test "pe ext" {
+  ext.pe(true, true, false)
+}
+
+test "et ext" {
+  ext.et(true, true, false)
+}
+
+test "ee ext" {
+  ext.ee(true, true, false)
+}
+
+type def nested(g : Block[bool])
+  = n(pe(g, true, g), ext.pt(g, {return true}, {return true}), ee(g, {return g.eval()}, g))
+
+test "nested t" {
+  nested(true)
+}
+
+test "nested f" {
+  !nested(false)
+}
+
+test "nested t re" {
+  true && nested(true)
+}
+
+test "nested f re" {
+  true && !nested(false)
+}
+
+test "nested t ext" {
+  ext.nested(true)
+}
+
+test "nested f ext" {
+  !ext.nested(false)
+}
+
+test "nested t re ext" {
+  true && ext.nested(true)
+}
+
+test "nested f re ext" {
+  true && !ext.nested(false)
+}
+
+test "deep t" {
+  ext.deep(true)
+}
+
+test "deep f" {
+  !ext.deep(false)
+}
+
+test "deep t re" {
+  true && ext.deep(true)
+}
+
+test "deep f re" {
+  true && !ext.deep(false)
+}
+
+// note: this test creates ~80k blocks, but it is imortant wrt. ordering and
+// implicits
+test "deep mut" {
+  var r = true
+  r && ext.deep(r) && {!(r = false)} && !ext.deep(r) && !r
+}

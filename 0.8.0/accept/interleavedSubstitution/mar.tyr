@@ -1,6 +1,9 @@
 /**
  * Let substitutions intearleave their returns to ensure that they are tracked
  * correctly.
+ *
+ * @note  this test creates an insane amount of temporary blocks; if BAs are
+ *   eliminated correctly, almost all of these blocks can be deleted again
  */
 public type mar:
 
