@@ -1,0 +1,33 @@
+with container.ArrayBuffer
+
+/**
+ * tests correctness of return/break/continue cross edges with finally blocks
+ *
+ * @note to self: I don't see why catch would be an issue, but finally is
+ */
+type mar:
+
+test "simple chars" {
+  var arr = new ArrayBuffer[String]
+
+  arr += "möp"
+  arr += "count"
+  arr += ""
+  arr += "☢"
+
+  9 == (arr.iterator().fold[int](0) s,v do {
+    s + (v.chars().count _ do {true}).sign().resize[32]()
+  })
+}
+
+test "fold fold chars" {
+  false
+}
+
+test "fold fold bytes" {
+  false
+}
+
+test "fold fold both" {
+  false
+}
