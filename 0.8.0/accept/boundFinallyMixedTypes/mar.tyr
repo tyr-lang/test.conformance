@@ -31,3 +31,13 @@ test "fold fold bytes" {
 test "fold fold both" {
   false
 }
+
+test "count stateful mixed" {
+  // rebuild the complex fold tests with counts and a local variable
+  false
+}
+
+test "foreach stateful mixed" {
+  // rebuild the complex fold tests with foreach and a local variable
+  false
+}
