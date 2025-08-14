@@ -1,0 +1,25 @@
+/**
+ * The reason for not allowing override on function templates is that they
+ * cannot take part in dynamic dispatch since they would require an infinite
+ * dispatch vector.
+ *
+ * @note to self  stricly speaking, the part about RT is not correct. We could
+ *   add all functions that have actually been materialized in the linker if we
+ *   add a rule that all other inhabitants of a method slot must be materialized
+ *   as well. I doubt, however, that there are any use cases for it.
+ */
+type mar:
+
+test "use" {
+  // once this works, make fold take one R Type parameter and get rid of other
+  // implementations
+  false
+}
+
+test "generic RT override" {
+  // note: generic function templates with a single projection should be
+  // exempted and allowed to take part in dispatching since they are effective-
+  // regular functions. Detection should work by checking if all CT parameters
+  // are generic.
+  false
+}
