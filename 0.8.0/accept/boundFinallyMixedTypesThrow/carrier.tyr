@@ -64,6 +64,45 @@ test "nested call both chars" <: mempass {
   } finally delete arr
 }
 
+test "nested call both bytes reapply" <: provable {
+  var arr = init()
+
+  try {
+    true && 12 == (arr.iterator().fold[int](0) s,v do {
+      try {
+        s +
+        bytes(v, throw new Carrier(bytes(v, true))) +
+        chars(v, throw new Carrier(chars(v, true)))
+      } catch e {
+        if Carrier {
+          val r = e.r
+          delete e
+          r
+        }
+      }
+    })
+  } finally delete arr
+}
+
+test "nested call both chars reapply" <: mempass {
+  var arr = init()
+
+  try {
+    true && 9 == (arr.iterator().fold[int](0) s,v do {
+      try {
+        s + bytes(v, {0 != bytes(v, true)}) +
+        chars(v, throw new Carrier(chars(v, true)))
+      } catch e {
+        if Carrier {
+          val r = e.r
+          delete e
+          r
+        }
+      }
+    })
+  } finally delete arr
+}
+
 test "foreach stateful mixed catch" <: mempass {
   var arr = init()
   var r = 0U
