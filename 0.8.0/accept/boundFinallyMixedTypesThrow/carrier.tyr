@@ -1,0 +1,88 @@
+with container.ArrayBuffer
+
+/**
+ * tests correctness of throw cross edges with finally blocks
+ */
+class Carrier <: Exception:
+
+var r : int
+new (r := r : int);
+
+type def init {
+  var arr = new ArrayBuffer[String]
+
+  arr += "möp"
+  arr += "count"
+  arr += ""
+  arr += "☢"
+
+  arr
+}
+
+type def bytes(s : String, b : Block[bool]) : int
+  = (s.bytes().count _ do {b.eval()}).sign().resize[32]()
+
+type def chars(s : String, b : Block[bool]) : int
+  = (s.chars().count _ do {b.eval()}).sign().resize[32]()
+
+test "nested call both bytes" <: mempass {
+  var arr = init()
+
+  try {
+    12 == (arr.iterator().fold[int](0) s,v do {
+      try {
+        s +
+        bytes(v, throw new Carrier(bytes(v, true))) +
+        chars(v, throw new Carrier(chars(v, true)))
+      } catch e {
+        if Carrier {
+          val r = e.r
+          delete e
+          r
+        }
+      }
+    })
+  } finally delete arr
+}
+
+test "nested call both chars" <: mempass {
+  var arr = init()
+
+  try {
+    9 == (arr.iterator().fold[int](0) s,v do {
+      try {
+        s + bytes(v, {0 != bytes(v, true)}) +
+        chars(v, throw new Carrier(chars(v, true)))
+      } catch e {
+        if Carrier {
+          val r = e.r
+          delete e
+          r
+        }
+      }
+    })
+  } finally delete arr
+}
+
+test "foreach stateful mixed catch" <: mempass {
+  var arr = init()
+  var r = 0U
+
+  try {
+    0U == r &&
+    5U == try {
+      arr.iterator().foreach s do {
+        s.bytes().foreach _ do {++r; if (5U == r) throw new Carrier(r) }
+        s.chars().foreach _ do {++r; if (25U == r) throw new Carrier(r) }
+      }
+      // 21U ==
+      r
+    } catch e {
+      if Carrier {
+        r = e.r
+        delete e
+        r
+      }
+    }
+  } finally delete arr
+}
