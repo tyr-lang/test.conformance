@@ -11,7 +11,9 @@ interface I {
     var xs = new Array[Object](0);
     var c = 0L;
     range(0, 10).foreach i do {
-      xs.foreach x do {
+      // note: array offers mutable and immutable foreach; thus, inference for x
+      // cannot be allowed under the current rules
+      xs.foreach x : Object do {
         if(I ? x) { ++c } else { ++c }
       }
     }
