@@ -18,6 +18,12 @@ type def init {
   arr
 }
 
+type def bytes(s : String, b : Block[bool]) : int
+  = (s.bytes().count _ do {b.eval()}).sign().resize[32]()
+
+type def chars(s : String, b : Block[bool]) : int
+  = (s.chars().count _ do {b.eval()}).sign().resize[32]()
+
 test "simple chars" {
   var arr = init()
 
@@ -34,16 +40,50 @@ test "simple bytes" {
   })
 }
 
+test "nested call both bytes" {
+  var arr = init()
+
+  12 == (arr.iterator().fold[int](0) s,v do {
+    do {
+      s + bytes(v, {break bytes(v, true)}) + chars(v, {break chars(v, true)})
+    } while false
+  })
+}
+
+test "nested call both chars" {
+  var arr = init()
+
+  9 == (arr.iterator().fold[int](0) s,v do {
+    do {
+      s + bytes(v, {0 != bytes(v, true)}) + chars(v, {break chars(v, true)})
+    } while false
+  })
+}
+
 test "fold fold chars" {
-  false
+  var arr = init()
+
+  9 == (arr.iterator().fold[int](0) s,v do {
+    s + (v.chars().fold[int](0) s,v do {++s})
+  })
 }
 
 test "fold fold bytes" {
-  false
+  var arr = init()
+
+  12 == (arr.iterator().fold[int](0) s,v do {
+    s + (v.bytes().fold[int](0) s,v do {++s})
+  })
 }
 
 test "fold fold both" {
-  false
+  var arr = init()
+
+  21 == (arr.iterator().fold[int](0) s,v do {
+    s +
+    (v.bytes().fold[int](0) s,v do {++s}) +
+    (v.chars().fold[int](0) s,v do {++s})
+  })
 }
 
 test "count stateful mixed" {
