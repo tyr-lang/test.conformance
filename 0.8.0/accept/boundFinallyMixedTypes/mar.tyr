@@ -7,7 +7,7 @@ with container.ArrayBuffer
  */
 type mar:
 
-test "simple chars" {
+type def init {
   var arr = new ArrayBuffer[String]
 
   arr += "möp"
@@ -15,8 +15,22 @@ test "simple chars" {
   arr += ""
   arr += "☢"
 
+  arr
+}
+
+test "simple chars" {
+  var arr = init()
+
   9 == (arr.iterator().fold[int](0) s,v do {
-    s + (v.chars().count _ do {true}).sign().resize[32]()
+    s + (v.chars().count _ do {v.size() < 15U}).sign().resize[32]()
+  })
+}
+
+test "simple bytes" {
+  var arr = init()
+
+  12 == (arr.iterator().fold[int](0) s,v do {
+    s + (v.bytes().count _ do {v.size() < 15U}).sign().resize[32]()
   })
 }
 
