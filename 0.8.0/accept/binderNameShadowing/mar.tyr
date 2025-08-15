@@ -1,0 +1,46 @@
+with container.ArrayBuffer
+
+/**
+ * Tests correctness of name shadowing and binding for nested binder
+ * applications while reusing bound variable names.
+ */
+type mar:
+
+type def init {
+  var arr = new ArrayBuffer[String]
+
+  arr += "möp"
+  arr += "count"
+  arr += ""
+  arr += "☢"
+
+  arr
+}
+
+test "unused" {
+  var arr = init()
+  var r = 0U
+
+  0U == r &&
+  {
+    arr.iterator().foreach s do {
+      s.bytes().foreach s do {++r}
+      s.chars().foreach s do {++r}
+    }
+    21U == r
+  }
+}
+
+test "used" {
+  var arr = init()
+  var r = 0U
+
+  0U == r &&
+  {
+    arr.iterator().foreach s do {
+      r += s.bytes().count s do {0u8 != s}
+      r += s.chars().count s do {'Π' != s}
+    }
+    21U == r
+  }
+}
