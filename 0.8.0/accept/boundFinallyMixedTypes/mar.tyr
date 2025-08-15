@@ -24,74 +24,155 @@ type def bytes(s : String, b : Block[bool]) : int
 type def chars(s : String, b : Block[bool]) : int
   = (s.chars().count _ do {b.eval()}).sign().resize[32]()
 
-test "simple chars" {
+test "simple chars" <: mempass {
   var arr = init()
 
-  9 == (arr.iterator().fold[int](0) s,v do {
-    s + (v.chars().count _ do {v.size() < 15U}).sign().resize[32]()
-  })
+  try {
+    9 == (arr.iterator().fold[int](0) s,v do {
+      s + (v.chars().count _ do {v.size() < 15U}).sign().resize[32]()
+    })
+  } finally delete arr
 }
 
-test "simple bytes" {
+test "simple bytes" <: mempass {
   var arr = init()
 
-  12 == (arr.iterator().fold[int](0) s,v do {
-    s + (v.bytes().count _ do {v.size() < 15U}).sign().resize[32]()
-  })
+  try {
+    12 == (arr.iterator().fold[int](0) s,v do {
+      s + (v.bytes().count _ do {v.size() < 15U}).sign().resize[32]()
+    })
+  } finally delete arr
 }
 
-test "nested call both bytes" {
+test "nested call both bytes" <: mempass {
   var arr = init()
 
-  12 == (arr.iterator().fold[int](0) s,v do {
-    do {
-      s + bytes(v, {break bytes(v, true)}) + chars(v, {break chars(v, true)})
-    } while false
-  })
+  try {
+    12 == (arr.iterator().fold[int](0) s,v do {
+      do {
+        s + bytes(v, {break bytes(v, true)}) + chars(v, {break chars(v, true)})
+      } while false
+    })
+  } finally delete arr
 }
 
-test "nested call both chars" {
+test "nested call both chars" <: mempass {
   var arr = init()
 
-  9 == (arr.iterator().fold[int](0) s,v do {
-    do {
-      s + bytes(v, {0 != bytes(v, true)}) + chars(v, {break chars(v, true)})
-    } while false
-  })
+  try {
+    9 == (arr.iterator().fold[int](0) s,v do {
+      do {
+        s + bytes(v, {0 != bytes(v, true)}) + chars(v, {break chars(v, true)})
+      } while false
+    })
+  } finally delete arr
 }
 
-test "fold fold chars" {
+test "fold fold chars nested inc" <: mempass {
   var arr = init()
 
-  9 == (arr.iterator().fold[int](0) s,v do {
-    s + (v.chars().fold[int](0) s,v do {++s})
-  })
+  try {
+    1 == (arr.iterator().fold[int](0) s,v do {
+      v.chars().fold[int](0) _,_ do {++s}
+    })
+  } finally delete arr
 }
 
-test "fold fold bytes" {
+test "fold fold chars nested init" <: mempass {
   var arr = init()
 
-  12 == (arr.iterator().fold[int](0) s,v do {
-    s + (v.bytes().fold[int](0) s,v do {++s})
-  })
+  try {
+    9 == (arr.iterator().fold[int](0) s,v do {
+      v.chars().fold[int](s) _,_ do {++s}
+    })
+  } finally delete arr
 }
 
-test "fold fold both" {
+test "fold fold chars" <: mempass {
   var arr = init()
 
-  21 == (arr.iterator().fold[int](0) s,v do {
-    s +
-    (v.bytes().fold[int](0) s,v do {++s}) +
-    (v.chars().fold[int](0) s,v do {++s})
-  })
+  try {
+    9 == (arr.iterator().fold[int](0) s,v do {
+      s + (v.chars().fold[int](0) s2,_ do {++s2})
+    })
+  } finally delete arr
 }
 
-test "count stateful mixed" {
-  // rebuild the complex fold tests with counts and a local variable
-  false
+test "fold fold bytes" <: mempass {
+  var arr = init()
+
+  try {
+    12 == (arr.iterator().fold[int](0) s,v do {
+      s + (v.bytes().fold[int](0) s2,_ do {++s2})
+    })
+  } finally delete arr
 }
 
-test "foreach stateful mixed" {
-  // rebuild the complex fold tests with foreach and a local variable
-  false
+test "fold fold both" <: mempass {
+  var arr = init()
+
+  try {
+    21 == (arr.iterator().fold[int](0) s,v do {
+      s +
+      (v.bytes().fold[int](0) s2,_ do {++s2}) +
+      (v.chars().fold[int](0) s2,_ do {++s2})
+    })
+  } finally delete arr
+}
+
+test "fold fold both nested" <: mempass {
+  var arr = init()
+
+  try {
+    21 == (arr.iterator().fold[int](0) s,v do {
+      v.chars().fold[int](v.bytes().fold[int](s) _,_ do {++s}) _,_ do {++s}
+    })
+  } finally delete arr
+}
+
+test "count stateful mixed" <: mempass {
+  var arr = init()
+  var r = 0U
+
+  try {
+    0U == r &&
+    3U == (arr.iterator().count s do {
+      0U < (s.bytes().count _ do {0U < ++r}) +
+      (s.chars().count _ do {0U < ++r})
+    }) &&
+    21U == r
+  } finally delete arr
+}
+
+test "foreach stateful mixed" <: mempass {
+  var arr = init()
+  var r = 0U
+
+  try {
+    0U == r &&
+    {
+      arr.iterator().foreach s do {
+        s.bytes().foreach _ do {++r}
+        s.chars().foreach _ do {++r}
+      }
+      21U == r
+    }
+  } finally delete arr
+}
+
+test "foreach stateful mixed loop" <: mempass {
+  var arr = init()
+  var r = 0U
+
+  try {
+    0U == r &&
+    25U == (do {
+      arr.iterator().foreach s do {
+        s.bytes().foreach _ do {++r; if (25U == r) break r }
+        s.chars().foreach _ do {++r; if (25U == r) break r }
+      }
+      // 21U ==
+      r
+    } while true)
+  } finally delete arr
 }
