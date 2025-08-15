@@ -25,7 +25,7 @@ type def bytes(s : String, b : Block[bool]) : int
 type def chars(s : String, b : Block[bool]) : int
   = (s.chars().count _ do {b.eval()}).sign().resize[32]()
 
-test "nested call both bytes" <: mempass {
+test "nested call both bytes" <: provable {
   var arr = init()
 
   try {

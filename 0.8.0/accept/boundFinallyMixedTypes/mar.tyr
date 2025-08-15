@@ -44,7 +44,7 @@ test "simple bytes" <: mempass {
   } finally delete arr
 }
 
-test "nested call both bytes" <: mempass {
+test "nested call both bytes" <: provable {
   var arr = init()
 
   try {
