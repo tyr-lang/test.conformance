@@ -93,4 +93,27 @@ type rebind {
       }
     } finally delete x
   }
+
+  test "double S" {
+    val x = new S
+    try {
+      true && true && 1 == {
+        do {
+          x.outer(7, break 1)
+          5
+        } while false
+      }
+    } finally delete x
+  }
+  test "double T" {
+    val x = new T
+    try {
+      true && true && 1 == {
+        do {
+          x.outer(7, break 1)
+          5
+        } while false
+      }
+    } finally delete x
+  }
 }
