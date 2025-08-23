@@ -1,0 +1,87 @@
+with range := container.range.apply
+
+/**
+ * tests that interleaved cross edges rebind even if no value is passed
+ *
+ * @note  this is kind of the void version of chi rebind tests
+ */
+type mar:
+
+type def outer(v : int, n : int, b : Block[int]) = f(v, n, b)
+type def f(v : int, n : int, b : Block[int]) {
+  var i = 0;
+  do {
+    i = inner(v, break)
+    range(0,n).foreach _ do (i += b.eval())
+  } while false
+  i
+}
+
+type def inner(n : int, b : Block[int]) = g(n, b)
+type def g(n : int, b : Block[int]) {
+  var i = 0
+  range(0,n).foreach _ do (i += b.eval())
+  i
+}
+
+test "call" {
+  1 == outer(1, 7, 1)
+}
+
+test "cross" {
+  5 == {
+    do {
+      outer(1, 5, break)
+    } while false
+    5
+  }
+}
+
+test "single" {
+  true && 5 == {
+    do {
+      outer(1, 7, break)
+    } while false
+    5
+  }
+}
+
+test "double" {
+  true && true && 5 == {
+    do {
+      outer(1, 7, break)
+    } while false
+    5
+  }
+}
+
+test "call 0" {
+  7 == outer(0, 7, 1)
+}
+
+test "cross 0" {
+  2 == {
+    do {
+      outer(0, 5, break)
+    } while false
+    5
+  }
+}
+
+test "single 0" {
+  true && 2 == {
+    do {
+      outer(0, 7, break)
+    } while false
+    5
+  }
+}
+
+test "double 0" {
+  true && true && 2 == {
+    do {
+      outer(0, 7, break)
+    } while false
+    5
+  }
+}
