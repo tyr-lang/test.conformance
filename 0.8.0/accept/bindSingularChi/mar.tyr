@@ -1,20 +1,28 @@
 with range := container.range.apply
 
 /**
- * tests that a chi is translated correctly
+ * tests that a chi with a single argument survives; we achieve it by not using
+ * the paramater at all
  *
  * @note  requires manual inspection until we have π-rebind
+ *
+ * @note  with the current implementation, only the T tests have singular chis
  */
 class T {
   def outer(n : int, b : Block[int]) = f(n, b)
   def f(n : int, b : Block[int]) {
     var i = 0
-    range(0,n).foreach _ do (i += b.eval())
+    range(0,n).foreach _ do (i += 1)
     i
   }
 }
 
 class S <: T {
+  // note: as of Tyr 0.8, there is no π-rebind, so T.outer needs to be
+  // overridden explicitly if it should call S.f
+  override
+  def outer(n : int, b : Block[int]) = f(n, b)
+
   // same effect, but uses eval twice
   override
   def f(n : int, b : Block[int]) {
@@ -60,7 +68,7 @@ type cross {
   test "call T" {
     val x = new T
     try {
-      1 == {
+      5 == {
         do {
           x.outer(7, break 1)
           5
@@ -85,7 +93,7 @@ type rebind {
   test "call T" {
     val x = new T
     try {
-      true && 1 == {
+      true && 5 == {
         do {
           x.outer(7, break 1)
           5
@@ -108,7 +116,7 @@ type rebind {
   test "double T" {
     val x = new T
     try {
-      true && true && 1 == {
+      true && true && 5 == {
         do {
           x.outer(7, break 1)
           5
