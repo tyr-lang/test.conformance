@@ -1,0 +1,27 @@
+/**
+ * Tests correctness of break/continue cross edges with nesting and operators.
+ * This tests acts as counter example to some ideas one might have when trying
+ * to implement cross edge substitution.
+ */
+type mar:
+
+type def ++ (b : Block[bool]) : bool = b.eval()
+type def -- (b : Block[bool]) : bool = `++`(b)
+
+test "direct" {
+  // TODO note to self: wenn das nicht erlaubt ist bau ich beim rebind noch ein
+  // open lookup ein; damit kann man dann auch operatoren mit with importieren;
+  // sollte nur dann passieren, wenn es keinen match gibt; hab kurz gedacht
+  // auch implicit, aber das mag ich nicht
+  ++ ++ (do {
+    ++ ++ (false || {break true})
+    false
+  } while false)
+}
+
+test "indirect" {
+  -- -- (do {
+    -- -- (false || {break true})
+    false
+  } while false)
+}
