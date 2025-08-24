@@ -1,0 +1,46 @@
+/**
+ * Tests correctness of break/continue cross edges with nesting and operators.
+ * This tests acts as counter example to some ideas one might have when trying
+ * to implement cross edge substitution.
+ */
+type mar:
+
+type def ++ (b : Block[bool]) : bool = b.eval()
+type def -- (b : Block[bool]) : bool = `++`(b)
+
+test "flat" {
+  do {
+    true && true && {break true}
+    false
+  } while false
+}
+
+test "min" {
+  true && (do {
+    // note: really two &&, because we want to trigger cross edges to get
+    // associated with the wrong binder application
+    true && true && {break true}
+    false
+  } while false)
+}
+
+test "reapply" {
+  true && true && (do {
+    true && true && {break true}
+    false
+  } while false)
+}
+
+test "direct" {
+  ++ ++ (do {
+    ++ ++ (false || {break true})
+    false
+  } while false)
+}
+
+test "indirect" {
+  -- -- (do {
+    -- -- (false || {break true})
+    false
+  } while false)
+}
