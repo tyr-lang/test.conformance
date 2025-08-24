@@ -32,6 +32,10 @@ test "reapply" {
 }
 
 test "direct" {
+  // TODO note to self: wenn das nicht erlaubt ist bau ich beim rebind noch ein
+  // open lookup ein; damit kann man dann auch operatoren mit with importieren;
+  // sollte nur dann passieren, wenn es keinen match gibt; hab kurz gedacht
+  // auch implicit, aber das mag ich nicht
   ++ ++ (do {
     ++ ++ (false || {break true})
     false
