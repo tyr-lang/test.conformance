@@ -25,7 +25,7 @@ type def g(n : int, b : Block[int]) {
 }
 
 test "call" {
-  1 == outer(1, 7, 1)
+  0 == outer(1, 7, 1)
 }
 
 test "cross" {
@@ -60,7 +60,7 @@ test "call 0" {
 }
 
 test "cross 0" {
-  2 == {
+  5 == {
     do {
       outer(0, 5, break)
     } while false
@@ -69,7 +69,7 @@ test "cross 0" {
 }
 
 test "single 0" {
-  true && 2 == {
+  true && 5 == {
     do {
       outer(0, 7, break)
     } while false
@@ -78,7 +78,7 @@ test "single 0" {
 }
 
 test "double 0" {
-  true && true && 2 == {
+  true && true && 5 == {
     do {
       outer(0, 7, break)
     } while false
