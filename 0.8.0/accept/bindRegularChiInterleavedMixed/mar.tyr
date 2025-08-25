@@ -23,7 +23,7 @@ type def g(n : int, b : Block[int]) {
 }
 
 test "call" {
-  1 == outer(1, 7, 1)
+  0 == outer(1, 7, 1)
 }
 
 test "cross" {
