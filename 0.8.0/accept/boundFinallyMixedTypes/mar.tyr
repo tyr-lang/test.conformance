@@ -44,11 +44,12 @@ test "simple bytes" <: mempass {
   } finally delete arr
 }
 
-test "nested call both bytes" <: provable {
+test "nested call both bytes" <: mempass {
   var arr = init()
 
   try {
-    12 == (arr.iterator().fold[int](0) s,v do {
+    // note to self: yields the result of the last value
+    3 == (arr.iterator().fold[int](0) s,v do {
       do {
         s + bytes(v, {break bytes(v, true)}) + chars(v, {break chars(v, true)})
       } while false
@@ -60,7 +61,8 @@ test "nested call both chars" <: mempass {
   var arr = init()
 
   try {
-    9 == (arr.iterator().fold[int](0) s,v do {
+    // note to self: yields the result of the last value
+    1 == (arr.iterator().fold[int](0) s,v do {
       do {
         s + bytes(v, {0 != bytes(v, true)}) + chars(v, {break chars(v, true)})
       } while false
