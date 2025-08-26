@@ -38,8 +38,8 @@ test "used" {
   0U == r &&
   {
     arr.iterator().foreach s do {
-      r += s.bytes().count s do {0u8 != s}
-      r += s.chars().count s do {'Π' != s}
+      r += (s.bytes().count s do {0u8 != s})
+      r += (s.chars().count s do {'Π' != s})
     }
     21U == r
   }
