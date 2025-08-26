@@ -2,37 +2,27 @@
  * Tests correctness of break/continue cross edges with nesting and operators.
  * This tests acts as counter example to some ideas one might have when trying
  * to implement cross edge substitution.
+ *
+ * @note  here, it is soly on name resolution and should work once open lookup
+ *   for operators is added
  */
 type mar:
-new;
 
-def ++ (b : Block[bool]) : bool = b.eval()
-def -- (b : Block[bool]) : bool = this ++ b
+type def ++ (b : Block[bool]) : bool = b.eval()
+type def -- (b : Block[bool]) : bool = `++`(b)
 
-test "direct" <: provable {
-  let x = new mar
-
+test "direct" {
   // TODO note to self: wenn das nicht erlaubt ist bau ich beim rebind noch ein
   // open lookup ein; damit kann man dann auch operatoren mit with importieren;
   // sollte nur dann passieren, wenn es keinen match gibt; hab kurz gedacht
   // auch implicit, aber das mag ich nicht
-  x ++ x ++ (do {
-    x ++ x ++ (false || {break true})
+  ++ ++ (do {
+    ++ ++ (false || {break true})
     false
   } while false)
 }
 
-test "indirect" <: provable {
-  let x = new mar
-
-  x -- x -- (do {
-    x -- x -- (false || {break true})
-    false
-  } while false)
-}
-
-test "missing this" <: noCompile[NAM_NOT_FOUND_INEXISTENT] {
-  // should result in a proper error message and not crash the compiler
+test "indirect" {
   -- -- (do {
     -- -- (false || {break true})
     false
