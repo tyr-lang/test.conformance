@@ -17,7 +17,7 @@ class T <: A {
   override /* field cannot take an explicit target */
   var g : int;
 
-  new (g := x : int);
+  new (g := x : int){}
 
   new {
     A.new(4)

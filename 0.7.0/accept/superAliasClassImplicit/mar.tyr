@@ -17,7 +17,7 @@ class T <: A {
   override
   var g : int;
 
-  new (g := x : int);
+  new (g := x : int){}
 
   new {
     A.new(4)
