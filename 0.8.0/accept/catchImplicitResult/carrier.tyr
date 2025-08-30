@@ -1,0 +1,21 @@
+/**
+ * tests correctness of implicit conversion from catch results
+ */
+class Carrier <: Exception:
+
+var r : bool
+new (r := r : bool);
+
+test "use" <: provable {
+  try {
+    if true
+      throw new Carrier(true)
+    false
+  } catch e {
+    if Carrier {
+      val r = e.r
+      delete e
+      r
+    }
+  }
+}
