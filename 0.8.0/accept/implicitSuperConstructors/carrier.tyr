@@ -1,0 +1,20 @@
+/**
+ * tests correctness of implicit super constructor calls
+ */
+class Carrier <: Exception:
+
+// should call Exception.new
+new;
+
+test "proof" <: provable {
+  try {
+    if true
+      throw new Carrier
+    false
+  } catch e {
+    if Carrier {
+      delete e
+      true
+    }
+  }
+}

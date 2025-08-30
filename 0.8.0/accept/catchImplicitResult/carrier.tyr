@@ -4,16 +4,30 @@
 class Carrier <: Exception:
 
 var r : bool
-new (r := r : bool);
+new (r := r : bool){Exception.new()}
 
-test "use" <: provable {
+test "use" {
   try {
     if true
       throw new Carrier(true)
     false
   } catch e {
     if Carrier {
-      val r = e.r
+      val r : bool = e.r
+      delete e
+      r
+    }
+  }
+}
+
+test "proof" <: provable {
+  try {
+    if true
+      throw new Carrier(true)
+    false
+  } catch e {
+    if Carrier {
+      val r : bool = e.r
       delete e
       r
     }
