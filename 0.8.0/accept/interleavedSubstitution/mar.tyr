@@ -25,53 +25,53 @@ public type def et(g : Block[bool], tb : Block[bool], eb : Block[bool])
 public type def ee(g : Block[bool], tb : Block[bool], eb : Block[bool])
   = ite(g.eval(), tb.eval(), ite(g, tb.eval(), eb))
 
-test "use" {
+test "use" <: provable {
   ite(true, true, false)
 }
-test "use2" {
+test "use2" <: provable {
   !ite(false, true, false)
 }
 
-test "n" {
+test "n" <: provable {
   n(true, true, false)
 }
 
-test "n2" {
+test "n2" <: provable {
   n(n(true, true, false), n(false, false, true), n(false, false, false))
 }
 
-test "pt" {
+test "pt" <: provable {
   pt(true, true, false)
 }
 
-test "pe" {
+test "pe" <: provable {
   pe(true, true, false)
 }
 
-test "et" {
+test "et" <: provable {
   et(true, true, false)
 }
 
-test "ee" {
+test "ee" <: provable {
   ee(true, true, false)
 }
 
 public type def nested(g : Block[bool])
   = n(pe(g, true, g), pt(g, {return true}, {return true}), ee(g, {return g.eval()}, g))
 
-test "nested t" {
+test "nested t" <: provable {
   nested(true)
 }
 
-test "nested f" {
+test "nested f" <: provable {
   !nested(false)
 }
 
-test "nested t re" {
+test "nested t re" <: provable {
   true && nested(true)
 }
 
-test "nested f re" {
+test "nested f re" <: provable {
   true && !nested(false)
 }
 
@@ -86,25 +86,25 @@ public type def deep(g : Block[bool])
         false),
     {return g.eval()})
 
-test "deep t" {
+test "deep t" <: provable {
   deep(true)
 }
 
-test "deep f" {
+test "deep f" <: provable {
   !deep(false)
 }
 
-test "deep t re" {
+test "deep t re" <: provable {
   true && deep(true)
 }
 
-test "deep f re" {
+test "deep f re" <: provable {
   true && !deep(false)
 }
 
 // note: this test creates ~80k blocks, but it is imortant wrt. ordering and
 // implicits
-test "deep mut" {
+test "deep mut" <: provable {
   var r = true
   r && deep(r) && {!(r = false)} && !deep(r) && !r
 }
