@@ -1,0 +1,72 @@
+/**
+ * test that constructors from constructible super interfaces get called
+ */
+interface I {
+  type var seen = false;
+  new{
+    seen = true
+  }
+}
+
+class None;
+
+class NoBody <: I;
+
+class Body <: I {
+
+}
+
+class ExplicitV <: I {
+  new;
+}
+
+class ExplicitP <: I {
+  var p : bool
+  new(p := p : bool);
+}
+
+class ExplicitBV <: I {
+  new(){
+    // not calling I.new
+    // note: might introduce a warning eventually
+  }
+}
+
+class ExplicitBP <: I {
+  var p : bool
+  new(p := p : bool){
+    // not calling I.new
+    // note: might introduce a warning eventually
+  }
+}
+
+type T {
+  test "none" {
+    delete new None
+    !I.seen
+  }
+  test "no body" {
+    delete new NoBody
+    I.seen
+  }
+  test "body" {
+    delete new Body
+    I.seen
+  }
+  test "explicit void" {
+    delete new ExplicitV
+    I.seen
+  }
+  test "explicit param" {
+    delete new ExplicitP(true)
+    I.seen
+  }
+  test "explicit void explicit discard" {
+    delete new ExplicitBV
+    !I.seen
+  }
+  test "explicit param explicit discard" {
+    delete new ExplicitBP(true)
+    !I.seen
+  }
+}

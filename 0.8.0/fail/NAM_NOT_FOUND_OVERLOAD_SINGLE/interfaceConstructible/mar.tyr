@@ -1,0 +1,14 @@
+/**
+ * test that constructors from constructible super interfaces get called
+ */
+interface I {
+  type var seen = false;
+  // will make I constructible, but trigger a failure for implicit constructors
+  new (seen := seen : bool);
+
+  test "no compile" {
+    false
+  }
+}
+
+class NoBody <: I;
