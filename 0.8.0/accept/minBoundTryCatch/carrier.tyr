@@ -1,0 +1,30 @@
+/**
+ * tests correctness of throw cross edges with finally blocks
+ */
+class Carrier <: Exception:
+
+var r : int
+new (r := r : int);
+
+type def id(b : Block[int]) : int {
+  var r = 9
+  try { r = b.eval() } finally { r }
+}
+
+test "use" <: provable {
+  12 == id(
+    try {
+      id({
+        if true
+          throw new Carrier(12)
+        7
+      })
+    } catch e {
+      if Carrier {
+        val r = e.r
+        delete e
+        r
+      }
+    }
+  )
+}
