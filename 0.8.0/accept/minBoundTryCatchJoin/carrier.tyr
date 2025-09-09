@@ -1,0 +1,57 @@
+/**
+ * tests correct typing of try catch results passed as blocks
+ */
+class Carrier <: Exception:
+
+var r : int
+new (r := r : int);
+
+type def id(b : Block[int]) : int = b.eval()
+
+test "int" <: provable {
+  12 == id(
+    try {
+      // NoReturn, because caught exception
+      throw new Carrier(12)
+    } catch e {
+      if Carrier {
+        val r = e.r
+        delete e
+        // int
+        r
+      }
+      // else, WillThrow
+    }
+  )
+}
+
+test "WillThrow" <: provable {
+  12 == id(
+    try {
+      // NoReturn
+      throw new Carrier(12)
+    } catch e {
+      // else, WillThrow
+    }
+  )
+}
+
+test "NoReturn" <: provable {
+  12 == id(
+    try {
+      // NoReturn
+      throw new Carrier(12)
+    } catch e {
+      else {
+        delete e
+        // NoReturn
+        return true
+      }
+    }
+  )
+}
+
+test "check types" {
+  // likely create accept functions with a template parameter
+  false
+}
