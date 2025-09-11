@@ -1,4 +1,4 @@
-exceptions.DeadCode
+with exceptions.DeadCode
 
 /**
  * Ensure that Quality of Life Fatal Exceptions exist.
