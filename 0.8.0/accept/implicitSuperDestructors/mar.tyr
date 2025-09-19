@@ -1,0 +1,80 @@
+/**
+ * test correctness of implicit super destructor calls
+ */
+interface R;
+
+class B <: R{
+  type var called = 0
+  delete {
+    ++called
+  }
+}
+
+interface I {
+  type var called = false
+  delete {
+    called = true
+  }
+}
+
+interface J <: I {
+  // nothing, just a marker, no implicit members
+}
+
+class S <: B, I {
+  // implicitly delete B, I
+  test "use" {
+    0 == B.called && !I.called && {
+      delete new S
+      1 == B.called && I.called
+    }
+  }
+}
+
+class T <: S {
+  delete {
+    // implicitly call S
+  }
+  test "use" {
+    0 == B.called && !I.called && {
+      delete new T
+      1 == B.called && I.called
+    }
+  }
+}
+
+class U <: B, J {
+  // implicitly delete B, I
+  test "use" {
+    0 == B.called && !I.called && {
+      delete new U
+      1 == B.called && I.called
+    }
+  }
+}
+
+class E <: S {
+  delete {
+    // contains explicit return ⇒ no implicit call to S
+    return;
+  }
+  test "use" {
+    0 == B.called && !I.called && {
+      delete new E
+      0 == B.called && !I.called
+    }
+  }
+}
+
+class E2 <: B, I {
+  delete {
+    // contains explicit super destructor calls ⇒ no implicit ones added
+    B.delete
+  }
+  test "use" {
+    0 == B.called && !I.called && {
+      delete new E
+      1 == B.called && !I.called
+    }
+  }
+}
