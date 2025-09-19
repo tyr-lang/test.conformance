@@ -1,0 +1,27 @@
+/**
+ * test that compiler prevents explicit definition of destructors in eternal
+ *  types
+ */
+class E <: mem.eternal;
+
+class C <: E {
+  // not allowed
+  delete {
+    utter; nonsense
+    it
+     is
+      not
+       allowed
+        to
+         process
+          the
+           body
+            of
+             an
+              eternal.delete
+  }
+
+  test "no compile" {
+    false
+  }
+}
