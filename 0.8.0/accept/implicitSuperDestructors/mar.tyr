@@ -73,7 +73,7 @@ class E2 <: B, I {
   }
   test "use" {
     0 == B.called && !I.called && {
-      delete new E
+      delete new E2
       1 == B.called && !I.called
     }
   }
