@@ -23,6 +23,7 @@ class T <: S {
 
   delete {
     deleted = true
+    return;
   }
 
   test "delete S" {

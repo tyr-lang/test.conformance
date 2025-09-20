@@ -3,13 +3,13 @@
  */
 class W [T : Type[any]] <: V[T] {
 
-  delete { x = 3 }
+  delete { x = 3; return }
 
 }
 
 class V [T : Type[any]] <: B {
 
-  delete { x = 2 }
+  delete { x = 2; return }
 
 }
 
@@ -23,7 +23,7 @@ class B {
 
 class S <: W[S] {
 
-  delete { x = 0 }
+  delete { x = 0; return }
   
   test "S" {
     var b : B = new S
