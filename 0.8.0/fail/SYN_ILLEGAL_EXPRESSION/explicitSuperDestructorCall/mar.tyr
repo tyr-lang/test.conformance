@@ -1,0 +1,32 @@
+/**
+ * Class interfaces do not get implicit destructors even if their parent
+ * interfaces have them. The rationale here is that for class hierarchies,
+ * different constructors may call the interface constructors or destructors if
+ * the interfaces are not tied to that hierarchy in general.
+ */
+interface R;
+
+class B <: R {
+  type var called = 0
+  delete {
+    ++called
+  }
+}
+
+interface I {
+  type var called = false
+  delete {
+    // not allowed, called by whichever class inherits I
+    B.delete
+  }
+}
+
+interface J <: I {
+  // nothing, just a marker, no implicit members
+}
+
+class E <: B, J {
+  test "fail"{
+    false
+  }
+}
