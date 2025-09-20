@@ -23,3 +23,23 @@ test "Dead" <: mustThrow[DeadCode] {
 test "dead code without argument" <: mustThrow[DeadCode] {
   DeadCode!
 }
+
+type def f = TODO!
+
+type def g : int = {
+  1 + 2
+
+  TODO - "don't know how to continue"
+}
+
+type def h : void = TODO - "equally fine"
+
+test "call f" <: mustThrow[TODO] {
+  f()
+}
+test "call g" <: mustThrow[TODO] {
+  g()
+}
+test "call h" <: mustThrow[TODO] {
+  h()
+}
