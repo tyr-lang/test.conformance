@@ -1,8 +1,5 @@
 /**
- * Class interfaces do not get implicit destructors even if their parent
- * interfaces have them. The rationale here is that for class hierarchies,
- * different constructors may call the interface constructors or destructors if
- * the interfaces are not tied to that hierarchy in general.
+ * Class interface delete cannot call delete
  */
 interface R;
 
