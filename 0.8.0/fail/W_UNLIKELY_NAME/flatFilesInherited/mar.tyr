@@ -4,7 +4,7 @@
  *
  * @note  the suppress is there because it is a) intended and b) should work
  */
-type mar <: int:
+type T <: int:
 
 type def f = true
 

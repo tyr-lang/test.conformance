@@ -4,5 +4,5 @@
  *
  * @note to self: this should work
  */
-type mar <: exceptions.Exception:
+class mar <: Exception:
 override def message = "just a flat override"
